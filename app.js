@@ -1,6 +1,7 @@
 import config from './config'
 
 var express = require('express');
+const bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 let db_output;
 
@@ -32,13 +33,29 @@ let db_output;
   console.log('connection closed');
 })();
 
+
 var app = express();
+app.use(bodyparser.json());
+
+
 app.get('/', function (req, res) {
   res.send(db_output);
 });
 
 app.post('/fulfillment', function (req,res) {
   console.log('got fulfillment request');
+  
+  let data = req.body;
+
+  console.log(data);
+
+  let ingredient = data.queryResult.parameters.any;
+
+  const response = {
+    fulfillmentText: "What was that about " + ingredient + "?"
+  }
+
+  res.json(response);
 });
 
 app.listen(5000, function () {
