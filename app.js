@@ -2,6 +2,7 @@ import config from './config'
 
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
+let db_output;
 
 (async function() {
   let client;
@@ -18,6 +19,7 @@ var MongoClient = require('mongodb').MongoClient;
 
     // Get all recipes and print to console
     let all_recipes = await collection.find({}).toArray();
+    db_output = all_recipes;
     console.log(all_recipes);
 
   } catch (err) {
@@ -32,7 +34,7 @@ var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  res.send(db_output);
 });
 app.listen(5000, function () {
   console.log('Example app listening on port 5000!');
