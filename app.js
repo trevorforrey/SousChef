@@ -1,5 +1,3 @@
-import config from './config'
-
 var express = require('express');
 const bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
@@ -7,7 +5,7 @@ let db_output;
 
 (async function() {
   let client;
-  let mongo_pw = config.MONGO_PW;
+  let mongo_pw = process.env.MONGO_PW;
   var uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
   try {
     client = await MongoClient.connect(uri);
