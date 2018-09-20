@@ -4,7 +4,7 @@
   "description": "Google Assistant that aids with cooking",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "start": "babel-node app.js"
   },
   "repository": {
