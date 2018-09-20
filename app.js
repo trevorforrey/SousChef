@@ -35,6 +35,7 @@ let db_output;
 var app = express();
 app.use(bodyparser.json());
 
+let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 
 app.get('/', function (req, res) {
   res.send(db_output);
@@ -56,6 +57,6 @@ app.post('/fulfillment', function (req,res) {
   res.json(response);
 });
 
-app.listen(5000, function () {
-  console.log('Example app listening on port 5000!');
+app.listen(port, function () {
+  console.log('Cooking server listening on port ' + port);
 });
