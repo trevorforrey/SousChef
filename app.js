@@ -22,7 +22,8 @@ app.post('/fulfillment', async function (req,res) {
   let data = req.body;
 
   // Match for Ingredient-Intent 
-  if (data.queryResult.intent.displayName == 'Ingredient-Intent') {
+  if (data.queryResult.intent.displayName == 'Ingredient-Intent'
+    || data.queryResult.intent.displayName == 'Ingredient-Intent-Follow-Up') {
 
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.any;
