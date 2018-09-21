@@ -1,36 +1,8 @@
+import get_ingredient from './ingredient_intent'
+
 var express = require('express');
 const bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
-let db_output;
-
-(async function() {
-  let client;
-  let mongo_pw = process.env.MONGO_PW;
-  var uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
-  try {
-    client = await MongoClient.connect(uri);
-    console.log("Connected correctly to server");
-
-    const db = client.db('sous-chef');
-
-    // Get the collection
-    const collection = db.collection('recipes');
-
-    // Get all recipes and print to console
-    let all_recipes = await collection.find({}).toArray();
-    db_output = all_recipes;
-    console.log(all_recipes);
-
-  } catch (err) {
-    client.close();
-    console.log(err.stack);
-  }
-
-  // Close connection
-  client.close();
-  console.log('connection closed');
-})();
-
 
 var app = express();
 app.use(bodyparser.json());
@@ -38,22 +10,36 @@ app.use(bodyparser.json());
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 
 app.get('/', function (req, res) {
-  res.send(db_output);
+  res.send('Welcome to the cooking assistant!');
 });
 
-app.post('/fulfillment', function (req,res) {
+app.post('/fulfillment', async function (req,res) {
   console.log('got fulfillment request');
+
+  let response = {};
+  let response_text;
   
   let data = req.body;
 
-  console.log(data);
+  // Match for Ingredient-Intent 
+  if (data.queryResult.intent.displayName == 'Ingredient-Intent') {
 
-  let ingredient = data.queryResult.parameters.any;
+    // Get Ingredient asked for from database
+    let ingredient = data.queryResult.parameters.any;
+    let ingredient_info = await get_ingredient(ingredient);
 
-  const response = {
-    fulfillmentText: "What was that about " + ingredient + "?"
+    // If Ingredient was found, return ingredient info. If not, return error message
+    if (ingredient_info != null) {
+      response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
+    } else {
+      response_text = ingredient + ' is not in the recipe';
+    }
+    
+    // Set response text
+    response.fulfillmentText = response_text;
   }
 
+  // Send response
   res.json(response);
 });
 
