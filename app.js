@@ -31,7 +31,22 @@ app.post('/fulfillment', async function (req,res) {
 
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
-      response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
+      
+      // If non-plural units, and plural amount, make unit plural
+      if (ingredient_info.quantity != 1 && ingredient_info.unit[ingredient_info.unit.length - 1] != 's') {
+        ingredient_info.unit += "s";
+
+      // If non-plural amount, but plural units
+      } else if (ingredient_info.quantity == 1 && ingredient_info.unit[ingredient_info.unit.length - 1] == 's') {
+        ingredient_info.unit = ingredient_info.unit.slice(0,-1);
+      }
+
+      // Don't say unit if unit is same as name (E.G. 1 egg, 1 orange)
+      if (ingredient_info.unit == ingredient_info.name) {
+        response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit;
+      } else {
+        response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
+      }
     } else {
       response_text = ingredient + ' is not in the recipe';
     }
