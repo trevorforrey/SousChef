@@ -24,13 +24,15 @@ async function get_ingredient(ingredient_name) {
       // Get ingredients array from recipe
       let recipe_ingredients = recipe_doc.ingredients;
       
-      // Iterate through the recipe array
+      
+      //=======================================
+      /*// Iterate through the recipe array
       recipe_ingredients.forEach( (recipe_ingredient) => {
         // If the ingredient exists, update ingredient_info with ingredient info
         if (recipe_ingredient.name == ingredient_name) {
           ingredient_info = recipe_ingredient;
         }
-      });
+      });*/
   
     } catch (err) {
       console.log(err.stack);

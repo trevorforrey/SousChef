@@ -1,5 +1,6 @@
 import get_ingredient from './ingredient_intent'
 import getFirstStep from'./firststep_intent'
+import getCookTime from './cook-time_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -23,8 +24,8 @@ app.post('/fulfillment', async function (req,res) {
   let data = req.body;
 
   // Match for Ingredient-Intent 
-  if (data.queryResult.intent.displayName == 'Ingredient-Intent'
-    || data.queryResult.intent.displayName == 'Ingredient-Intent-Follow-Up') {
+  if (data.queryResult.intent.displayName === 'Ingredient-Intent'
+    || data.queryResult.intent.displayName === 'Ingredient-Intent-Follow-Up') {
 
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.any;
@@ -40,9 +41,9 @@ app.post('/fulfillment', async function (req,res) {
     // Set response text
     response.fulfillmentText = response_text;
   }
-   else if(data.queryResult.intent.displayName =='first.step'){
-    let firstStep= await getFirstStep();
-    if(firstStep!=null){
+   else if(data.queryResult.intent.displayName === 'first.step'){
+    let firstStep = await getFirstStep();
+    if(firstStep!= null){
       response_text=firstStep;
     }
     else response_text="I don't know";
