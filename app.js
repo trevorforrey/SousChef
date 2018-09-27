@@ -1,5 +1,5 @@
 import get_ingredient from './ingredient_intent'
-import listEntityTypes from './setup_intent'
+import update_session_entity from './setup_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -11,7 +11,6 @@ app.use(bodyparser.json());
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 
 app.get('/', function (req, res) {
-  listEntityTypes('fd69b65c-df02-43fe-a94d-b755c9a5dd6c');
   res.send('Welcome to the cooking assistant!');
 });
 app.post('/fulfillment', async function (req,res) {
@@ -54,6 +53,12 @@ app.post('/fulfillment', async function (req,res) {
 
     // Set response text
     response.fulfillmentText = response_text;
+  }
+  else if (data.queryResult.intent.displayName == 'Setup-Intent'){
+    let projectID = data.session.split('/')[1]
+    let sessionID = data.session.split('/')[4]
+    update_session_entity(projectID,sessionID);
+    response_text = "Let's get cooking!"
   }
 
   // Send response
