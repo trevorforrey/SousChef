@@ -19,6 +19,7 @@
   "homepage": "https://github.com/trevorforrey/SousChef#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "dialogflow": "^0.6.0",
     "express": "^4.16.3",
     "mongodb": "^3.1.6"
   },
