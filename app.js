@@ -1,5 +1,7 @@
 import get_ingredient from './ingredient_intent'
 import update_session_entity from './setup_intent'
+import getFirstStep from'./firststep_intent'
+import getIndexByStep from'./nextstep_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -13,9 +15,13 @@ let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 app.get('/', function (req, res) {
   res.send('Welcome to the cooking assistant!');
 });
-app.post('/fulfillment', async function (req,res) {
-  console.log('got fulfillment request');
+let index=1;
 
+
+
+app.post('/fulfillment', async function (req,res) {
+
+  console.log('got fulfillment request');
   let response = {};
   let response_text;
 
@@ -27,7 +33,7 @@ app.post('/fulfillment', async function (req,res) {
 
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.any;
-    let ingredient_info = await get_ingredient(ingredient);
+    let ingredient_info =await  get_ingredient(ingredient);
 
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
@@ -49,9 +55,28 @@ app.post('/fulfillment', async function (req,res) {
       }
     } else {
       response_text = ingredient + ' is not in the recipe';
-    }
+    }   
+  }
 
-    // Set response text
+  else if(data.queryResult.intent.displayName =='first.step'){
+    let firstStep= await getFirstStep();
+    if(firstStep!=null){
+      response_text=firstStep;
+    }
+    else response_text="I don't know"; 
+    index=1; 
+  } 
+
+  else if(data.queryResult.intent.displayName=='next.step'){
+    console.log("index:"+index);
+    let step= await getIndexByStep(index);
+    index=index+1;
+    if(step!=null){
+      response_text=step;
+    }
+    else response_text="End of steps";
+  }
+  // Set response text
     response.fulfillmentText = response_text;
   }
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
