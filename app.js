@@ -75,9 +75,6 @@ app.post('/fulfillment', async function (req,res) {
       response_text=step;
     }
     else response_text="End of steps";
-
-    // Set response text
-    response.fulfillmentText = response_text;
   }
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
     let projectID = data.session.split('/')[1]
@@ -85,6 +82,9 @@ app.post('/fulfillment', async function (req,res) {
     update_session_entity(projectID,sessionID);
     response_text = "Let's get cooking!"
   }
+
+  // Set response text
+  response.fulfillmentText = response_text;
 
   // Send response
   res.json(response);
