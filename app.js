@@ -1,4 +1,5 @@
 import get_ingredient from './ingredient_intent'
+import getFirstStep from'./firststep_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -14,8 +15,8 @@ app.get('/', function (req, res) {
 });
 
 app.post('/fulfillment', async function (req,res) {
-  console.log('got fulfillment request');
 
+  console.log('got fulfillment request');
   let response = {};
   let response_text;
   
@@ -27,7 +28,7 @@ app.post('/fulfillment', async function (req,res) {
 
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.any;
-    let ingredient_info = await get_ingredient(ingredient);
+    let ingredient_info =await  get_ingredient(ingredient);
 
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
@@ -39,6 +40,14 @@ app.post('/fulfillment', async function (req,res) {
     // Set response text
     response.fulfillmentText = response_text;
   }
+   else if(data.queryResult.intent.displayName =='first.step'){
+    let firstStep= await getFirstStep();
+    if(firstStep!=null){
+      response_text=firstStep;
+    }
+    else response_text="I don't know";
+    response.fulfillmentText = response_text;
+  } 
 
   // Send response
   res.json(response);
