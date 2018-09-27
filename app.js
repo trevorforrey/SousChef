@@ -1,7 +1,8 @@
 import get_ingredient from './ingredient_intent'
 import update_session_entity from './setup_intent'
-import getFirstStep from'./firststep_intent'
-import getIndexByStep from'./nextstep_intent'
+import getFirstStep from './firststep_intent'
+import getIndexByStep from './nextstep_intent'
+import get_ingredient_list from './ingredient-list_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -54,6 +55,11 @@ app.post('/fulfillment', async function (req,res) {
     } else {
       response_text = ingredient + ' is not in the recipe';
     }   
+  }
+
+  // Match for Full Ingredient List Intent
+  else if (data.queryResult.intent.displayName == 'List-Ingredients'){
+    response_text = await get_ingredient_list();
   }
 
   // Match for First Step
