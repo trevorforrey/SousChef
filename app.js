@@ -17,8 +17,6 @@ app.get('/', function (req, res) {
 });
 let index=1;
 
-
-
 app.post('/fulfillment', async function (req,res) {
 
   console.log('got fulfillment request');
@@ -32,8 +30,8 @@ app.post('/fulfillment', async function (req,res) {
     || data.queryResult.intent.displayName == 'Ingredient-Intent-Follow-Up') {
 
     // Get Ingredient asked for from database
-    let ingredient = data.queryResult.parameters.any;
-    let ingredient_info =await  get_ingredient(ingredient);
+    let ingredient = data.queryResult.parameters.ingredient;
+    let ingredient_info = await get_ingredient(ingredient);
 
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
@@ -58,24 +56,28 @@ app.post('/fulfillment', async function (req,res) {
     }   
   }
 
-  else if(data.queryResult.intent.displayName =='first.step'){
-    let firstStep= await getFirstStep();
-    if(firstStep!=null){
-      response_text=firstStep;
+  // Match for First Step
+  else if (data.queryResult.intent.displayName =='first.step') {
+    let firstStep = await getFirstStep();
+    if (firstStep != null) {
+      response_text = firstStep;
     }
-    else response_text="I don't know"; 
-    index=1; 
+    else response_text = "I don't know"; 
+    index = 1; 
   } 
 
-  else if(data.queryResult.intent.displayName=='next.step'){
+  // Match for Next Step
+  else if (data.queryResult.intent.displayName=='next.step') {
     console.log("index:"+index);
-    let step= await getIndexByStep(index);
-    index=index+1;
-    if(step!=null){
-      response_text=step;
+    let step = await getIndexByStep(index);
+    index = index + 1;
+    if (step != null) {
+      response_text = step;
     }
-    else response_text="End of steps";
+    else response_text = "End of steps";
   }
+
+  // Match for Set Up Intent
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
     let projectID = data.session.split('/')[1]
     let sessionID = data.session.split('/')[4]

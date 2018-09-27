@@ -11,7 +11,7 @@ async function update_session_entity(projectId,session) {
   const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
   // The path to the agent the session entity types belong to.
   const sessionEntityPath = sessionEntityTypesClient.sessionEntityTypePath(
-      projectId,session,'Ingredients'
+      projectId,session,'ingredient'
   );
   // The path to the agent that the session exists in
   const sessionPath = sessionEntityTypesClient.sessionPath(
