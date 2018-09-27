@@ -75,8 +75,8 @@ app.post('/fulfillment', async function (req,res) {
       response_text=step;
     }
     else response_text="End of steps";
-  }
-  // Set response text
+
+    // Set response text
     response.fulfillmentText = response_text;
   }
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
