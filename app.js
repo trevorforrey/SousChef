@@ -47,7 +47,8 @@ app.post('/fulfillment', async function (req,res) {
     if(firstStep!=null){
       response_text=firstStep;
     }
-    else response_text="I don't know";  
+    else response_text="I don't know"; 
+    index=1; 
   } 
 
   else if(data.queryResult.intent.displayName=='next.step'){
