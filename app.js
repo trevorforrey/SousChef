@@ -11,11 +11,13 @@ var app = express();
 app.use(bodyparser.json());
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
+let index=1;
+let currentIndex=null;
 
 app.get('/', function (req, res) {
   res.send('Welcome to the cooking assistant!');
 });
-let index=1;
+
 
 app.post('/fulfillment', async function (req,res) {
 
@@ -63,20 +65,37 @@ app.post('/fulfillment', async function (req,res) {
       response_text = firstStep;
     }
     else response_text = "I don't know"; 
-    index = 1; 
+    index = 1;
+    currentIndex=0; 
   } 
 
   // Match for Next Step
   else if (data.queryResult.intent.displayName=='next.step') {
     console.log("index:"+index);
     let step = await getIndexByStep(index);
+    currentIndex=index;
     index = index + 1;
     if (step != null) {
       response_text = step;
     }
     else response_text = "End of steps";
   }
-
+  //Match for Repeat step
+  else if(data.queryResult.intent.displayName=='repeat.step'){
+    if(currentIndex==null){
+      response_text="What shall I repeat?";
+    }
+    else {
+      let currentStep= await getIndexByStep(currentIndex);
+      if(currentStep!=null){
+        response_text=currentStep;
+      }
+      else
+        response_text="which step to repeat"
+    }
+    
+  }
+ 
   // Match for Set Up Intent
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
     let projectID = data.session.split('/')[1]
