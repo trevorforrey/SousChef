@@ -82,7 +82,7 @@ app.post('/fulfillment', async function (req,res) {
       response_text="You have not started cooking yet";
     }
     else{
-     let step = await getIndexByStep(index);
+     let step = await getStepByIndex(index);
     currentIndex=index;
     previousIndex=index-1;
     index = index + 1;
