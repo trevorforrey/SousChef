@@ -1,8 +1,8 @@
 import get_ingredient from './ingredient_intent'
 import update_session_entity from './setup_intent'
-import getFirstStep from './firststep_intent'
-import getIndexByStep from './nextstep_intent'
 import get_ingredient_list from './ingredient-list_intent'
+import getFirstStep from'./firststep_intent'
+import getStepByIndex from'./nextstep_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -12,11 +12,14 @@ var app = express();
 app.use(bodyparser.json());
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
+let index=null;
+let currentIndex=null;
+let previousIndex=null;
 
 app.get('/', function (req, res) {
   res.send('Welcome to the cooking assistant!');
 });
-let index=1;
+
 
 app.post('/fulfillment', async function (req,res) {
 
@@ -69,20 +72,61 @@ app.post('/fulfillment', async function (req,res) {
       response_text = firstStep;
     }
     else response_text = "I don't know"; 
-    index = 1; 
+    index = 1;
+    currentIndex=0; 
   } 
 
   // Match for Next Step
-  else if (data.queryResult.intent.displayName=='next.step') {
-    console.log("index:"+index);
-    let step = await getIndexByStep(index);
+  else if (data.queryResult.intent.displayName=='next.step'){
+    if(index==null){
+      response_text="You have not started cooking yet";
+    }
+    else{
+     let step = await getIndexByStep(index);
+    currentIndex=index;
+    previousIndex=index-1;
     index = index + 1;
     if (step != null) {
       response_text = step;
     }
-    else response_text = "End of steps";
+    else response_text = "End of steps"; 
+    }
+    
   }
-
+  //Match for Repeat step
+  else if(data.queryResult.intent.displayName=='repeat.step'){
+    if(currentIndex==null){
+      response_text="Which step do you want?";
+    }
+    else {
+      let currentStep= await getStepByIndex(currentIndex);
+      if(currentStep!=null){
+        response_text=currentStep;
+      }
+      else
+        response_text="which step do you want?"
+    }
+    
+  }
+  //Match for previous step
+  if(data.queryResult.intent.displayName=='previous.step'){
+    if(previousIndex==null){
+      response_text="Which step to do you want?";
+    }
+    else{
+      let previousStep=await getStepByIndex(previousIndex);
+      if(previousStep!=null){
+        response_text=previousStep;
+      }
+      else response_text="Which step do you want?";
+      index=previousIndex+1;
+      currentIndex=previousIndex;
+      previousIndex=previousIndex-1;
+    }
+    
+  }
+  
+ 
   // Match for Set Up Intent
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
     let projectID = data.session.split('/')[1]
