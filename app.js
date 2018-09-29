@@ -13,6 +13,7 @@ app.use(bodyparser.json());
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 let index=1;
 let currentIndex=null;
+let previousIndex=null;
 
 app.get('/', function (req, res) {
   res.send('Welcome to the cooking assistant!');
@@ -74,6 +75,7 @@ app.post('/fulfillment', async function (req,res) {
     console.log("index:"+index);
     let step = await getIndexByStep(index);
     currentIndex=index;
+    previousIndex=index-1;
     index = index + 1;
     if (step != null) {
       response_text = step;
@@ -82,7 +84,7 @@ app.post('/fulfillment', async function (req,res) {
   }
   //Match for Repeat step
   else if(data.queryResult.intent.displayName=='repeat.step'){
-    if(currentIndex==null){
+     if(currentIndex==null){
       response_text="What shall I repeat?";
     }
     else {
@@ -91,10 +93,25 @@ app.post('/fulfillment', async function (req,res) {
         response_text=currentStep;
       }
       else
-        response_text="which step to repeat"
+        response_text="which step to repeat?"
     }
     
   }
+  //Match for previous step
+  if(data.queryResult.intent.displayName=='previous.step'){
+    if(previousIndex==null){
+      response_text="Which step you want?";
+    }
+    else{
+      let previousStep=await getIndexByStep(previousIndex);
+      if(previousStep!=null){
+        response_text=previousStep;
+      }
+      else response_text="Which step you want?"
+    }
+
+  }
+  
  
   // Match for Set Up Intent
   else if (data.queryResult.intent.displayName == 'Setup-Intent'){
