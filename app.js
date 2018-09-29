@@ -1,7 +1,7 @@
 import get_ingredient from './ingredient_intent'
 import update_session_entity from './setup_intent'
 import getFirstStep from'./firststep_intent'
-import getIndexByStep from'./nextstep_intent'
+import getStepByIndex from'./nextstep_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -93,7 +93,7 @@ app.post('/fulfillment', async function (req,res) {
       response_text="Which step do you want?";
     }
     else {
-      let currentStep= await getIndexByStep(currentIndex);
+      let currentStep= await getStepByIndex(currentIndex);
       if(currentStep!=null){
         response_text=currentStep;
       }
@@ -108,7 +108,7 @@ app.post('/fulfillment', async function (req,res) {
       response_text="Which step to do you want?";
     }
     else{
-      let previousStep=await getIndexByStep(previousIndex);
+      let previousStep=await getStepByIndex(previousIndex);
       if(previousStep!=null){
         response_text=previousStep;
       }
