@@ -71,8 +71,7 @@ app.post('/fulfillment', async function (req,res) {
   } 
 
   // Match for Next Step
-  else if (data.queryResult.intent.displayName=='next.step') {
-    console.log("index:"+index);
+  else if (data.queryResult.intent.displayName=='next.step'){
     let step = await getIndexByStep(index);
     currentIndex=index;
     previousIndex=index-1;
@@ -84,7 +83,7 @@ app.post('/fulfillment', async function (req,res) {
   }
   //Match for Repeat step
   else if(data.queryResult.intent.displayName=='repeat.step'){
-     if(currentIndex==null){
+    if(currentIndex==null){
       response_text="What shall I repeat?";
     }
     else {
@@ -93,23 +92,23 @@ app.post('/fulfillment', async function (req,res) {
         response_text=currentStep;
       }
       else
-        response_text="which step to repeat?"
+        response_text="which step to repeat"
     }
     
   }
   //Match for previous step
   if(data.queryResult.intent.displayName=='previous.step'){
     if(previousIndex==null){
-      response_text="Which step you want?";
+      response_text="Which step to do you want?";
     }
     else{
       let previousStep=await getIndexByStep(previousIndex);
       if(previousStep!=null){
         response_text=previousStep;
       }
-      else response_text="Which step you want?"
+      else response_text="Which step do you want?";
     }
-
+    index=previousIndex+1;
   }
   
  
