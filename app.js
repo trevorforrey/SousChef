@@ -93,7 +93,7 @@ app.post('/fulfillment', async function (req,res) {
         response_text=currentStep;
       }
       else
-        response_text="which step to repeat"
+        response_text="which step to repeat?"
     }
     
   }
