@@ -11,7 +11,7 @@ var app = express();
 app.use(bodyparser.json());
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
-let index=1;
+let index=null;
 let currentIndex=null;
 let previousIndex=null;
 
@@ -72,19 +72,25 @@ app.post('/fulfillment', async function (req,res) {
 
   // Match for Next Step
   else if (data.queryResult.intent.displayName=='next.step'){
-    let step = await getIndexByStep(index);
+    if(index==null){
+      response_text="You have not started cooking yet";
+    }
+    else{
+     let step = await getIndexByStep(index);
     currentIndex=index;
     previousIndex=index-1;
     index = index + 1;
     if (step != null) {
       response_text = step;
     }
-    else response_text = "End of steps";
+    else response_text = "End of steps"; 
+    }
+    
   }
   //Match for Repeat step
   else if(data.queryResult.intent.displayName=='repeat.step'){
     if(currentIndex==null){
-      response_text="What shall I repeat?";
+      response_text="Which step do you want?";
     }
     else {
       let currentStep= await getIndexByStep(currentIndex);
@@ -92,7 +98,7 @@ app.post('/fulfillment', async function (req,res) {
         response_text=currentStep;
       }
       else
-        response_text="which step to repeat"
+        response_text="which step do you want?"
     }
     
   }
@@ -107,8 +113,11 @@ app.post('/fulfillment', async function (req,res) {
         response_text=previousStep;
       }
       else response_text="Which step do you want?";
+      index=previousIndex+1;
+      currentIndex=previousIndex;
+      previousIndex=previousIndex-1;
     }
-    index=previousIndex+1;
+    
   }
   
  
