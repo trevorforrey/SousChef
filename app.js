@@ -144,6 +144,15 @@ app.post('/fulfillment', async function (req,res) {
     }
     
   }
+    
+  if(data.queryResult.intent.displayName=='requested.step'){
+      let requested_step_number = data.queryResult.parameters['STEP_NUMBER']; 
+      if(requested_step_number){
+          response_text="The requested step number is "+requested_step_number;
+      }else{
+          response_text = "The requested step is null";
+      }
+  }
   
  
   // Match for Set Up Intent
