@@ -6,6 +6,7 @@ import get_recipe from './mongo_helper'
 
 async function getPrepTime(){
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
+    let prepTime = "";
 
     if (recipe_doc == null){
         prepTime = null;
