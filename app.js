@@ -1,6 +1,7 @@
 import get_ingredient from './ingredient_intent'
 import getFirstStep from'./firststep_intent'
 import getCookTime from './cook-time_intent'
+import getPrepTime from './prep-time_intent'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -40,15 +41,21 @@ app.post('/fulfillment', async function (req,res) {
     
     // Set response text
     response.fulfillmentText = response_text;
-  }
-   else if(data.queryResult.intent.displayName === 'first.step'){
+  } else if(data.queryResult.intent.displayName === 'first.step'){
     let firstStep = await getFirstStep();
     if(firstStep!= null){
       response_text=firstStep;
     }
     else response_text="I don't know";
     response.fulfillmentText = response_text;
-  } 
+  } else if(data.queryResult.intent.displayName === 'Prep-Time-Intent') {
+    let prepTime = await getPrepTime();
+    if (prepTime == null) {
+      response.fulfillmentText = "Hm. It looks like I don't have a prep-time for this recipe. I'm sorry about that.";
+    } else {
+      response.fulfillmentText = 'You will need ' + prepTime + ' in order to prepare the recipe.';
+    }
+  }
 
   // Send response
   res.json(response);
