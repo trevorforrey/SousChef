@@ -2,6 +2,8 @@ import get_ingredient from './ingredient_intent'
 import update_session_entity from './setup_intent'
 import get_ingredient_list from './ingredient-list_intent'
 import getFirstStep from'./firststep_intent'
+import getCookTime from './cooktime_intent'
+import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
 
 var express = require('express');
@@ -93,28 +95,29 @@ app.post('/fulfillment', async function (req,res) {
     }
     
   }
+  
   //Match for Repeat step
   else if(data.queryResult.intent.displayName=='repeat.step'){
     if(currentIndex==null){
       response_text="Which step do you want?";
     }
     else {
-      let currentStep= await getStepByIndex(currentIndex);
+      let currentStep = await getStepByIndex(currentIndex);
       if(currentStep!=null){
         response_text=currentStep;
       }
-      else
-        response_text="which step do you want?"
+      else response_text="which step do you want?"
     }
     
   }
+  
   //Match for previous step
   if(data.queryResult.intent.displayName=='previous.step'){
     if(previousIndex==null){
       response_text="Which step to do you want?";
     }
     else{
-      let previousStep=await getStepByIndex(previousIndex);
+      let previousStep = await getStepByIndex(previousIndex);
       if(previousStep!=null){
         response_text=previousStep;
       }
@@ -133,6 +136,29 @@ app.post('/fulfillment', async function (req,res) {
     let sessionID = data.session.split('/')[4]
     update_session_entity(projectID,sessionID);
     response_text = "Let's get cooking!"
+  }
+    
+  // Match for Prep Time Intent
+  else if(data.queryResult.intent.displayName === 'Prep-Time-Intent') {
+    let prepTime = await getPrepTime();
+    if (prepTime == null) {
+      response_text = "Hm. It looks like I don't have a prep-time for this recipe. I'm sorry about that.";
+    } else {
+      response_text = 'You will need ' + prepTime + ' in order to prepare the recipe.';
+    }
+  }
+   
+  // Match for the Cook-Time
+  else if (data.queryResult.intent.displayName === 'Cook-Time-Intent') {
+    // Get the cook time that was asked for from the database
+    let cook_time_info = await getCookTime();
+    
+    // If Ingredient was found, return ingredient info. If not, return error message
+    if (cook_time_info != null) {
+        response_text = 'The Blueberry pancakes will take ' + cook_time_info + ' to finish cooking';
+    } else {
+        response_text = 'Unfortunately this recipe does not include a cook time.';
+    }
   }
 
   // Set response text
