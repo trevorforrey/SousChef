@@ -6,12 +6,9 @@ async function getCookTime() {
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
     let cook_time = null;
     
-    
-    
-    
     try {
-        client = await MongoClient.connect(uri);
-        console.log("Connected correctly to server");
+        client =await MongoClient.connect(uri);
+        console.log("Connected correctly to the server");
         
         const db = client.db('sous-chef');
         
@@ -24,32 +21,18 @@ async function getCookTime() {
         // Get recipe document from cursor
         const recipe_doc = await cursor.next();
         
-        // Get ingredients array from recipe
-        let recipe_ingredients = recipe_doc.cooktime;
-        
-        // Iterate through the recipe array
-        recipe_ingredients.forEach( (recipe_ingredient) => {
-            /*If the cooktime exists in the db, update cooktime_info
-            with the cooktime info to send back*/
-            if (recipe_ingredient.name == ingredient_name) {
-                ingredient_info = recipe_ingredient;
-            }
-        });
+        // Get the cook time field from the recipe
+        let cook_time = recipe_doc.cook_time;
         
     } catch (err) {
         console.log(err.stack);
         client.close();
     }
     
-    // Close connection before returning
+    // Close the connection before returning cook time
     client.close();
-    console.log('connection closed');
-    
-    
-    
-    
-    
-    
+    console.log('cook time connection has closed');
+   
     return cook_time;
 }
 

@@ -30,7 +30,7 @@ app.post('/fulfillment', async function (req,res) {
 
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.any;
-    let ingredient_info =await  get_ingredient(ingredient);
+    let ingredient_info = await  get_ingredient(ingredient);
 
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
@@ -55,7 +55,22 @@ app.post('/fulfillment', async function (req,res) {
     } else {
       response.fulfillmentText = 'You will need ' + prepTime + ' in order to prepare the recipe.';
     }
-  }
+   
+   //Look for the Cook-Time
+  } else if (data.queryResult.intent.displayName === 'Cook-Time-Intent') {
+        // Get the cook time that was asked for from the database
+        let cook_time_info = await getCookTime();
+        
+        // If Ingredient was found, return ingredient info. If not, return error message
+        if (cook_time_info != null) {
+            response_text = 'The Blueberry pancakes will take ' + cook_time_info + ' to finish cooking';
+        } else {
+            response_text = 'Unfortunately this recipe does not include a cook time.';
+        }
+        
+        // Set response text
+        response.fulfillmentText = response_text;
+    }
 
   // Send response
   res.json(response);
