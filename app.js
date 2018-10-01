@@ -5,6 +5,7 @@ import getFirstStep from'./firststep_intent'
 import getCookTime from './cooktime_intent'
 import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
+import getCustomUnitResponse from './get_amount_custom_unit'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -34,28 +35,36 @@ app.post('/fulfillment', async function (req,res) {
   // Match for Ingredient-Intent
   if (data.queryResult.intent.displayName === 'Ingredient-Intent'
     || data.queryResult.intent.displayName === 'Ingredient-Intent-Follow-Up') {
-
+    
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.ingredient;
     let ingredient_info = await get_ingredient(ingredient);
 
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
-
-      // If non-plural units, and plural amount, make unit plural
-      if (ingredient_info.quantity !== 1 && ingredient_info.unit[ingredient_info.unit.length - 1] !== 's') {
-        ingredient_info.unit += "s";
-
-      // If non-plural amount, but plural units
-      } else if (ingredient_info.quantity === 1 && ingredient_info.unit[ingredient_info.unit.length - 1] === 's') {
-        ingredient_info.unit = ingredient_info.unit.slice(0,-1);
-      }
-
-      // Don't say unit if unit is same as name (E.G. 1 egg, 1 orange)
-      if (ingredient_info.unit === ingredient_info.name) {
-        response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit;
+      
+      //check if the client requested specific units
+      if ('unit-weight-name' in data.queryResult.parameters){
+        //console.log(ingredient_info.name);
+        //console.log(data.queryResult.parameters['unit-weight-name']);
+        response_text = await getCustomUnitResponse(ingredient_info.name, data.queryResult.parameters['unit-weight-name'])
       } else {
-        response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
+
+        // If non-plural units, and plural amount, make unit plural
+        if (ingredient_info.quantity !== 1 && ingredient_info.unit[ingredient_info.unit.length - 1] !== 's') {
+          ingredient_info.unit += "s";
+
+        // If non-plural amount, but plural units
+        } else if (ingredient_info.quantity === 1 && ingredient_info.unit[ingredient_info.unit.length - 1] === 's') {
+          ingredient_info.unit = ingredient_info.unit.slice(0,-1);
+        }
+
+        // Don't say unit if unit is same as name (E.G. 1 egg, 1 orange)
+        if (ingredient_info.unit === ingredient_info.name) {
+          response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit;
+        } else {
+          response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
+        }
       }
     } else {
       response_text = ingredient + ' is not in the recipe';
