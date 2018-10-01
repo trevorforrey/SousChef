@@ -18,7 +18,6 @@ app.use(bodyparser.json());
 
 // Have Heroku set up google auth
 if (process.env.GOOGLE_AUTH_CONTENTS != null) {
-  console.log(process.env.GOOGLE_AUTH_CONTENTS);
   shell.exec('./release-tasks.sh');
 }
 
