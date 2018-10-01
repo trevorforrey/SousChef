@@ -8,9 +8,7 @@ privKey=${GOOGLE_AUTH_CONTENTS}
 touch key.json
 echo $privKey >> key.json
 
-export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)"/key.json"
-
-echo "File Contents:"
-echo $privKey
-echo "File Path: "
-echo ${GOOGLE_APPLICATION_CREDENTIALS}
+#echo "File Contents:"
+#echo $privKey
+#echo "File Path: "
+#echo ${GOOGLE_APPLICATION_CREDENTIALS}

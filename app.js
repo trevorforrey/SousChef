@@ -7,12 +7,20 @@ import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
 import getCustomUnitResponse from './get_amount_custom_unit'
 
+
+const shell = require('shelljs');
 var express = require('express');
 const bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 app.use(bodyparser.json());
+
+// Have Heroku set up google auth
+if (process.env.GOOGLE_AUTH_CONTENTS != null) {
+  console.log(process.env.GOOGLE_AUTH_CONTENTS);
+  shell.exec('./release-tasks.sh');
+}
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 let index=null;
