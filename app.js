@@ -5,11 +5,8 @@ import getFirstStep from'./firststep_intent'
 import getCookTime from './cooktime_intent'
 import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
-<<<<<<< HEAD
 import getCustomUnitResponse from './get_amount_custom_unit'
-=======
 import getTotalNumberOfSteps from './total_steps_intent'
->>>>>>> Steps related changes
 
 
 const shell = require('shelljs');
