@@ -5,7 +5,11 @@ import getFirstStep from'./firststep_intent'
 import getCookTime from './cooktime_intent'
 import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
+<<<<<<< HEAD
 import getCustomUnitResponse from './get_amount_custom_unit'
+=======
+import getTotalNumberOfSteps from './total_steps_intent'
+>>>>>>> Steps related changes
 
 
 const shell = require('shelljs');
@@ -145,12 +149,36 @@ app.post('/fulfillment', async function (req,res) {
     
   }
     
+  //Intent for any requested step
   if(data.queryResult.intent.displayName=='requested.step'){
       let requested_step_number = data.queryResult.parameters['STEP_NUMBER']; 
-      if(requested_step_number){
-          response_text="The requested step number is "+requested_step_number;
+      if(isNaN(requested_step_number) || null == requested_step_number){
+          response_text="Sorry I didn't catch that! Can you please repeat?";
+      }
+      let requested_step = await getStepByIndex(requested_step_number);
+      if(null != requested_step){
+          response_text = requested_step;
       }else{
-          response_text = "The requested step is null";
+          response_text = "Unable to fetch the response at this moment, try later!";
+      }
+      currentIndex = requested_step_number;
+      previousIndex = currentIndex - 1;
+      index = currentIndex + 1;
+  }
+
+  //Intent to get the remaining number of steps 
+  if(data.queryResult.intent.displayName=='remaining.steps'){
+      let totalNumberOfSteps = await getTotalNumberOfSteps();
+      if(null == totalNumberOfSteps){
+         response_text = "Unable to fetch the response at this moment, try later!";
+      }
+      let remaining_steps = totalNumberOfSteps - currentIndex;
+      if(remaining_steps == 0){
+          response = "You are in the last step!";
+      }else if(remaining_steps == 1){
+          response = "You are almost done, just 1 more step!";
+      }else{
+          response = "You still have "+remaining_steps+" to go";
       }
   }
   

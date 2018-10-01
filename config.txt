@@ -1,0 +1,5 @@
+let config = {
+    MONGO_PW : 'mongopw' 
+};
+
+export default config;
