@@ -8,7 +8,7 @@ async function get_ingredient(ingredient_name) {
   // Iterate through the recipe array
   recipe_doc.ingredients.forEach( (recipe_ingredient) => {
     // If the ingredient exists, update ingredient_info with ingredient info
-    if (recipe_ingredient.name == ingredient_name) {
+    if (recipe_ingredient.name === ingredient_name) {
       ingredient_info = recipe_ingredient;
     }
   });
