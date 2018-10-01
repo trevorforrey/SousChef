@@ -12,12 +12,12 @@ async function get_ingredient_list() {
   ingredients.forEach( (ingredient) => {
     
     // Add "and" to start of last ingredient
-    if (ingredient == ingredients[ingredients.length - 1]) {
+    if (ingredient === ingredients[ingredients.length - 1]) {
         response += "and ";
     }
 
     // Handles items like eggs, oranges (name is unit)
-    if (ingredient.unit == ingredient.name) {
+    if (ingredient.unit === ingredient.name) {
         response += ingredient.quantity + " " + ingredient.name + ". ";
 
     // Handles items where it's natural to say quantity, units, and name

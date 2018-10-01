@@ -32,8 +32,8 @@ app.post('/fulfillment', async function (req,res) {
   let data = req.body;
 
   // Match for Ingredient-Intent
-  if (data.queryResult.intent.displayName == 'Ingredient-Intent'
-    || data.queryResult.intent.displayName == 'Ingredient-Intent-Follow-Up') {
+  if (data.queryResult.intent.displayName === 'Ingredient-Intent'
+    || data.queryResult.intent.displayName === 'Ingredient-Intent-Follow-Up') {
 
     // Get Ingredient asked for from database
     let ingredient = data.queryResult.parameters.ingredient;
@@ -43,16 +43,16 @@ app.post('/fulfillment', async function (req,res) {
     if (ingredient_info != null) {
 
       // If non-plural units, and plural amount, make unit plural
-      if (ingredient_info.quantity != 1 && ingredient_info.unit[ingredient_info.unit.length - 1] != 's') {
+      if (ingredient_info.quantity !== 1 && ingredient_info.unit[ingredient_info.unit.length - 1] !== 's') {
         ingredient_info.unit += "s";
 
       // If non-plural amount, but plural units
-      } else if (ingredient_info.quantity == 1 && ingredient_info.unit[ingredient_info.unit.length - 1] == 's') {
+      } else if (ingredient_info.quantity === 1 && ingredient_info.unit[ingredient_info.unit.length - 1] === 's') {
         ingredient_info.unit = ingredient_info.unit.slice(0,-1);
       }
 
       // Don't say unit if unit is same as name (E.G. 1 egg, 1 orange)
-      if (ingredient_info.unit == ingredient_info.name) {
+      if (ingredient_info.unit === ingredient_info.name) {
         response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit;
       } else {
         response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
@@ -63,12 +63,12 @@ app.post('/fulfillment', async function (req,res) {
   }
 
   // Match for Full Ingredient List Intent
-  else if (data.queryResult.intent.displayName == 'List-Ingredients'){
+  else if (data.queryResult.intent.displayName === 'List-Ingredients'){
     response_text = await get_ingredient_list();
   }
 
   // Match for First Step
-  else if (data.queryResult.intent.displayName =='first.step') {
+  else if (data.queryResult.intent.displayName === 'first.step') {
     let firstStep = await getFirstStep();
     if (firstStep != null) {
       response_text = firstStep;
@@ -79,7 +79,7 @@ app.post('/fulfillment', async function (req,res) {
   } 
 
   // Match for Next Step
-  else if (data.queryResult.intent.displayName=='next.step'){
+  else if (data.queryResult.intent.displayName === 'next.step'){
     if(index==null){
       response_text="You have not started cooking yet";
     }
@@ -97,7 +97,7 @@ app.post('/fulfillment', async function (req,res) {
   }
   
   //Match for Repeat step
-  else if(data.queryResult.intent.displayName=='repeat.step'){
+  else if(data.queryResult.intent.displayName === 'repeat.step'){
     if(currentIndex==null){
       response_text="Which step do you want?";
     }
@@ -112,7 +112,7 @@ app.post('/fulfillment', async function (req,res) {
   }
   
   //Match for previous step
-  if(data.queryResult.intent.displayName=='previous.step'){
+  else if(data.queryResult.intent.displayName === 'previous.step'){
     if(previousIndex==null){
       response_text="Which step to do you want?";
     }
@@ -131,7 +131,7 @@ app.post('/fulfillment', async function (req,res) {
   
  
   // Match for Set Up Intent
-  else if (data.queryResult.intent.displayName == 'Setup-Intent'){
+  else if (data.queryResult.intent.displayName === 'Setup-Intent'){
     let projectID = data.session.split('/')[1]
     let sessionID = data.session.split('/')[4]
     update_session_entity(projectID,sessionID);
