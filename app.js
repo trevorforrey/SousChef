@@ -44,7 +44,9 @@ app.post('/fulfillment', async function (req,res) {
     if (ingredient_info != null) {
       
       //check if the client requested specific units
-      if ('unit-weight-name' in data.queryResult.parameters){
+      if ('unit-weight-name' in data.queryResult.parameters &&
+          data.queryResult.parameters['unit-weight-name'] != null &&
+          data.queryResult.parameters['unit-weight-name'] != ""){
         //console.log(ingredient_info.name);
         //console.log(data.queryResult.parameters['unit-weight-name']);
         response_text = await getCustomUnitResponse(ingredient_info.name, data.queryResult.parameters['unit-weight-name'])
