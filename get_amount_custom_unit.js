@@ -3,12 +3,12 @@ import get_ingredient from './ingredient_intent';
 import unitLookup from './unit_lookup';
 
 async function getCustomUnitResponse(ingredientName, unit){
-    console.log(ingredientName)
-    console.log(unit)
+    //console.log(ingredientName)
+    //console.log(unit)
     var unitConvert = require('convert-units');
     //let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let ingredientInfo = await get_ingredient(ingredientName);
-    console.log(ingredientInfo)
+    //console.log(ingredientInfo)
     if (ingredientInfo == null) {
         return "The recipe doesn't call for " + ingredientName + ".";
     }
@@ -20,8 +20,24 @@ async function getCustomUnitResponse(ingredientName, unit){
     try{
         newUnitShort = await unitLookup(unit);
         origUnitShort = await unitLookup(origUnit);
-        console.log(newUnitShort)
-        console.log(origUnitShort)
+
+        //If the client or recipe said 'ounces' we need to determine
+        //whether they meant the volume measure or the mass measure.
+        if (newUnitShort === 'oz') {
+            if (unitConvert.possibilites('mass').indexOf(origUnitShort) < 0) {
+                newUnitShort = 'fl-oz'
+            }
+        //In the case that they both mean fluid ounces, conversion won't be an issue, and
+        // Sue should reply back with "ounces" rather than "fluid oounces" to be on the 
+        // safe side
+        } else if (origUnitShort === 'oz') {
+            if (unitConvert.possibilites('mass').indexOf(newUnitShort) < 0){
+                origUnitShort = 'fl-oz'
+            }
+        }
+
+        //console.log(newUnitShort)
+        //console.log(origUnitShort)
         newAmount = unitConvert(amount).from(origUnitShort).to(newUnitShort).toPrecision(3);
     } catch (e){
         console.log('unable to convert ' + origUnit + ' to ' + unit + '.');
