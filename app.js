@@ -1,10 +1,4 @@
-import get_ingredient from './ingredient_intent'
-import update_session_entity from './setup_intent'
-import get_ingredient_list from './ingredient-list_intent'
-import getFirstStep from'./firststep_intent'
-import getCookTime from './cooktime_intent'
-import getPrepTime from './prep-time_intent'
-import getStepByIndex from'./nextstep_intent'
+import * as intent from './intents/intents'
 
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -39,17 +33,17 @@ app.post('/fulfillment', async function (req,res) {
         case "Ingredient-Intent-Follow-Up":
             // Get Ingredient asked for from database
             let ingredient = data.queryResult.parameters.ingredient;
-            response_text = await get_ingredient(ingredient);
+            response_text = await intent.get_ingredient(ingredient);
             break;
         
         //Match for List of all ingredients
         case "List-Ingredients":
-            response_text = await get_ingredient_list();
+            response_text = await intent.get_ingredient_list();
             break;
         
         //Match for first step
         case "first.step":
-            let firstStep = await getFirstStep();
+            let firstStep = await intent.getFirstStep();
             if (firstStep != null) {
                 response_text = firstStep;
             }
@@ -64,7 +58,7 @@ app.post('/fulfillment', async function (req,res) {
                 response_text="You have not started cooking yet";
             }
             else{
-                let step = await getStepByIndex(index);
+                let step = await intent.getStepByIndex(index);
                 currentIndex = index;
                 previousIndex = index-1;
                 index = index + 1;
@@ -81,7 +75,7 @@ app.post('/fulfillment', async function (req,res) {
                 response_text="Which step do you want?";
             }
             else {
-                let currentStep = await getStepByIndex(currentIndex);
+                let currentStep = await intent.getStepByIndex(currentIndex);
                 if(currentStep != null){
                     response_text=currentStep;
                 }
@@ -95,7 +89,7 @@ app.post('/fulfillment', async function (req,res) {
                 response_text="Which step to do you want?";
             }
             else{
-                let previousStep = await getStepByIndex(previousIndex);
+                let previousStep = await intent.getStepByIndex(previousIndex);
                 if(previousStep != null){
                     response_text=previousStep;
                 }
@@ -117,13 +111,13 @@ app.post('/fulfillment', async function (req,res) {
         //Match for cook time intent
         case "Cook-Time-Intent":
             // Get the cook time and the response text
-            response_text = await getCookTime();
+            response_text = await intent.getCookTime();
             break;
         
         //Match for prep time intent
         case "Prep-Time-Intent":
             // Get the prep time and the response text
-            let prepTime = await getPrepTime();
+            let prepTime = await intent.getPrepTime();
             break;
     }
     

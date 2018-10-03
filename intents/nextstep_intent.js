@@ -1,4 +1,4 @@
-import get_recipe from "./mongo_helper";
+import get_recipe from "../mongo_helper";
 
 let MongoClient = require('mongodb').MongoClient;
 async function getStepByIndex(index){

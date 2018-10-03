@@ -1,4 +1,4 @@
-import get_recipe from './mongo_helper'
+import get_recipe from '../mongo_helper'
 
 async function get_ingredient(ingredient_name) {
     //Load up a recipe

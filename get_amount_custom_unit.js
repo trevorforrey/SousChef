@@ -1,5 +1,5 @@
 //import get_recipe from './mongo_helper';
-import get_ingredient from './ingredient_intent';
+import get_ingredient from './intents/ingredient_intent';
 import unitLookup from './unit_lookup';
 
 async function getCustomUnitResponse(ingredientName, unit){
