@@ -1,6 +1,5 @@
-import get_recipe from "../mongo_helper";
+import get_recipe from '../mongo_helper'
 
-let MongoClient = require('mongodb').MongoClient;
 async function getStepByIndex(stepDict){
     //Get the recipe from the database
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");

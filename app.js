@@ -42,14 +42,14 @@ app.post('/fulfillment', async function (req,res) {
             break;
         //Match for first step and retrieve the response text
         case "first.step":
-            response_text = await getFirstStep();
+            response_text = await intent.getFirstStep();
             stepDict.index = 1;
             stepDict.currentIndex = 0;
             break;
         //Match for next step and retrieve the response text
         case "next.step":
             stepDict.name = "index";
-            response_text = await getStepByIndex(stepDict);
+            response_text = await intent.getStepByIndex(stepDict);
             if(stepDict.index != null) {
                 stepDict.currentIndex = index;
                 stepDict.previousIndex = index - 1;
@@ -60,7 +60,7 @@ app.post('/fulfillment', async function (req,res) {
         //Match for repeating step and retrieve the response text
         case "repeat.step":
             stepDict.name = "currentIndex";
-            response_text = await getStepByIndex(stepDict);
+            response_text = await intent.getStepByIndex(stepDict);
             break;
             
         //Match for the previous step and retrieve the response text
@@ -73,19 +73,19 @@ app.post('/fulfillment', async function (req,res) {
             
         //Match for set up intent
         case "Setup-Intent":
-            let projectID = data.session.split('/')[1]
-            let sessionID = data.session.split('/')[4]
+            let projectID = data.session.split('/')[1];
+            let sessionID = data.session.split('/')[4];
             update_session_entity(projectID,sessionID);
             response_text = "Let's get cooking!"
             break;
             
         //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":
-            response_text = await getCookTime();
+            response_text = await intent.getCookTime();
             break;
         //Match for prep time intent and retrieve the response text
         case "Prep-Time-Intent":
-            response_text = await getPrepTime();
+            response_text = await intent.getPrepTime();
             break;
     }
     
