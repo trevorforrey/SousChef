@@ -7,10 +7,10 @@ var app = express();
 app.use(bodyparser.json());
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
-let index=null;
-let currentIndex=null;
-let previousIndex=null;
-
+/*let index = null;
+let currentIndex = null;
+let previousIndex = null;*/
+var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null};
 
 app.get('/', function (req, res) {
     res.send('Welcome to the cooking assistant!');
@@ -22,11 +22,12 @@ app.post('/fulfillment', async function (req,res) {
     console.log('got fulfillment request');
     let response = {};
     let response_text;
-    
     let data = req.body;
-    
     let displayName = data.queryResult.intent.displayName;
     
+    
+    /*Switch to route all the different Intents to their specific
+    functions and retrieve the response message*/
     switch (displayName) {
         //Match for Ingredient and Follow up ingredients
         case "Ingredient-Intent":
@@ -35,71 +36,41 @@ app.post('/fulfillment', async function (req,res) {
             let ingredient = data.queryResult.parameters.ingredient;
             response_text = await intent.get_ingredient(ingredient);
             break;
-        
-        //Match for List of all ingredients
+        //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":
             response_text = await intent.get_ingredient_list();
             break;
-        
-        //Match for first step
+        //Match for first step and retrieve the response text
         case "first.step":
-            let firstStep = await intent.getFirstStep();
-            if (firstStep != null) {
-                response_text = firstStep;
-            }
-            else response_text = "I don't know";
-            index = 1;
-            currentIndex=0;
+            response_text = await getFirstStep();
+            stepDict.index = 1;
+            stepDict.currentIndex = 0;
             break;
-        
-        //Match for next step
+        //Match for next step and retrieve the response text
         case "next.step":
-            if(index==null){
-                response_text="You have not started cooking yet";
-            }
-            else{
-                let step = await intent.getStepByIndex(index);
-                currentIndex = index;
-                previousIndex = index-1;
-                index = index + 1;
-                if (step != null) {
-                    response_text = step;
-                }
-                else response_text = "End of steps";
+            stepDict.name = "index";
+            response_text = await getStepByIndex(stepDict);
+            if(stepDict.index != null) {
+                stepDict.currentIndex = index;
+                stepDict.previousIndex = index - 1;
+                stepDict.index = index + 1;
             }
             break;
-        
-        //Match for repeating step
+            
+        //Match for repeating step and retrieve the response text
         case "repeat.step":
-            if(currentIndex == null){
-                response_text="Which step do you want?";
-            }
-            else {
-                let currentStep = await intent.getStepByIndex(currentIndex);
-                if(currentStep != null){
-                    response_text=currentStep;
-                }
-                else response_text = "which step do you want?"
-            }
+            stepDict.name = "currentIndex";
+            response_text = await getStepByIndex(stepDict);
             break;
-        
-        //Match for the previous step
+            
+        //Match for the previous step and retrieve the response text
         case "previous.step":
-            if(previousIndex == null){
-                response_text="Which step to do you want?";
-            }
-            else{
-                let previousStep = await intent.getStepByIndex(previousIndex);
-                if(previousStep != null){
-                    response_text=previousStep;
-                }
-                else response_text="Which step do you want?";
-                index=previousIndex+1;
-                currentIndex=previousIndex;
-                previousIndex=previousIndex-1;
-            }
+            stepDict.name = "previousIndex";
+            stepDict.index = stepDict.previousIndex + 1;
+            stepDict.currentIndex = stepDict.previousIndex;
+            stepDict.previousIndex = stepDict.previousIndex - 1;
             break;
-        
+            
         //Match for set up intent
         case "Setup-Intent":
             let projectID = data.session.split('/')[1]
@@ -107,20 +78,16 @@ app.post('/fulfillment', async function (req,res) {
             update_session_entity(projectID,sessionID);
             response_text = "Let's get cooking!"
             break;
-        
-        //Match for cook time intent
+            
+        //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":
-            // Get the cook time and the response text
-            response_text = await intent.getCookTime();
+            response_text = await getCookTime();
             break;
-        
-        //Match for prep time intent
+        //Match for prep time intent and retrieve the response text
         case "Prep-Time-Intent":
-            // Get the prep time and the response text
-            let prepTime = await intent.getPrepTime();
+            response_text = await getPrepTime();
             break;
     }
-    
     
     // Set response text
     response.fulfillmentText = response_text;
