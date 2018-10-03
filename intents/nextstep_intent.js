@@ -13,9 +13,9 @@ async function getStepByIndex(stepDict){
                 response_text = "You have not started cooking yet";
             }
             else {
-                response_text = receipe_doc.directions[stepDict.index];
-                if (response_text != null) {
-                    response_text = step;
+                let firstStep = recipe_doc.directions[stepDict.index];
+                if (firstStep != null) {
+                    response_text = firstStep;
                 }
                 else response_text = "End of steps";
             }
