@@ -7,9 +7,6 @@ var app = express();
 app.use(bodyparser.json());
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
-/*let index = null;
-let currentIndex = null;
-let previousIndex = null;*/
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null};
 
 app.get('/', function (req, res) {
@@ -36,19 +33,16 @@ app.post('/fulfillment', async function (req,res) {
             let ingredient = data.queryResult.parameters.ingredient;
             response_text = await intent.get_ingredient(ingredient);
             break;
-            
         //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":
             response_text = await intent.get_ingredient_list();
             break;
-            
         //Match for first step and retrieve the response text
         case "first.step":
             response_text = await intent.getFirstStep();
             stepDict.index = 1;
             stepDict.currentIndex = 0;
             break;
-            
         //Match for next step and retrieve the response text
         case "next.step":
             stepDict.name = "index";
@@ -59,13 +53,11 @@ app.post('/fulfillment', async function (req,res) {
                 stepDict.index = index + 1;
             }
             break;
-            
         //Match for repeating step and retrieve the response text
         case "repeat.step":
             stepDict.name = "currentIndex";
             response_text = await intent.getStepByIndex(stepDict);
             break;
-            
         //Match for the previous step and retrieve the response text
         case "previous.step":
             stepDict.name = "previousIndex";
@@ -73,7 +65,6 @@ app.post('/fulfillment', async function (req,res) {
             stepDict.currentIndex = stepDict.previousIndex;
             stepDict.previousIndex = stepDict.previousIndex - 1;
             break;
-            
         //Match for set up intent
         case "Setup-Intent":
             let projectID = data.session.split('/')[1];
@@ -81,12 +72,10 @@ app.post('/fulfillment', async function (req,res) {
             update_session_entity(projectID,sessionID);
             response_text = "Let's get cooking!"
             break;
-            
         //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":
             response_text = await intent.getCookTime();
             break;
-            
         //Match for prep time intent and retrieve the response text
         case "Prep-Time-Intent":
             response_text = await intent.getPrepTime();
