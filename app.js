@@ -36,16 +36,19 @@ app.post('/fulfillment', async function (req,res) {
             let ingredient = data.queryResult.parameters.ingredient;
             response_text = await intent.get_ingredient(ingredient);
             break;
+            
         //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":
             response_text = await intent.get_ingredient_list();
             break;
+            
         //Match for first step and retrieve the response text
         case "first.step":
             response_text = await intent.getFirstStep();
             stepDict.index = 1;
             stepDict.currentIndex = 0;
             break;
+            
         //Match for next step and retrieve the response text
         case "next.step":
             stepDict.name = "index";
@@ -83,6 +86,7 @@ app.post('/fulfillment', async function (req,res) {
         case "Cook-Time-Intent":
             response_text = await intent.getCookTime();
             break;
+            
         //Match for prep time intent and retrieve the response text
         case "Prep-Time-Intent":
             response_text = await intent.getPrepTime();
