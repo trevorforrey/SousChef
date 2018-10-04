@@ -52,12 +52,12 @@ app.post('/fulfillment', async function (req,res) {
     if (ingredient_info != null) {
       
       //check if the client requested specific units
-      if ('unit-weight-name' in data.queryResult.parameters &&
-          data.queryResult.parameters['unit-weight-name'] != null &&
-          data.queryResult.parameters['unit-weight-name'] != ""){
+      if ('unit-volume-name' in data.queryResult.parameters &&
+          data.queryResult.parameters['unit-volume-name'] != null &&
+          data.queryResult.parameters['unit-volume-name'] != ""){
         //console.log(ingredient_info.name);
         //console.log(data.queryResult.parameters['unit-weight-name']);
-        response_text = await getCustomUnitResponse(ingredient_info.name, data.queryResult.parameters['unit-weight-name'])
+        response_text = await getCustomUnitResponse(ingredient_info.name, data.queryResult.parameters['unit-volume-name'])
       } else {
 
         // If non-plural units, and plural amount, make unit plural
