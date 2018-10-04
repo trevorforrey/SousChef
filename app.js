@@ -85,6 +85,40 @@ app.post('/fulfillment', async function (req,res) {
     // Set response text
     response.fulfillmentText = response_text;
     
+  //Intent to get the remaining number of steps 
+
+  }
+      index = currentIndex + 1;
+      previousIndex = currentIndex - 1;
+      }
+      currentIndex = requested_step_number;
+          response_text = "Unable to fetch the response at this moment, try later!";
+      }else{
+          response_text = requested_step;
+      let requested_step = await getStepByIndex(requested_step_number);
+      if(null != requested_step){
+      }
+      if(isNaN(requested_step_number) || null == requested_step_number){
+          response_text="Sorry I didn't catch that! Can you please repeat?";
+      let requested_step_number = data.queryResult.parameters['STEP_NUMBER']; 
+  if(data.queryResult.intent.displayName=='requested-step'){
+  //Intent for any requested step
+  if(data.queryResult.intent.displayName=='remaining-steps'){
+      let totalNumberOfSteps = await getTotalNumberOfSteps();
+         response_text = "Unable to fetch the response at this moment, try later!";
+      if(null == totalNumberOfSteps){
+      }
+      let remaining_steps = totalNumberOfSteps - currentIndex;
+      if(remaining_steps == 0){
+          response_text = "You are in the last step!";
+      }else if(remaining_steps == 1){
+          response_text = "You are almost done, just 1 more step!";
+          response_text = "You still have "+remaining_steps+" to go";
+      }else{
+      }
+  }
+  
+ 
     // Send response message back
     res.json(response);
 });

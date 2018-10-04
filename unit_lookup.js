@@ -5,6 +5,8 @@ var unitLookupDict = {
     "CUBIC MILLIMETERS": 'mm3',
     "TABLESPOON": 'Tbs',
     "TABLESPOONS": 'Tbs',
+    "TBSP": 'Tbs',
+    "TSP": 'tsp',
     "TEASPOON": 'tsp',
     'TEASPOONS': 'tsp',
     "MILLILITER": 'ml',
@@ -19,6 +21,7 @@ var unitLookupDict = {
     'PINTS': 'pnt',
     'QUART': 'qt',
     'QUARTS': 'qt',
+    "GAL": 'gal',
     'GALLON': 'gal',
     'GALLONS': 'gal',
     'GRAM': 'g',
@@ -29,9 +32,10 @@ var unitLookupDict = {
     'KILOS': 'kg',
     'POUND': 'lb',
     'POUNDS': 'lb',
-    //I'm going to assume that if a customer says 'ounces', they mean fluid ounces.
-    'OUNCE': 'fl-oz',
-    'OUNCES': 'fl-oz'
+    //I'm going to assume that if a customer says 'ounces', they don't mean fluid ounces.
+    // This will have to be double-checked in code.
+    'OUNCE': 'oz',
+    'OUNCES': 'oz'
 }
 
 async function unitLookup(unitName){
