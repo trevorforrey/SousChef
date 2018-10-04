@@ -163,7 +163,7 @@ app.post('/fulfillment', async function (req,res) {
           response_text="Sorry I didn't catch that! Can you please repeat?";
       }
       let requested_step = await getStepByIndex(requested_step_number);
-      if(null != requested_step){
+      if(null != requested_step || isNaN(requested_step_number)){
           response_text = requested_step;
       }else{
           response_text = "Unable to fetch the response at this moment, try later!";
@@ -181,11 +181,11 @@ app.post('/fulfillment', async function (req,res) {
       }
       let remaining_steps = totalNumberOfSteps - currentIndex;
       if(remaining_steps == 0){
-          response = "You are in the last step!";
+          response_text = "You are in the last step!";
       }else if(remaining_steps == 1){
-          response = "You are almost done, just 1 more step!";
+          response_text = "You are almost done, just 1 more step!";
       }else{
-          response = "You still have "+remaining_steps+" to go";
+          response_text = "You still have "+remaining_steps+" to go";
       }
   }
   
