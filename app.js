@@ -28,7 +28,7 @@ let currentIndex=null;
 let previousIndex=null;
 
 app.get('/', function (req, res) {
-  res.send('Welcome to the cooking assistant!');
+  res.sendFile(__dirname+'/index.html');
 });
 
 
