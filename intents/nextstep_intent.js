@@ -8,7 +8,8 @@ async function getStepByIndex(stepDict){
     
     
     switch(stepParamName) {
-        case "index":
+        //Get the next step
+        case "nextStep":
             if(stepDict.index == null){
                 response_text = "You have not started cooking yet";
             }
@@ -20,30 +21,46 @@ async function getStepByIndex(stepDict){
                 else response_text = "End of steps";
             }
             break;
-            
-        case "currentIndex":
+    
+        //Get the next step
+        case "repeatStep":
             if(stepDict.currentIndex == null){
                 response_text = "Which step do you want?";
             }
             else {
-                let currentStep = receipe_doc.directions[stepDict.currentIndex];
+                let currentStep = recipe_doc.directions[stepDict.currentIndex];
                 if(currentStep != null){
                     response_text = currentStep;
                 }
                 else response_text = "which step do you want?"
             }
             break;
-            
-        case "previousIndex":
+    
+        //Get the previous step
+        case "previousStep":
             if(stepDict.previousIndex == null){
                 response_text = "Which step to do you want?";
             }
             else{
-                let previousStep = receipe_doc.directions[stepDict.previousIndex];
+                let previousStep = recipe_doc.directions[stepDict.previousIndex];
                 if(previousStep != null){
                     response_text = previousStep;
                 }
                 else response_text= "Which step do you want?";
+            }
+            break;
+            
+        //Get the specific step that was requested
+        case "requestedStep":
+            let requested_step_number = stepDict.stepRequest;
+            if(isNaN(requested_step_number) || null == requested_step_number){
+                response_text = "Sorry I didn't catch that! Can you please repeat?";
+            }
+            let requested_step = recipe_doc.directions[stepDict.stepRequest];
+            if(null != requested_step){
+                response_text = requested_step;
+            }else{
+                response_text = "Unable to fetch the response at this moment, try later!";
             }
             break;
     }
