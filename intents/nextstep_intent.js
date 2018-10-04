@@ -5,7 +5,7 @@ async function getStepByIndex(stepDict){
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let response_text;
     let stepParamName = stepDict.name;
-    
+    let total_number_of_steps = recipe_doc.directions.length;
     
     switch(stepParamName) {
         //Get the next step
@@ -53,14 +53,18 @@ async function getStepByIndex(stepDict){
         //Get the specific step that was requested
         case "requestedStep":
             let requested_step_number = stepDict.stepRequest;
-            if(isNaN(requested_step_number) || null == requested_step_number){
+            if(isNaN(requested_step_number) || requested_step_number == null){
                 response_text = "Sorry I didn't catch that! Can you please repeat?";
             }
-            let requested_step = recipe_doc.directions[stepDict.stepRequest];
-            if(null != requested_step){
-                response_text = requested_step;
-            }else{
-                response_text = "Unable to fetch the response at this moment, try later!";
+            let requested_step = recipe_doc.directions[requested_step_number];
+            if(requested_step !== null){
+                if(requested_step_number >= total_number_of_steps) {
+                    response_text = "I'm sorry there is no step " + requested_step_number + " in the recipe!";
+                }
+                else response_text = requested_step;
+            }
+            else{
+                response_text = "Unable to fetch the response at this moment, please try later!";
             }
             break;
     }

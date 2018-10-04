@@ -15,7 +15,6 @@ app.get('/', function (req, res) {
 
 
 app.post('/fulfillment', async function (req,res) {
-    
     console.log('got fulfillment request');
     let response = {};
     let response_text;
@@ -48,9 +47,9 @@ app.post('/fulfillment', async function (req,res) {
             stepDict.name = "nextStep";
             response_text = await intent.getStepByIndex(stepDict);
             if(stepDict.index != null) {
-                stepDict.currentIndex = index;
-                stepDict.previousIndex = index - 1;
-                stepDict.index = index + 1;
+                stepDict.currentIndex = stepDict.index;
+                stepDict.previousIndex = stepDict.index - 1;
+                stepDict.index = stepDict.index + 1;
             }
             break;
         //Match for repeating step
@@ -69,7 +68,7 @@ app.post('/fulfillment', async function (req,res) {
         //Match for any requested step
         case "requested-step":
             stepDict.name = "requestedStep";
-            stepDict.stepRequest = data.queryResult.parameters['STEP_NUMBER'];
+            stepDict.stepRequest = data.queryResult.parameters.number;
             response_text = await intent.getStepByIndex(stepDict);
             stepDict.currentIndex = stepDict.stepRequest;
             stepDict.previousIndex = stepDict.currentIndex - 1;
@@ -84,7 +83,7 @@ app.post('/fulfillment', async function (req,res) {
             let projectID = data.session.split('/')[1];
             let sessionID = data.session.split('/')[4];
             update_session_entity(projectID, sessionID);
-            response_text = "Let's get cooking!"
+            response_text = "Let's get cooking!";
             break;
         //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":
