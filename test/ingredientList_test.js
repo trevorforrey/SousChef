@@ -11,7 +11,7 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 
-//Create json body vars for posting
+//Create json example POST body for testing
 const ingredientListRequest = {
     "responseId": "ecf2b92a-b67b-41de-b3bc-0da7f961df47",
     "queryResult": {
@@ -42,34 +42,14 @@ const ingredientListRequest = {
   };
 
 
+/************* TESTING BEGINS ***************/
 
 
+// Describes All Tests in this file 
+describe('Testing Ingredient List Intent', () => {
 
 
-//Our parent block
-describe('Testing Intents', () => {
-
-/*
-* Test the /GET route
-*/
-describe('/GET on homepage', () => {
-    it('it should GET on the homepage', (done) => {
-    chai.request(app)
-        .get('/')
-        .end( (error, response, body) => {
-            if (error) {
-                done(error);
-            } else {
-                response.should.have.status(200);
-                done();
-            }
-        });
-    });
-});
-
-/*
-* Test the /GET route
-*/
+// Test Ingredient List Intent
 describe('Test Ingredient List Intent', () => {
     it('it should get an ingredient list back', (done) => {
     chai.request(app)
@@ -80,8 +60,8 @@ describe('Test Ingredient List Intent', () => {
             if (error) {
                 done(error);
             } else {
-                //response.should.have.status(201);
-                console.log(response);
+                response.should.have.status(201);
+                console.log('Fulfillment Text: ' + response.body.fulfillmentText);
                 response.body.fulfillmentText.should.include('For this recipe,');
                 done();
             }

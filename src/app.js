@@ -2,8 +2,8 @@ import * as intent from './intents/intents'
 
 var express = require('express');
 const bodyparser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
-var app = express();
+let MongoClient = require('mongodb').MongoClient;
+let app = express();
 app.use(bodyparser.json());
 
 let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
@@ -97,6 +97,13 @@ app.post('/fulfillment', async function (req,res) {
     }
     // Set response text
     response.fulfillmentText = response_text;
+
+    if (response.fulfillmentText != null
+      && response.fulfillmentText.length > 1) {
+        res.status(201);
+      } else {
+        res.status(500);
+      }
     
     // Send response message back
     res.json(response);
@@ -105,3 +112,5 @@ app.post('/fulfillment', async function (req,res) {
 app.listen(port, function () {
     console.log('Cooking server listening on port ' + port);
 });
+
+module.exports = app;
