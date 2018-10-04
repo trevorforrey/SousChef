@@ -87,7 +87,8 @@ app.post('/fulfillment', async function (req,res) {
   }
 
   // Match for First Step
-  else if (data.queryResult.intent.displayName === 'first.step') {
+  else if (data.queryResult.intent.displayName === 'first-step') {
+    console.log("hit first step");
     let firstStep = await getFirstStep();
     if (firstStep != null) {
       response_text = firstStep;
@@ -98,7 +99,7 @@ app.post('/fulfillment', async function (req,res) {
   } 
 
   // Match for Next Step
-  else if (data.queryResult.intent.displayName === 'next.step'){
+  else if (data.queryResult.intent.displayName === 'next-step'){
     if(index==null){
       response_text="You have not started cooking yet";
     }
@@ -116,7 +117,7 @@ app.post('/fulfillment', async function (req,res) {
   }
   
   //Match for Repeat step
-  else if(data.queryResult.intent.displayName === 'repeat.step'){
+  else if(data.queryResult.intent.displayName === 'repeat-step'){
     if(currentIndex==null){
       response_text="Which step do you want?";
     }
@@ -131,7 +132,7 @@ app.post('/fulfillment', async function (req,res) {
   }
   
   //Match for previous step
-  else if(data.queryResult.intent.displayName === 'previous.step'){
+  else if(data.queryResult.intent.displayName === 'previous-step'){
     if(previousIndex==null){
       response_text="Which step to do you want?";
     }
@@ -149,7 +150,7 @@ app.post('/fulfillment', async function (req,res) {
   }
     
   //Intent for any requested step
-  if(data.queryResult.intent.displayName=='requested.step'){
+  if(data.queryResult.intent.displayName=='requested-step'){
       let requested_step_number = data.queryResult.parameters['STEP_NUMBER']; 
       if(isNaN(requested_step_number) || null == requested_step_number){
           response_text="Sorry I didn't catch that! Can you please repeat?";
@@ -166,7 +167,7 @@ app.post('/fulfillment', async function (req,res) {
   }
 
   //Intent to get the remaining number of steps 
-  if(data.queryResult.intent.displayName=='remaining.steps'){
+  if(data.queryResult.intent.displayName=='remaining-steps'){
       let totalNumberOfSteps = await getTotalNumberOfSteps();
       if(null == totalNumberOfSteps){
          response_text = "Unable to fetch the response at this moment, try later!";
