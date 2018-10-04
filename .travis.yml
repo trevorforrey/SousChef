@@ -1,10 +1,24 @@
 language: node_js
 node_js:
 - 8
-
 deploy:
   provider: heroku
   api_key:
     secure: EYWEHgqXUxe/b3mZUuBZgx2UPLctL9f+37m5JbcN2HZF+mwV51Aoh+Qv4syw//vc2JmPCYVioUW7Oxv0fQROFzY8AVIYPqF/HgtHov6UwCGiXheizQwyhq38hlg8l5tplhSfXKf41V1Im61+bnQc6a3I4C/jNBioFMlp9MryVkVaAitX6ryshj7hxRpYX21SU6t8vijIMcbvXjyqhYl9H3XyXlsRPg72aV3pbZtkjAOFLxt8KdI5UVraJvS3GMIbkDPFbyrI0p6fDONCjJ+bOzXFh1r1hq+wEYE1rmIQDT9vNHpSkft2ta/1Z27xW08H5Tfy3hftMvEPMI1uFIQsFc+ei96N8HrHZYIi+ympGsRWHULE8VKMeBD8erRgq6/JWJVPRszF/YGKhDNE+6cPKgR5X44j9JraczxWh0qz8XouMYRy6ZRsOlBWGgQnrpwcaAE4xP5JtX+WePNj/AT8r+HzV3WMKstUX+jchPvUaHa6uI4SEDTlOHO1hCaT8UEgSFMFbZnjMGkT45bu1rhjP8VpXZ9sSArUOGwBWMU+rD7MeV9i2N2GrLZpHNqDNfFs/yUYGQkVlPv22pr/Cu2c0q19YI3179leuaK/yy6QsgzwAs3CHjzY/kGWmeZZY2yGWEeNatrtqAgvyNOVvjZXCde0bqaPT78chIIsDGuJ17Y=
   app: sous-chef-assistant
   on: develop
+notifications:
+  slack:
+    secure: wOrPjEPb3kZrr9fGa6JDJmYY0Adh4nnooMrmMsNIqaEksonkC/IDn5JSiHMNHv1odxOH2glTj6tczAGI5lMsbMbuqpTpZSTKvW8B0dtElfFMrC+cYXyWVAgc0col1lgwWExuvm9dbHP7vE3qDl3Ih2Fl3Sgf1L6qCD5oqUVosTCj6jGjxb4+9t62mfYYwr+RCGg8c6o7CgvQ87jROt17nUUEUUqH2TMm2TS0zVf/dlf4v/ul3PXhz3nR48Cftppfewo1/+rfTp2BtnABSZKvsIOSh7+D8+UxIYjpMqxF92lTQyiFxGjCku6Mn+KSbr4JlN/6Q528SvWFzDgaGDyHYgNpy7DEn8+Yzr8FV5zWxzjqTjMSiPkVQt40ByZwgDBpLb3INmSqv56FQpZQ4nAzTROh0CQFygEc0ThFYUMXxTNu00svQiJquaQwev+UWaXjxW9bkOaWzGhEFULU6MmlXF7a5+1e4dNxaKVtoYoaRe3d2YiNuaOuiZ7ABWkggNoV8JHs/jy3e6gmvCcRhjJwwGBJrSSaOFi0aVEkGu6OKAPRM95kGvDA9pVN2wImu3v4qmfuruZoQVf6fr5uYIXGAGOcphRb5VzykVPMqubuZuL8xakAGymqWGgSPpGyQiZtacthLhxbgGep5vW2GuAWIEb5CnoqeK2N/6gtF1GmPYw=
+    on_success: change
+    on_failure: change
+  email:
+    recipients:
+      - swdunnin@asu.edu
+      - sparanj2@asu.edu
+      - rkhatun@asu.edu
+      - dlahtine@asu.edu
+      - pahorton@asu.edu
+      - trevor4e@gmail.com
+    on_success: change
+    on_failure: always
