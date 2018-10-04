@@ -111,7 +111,7 @@ app.post('/fulfillment', async function (req,res) {
     if (step != null) {
       response_text = step;
     }
-    else response_text = "End of steps"; 
+    else response_text = "Enjoy!!"; 
     }
     
   }
@@ -134,7 +134,12 @@ app.post('/fulfillment', async function (req,res) {
   //Match for previous step
   else if(data.queryResult.intent.displayName === 'previous-step'){
     if(previousIndex==null){
-      response_text="Which step to do you want?";
+      response_text="Which step do you want?";
+    }
+    else if(previousIndex==-1){
+      response_text="Which step do you want?";
+      index=1;
+      currentIndex=0;
     }
     else{
       let previousStep = await getStepByIndex(previousIndex);
