@@ -87,36 +87,38 @@ app.post('/fulfillment', async function (req,res) {
   }
 
   // Match for First Step
-  else if (data.queryResult.intent.displayName === 'first.step') {
+  else if (data.queryResult.intent.displayName === 'first-step') {
     let firstStep = await getFirstStep();
     if (firstStep != null) {
       response_text = firstStep;
     }
-    else response_text = "I don't know"; 
+    else 
+      response_text = "Direction for this receipe is not available"; 
     index = 1;
-    currentIndex=0; 
+    currentIndex=0;
+    previousIndex=-1; 
   } 
 
   // Match for Next Step
-  else if (data.queryResult.intent.displayName === 'next.step'){
+  else if (data.queryResult.intent.displayName === 'next-step'){
     if(index==null){
-      response_text="You have not started cooking yet";
+      response_text="Which step do you want";
     }
     else{
-     let step = await getStepByIndex(index);
+    let step = await getStepByIndex(index);
     currentIndex=index;
     previousIndex=index-1;
     index = index + 1;
     if (step != null) {
       response_text = step;
     }
-    else response_text = "End of steps"; 
+    else response_text = "Enjoy!!"; 
     }
     
   }
   
   //Match for Repeat step
-  else if(data.queryResult.intent.displayName === 'repeat.step'){
+  else if(data.queryResult.intent.displayName === 'repeat-step'){
     if(currentIndex==null){
       response_text="Which step do you want?";
     }
@@ -131,16 +133,22 @@ app.post('/fulfillment', async function (req,res) {
   }
   
   //Match for previous step
-  else if(data.queryResult.intent.displayName === 'previous.step'){
+  else if(data.queryResult.intent.displayName === 'previous-step'){
     if(previousIndex==null){
-      response_text="Which step to do you want?";
+      response_text="Which step do you want?";
+    }
+    else if(previousIndex==-1){
+      response_text="Which step do you exactly want";
+      currentIndex=null;
+      index=null;      
     }
     else{
       let previousStep = await getStepByIndex(previousIndex);
       if(previousStep!=null){
         response_text=previousStep;
       }
-      else response_text="Which step do you want?";
+      else
+        response_text="Which step do you want?";
       index=previousIndex+1;
       currentIndex=previousIndex;
       previousIndex=previousIndex-1;
@@ -149,7 +157,7 @@ app.post('/fulfillment', async function (req,res) {
   }
     
   //Intent for any requested step
-  if(data.queryResult.intent.displayName=='requested.step'){
+  if(data.queryResult.intent.displayName=='requested-step'){
       let requested_step_number = data.queryResult.parameters['STEP_NUMBER']; 
       if(isNaN(requested_step_number) || null == requested_step_number){
           response_text="Sorry I didn't catch that! Can you please repeat?";
@@ -166,7 +174,7 @@ app.post('/fulfillment', async function (req,res) {
   }
 
   //Intent to get the remaining number of steps 
-  if(data.queryResult.intent.displayName=='remaining.steps'){
+  if(data.queryResult.intent.displayName=='remaining-steps'){
       let totalNumberOfSteps = await getTotalNumberOfSteps();
       if(null == totalNumberOfSteps){
          response_text = "Unable to fetch the response at this moment, try later!";
