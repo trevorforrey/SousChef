@@ -27,7 +27,7 @@ app.post('/fulfillment', async function (req,res) {
         case "Ingredient-Intent-Follow-Up":
             // Get Ingredient asked for from database
             let ingredient = data.queryResult.parameters.ingredient;
-            response_text = await intent.get_ingredient(ingredient);
+            response_text = await intent.get_ingredient(ingredient, data);
             break;
         //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":

@@ -1,5 +1,3 @@
-//import get_recipe from './mongo_helper';
-import get_ingredient from './intents/ingredient_intent';
 import unitLookup from './unit_lookup';
 
 async function getCustomUnitResponse(ingredientName, unit){
@@ -7,14 +5,14 @@ async function getCustomUnitResponse(ingredientName, unit){
     //console.log(unit)
     var unitConvert = require('convert-units');
     //let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
-    let ingredientInfo = await get_ingredient(ingredientName);
+    let ingredientInfo = ingredientName;
     //console.log(ingredientInfo)
     if (ingredientInfo == null) {
         return "The recipe doesn't call for " + ingredientName + ".";
     }
-    let amount = ingredientInfo.quantity
-    let origUnit = ingredientInfo.unit
-    let newAmount = null
+    let amount = ingredientInfo.quantity;
+    let origUnit = ingredientInfo.unit;
+    let newAmount = null;
     let newUnitShort = null;
     let origUnitShort = null;
     try{
