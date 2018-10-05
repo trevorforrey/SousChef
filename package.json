@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "compile": "babel -d dst/ src/",
-    "test": "npm run compile && mocha --compilers js:babel-core/register --exit",
+    "test": "npm run compile && mocha --no-colors --compilers js:babel-core/register --exit",
     "start": "babel-node src/app.js"
   },
   "repository": {
