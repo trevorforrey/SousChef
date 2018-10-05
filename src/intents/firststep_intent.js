@@ -1,6 +1,6 @@
 import get_recipe from '../mongo_helper'
 
-async function getFirstStep(){
+async function getFirstStep(stepDict){
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let first_step = recipe_doc.directions[0];
     let response_text;
@@ -10,7 +10,10 @@ async function getFirstStep(){
     }
     else
         response_text = "I don't know";
-    
+    stepDict.index = 1;
+    stepDict.currentIndex = 0;
+    stepDict.previousIndex = null;
+    console.log("stepDict inside firstStep.js", stepDict);
     return response_text;
 }
 export default getFirstStep;

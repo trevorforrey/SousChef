@@ -1,27 +1,33 @@
 import * as intent from './intents/intents'
 
+const shell = require('shelljs');
 var express = require('express');
 const bodyparser = require('body-parser');
 let MongoClient = require('mongodb').MongoClient;
 let app = express();
 app.use(bodyparser.json());
 
-let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
+// process.env.PORT used by Heroku
+var port = process.env.PORT || 5000;
+
+// Have Heroku set up google auth
+if (process.env.GOOGLE_AUTH_CONTENTS != null) {
+    shell.exec('../release-tasks.sh');
+}
+
+// Global variables
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, stepRequest: null};
 
 app.get('/', function (req, res) {
     res.send('Welcome to the cooking assistant!');
 });
 
-
 app.post('/fulfillment', async function (req,res) {
-    
     console.log('got fulfillment request');
     let response = {};
     let response_text;
     let data = req.body;
     let displayName = data.queryResult.intent.displayName;
-    
     
     /*Switch to route all the different Intents to their specific
     functions and retrieve the response message*/
@@ -31,7 +37,7 @@ app.post('/fulfillment', async function (req,res) {
         case "Ingredient-Intent-Follow-Up":
             // Get Ingredient asked for from database
             let ingredient = data.queryResult.parameters.ingredient;
-            response_text = await intent.get_ingredient(ingredient);
+            response_text = await intent.get_ingredient(ingredient, data);
             break;
         //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":
@@ -39,19 +45,12 @@ app.post('/fulfillment', async function (req,res) {
             break;
         //Match for first step and retrieve the response text
         case "first-step":
-            response_text = await intent.getFirstStep();
-            stepDict.index = 1;
-            stepDict.currentIndex = 0;
+            response_text = await intent.getFirstStep(stepDict);
             break;
         //Match for next step and retrieve the response text
         case "next-step":
             stepDict.name = "nextStep";
             response_text = await intent.getStepByIndex(stepDict);
-            if(stepDict.index != null) {
-                stepDict.currentIndex = index;
-                stepDict.previousIndex = index - 1;
-                stepDict.index = index + 1;
-            }
             break;
         //Match for repeating step
         case "repeat-step":
@@ -62,18 +61,12 @@ app.post('/fulfillment', async function (req,res) {
         case "previous-step":
             stepDict.name = "previousStep";
             response_text = await intent.getStepByIndex(stepDict);
-            stepDict.index = stepDict.previousIndex + 1;
-            stepDict.currentIndex = stepDict.previousIndex;
-            stepDict.previousIndex = stepDict.previousIndex - 1;
             break;
         //Match for any requested step
         case "requested-step":
             stepDict.name = "requestedStep";
-            stepDict.stepRequest = data.queryResult.parameters['STEP_NUMBER'];
+            stepDict.stepRequest = data.queryResult.parameters.number;
             response_text = await intent.getStepByIndex(stepDict);
-            stepDict.currentIndex = stepDict.stepRequest;
-            stepDict.previousIndex = stepDict.currentIndex - 1;
-            stepDict.index = stepDict.currentIndex + 1;
             break;
         //Match for getting the remaining number of steps
         case "remaining-steps":
@@ -84,7 +77,7 @@ app.post('/fulfillment', async function (req,res) {
             let projectID = data.session.split('/')[1];
             let sessionID = data.session.split('/')[4];
             update_session_entity(projectID, sessionID);
-            response_text = "Let's get cooking!"
+            response_text = "Let's get cooking!";
             break;
         //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":

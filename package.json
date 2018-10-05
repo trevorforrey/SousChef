@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "babel -d dst/ src/",
     "test": "npm run compile && mocha --compilers js:babel-core/register --exit",
-    "start": "babel-node app.js"
+    "start": "babel-node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,6 @@
     "shelljs": "^0.8.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "chai": "^4.2.0",
