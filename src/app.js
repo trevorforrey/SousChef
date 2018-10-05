@@ -1,11 +1,21 @@
 import * as intent from './intents/intents'
 
+const shell = require('shelljs');
 var express = require('express');
 const bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var app = express();
 app.use(bodyparser.json());
-var port = process.env.PORT || 5000; // process.env.PORT used by Heroku
+
+// process.env.PORT used by Heroku
+var port = process.env.PORT || 5000;
+
+// Have Heroku set up google auth
+if (process.env.GOOGLE_AUTH_CONTENTS != null) {
+    shell.exec('../release-tasks.sh');
+}
+
+// Global variables
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, stepRequest: null};
 
 app.get('/', function (req, res) {
