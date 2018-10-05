@@ -12,7 +12,7 @@ var port = process.env.PORT || 5000;
 
 // Have Heroku set up google auth
 if (process.env.GOOGLE_AUTH_CONTENTS != null) {
-    shell.exec('../release-tasks.sh');
+    shell.exec('./release-tasks.sh');
 }
 
 app.get('/', function (req, res) {
