@@ -33,6 +33,10 @@ app.get('/', function (req, res) {
   res.sendFile('index.html');
 });
 
+app.get('/upload',function (req, res){
+  res.sendFile('/upload.html');
+});
+
 
 app.post('/fulfillment', async function (req,res) {
 
