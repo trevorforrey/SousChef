@@ -56,7 +56,7 @@ async function handle_fulfillment(req,res) {
         case "Setup-Intent":
             let projectID = data.session.split('/')[1];
             let sessionID = data.session.split('/')[4];
-            update_session_entity(projectID, sessionID);
+            intent.update_session_entity(projectID, sessionID);
             response_text = "Let's get cooking!";
             break;
         //Match for cook time intent and retrieve the response text
