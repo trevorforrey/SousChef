@@ -2,5 +2,8 @@
 node_modules/
 
 app-env
+app-env.*
+
+dst
 
 .idea
