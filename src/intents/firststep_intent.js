@@ -12,6 +12,7 @@ async function getFirstStep(stepDict){
         response_text = "I don't know";
     stepDict.index = 1;
     stepDict.currentIndex = 0;
+    stepDict.previousIndex = null;
     console.log("stepDict inside firstStep.js", stepDict);
     return response_text;
 }

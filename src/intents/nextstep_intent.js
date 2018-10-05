@@ -69,12 +69,13 @@ async function getStepByIndex(stepDict){
         //Get the specific step that was requested
         case "requestedStep":
             let requested_step_number = stepDict.stepRequest - 1;
+            let requested_step = recipe_doc.directions[requested_step_number];
             if(isNaN(requested_step_number) || requested_step_number == null){
                 response_text = "Sorry I didn't catch that! Can you please repeat?";
             }
-            let requested_step = recipe_doc.directions[requested_step_number];
-            if(requested_step !== null){
-                if(requested_step_number >= total_number_of_steps) {
+            
+            else if(requested_step !== null){
+                if(requested_step_number >= total_number_of_steps || requested_step_number < 0) {
                     response_text = "I'm sorry there is no step " + (requested_step_number + 1) + " in the recipe!";
                 }
                 else response_text = requested_step;
@@ -82,7 +83,7 @@ async function getStepByIndex(stepDict){
             else{
                 response_text = "Unable to fetch the response at this moment, please try later!";
             }
-            stepDict.currentIndex = stepDict.stepRequest;
+            stepDict.currentIndex = stepDict.stepRequest - 1;
             stepDict.previousIndex = stepDict.currentIndex - 1;
             stepDict.index = stepDict.currentIndex + 1;
             break;
