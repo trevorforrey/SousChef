@@ -5,14 +5,12 @@ const bodyparser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var app = express();
 app.use(bodyparser.json());
-
-let port = process.env.PORT || 5000; // process.env.PORT used by Heroku
+var port = process.env.PORT || 5000; // process.env.PORT used by Heroku
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, stepRequest: null};
 
 app.get('/', function (req, res) {
     res.send('Welcome to the cooking assistant!');
 });
-
 
 app.post('/fulfillment', async function (req,res) {
     console.log('got fulfillment request');
@@ -20,7 +18,6 @@ app.post('/fulfillment', async function (req,res) {
     let response_text;
     let data = req.body;
     let displayName = data.queryResult.intent.displayName;
-    
     
     /*Switch to route all the different Intents to their specific
     functions and retrieve the response message*/
@@ -38,19 +35,12 @@ app.post('/fulfillment', async function (req,res) {
             break;
         //Match for first step and retrieve the response text
         case "first-step":
-            response_text = await intent.getFirstStep();
-            stepDict.index = 1;
-            stepDict.currentIndex = 0;
+            response_text = await intent.getFirstStep(stepDict);
             break;
         //Match for next step and retrieve the response text
         case "next-step":
             stepDict.name = "nextStep";
             response_text = await intent.getStepByIndex(stepDict);
-            if(stepDict.index != null) {
-                stepDict.currentIndex = stepDict.index;
-                stepDict.previousIndex = stepDict.index - 1;
-                stepDict.index = stepDict.index + 1;
-            }
             break;
         //Match for repeating step
         case "repeat-step":
@@ -61,18 +51,12 @@ app.post('/fulfillment', async function (req,res) {
         case "previous-step":
             stepDict.name = "previousStep";
             response_text = await intent.getStepByIndex(stepDict);
-            stepDict.index = stepDict.previousIndex + 1;
-            stepDict.currentIndex = stepDict.previousIndex;
-            stepDict.previousIndex = stepDict.previousIndex - 1;
             break;
         //Match for any requested step
         case "requested-step":
             stepDict.name = "requestedStep";
             stepDict.stepRequest = data.queryResult.parameters.number;
             response_text = await intent.getStepByIndex(stepDict);
-            stepDict.currentIndex = stepDict.stepRequest;
-            stepDict.previousIndex = stepDict.currentIndex - 1;
-            stepDict.index = stepDict.currentIndex + 1;
             break;
         //Match for getting the remaining number of steps
         case "remaining-steps":
@@ -96,7 +80,7 @@ app.post('/fulfillment', async function (req,res) {
     }
     // Set response text
     response.fulfillmentText = response_text;
-    
+    console.log("stepDict inside app.js", stepDict);
     // Send response message back
     res.json(response);
 });
