@@ -1,0 +1,36 @@
+
+*{
+	
+	padding: 7px;
+	border:0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+	
+}
+h1{
+	text-align: center;
+	margin:50px;
+	color: red;
+}	
+p{
+
+	padding-top: 30px;
+	font-size: .8em;
+}
+h3{
+	background-color: blue;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	position:absolute;
+	top:0px;
+	right: 0px;
+    width: 30%;
+	
+	
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	text-align: center;
+	overflow: auto;
+
+}
