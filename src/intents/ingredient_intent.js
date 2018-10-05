@@ -6,13 +6,13 @@ async function get_ingredient(ingredient_name, data) {
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let ingredient_info = null;
     let response_text;
-
+    
     // Iterate through the recipe array
     recipe_doc.ingredients.forEach( (recipe_ingredient) => {
-    // If the ingredient exists, update ingredient_info with ingredient info
-    if (recipe_ingredient.name === ingredient_name) {
-      ingredient_info = recipe_ingredient;
-    }
+        // If the ingredient exists, update ingredient_info with ingredient info
+        if (recipe_ingredient.name === ingredient_name) {
+            ingredient_info = recipe_ingredient;
+        }
     });
     
     // If Ingredient was found, return ingredient info. If not, return error message
@@ -40,7 +40,7 @@ async function get_ingredient(ingredient_name, data) {
         }
     } else response_text = ingredient_name + ' is not in the recipe';
     
-  return response_text;
+    return response_text;
 };
 
 // allows us to import the function in app.js
