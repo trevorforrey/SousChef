@@ -11,7 +11,7 @@ async function getTotalNumberOfSteps(stepDict){
     //     response_text = "Unable to fetch the response at this moment, try later!";
     // }
     
-    let remaining_steps = total_number_of_steps - currentIndex;
+    let remaining_steps = (total_number_of_steps - currentIndex) - 1;
     if(remaining_steps === 0){
         response_text = "You are on the last step!";
     }
