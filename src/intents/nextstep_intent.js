@@ -81,7 +81,7 @@ async function getStepByIndex(stepDict){
                 else response_text = requested_step;
             }
             else{
-                response_text = "Unable to fetch the response at this moment, please try later!";
+		  response_text = "That is an invalid request. Can you please repeat?";
             }
             stepDict.currentIndex = stepDict.stepRequest - 1;
             stepDict.previousIndex = stepDict.currentIndex - 1;
