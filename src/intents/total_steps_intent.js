@@ -6,12 +6,18 @@ async function getTotalNumberOfSteps(stepDict){
     let total_number_of_steps = recipe_doc.directions.length;
     let response_text;
     let currentIndex = stepDict.currentIndex;
+    let remaining_steps;
     
     // if(total_number_of_steps === null){
     //     response_text = "Unable to fetch the response at this moment, try later!";
     // }
     
-    let remaining_steps = (total_number_of_steps - currentIndex) - 1;
+    if(currentIndex != null){
+          remaining_steps = total_number_of_steps - currentIndex - 1;
+    }else{
+          remaining_steps = total_number_of_steps;
+    }
+
     if(remaining_steps === 0){
         response_text = "You are on the last step!";
     }
