@@ -9,16 +9,6 @@ deploy:
   on: develop
 notifications:
   slack:
-    secure: wOrPjEPb3kZrr9fGa6JDJmYY0Adh4nnooMrmMsNIqaEksonkC/IDn5JSiHMNHv1odxOH2glTj6tczAGI5lMsbMbuqpTpZSTKvW8B0dtElfFMrC+cYXyWVAgc0col1lgwWExuvm9dbHP7vE3qDl3Ih2Fl3Sgf1L6qCD5oqUVosTCj6jGjxb4+9t62mfYYwr+RCGg8c6o7CgvQ87jROt17nUUEUUqH2TMm2TS0zVf/dlf4v/ul3PXhz3nR48Cftppfewo1/+rfTp2BtnABSZKvsIOSh7+D8+UxIYjpMqxF92lTQyiFxGjCku6Mn+KSbr4JlN/6Q528SvWFzDgaGDyHYgNpy7DEn8+Yzr8FV5zWxzjqTjMSiPkVQt40ByZwgDBpLb3INmSqv56FQpZQ4nAzTROh0CQFygEc0ThFYUMXxTNu00svQiJquaQwev+UWaXjxW9bkOaWzGhEFULU6MmlXF7a5+1e4dNxaKVtoYoaRe3d2YiNuaOuiZ7ABWkggNoV8JHs/jy3e6gmvCcRhjJwwGBJrSSaOFi0aVEkGu6OKAPRM95kGvDA9pVN2wImu3v4qmfuruZoQVf6fr5uYIXGAGOcphRb5VzykVPMqubuZuL8xakAGymqWGgSPpGyQiZtacthLhxbgGep5vW2GuAWIEb5CnoqeK2N/6gtF1GmPYw=
-    on_success: change
-    on_failure: change
-  email:
-    recipients:
-      - swdunnin@asu.edu
-      - sparanj2@asu.edu
-      - rkhatun@asu.edu
-      - dlahtine@asu.edu
-      - pahorton@asu.edu
-      - trevor4e@gmail.com
+    secure: 1eX8Q0K/6KVPgUTRhPkICw0VCwlG4OoOvxNki++8mWIrwieeAd2dieiA2vsApshoA7VqffrQVazIcy/xhWKpbxirc0lL9p5TwIE7AzxVjYmIRHmT85/PkMUZui+CoHpl9Yhos2Y60/vzD9QUWwQa0XUilux5y+tcz1PkF6cEJAZNR9vjRRLizK9t7iAnkmeZRvvrQgO46a2Z5OKF6xoVBBaivqWphyITs119GMvDsQ2/VX3gfgf/a7J8I8hlmEeSutDGHoCb7WRgA8Bj2mbsFFvZOZtXZWaauBKorNSx+9Xw9nMrebP8JEtcZYi1jgdgfktEjxGwCr5TABXFwH85D1Lnk4QUIx2dVHu9YfxS1/9kzvYsvUWVn8wn7nSN8y6ouSchswWzq/WijDqToyLr/o0FRQu/uRAntm681/OBq9jgIpcROfHSVI6zr0gQnI/suSvW05v6mYXWHf5DmwUnkZfZCDw2EE21aqQ5RyDK/bGDhLpgCac6guKRLHN57feoiRNeG00rg80/H+4ejnG5IImzzt5Rvo9wptX3fvWNsCji/w8/ykx6Ve7unpbPtmracVVkjOkLGNYhcwBWjIjMyssGjtObIqtpBdNiHNnQ4k23wqrvxxjdi5kOK68GfjoGtbYmwWec9xE92tv5bhIR6pRB4ckzmyD13AzbqyjLE7U=
     on_success: change
     on_failure: always
