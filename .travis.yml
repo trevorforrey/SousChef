@@ -8,7 +8,14 @@ deploy:
   app: sous-chef-assistant
   on: develop
 notifications:
-  slack:
-    secure: 1eX8Q0K/6KVPgUTRhPkICw0VCwlG4OoOvxNki++8mWIrwieeAd2dieiA2vsApshoA7VqffrQVazIcy/xhWKpbxirc0lL9p5TwIE7AzxVjYmIRHmT85/PkMUZui+CoHpl9Yhos2Y60/vzD9QUWwQa0XUilux5y+tcz1PkF6cEJAZNR9vjRRLizK9t7iAnkmeZRvvrQgO46a2Z5OKF6xoVBBaivqWphyITs119GMvDsQ2/VX3gfgf/a7J8I8hlmEeSutDGHoCb7WRgA8Bj2mbsFFvZOZtXZWaauBKorNSx+9Xw9nMrebP8JEtcZYi1jgdgfktEjxGwCr5TABXFwH85D1Lnk4QUIx2dVHu9YfxS1/9kzvYsvUWVn8wn7nSN8y6ouSchswWzq/WijDqToyLr/o0FRQu/uRAntm681/OBq9jgIpcROfHSVI6zr0gQnI/suSvW05v6mYXWHf5DmwUnkZfZCDw2EE21aqQ5RyDK/bGDhLpgCac6guKRLHN57feoiRNeG00rg80/H+4ejnG5IImzzt5Rvo9wptX3fvWNsCji/w8/ykx6Ve7unpbPtmracVVkjOkLGNYhcwBWjIjMyssGjtObIqtpBdNiHNnQ4k23wqrvxxjdi5kOK68GfjoGtbYmwWec9xE92tv5bhIR6pRB4ckzmyD13AzbqyjLE7U=
-    on_success: change
-    on_failure: always
+  slack: ser515-fall2018:0ORqJzFF4lb4O5SZd8xTitJJ
+  email:
+    recipients:
+      - swdunnin@asu.edu
+      - sparanj2@asu.edu
+      - rkhatun@asu.edu
+      - dlahtine@asu.edu
+      - pahorton@asu.edu
+      - trevor4e@gmail.com
+  on_success: change # default: always
+  on_failure: always # default: always
