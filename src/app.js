@@ -16,11 +16,11 @@ if (process.env.GOOGLE_AUTH_CONTENTS != null) {
 }
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html');
+    res.sendFile('views/index.html', { root : __dirname});
 });
   
 app.get('/upload',function (req, res) {
-    res.sendFile('/upload.html');
+    res.sendFile('views/upload.html', { root : __dirname});
 });
 
 app.post('/fulfillment', handle_fulfillment);
