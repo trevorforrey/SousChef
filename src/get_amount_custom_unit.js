@@ -1,14 +1,14 @@
 import unitLookup from './unit_lookup';
 
-async function getCustomUnitResponse(ingredientName, unit){
+async function getCustomUnitResponse(ingredientInfo, unit){
     //console.log(ingredientName)
     //console.log(unit)
     var unitConvert = require('convert-units');
-    //let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
-    let ingredientInfo = ingredientName;
+    //let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes"
+    let ingredientName = ingredientInfo.name;
     //console.log(ingredientInfo)
     if (ingredientInfo == null) {
-        return "The recipe doesn't call for " + ingredientName + ".";
+        return "The recipe doesn't call for " + ingredientInfo + ".";
     }
     let amount = ingredientInfo.quantity;
     let origUnit = ingredientInfo.unit;
@@ -39,7 +39,7 @@ async function getCustomUnitResponse(ingredientName, unit){
         newAmount = unitConvert(amount).from(origUnitShort).to(newUnitShort).toPrecision(3);
     } catch (e){
         console.log('unable to convert ' + origUnit + ' to ' + unit + '.');
-        return ("I'm sorry, I was unable to convert " + origUnit + " to " + unit + ".");
+        return null;
     }
     let plural = (newAmount != 1);
     let unitDesc = unitConvert().describe(newUnitShort)
