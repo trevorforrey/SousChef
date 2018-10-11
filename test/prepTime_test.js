@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 
 //Create json example POST body for testing
 const prepTimeRequest = {
-    "responseId": "d5e6ac02-ba51-4805-bd4f-18c755d8ae9f",
+    "responseId": "59941f85-76b3-4297-b3c3-88145d540c3e",
     "queryResult": {
         "queryText": "How long will the recipe take to prepare?",
         "parameters": {
@@ -22,12 +22,11 @@ const prepTimeRequest = {
             "Prep-Time-Entity": "prepare"
         },
         "allRequiredParamsPresent": true,
-        "fulfillmentText": "Your blueberry pancakes are going to take 20 minutes to prepare.",
         "fulfillmentMessages": [
             {
                 "text": {
                     "text": [
-                        "Your blueberry pancakes are going to take 20 minutes to prepare."
+                        ""
                     ]
                 }
             }
@@ -43,7 +42,7 @@ const prepTimeRequest = {
         "payload": {}
     },
     "session": "projects/testagent-be9db/agent/sessions/12fcb68c-9097-7fc5-450b-3fb341e32ddb"
-};
+}
 
 
 
@@ -67,7 +66,7 @@ describe('Testing the Prep Time Intent', () => {
                     } else {
                         response.should.have.status(201);
                         console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                        response.body.fulfillmentText.should.include('For this recipe,');
+                        response.body.fulfillmentText.should.include('You will need 12 minutes in order to prepare the recipe.');
                         done();
                     }
                 });

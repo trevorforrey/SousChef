@@ -13,20 +13,19 @@ chai.use(chaiHttp);
 
 //Create json example POST body for testing
 const cookTimeRequest = {
-    "responseId": "6d38b2d9-f605-40fa-8930-a99107e8c472",
+    "responseId": "a7fc60de-cd3b-46ff-9a69-619517396924",
     "queryResult": {
-        "queryText": "What is the cook time?",
+        "queryText": "How long will the recipe take to cook?",
         "parameters": {
             "recipe_indicator": "",
-            "Cook-Time-Entity": "cook time"
+            "Cook-Time-Entity": "cook"
         },
         "allRequiredParamsPresent": true,
-        "fulfillmentText": "Your pancakes will take 15 minutes to cook.",
         "fulfillmentMessages": [
             {
                 "text": {
                     "text": [
-                        "Your pancakes will take 15 minutes to cook."
+                        ""
                     ]
                 }
             }
@@ -35,14 +34,14 @@ const cookTimeRequest = {
             "name": "projects/testagent-be9db/agent/intents/c7af74ff-b6d1-4a0f-9d1d-a2edf70c8d70",
             "displayName": "Cook-Time-Intent"
         },
-        "intentDetectionConfidence": 0.77,
+        "intentDetectionConfidence": 0.67,
         "languageCode": "en"
     },
     "originalDetectIntentRequest": {
         "payload": {}
     },
     "session": "projects/testagent-be9db/agent/sessions/12fcb68c-9097-7fc5-450b-3fb341e32ddb"
-};
+}
 
 
 
@@ -66,7 +65,7 @@ describe('Testing the Cook Time Intent', () => {
                     } else {
                         response.should.have.status(201);
                         console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                        response.body.fulfillmentText.should.include('For this recipe,');
+                        response.body.fulfillmentText.should.include('The Blueberry pancakes will take 18 minutes to finish cooking');
                         done();
                     }
                 });
