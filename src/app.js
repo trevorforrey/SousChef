@@ -1,4 +1,5 @@
 import handle_fulfillment from './fulfillment_controller'
+import get_cookbook from './get_cookbook'
 
 const shell = require('shelljs');
 var express = require('express');
@@ -20,6 +21,9 @@ app.get('/', function (req, res) {
 });
 
 app.post('/fulfillment', handle_fulfillment);
+
+
+app.get('/:userid/cookbook',get_cookbook);
 
 app.listen(port, function () {
     console.log('Cooking server listening on port ' + port);
