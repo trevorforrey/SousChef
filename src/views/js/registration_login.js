@@ -1,12 +1,3 @@
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var express = require('express');
-var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
-var app = express();
-
-
-
 /*Click functionality between the Login and register tabs
 * using jquery to make it easier to do the DOM manipulation of showing
 * and hiding tab panels and also because I found a nice code snippet online ;-)*/
@@ -26,6 +17,7 @@ $(function () {
         e.preventDefault();
     });
 });
+
 
 
 function loginSubmit() {
