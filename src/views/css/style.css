@@ -1,16 +1,14 @@
 
 *{
-	
 	padding: 0;
 	border:0;
 	box-sizing: border-box;
 	font-family: sans-serif;
 	
 }
-h1{
+h1, h3{
 	text-align: center;
 	margin:50px;
-	
 }
 
 p{
@@ -22,6 +20,7 @@ h4{
 	margin: 50px;
 }
 img.test { background-size: auto 100%; width: 100%;}
+
 
 
 /*Registration/Login Page CSS*/
@@ -123,4 +122,8 @@ body {
     color: #fff;
     background-color: #1CA347;
     border-color: #1CA347;
+}
+#welcomeDiv {
+    background: rgba(0, 92, 255, 0.53);
+    color: #000;
 }

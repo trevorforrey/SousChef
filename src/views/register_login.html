@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/registration_login.js"> </script>
+    <!Load the javascript file for the click between the tabs for registration and login -->
     <link href="css/style.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Sous Chef – Registration/Login page</title>
 
 </head>
 <body>
-    <div>
-        <h1>
-            Sous Chef Registration
-        </h1>
-    </div>
+
     <div class="container">
+        <div id="welcomeDiv" class="panel col-md-6 col-md-offset-3">
+            <h1>
+                <i> Welcome to Sous Chef!</i>
+            </h1>
+            <h3>Login or Register to create your cookbook</h3>
+        </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-login">
@@ -22,12 +28,12 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <a href="#" class="active" id="login-form-link">LOGIN</a>
+
                             </div>
                             <div class="col-xs-6">
                                 <a href="#" id="register-form-link">REGISTER ACCOUNT</a>
                             </div>
-                        </div>
-                        <hr>
+                        </div><hr>
                     </div>
 
                     <! Login portion of the panel-->
@@ -56,7 +62,8 @@
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-3">
                                                 <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                       class="form-control btn btn-login" value="Log In">
+                                                       class="form-control btn btn-login" value="Log In"
+                                                       onclick="loginSubmit()">
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +86,7 @@
 
 
                                 <!  ======================================================= -->
-                                         <!Need to collect the form data in action -->
+                                <!Need to collect the form data in action -->
                                 <!  ======================================================= -->
                                 <! Registration panel -->
                                 <form id="register-form" action=""
@@ -120,9 +127,9 @@
             </div>
         </div>
     </div>
-    <!Load the javascript file for the click between the tabs for registration and login -->
-    <script src="js/registration_login.js"></script>
+
 </body>
+
 </html>
 
 

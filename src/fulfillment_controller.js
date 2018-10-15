@@ -3,7 +3,7 @@ import * as intent from './intents/intents'
 // Global variables
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, stepRequest: null};
 
-async function handle_fulfillment(req,res) {
+async function handle_fulfillment(req, res) {
     let response = {};
     let response_text;
     let data = req.body;
