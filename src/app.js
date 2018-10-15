@@ -15,12 +15,13 @@ if (process.env.GOOGLE_AUTH_CONTENTS != null) {
     shell.exec('./release-tasks.sh');
 }
 
+app.use(express.static(__dirname+"/views"))
 app.get('/', function (req, res) {
-    res.sendFile('views/index.html', { root : __dirname});
+    res.sendFile('index.html');
 });
   
 app.get('/upload',function (req, res) {
-    res.sendFile('views/upload.html', { root : __dirname});
+    res.sendFile('upload.html');
 });
 
 app.post('/fulfillment', handle_fulfillment);
