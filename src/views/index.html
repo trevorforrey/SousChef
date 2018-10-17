@@ -1,25 +1,164 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
-	</head>
-	<body>
-		<div class="container">
-			<div id="content-header">
-				<h1 class="text-center">Welcome</h1>
-			</div>
-			<div>
-				<img class="test" src="img/9rguqEo.jpg">
-			</div>
-			<div id="upload-receipe" class ="text-center">
-				<h4><a href="/upload.html">Upload your own receipe</a></h4>
-			</div>
-		</div>
-		<footer>
-    		<div class="container">
-                Copyright &copy; 2018 Chanteuse Hat Hackers <br>
-    		</div>
- 		 </footer>			
-	</body>
+<head>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!Load the javascript file for the click between the tabs for registration and login -->
+    <link href="css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Sous Chef – Registration/Login page</title>
+</head>
+<body>
+
+<div class="container">
+    <div id="welcomeDiv" class="panel col-md-6 col-md-offset-3">
+        <h1>
+            <i> Welcome to Sous Chef Buddy! </i>
+        </h1>
+        <h3>Login or Register to create your Cookbook</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="login-form-link">LOGIN</a>
+
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="register-form-link">REGISTER ACCOUNT</a>
+                        </div>
+                    </div><hr>
+                </div>
+
+                <! Login portion of the panel-->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <! Login Form-->
+                            <!  ======================================================= -->
+                            <!Need to collect the form data in action -->
+                            <!  ======================================================= -->
+                            <form id="login-form" action="http://localhost:5000/postUser" method="post"
+                                  role="form" style="display: block;">
+                                <div class="form-group">
+                                    <input type="text" name="usernameLogin" id="usernameLogin" tabindex="1"
+                                           class="form-control" placeholder="Username" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="passwordLogin" id="passwordLogin" tabindex="2"
+                                           class="form-control" placeholder="Password">
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                    <label for="remember"> Remember Me</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                                   class="form-control btn btn-login" value="Log In">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!Forgot password panel – Doesn't do anything right now since we're changing to
+                                Google Sign in-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <!  ======================================================= -->
+                                                <!Need to collect the form data in action -->
+                                                <!  ======================================================= -->
+                                                <a href="" tabindex="5"
+                                                   class="forgot-password">Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <!  ======================================================= -->
+                            <!Need to collect the form data in action -->
+                            <!  ======================================================= -->
+                            <! Registration Form -->
+                            <form id="register-form" action=""
+                                  method="post" role="form" style="display: none;">
+                                <div class="form-group">
+                                    <input type="text" name="firstnameReg" id="firstnameReg" tabindex="1"
+                                           class="form-control" placeholder="First Name" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="lastnameReg" id="lastnameReg" tabindex="1"
+                                           class="form-control" placeholder="Last Name" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="usernameReg" id="usernameReg" tabindex="1"
+                                           class="form-control" placeholder="Username" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                           placeholder="Email Address" value="">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="passwordReg" id="passwordReg" tabindex="2"
+                                           class="form-control" placeholder="Password">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="confirm-passwordReg" id="confirm-passwordReg"
+                                           tabindex="2" class="form-control" placeholder="Confirm Password">
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="register-submit" id="register-submit"
+                                                   tabindex="4" class="form-control btn btn-register"
+                                                   value="Sign Up" onclick="registerSubmit(this.form)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /*Click functionality between the Login and register tabs
+    * using jquery to make it easier to do the DOM manipulation of showing
+    * and hiding tab panels and also because I found a nice code snippet online ;-)*/
+    $(function () {
+        $('#login-form-link').click(function  (e) {
+            $("#login-form").delay(100).fadeIn(100);
+            $("#register-form").fadeOut(100);
+            $('#register-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+        $('#register-form-link').click(function (e) {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+    });
+</script>
+</body>
+
 </html>
+
+
+
+

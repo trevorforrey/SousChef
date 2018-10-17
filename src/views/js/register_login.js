@@ -25,12 +25,14 @@ async function post_username(req, res) {
         //     {username: user}, // Filter
         //     {$push: {recipes: recipe}} // Append recipe to user's recipes array
         // );
-        var itemInsert = {
-            username: res.body.usernameLogin
-        };
+            var itemInsert = {
+                username: res.body.usernameLogin.value
+            };
         
-        let result = await users.insertOne(itemInsert, function(err, result) {
-        });
+            MongoClient.connect(url, function(err, db) {
+                db.collection('users').insertOne(itemInsert, function(err, result) {
+                })
+            });
         
     } catch (err) {
         console.log(err.stack);
@@ -45,6 +47,23 @@ async function post_username(req, res) {
 
 // allows us to import the function in app.js
 export default post_username;
+
+
+//======================================
+//FROM app.js
+/*app.post('/register_login', function(req, res, next) {
+   var itemInsert = {
+       username: res.body.usernameLogin.value
+   }
+   
+   MongoClient.connect(url, function(err, db) {
+       assert.equal(null, err);
+       db.collection('users').insertOne(itemInsert, function(err, result) {
+           assert.equal(null, err);
+       })
+   })
+});*/
+//======================================
 
 
 /*

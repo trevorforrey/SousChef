@@ -18,28 +18,25 @@ if (process.env.GOOGLE_AUTH_CONTENTS != null) {
     shell.exec('./release-tasks.sh');
 }
 
-app.use(express.static(__dirname+"/views"))
+//=======================================================
+//Leave this first or all the tests fail for some reason
+app.post('/fulfillment', handle_fulfillment);
+//=======================================================
+
+
+app.use(express.static(__dirname+"/views"));
+
+//Login/Registration page
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
-app.get('/views/register_login', function (req, res) {
-    res.sendFile('views/register_login.html', { root : __dirname});
+app.get('/home', function (req, res) {
+    res.sendFile('home.html');
 });
 
+//posting a registered username
 app.post('/:users', post_username);
-/*app.post('/register_login', function(req, res, next) {
-   var itemInsert = {
-       username: res.body.usernameLogin.value
-   }
-   
-   MongoClient.connect(url, function(err, db) {
-       assert.equal(null, err);
-       db.collection('users').insertOne(itemInsert, function(err, result) {
-           assert.equal(null, err);
-       })
-   })
-});*/
 
 app.get('/upload',function (req, res) {
     res.sendFile('upload.html');
