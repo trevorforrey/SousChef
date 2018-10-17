@@ -15,7 +15,8 @@ if (process.env.GOOGLE_AUTH_CONTENTS != null) {
     shell.exec('./release-tasks.sh');
 }
 
-app.use(express.static(__dirname+"/views"))
+app.use(express.static(__dirname+'/views'))
+
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
