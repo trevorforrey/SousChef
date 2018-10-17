@@ -42,7 +42,7 @@
                             <!  ======================================================= -->
                             <!Need to collect the form data in action -->
                             <!  ======================================================= -->
-                            <form id="login-form" action="http://localhost:5000/postUser" method="post"
+                            <form id="login-form" action="https://sous-chef-assistant.herokuapp.com/index" method="GET"
                                   role="form" style="display: block;">
                                 <div class="form-group">
                                     <input type="text" name="usernameLogin" id="usernameLogin" tabindex="1"
@@ -87,7 +87,7 @@
                             <!Need to collect the form data in action -->
                             <!  ======================================================= -->
                             <! Registration Form -->
-                            <form id="register-form" action=""
+                            <form id="register-form" action="/index"
                                   method="post" role="form" style="display: none;">
                                 <div class="form-group">
                                     <input type="text" name="firstnameReg" id="firstnameReg" tabindex="1"
@@ -113,16 +113,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="confirm-passwordReg" id="confirm-passwordReg"
+                                    <input type="password" name="confirmPasswordReg" id="confirm-passwordReg"
                                            tabindex="2" class="form-control" placeholder="Confirm Password">
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="register-submit" id="register-submit"
+                                            <input type="submit" name="registerSubmit" id="registerSubmit"
                                                    tabindex="4" class="form-control btn btn-register"
-                                                   value="Sign Up" onclick="registerSubmit(this.form)">
+                                                   value="Sign Up" ><!--onclick="registerSubmit(this.form)"-->
                                         </div>
                                     </div>
                                 </div>

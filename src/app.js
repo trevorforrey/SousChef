@@ -1,6 +1,6 @@
 import handle_fulfillment from './fulfillment_controller'
-import post_username from './views/js/register_login'
-
+import postRegistration from './views/js/register_login'
+import getLoginUser from './views/js/register_login'
 
 const shell = require('shelljs');
 var express = require('express');
@@ -35,14 +35,17 @@ app.get('/home', function (req, res) {
     res.sendFile('home.html');
 });
 
-//posting a registered username
-app.post('/:users', post_username);
+//posting a registered user account
+app.post('/index', postRegistration);
+
+//get a user from the db for logging in.
+app.get('/index', getLoginUser);
+
 
 app.get('/upload',function (req, res) {
     res.sendFile('upload.html');
 });
 
-app.post('/fulfillment', handle_fulfillment);
 
 app.listen(port, function () {
     console.log('Cooking server listening on port ' + port);

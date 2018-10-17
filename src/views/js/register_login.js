@@ -1,17 +1,70 @@
-let MongoClient = require('mongodb').MongoClient;
 
-async function post_username(req, res) {
-    
-    let data = req.body;
-    
-    console.log(data);
-    
-    // TODO get recipe and username from request body sent
-    
+var MongoClient = require('mongodb').MongoClient;
+
+async function postRegistration(req, res) {
+    console.log("==========================================\n", req.body);
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
     
+    //Registration form data
+    let registrationData = req.body;
+    
+    
+    //Create a JSON object of the registration form data
+    var registrationInsert = {
+        username: registrationData.usernameReg,
+        fName: registrationData.firstnameReg,
+        lName: registrationData.email,
+        pass: registrationData.passwordReg,
+        confirmPass: registrationData.confirmPasswordReg
+    };
+    
+    
+    
+    try {
+        //client = await MongoClient.connect(uri);
+        console.log("Connected correctly to server");
+        
+        //const db = client.db('sous-chef');
+        
+        // Get the users collection
+        //const users = db.collection('users');
+        
+        // let result = await users.updateOne(
+        //     {username: user}, // Filter
+        //     {$push: {recipes: recipe}} // Append recipe to user's recipes array
+        // );
+        
+        
+        await MongoClient.connect(uri, function(err, db) {
+            var dbo = db.db('sous-chef');
+            dbo.collection('users').insertOne(registrationInsert, function(err, result) {
+            db.close();
+            })
+        });
+        
+    } catch (err) {
+        console.log(err.stack);
+    }
+    res.status(201);
+    res.send("success")
+};
+
+// allows us to import the function in app.js
+export default postRegistration;
+
+
+/*async function getLoginUser(req, res) {
+    let data = req.body;
+    let recipes_response = {};
+    
+    let user = 'Tony Gunk';
+    
+    let client;
+    let mongo_pw = process.env.MONGO_PW;
+    let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
+    let recipe_doc = null;
     try {
         client = await MongoClient.connect(uri);
         console.log("Connected correctly to server");
@@ -21,32 +74,30 @@ async function post_username(req, res) {
         // Get the users collection
         const users = db.collection('users');
         
-        // let result = await users.updateOne(
-        //     {username: user}, // Filter
-        //     {$push: {recipes: recipe}} // Append recipe to user's recipes array
-        // );
-            var itemInsert = {
-                username: res.body.usernameLogin.value
-            };
+        // Get user document
+        let user_doc = await users.findOne(
+            {
+                username: { $eq: user }
+            }
+        );
         
-            MongoClient.connect(url, function(err, db) {
-                db.collection('users').insertOne(itemInsert, function(err, result) {
-                })
-            });
+        // Add user recipes to response json
+        recipes_response.recipes = user_doc.recipes;
         
     } catch (err) {
-        console.log(err.stack);
         res.status(500);
-        res.send("failure");
+        res.send('failure');
+        console.log(err.stack);
         client.close();
     }
     client.close();
-    res.status(201);
-    res.send("success")
-};
+    res.status(200);
+    res.json(recipes_response);
 
+}
 // allows us to import the function in app.js
-export default post_username;
+export default getLoginUser;*/
+
 
 
 //======================================
