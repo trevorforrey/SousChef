@@ -128,7 +128,5 @@ body {
     color: #000;
 }
 
+.ingredient_field   {border: solid 1px #eee; padding: 5px 2px; margin: 10px 0 0 0;}
 
-
-.ingredient_field   {border: solid 1px #999; padding: 5px 2px; margin: 10px 0 0 0;}
-ul li               {list-style-type: :none!important;}
