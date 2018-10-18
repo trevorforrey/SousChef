@@ -1,5 +1,9 @@
 import handle_fulfillment from './fulfillment_controller'
+
+import post_user_recipe from './post_user_recipe'
+
 import get_cookbook from './get_cookbook'
+
 import postRegistration from './views/js/register_login'
 import getLoginUser from './views/js/register_login'
 
@@ -46,7 +50,11 @@ app.get('/upload',function (req, res) {
 
 
 
+app.post('/postRecipe', post_user_recipe);
+
+
 app.get('/:userid/cookbook',get_cookbook);
+
 
 app.listen(port, function () {
     console.log('Cooking server listening on port ' + port);
