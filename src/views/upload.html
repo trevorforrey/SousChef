@@ -3,21 +3,31 @@
 	<head>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<script src="js/jquery-3.2.1.min.js"></script>>
+		<script src="js/script.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<div id="content-header">
 				<h1 class="text-center">Upload your receipe</h1>
 			</div>
+
 			<div class="form">
-				
-					<ul> Receipe name <input type="text" name="receipe-name"></ul>
-					<ul> Preparation time <input type="text" name="receipe-name"></ul>
-				 	<ul>ingredients <input type="text" name="receipe-name"></ul>
-				 		<li>Ingredient 1 <input type="text" name="receipe-name"></li>
-				
-				
-				
+				<form>
+					<ul>
+						<li>Receipe name <input type="text" name="receipe-name"></li>
+						<li>Preparation time <input type="text" name="receipe-name"></li>
+					 	<li>
+					 		<input type="button" value="Add Ingredients" id="ingredient" />
+					 		<ul class="ingredient-fields">
+					 			<li></li>
+					 		</ul>
+					 	</li>
+					 	<li><input type="button" value="Add steps" id="steps" onclick="addSteps()"</input></li>
+				 	</ul>
+				 <div class="test"></div>
+
+				</form>		
 			</div>
 		</div>
 		<footer>

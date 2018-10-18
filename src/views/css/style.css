@@ -135,3 +135,6 @@ body {
     background: #59B2E0;
     color: #000;
 }
+
+.ingredient_field   {border: solid 1px #eee; padding: 5px 2px; margin: 10px 0 0 0;}
+

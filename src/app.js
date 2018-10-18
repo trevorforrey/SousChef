@@ -22,11 +22,8 @@ if (process.env.GOOGLE_AUTH_CONTENTS != null) {
 //Leave this first or all the tests fail for some reason
 app.post('/fulfillment', handle_fulfillment);
 //=======================================================
+app.use(express.static(__dirname+'/views'))
 
-
-app.use(express.static(__dirname+"/views"));
-
-//Login/Registration page
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
