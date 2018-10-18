@@ -1,6 +1,6 @@
 let MongoClient = require('mongodb').MongoClient;
 
-async function post_user_story(req, res) {
+async function post_user_recipe(req, res) {
 
     let data = req.body;
 
