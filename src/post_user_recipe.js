@@ -2,18 +2,12 @@ let MongoClient = require('mongodb').MongoClient;
 
 async function post_user_recipe(req, res) {
 
-    let data = req.body;
-
-    console.log(data);
-
-    let recipe;
+    let recipe = req.body;
 
     // TODO get recipe and username from request body sent
-    if (data.recipe != null) {
-        recipe = data.recipe;
-    } else {
+    if (recipe == null) {
         console.log('recipe in data.recipe was null');
-        recipe = {"name":"Tony's Kentucky Chicken","make_time":"40000","num_servings":4,"prep_time":"25 minutes","cook_time":"30 minutes","ingredients":[{"name":"chicken","quantity":1.25,"unit":"breasts"},{"name":"salt","quantity":1,"unit":"teaspoons"},{"name":"canola oil","quantity":1,"unit":"quart"}],"directions":["Start up the fryer and season up yo' chicken","Lay those bad boys down and wait for them to be done"]};
+        return;
     }
 
     // TODO get this data from a session object, or pass it in on the request

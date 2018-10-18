@@ -12,15 +12,18 @@
 				<h1 class="text-center">Upload your receipe</h1>
 			</div>
 
-			<div >
-				<form id="upload-recipe-form"action="/postRecipe" method="post" >
+
+
+			<div id="form-area">
+				<form>
 					<ul id="upload-recipe">
 						<li id="name">
 							<span>Recipe Name:</span>
-							<input type="text" class="input-1"></li>
+							<input type="text" id="recipeName" class="input-1"></li>
+
 						<li id="time">
 							<span>Preparation time:</span>
-							<input type="text" class="input-1"></li>
+							<input type="text" class="input-1" id="prepTime"></li>
 					 	<li>
 					 		<input class="btn primary" type="button" value="Add Ingredients" id="ingredient" />
 					 		<ul class="ingredient-fields">
@@ -34,7 +37,7 @@
 					 		</ul>
 					 	</li>
 					 	<li>
-					 		<input id="submit-button"class="btn primary" type="submit" value="submit"/>
+					 		<input class="btn primary" type="button" value="upload" id="upload"/>
 					 	</li>
 				 	</ul>
 				 <div class="test"></div>

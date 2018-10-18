@@ -25,6 +25,7 @@
     "dialogflow": "^0.6.0",
     "express": "^4.16.3",
     "mongodb": "^3.1.6",
+    "path": "^0.12.7",
     "shelljs": "^0.8.2"
   },
   "devDependencies": {
