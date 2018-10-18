@@ -10,7 +10,9 @@ import getLoginUser from './views/js/register_login'
 const shell = require('shelljs');
 var express = require('express');
 const bodyparser = require('body-parser');
+let path = require('path');
 let MongoClient = require('mongodb').MongoClient;
+
 let app = express();
 var router = express.Router();
 app.use(bodyparser.json());
@@ -23,18 +25,16 @@ if (process.env.GOOGLE_AUTH_CONTENTS != null) {
     shell.exec('./release-tasks.sh');
 }
 
-//=======================================================
-//Leave this first or all the tests fail for some reason
+app.use(express.static(__dirname + '/views'))
+
 app.post('/fulfillment', handle_fulfillment);
-//=======================================================
-app.use(express.static(__dirname+'/views'))
 
 app.get('/', function (req, res) {
-    res.sendFile('index.html');
+    res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
 app.get('/home', function (req, res) {
-    res.sendFile('home.html');
+    res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
 //posting a registered user account
@@ -45,7 +45,8 @@ app.get('/index', getLoginUser);
 
 
 app.get('/upload',function (req, res) {
-    res.sendFile('upload.html');
+    res.sendFile(path.join(__dirname + '/views/upload.html'));
+    console.log('hit the upload handler');
 });
 
 
