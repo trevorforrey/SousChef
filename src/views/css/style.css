@@ -136,5 +136,13 @@ body {
     color: #000;
 }
 
-.ingredient_field   {border: solid 1px #eee; padding: 5px 2px; margin: 10px 0 0 0;}
+.input-1   
+    {border: solid 1px #333; padding: 5px 2px; margin: 10px 10px 0 0; }
+#upload-recipe li {list-style-type: none; }
 
+#ingredient, #steps, #name, #time {
+    margin: 10px 0;
+    
+}
+
+li#name span, li#time span {min-width: 200px;}

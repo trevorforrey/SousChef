@@ -12,18 +12,30 @@
 				<h1 class="text-center">Upload your receipe</h1>
 			</div>
 
-			<div class="form">
+			<div >
 				<form>
-					<ul>
-						<li>Receipe name <input type="text" name="receipe-name"></li>
-						<li>Preparation time <input type="text" name="receipe-name"></li>
+					<ul id="upload-recipe">
+						<li id="name">
+							<span>Recipe Name:</span>
+							<input type="text"></li>
+						<li id="time">
+							<span>Preparation time:</span>
+							<input type="text" class="input-1"></li>
 					 	<li>
-					 		<input type="button" value="Add Ingredients" id="ingredient" />
+					 		<input class="btn primary" type="button" value="Add Ingredients" id="ingredient" />
 					 		<ul class="ingredient-fields">
 					 			<li></li>
 					 		</ul>
 					 	</li>
-					 	<li><input type="button" value="Add steps" id="steps" onclick="addSteps()"</input></li>
+					 	<li>
+					 		<input  class="btn primary" type="button" value="Add steps" id="steps"/>
+					 		<ul class="steps-field">
+					 			<li></li>
+					 		</ul>
+					 	</li>
+					 	<li>
+					 		<input class="btn primary" type="button" value="upload"/>
+					 	</li>
 				 	</ul>
 				 <div class="test"></div>
 
