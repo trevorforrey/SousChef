@@ -23,23 +23,30 @@ async function get_ingredient(ingredient_name, data) {
             data.queryResult.parameters['unit-weight-name'] !== "") {
             response_text = await getCustomUnitResponse(ingredient_info, data.queryResult.parameters['unit-weight-name'])
         }
-        // If non-plural units, and plural amount, make unit plural
-        if (ingredient_info.quantity !== 1 && ingredient_info.unit[ingredient_info.unit.length - 1] !== 's') {
-            ingredient_info.unit += "s";
+        if (response_text == null &&
+            'unit-volume-name' in data.queryResult.parameters &&
+            data.queryResult.parameters['unit-volume-name'] != null &&
+            data.queryResult.parameters['unit-volume-name'] !== "") {
+            response_text = await getCustomUnitResponse(ingredient_info, data.queryResult.parameters['unit-volume-name'])
         }
-        // If non-plural amount, but plural units
-        else if (ingredient_info.quantity === 1 && ingredient_info.unit[ingredient_info.unit.length - 1] ==='s') {
-            ingredient_info.unit = ingredient_info.unit.slice(0,-1);
-        }
-        // Don't say unit if unit is same as name (E.G. 1 egg, 1 orange)
-        if (ingredient_info.unit === ingredient_info.name) {
-            response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit;
-        }
-        else {
-            response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
-        }
+        if (response_text == null){
+            // If non-plural units, and plural amount, make unit plural
+            if (ingredient_info.quantity !== 1 && ingredient_info.unit[ingredient_info.unit.length - 1] !== 's') {
+                ingredient_info.unit += "s";
+            }
+            // If non-plural amount, but plural units
+            else if (ingredient_info.quantity === 1 && ingredient_info.unit[ingredient_info.unit.length - 1] ==='s') {
+                ingredient_info.unit = ingredient_info.unit.slice(0,-1);
+            }
+            // Don't say unit if unit is same as name (E.G. 1 egg, 1 orange)
+            if (ingredient_info.unit === ingredient_info.name) {
+                response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit;
+            }
+            else {
+                response_text = 'You need ' + ingredient_info.quantity + ' ' + ingredient_info.unit + ' of ' + ingredient_info.name;
+            }
+        } 
     } else response_text = ingredient_name + ' is not in the recipe';
-    
     return response_text;
 };
 
