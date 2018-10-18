@@ -36,7 +36,7 @@ app.get('/home', function (req, res) {
 });
 
 //posting a registered user account
-app.post('/index', postRegistration);
+app.post('/postReg', postRegistration(req, res));
 
 //get a user from the db for logging in.
 app.get('/index', getLoginUser);

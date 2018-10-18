@@ -8,7 +8,7 @@ async function postRegistration(req, res) {
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
     
     //Registration form data
-    let registrationData = req.body;
+    let registrationData = res.body;
     
     
     //Create a JSON object of the registration form data
@@ -38,11 +38,12 @@ async function postRegistration(req, res) {
         
         
         await MongoClient.connect(uri, function(err, db) {
-            var dbo = db.db('sous-chef');
-            dbo.collection('users').insertOne(registrationInsert, function(err, result) {
-            db.close();
+            let dbo = db.db('sous-chef');
+            dbo.collection('users').insertOne(registrationInsert, function(err, res) {
+                db.close();
             })
         });
+        
         
     } catch (err) {
         console.log(err.stack);
