@@ -22,6 +22,7 @@ $(document).ready(function(){
 	         
 	    console.log(1);
 	});
+
 	$("#steps").click(function(){
 
 		var steps_field = $(document.createElement('input'))
@@ -31,5 +32,14 @@ $(document).ready(function(){
 	         $(".steps-field li").append(steps_field).append("<br />");
 	 
 	});
+	$("submit-button").click(function(){
+
+		$('#upload-recipe-form').submit();
+
+	});
+
+	$("#upload-recipe-form").on("keydown", function(e){
+    if (e.which===13) e.preventDefault();
+});
 		
 });
