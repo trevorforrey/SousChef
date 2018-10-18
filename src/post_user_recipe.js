@@ -6,8 +6,17 @@ async function post_user_story(req, res) {
 
     console.log(data);
 
+    let recipe;
+
     // TODO get recipe and username from request body sent
-    let recipe = {"name":"Tony's Kentucky Chicken","make_time":"40000","num_servings":4,"prep_time":"25 minutes","cook_time":"30 minutes","ingredients":[{"name":"chicken","quantity":1.25,"unit":"breasts"},{"name":"salt","quantity":1,"unit":"teaspoons"},{"name":"canola oil","quantity":1,"unit":"quart"}],"directions":["Start up the fryer and season up yo' chicken","Lay those bad boys down and wait for them to be done"]};
+    if (data.recipe != null) {
+        recipe = data.recipe;
+    } else {
+        console.log('recipe in data.recipe was null');
+        recipe = {"name":"Tony's Kentucky Chicken","make_time":"40000","num_servings":4,"prep_time":"25 minutes","cook_time":"30 minutes","ingredients":[{"name":"chicken","quantity":1.25,"unit":"breasts"},{"name":"salt","quantity":1,"unit":"teaspoons"},{"name":"canola oil","quantity":1,"unit":"quart"}],"directions":["Start up the fryer and season up yo' chicken","Lay those bad boys down and wait for them to be done"]};
+    }
+
+    // TODO get this data from a session object, or pass it in on the request
     let user = 'Tony Gunk';
 
     let client;
@@ -40,4 +49,4 @@ async function post_user_story(req, res) {
 };
 
 // allows us to import the function in app.js
-export default post_user_story;
+export default post_user_recipe;
