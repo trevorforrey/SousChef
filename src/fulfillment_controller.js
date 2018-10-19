@@ -100,7 +100,11 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for prep time intent and retrieve the response text
         case "Prep-Time-Intent":
-            response_text = await intent.getPrepTime();
+            if (sessionData == null) {
+                response_text = await intent.getPrepTime();
+            } else {
+                await intent.handle_get_preptime(req, res, sessionData);
+            }
             break;
     }
    
