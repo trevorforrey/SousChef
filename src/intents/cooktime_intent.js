@@ -23,7 +23,6 @@ export async function handle_get_cooktime(req,res,sessionData) {
 
     response.fulfillmentText = response_text;
     response.contextOut = data.queryResult.outputContexts;
-    
     res.json(response);
     return;
 }

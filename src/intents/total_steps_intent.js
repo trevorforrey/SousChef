@@ -4,7 +4,6 @@ export async function handle_get_num_remaining_steps(req,res,sessionData) {
     let response = {};
     let response_text;
     let data = req.body;
-    let step_requested = sessionData.currentStep;
 
     let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
 
@@ -26,6 +25,7 @@ export async function handle_get_num_remaining_steps(req,res,sessionData) {
 
     res.status(201);
     response.fulfillmentText = response_text;
+    response.contextOut = data.queryResult.outputContexts;
     res.json(response);
     return;
 }
