@@ -1,4 +1,4 @@
-import get_ingredient from './ingredient_intent'
+import {get_ingredient} from './ingredient_intent'
 import update_session_entity from './setup_intent'
 import get_ingredient_list from './ingredient-list_intent'
 import getFirstStep from'./firststep_intent'

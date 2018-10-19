@@ -1,4 +1,4 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe} from '../mongo_helper'
 
 async function update_session_entity(projectId,session) {
   //Gets the recipe

@@ -1,4 +1,4 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe} from '../mongo_helper'
 
 async function getFirstStep(stepDict){
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");

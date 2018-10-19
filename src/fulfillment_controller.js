@@ -12,9 +12,11 @@ async function handle_fulfillment(req, res) {
 
     let sessionData;
     // Grab session data from request context (if it exists)
-    for (let i = 0; i < contexts.length; i++) {
-        if (contexts[i].name == "session_data") {
-            sessionData = contexts[i].parameters;
+    if (contexts != null) {
+        for (let i = 0; i < contexts.length; i++) {
+            if (contexts[i].name == "session_data") {
+                sessionData = contexts[i].parameters;
+            }
         }
     }
 

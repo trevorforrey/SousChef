@@ -1,4 +1,4 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe} from '../mongo_helper'
 
 
 /*Returns the amount of time it will take to finish the client's recipe.*/
