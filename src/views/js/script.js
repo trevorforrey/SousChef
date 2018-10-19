@@ -14,11 +14,13 @@ $(document).ready(function(){
 
 		var ingredient_field = $(document.createElement('input'))
 	         .attr("type", "text")
+	         .attr("value", "name")
 			 .attr("class", "input-1")
 			 .attr("id", nameId);
 
 	    var amount_field = $(document.createElement('input'))
 	         .attr("type", "text")
+	         .attr("value", "amount")
 			 .attr("class", "input-1")
 			 .attr("id", amountId);
 	    
@@ -26,6 +28,7 @@ $(document).ready(function(){
 	         .attr("name", " ")
 			 .attr("class", "input-1")
 			 .attr("id", unitId)
+			 .append("<option>unit</option>")
 			 .append("<option>teaspoon</option>")
 			 .append("<option>tablespoon</option>")
 			 .append("<option>ounce</option>")
@@ -38,8 +41,8 @@ $(document).ready(function(){
 			 .append("<option>liter</option>")
 	    
 		$(".ingredient-fields li")
-			.append(ingredient_field).append(" Amount ")
-			.append(amount_field).append(" Unit ")
+			.append(ingredient_field)
+			.append(amount_field)
 			.append(unit_field)
 			.append("</br>");
 	         

@@ -17,28 +17,41 @@
 			<div id="form-area">
 				<form>
 					<ul id="upload-recipe">
-						<li id="name">
-							<span>Recipe Name:</span>
-							<input type="text" id="recipeName" class="input-1"></li>
+						<li id="name" class="row">
 
-						<li id="time">
-							<span>Preparation time:</span>
-							<input type="text" class="input-1" id="prepTime"></li>
-					 	<li>
-					 		<input class="btn primary" type="button" value="Add Ingredients" id="ingredient" />
-					 		<ul class="ingredient-fields">
-					 			<li></li>
-					 		</ul>
-					 	</li>
-					 	<li>
-					 		<input  class="btn primary" type="button" value="Add steps" id="steps"/>
-					 		<ul class="steps-field">
-					 			<li></li>
-					 		</ul>
-					 	</li>
-					 	<li>
-					 		<input class="btn primary" type="button" value="upload" id="upload"/>
-					 	</li>
+							<span class="col-md-2">Recipe Name:</span>
+							<input type="text" id="recipeName" class="input-1" class="col-md-2">
+						</li>
+
+						<li id="time" class="row">
+							<span class="col-md-2">Preparation time:</span>
+							<input type="text" class="input-1" class="col-md-2"  id="prepTime">
+						</li>
+						<li class="row">
+							<span class="col-md-2">Cook Time:</span>
+							<input type="text" class="input-1" class="col-md-2" id="cookTime">
+						</li>
+						<li class="row">
+							<span class="col-md-2">Serving Size:</span>
+							<input type="text" class="input-1" class="col-md-2" id="servingSize">	
+						</li>
+						<div class="row">
+						 	<li class="col-md-3">
+						 		<input class="btn primary" type="button" value="Add Ingredients" id="ingredient" />
+						 		<ul class="ingredient-fields">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+						 	<li class="col-md-3">
+						 		<input  class="btn primary" type="button" value="Add steps" id="steps"/>
+						 		<ul class="steps-field">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+						 </div>
+						 	<li>
+						 		<input class="btn primary" type="button" value="upload" id="upload"/>	
+						 	</li>
 				 	</ul>
 				 <div class="test"></div>
 
