@@ -108,10 +108,18 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for set up intent
         case "Setup-Intent":
-            let projectID = data.session.split('/')[1];
-            let sessionID = data.session.split('/')[4];
-            intent.update_session_entity(projectID, sessionID);
-            response_text = "Let's get cooking!";
+            if (sessionData == null) {
+                let projectID = data.session.split('/')[1];
+                let sessionID = data.session.split('/')[4];
+                intent.update_session_entity(projectID, sessionID);
+                response_text = "Let's get cooking!";
+            } else {
+                let projectID = data.session.split('/')[1];
+                let sessionID = data.session.split('/')[4];
+                console.log(projectID);
+                console.log(sessionID);
+                await intent.handle_update_session_entity(req, res, sessionData, projectID, sessionID); // should be the only function called once session data set
+            }
             break;
         //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":

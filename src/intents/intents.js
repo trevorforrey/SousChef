@@ -1,5 +1,6 @@
 import {get_ingredient} from './ingredient_intent'
 import {update_session_entity} from './setup_intent'
+import {handle_update_session_entity} from './setup_intent'
 import {get_ingredient_list} from './ingredient-list_intent'
 import {handle_get_ingredient_list} from './ingredient-list_intent'
 import {getFirstStep} from'./firststep_intent'
@@ -27,6 +28,7 @@ module.exports = {
     handle_get_cooktime: handle_get_cooktime,
     handle_get_preptime: handle_get_preptime,
     handle_get_step_by_index: handle_get_step_by_index,
-    handle_get_num_remaining_steps: handle_get_num_remaining_steps
+    handle_get_num_remaining_steps: handle_get_num_remaining_steps,
+    handle_update_session_entity: handle_update_session_entity
 }
 
