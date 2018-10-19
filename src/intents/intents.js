@@ -3,7 +3,8 @@ import update_session_entity from './setup_intent'
 import {get_ingredient_list} from './ingredient-list_intent'
 import {handle_get_ingredient_list} from './ingredient-list_intent'
 import getFirstStep from'./firststep_intent'
-import getCookTime from './cooktime_intent'
+import {getCookTime} from './cooktime_intent'
+import {handle_get_cooktime} from './cooktime_intent'
 import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
 import getTotalNumberOfSteps from './total_steps_intent'
@@ -19,6 +20,7 @@ module.exports = {
     getStepByIndex: getStepByIndex,
     getTotalNumberOfSteps: getTotalNumberOfSteps,
     handle_get_ingredient: handle_get_ingredient,
-    handle_get_ingredient_list: handle_get_ingredient_list
+    handle_get_ingredient_list: handle_get_ingredient_list,
+    handle_get_cooktime: handle_get_cooktime
 }
 

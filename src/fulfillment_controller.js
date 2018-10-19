@@ -92,7 +92,11 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for cook time intent and retrieve the response text
         case "Cook-Time-Intent":
-            response_text = await intent.getCookTime();
+            if (sessionData == null) {
+                response_text = await intent.getCookTime();
+            } else {
+                await intent.handle_get_cooktime(req, res, sessionData);
+            }
             break;
         //Match for prep time intent and retrieve the response text
         case "Prep-Time-Intent":
