@@ -1,6 +1,37 @@
-import {get_recipe} from "../mongo_helper";
+import {get_recipe, get_user_recipe} from "../mongo_helper";
 
-async function getTotalNumberOfSteps(stepDict){
+export async function handle_get_num_remaining_steps(req,res,sessionData) {
+    let response = {};
+    let response_text;
+    let data = req.body;
+    let step_requested = sessionData.currentStep;
+
+    let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
+
+    console.log('recipe from mongo: ' + recipe_doc.ingredients);
+    
+    const steps = recipe_doc.directions;
+
+    let remaining_steps = (steps.length - 1) - sessionData.currentStep;
+
+    if (remaining_steps === 0) {
+        response_text = "You are on the last step!";
+    }
+    else if (remaining_steps === 1) {
+        response_text = "You are almost done, just 1 more step!";
+    }
+    else {
+        response_text = "You still have " + remaining_steps + " to go!";
+    }
+
+    res.status(201);
+    response.fulfillmentText = response_text;
+    res.json(response);
+    return;
+}
+
+
+export async function getTotalNumberOfSteps(stepDict){
     //Get the recipe from the database
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let total_number_of_steps = recipe_doc.directions.length;

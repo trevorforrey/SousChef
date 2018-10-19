@@ -27,7 +27,7 @@ export async function handle_get_step_by_index(req,res,sessionData,contexts) {
     }
     // Else, perform a proper step lookup and response
     else {
-        res.status(200);
+        res.status(201);
         response_text = steps[step_requested];
         sessionData.currentStep = step_requested;
     }

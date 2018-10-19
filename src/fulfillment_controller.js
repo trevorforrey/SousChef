@@ -89,13 +89,22 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for any requested step
         case "requested-step":
-            stepDict.name = "requestedStep";
-            stepDict.stepRequest = data.queryResult.parameters.number;
-            response_text = await intent.getStepByIndex(stepDict);
+            if (sessionData == null) {
+                stepDict.name = "requestedStep";
+                stepDict.stepRequest = data.queryResult.parameters.number;
+                response_text = await intent.getStepByIndex(stepDict);
+            } else {
+                sessionData.currentStep = data.queryResult.parameters.number - 1; // Because of zero index
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+            }
             break;
         //Match for getting the remaining number of steps
         case "remaining-steps":
-            response_text = await intent.getTotalNumberOfSteps(stepDict);
+            if (sessionData == null) {
+                response_text = await intent.getTotalNumberOfSteps(stepDict);
+            } else {
+                await intent.handle_get_num_remaining_steps(req, res, sessionData); // should be the only function called once session data set
+            }
             break;
         //Match for set up intent
         case "Setup-Intent":
