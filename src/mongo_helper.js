@@ -43,8 +43,8 @@ export async function get_user_recipe(user, recipe) {
     const collection = db.collection('users');
 
     // Find recipe document for the recipe name
-    const cursor = await collection.find({ 
-      username: user, 
+    const cursor = await collection.find({
+      username: user,
       recipes: {$elemMatch: {name: recipe}}
     }).limit(1);
 
@@ -63,4 +63,29 @@ export async function get_user_recipe(user, recipe) {
   }
   client.close();
   return recipe_doc;
+}
+
+export async function get_users() {
+  let client;
+  let mongo_pw = process.env.MONGO_PW;
+  let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
+  let user_doc = null;
+  let users = [];
+  try {
+    client = await MongoClient.connect(uri);
+    console.log("Connected correctly to server");
+
+    const db = client.db('sous-chef');
+
+    // Get all users
+    user_doc = await db.collection('users').find().toArray();
+
+    user_doc.forEach( function(user) { users.push(user["username"]); } )
+
+  } catch (err) {
+    console.log(err.stack);
+    client.close();
+  }
+  client.close();
+  return users;
 }
