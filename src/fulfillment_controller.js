@@ -134,6 +134,17 @@ async function handle_fulfillment(req, res) {
                 await intent.handle_get_preptime(req, res, sessionData);
             }
             break;
+        case "login-request":
+            intent.handle_login_request(req,res);
+            break;
+        case "login-request user":
+            username = data.queryResult.parameters.username;
+            intent.handle_username_response(req,res,username);
+            break;
+        case "login-request recipe":
+            recipe = data.queryResult.parameters.recipe;
+            intent.handle_recipe_response(req,res,recipe);
+            break;
     }
 
     // If query didn't go through session data

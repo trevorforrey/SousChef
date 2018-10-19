@@ -66,12 +66,13 @@ export async function handle_update_session_entity(req, res, sessionData, projec
 export async function follow_up_login_request(req, res) {
  let response = {
     "followupEventInput": {
-      "name": "login-req",
+      "name": "login-request",
       "parameters": {
           },
       "languageCode": "en-US"
     }
   };
+  res.status(201);
   res.json(response);
   return;
 }
