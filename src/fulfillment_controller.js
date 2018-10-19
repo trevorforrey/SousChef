@@ -21,14 +21,16 @@ async function handle_fulfillment(req, res) {
     }
 
     // Example of how session data should look
-    let newContext = {
-        name: "session_data",
-        lifespan: 5,
-        parameters: {
-            "username": "Tony Gunk",
-            "recipe": "Tony's Kentucky Chicken"
-        }
-    }
+    // data.queryResult.outputContexts = [
+    //     {...},
+    //     {...},
+    //     {  name: "session_data",
+    //        lifespan: 5,
+    //        parameters: {
+    //          "username": "Tony Gunk",
+    //          "recipe": "Tony's Kentucky Chicken"
+    //        }
+    // ]
     
     /*Switch to route all the different Intents to their specific
     functions and retrieve the response message*/
@@ -46,7 +48,11 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":
-            response_text = await intent.get_ingredient_list();
+            if (sessionData == null) {
+                response_text = await intent.get_ingredient_list();
+            } else {
+                await intent.handle_get_ingredient_list(req, res, sessionData);
+            }
             break;
         //Match for first step and retrieve the response text
         case "first-step":
