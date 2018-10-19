@@ -1,4 +1,5 @@
 import * as intent from './intents/intents'
+import {get_session_data} from './session_helper'
 
 // Global variables
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, stepRequest: null};
@@ -10,15 +11,8 @@ async function handle_fulfillment(req, res) {
     let displayName = data.queryResult.intent.displayName;
     let contexts = data.queryResult.outputContexts;
 
-    let sessionData;
-    // Grab session data from request context (if it exists)
-    if (contexts != null) {
-        for (let i = 0; i < contexts.length; i++) {
-            if (contexts[i].name == "session_data") {
-                sessionData = contexts[i].parameters;
-            }
-        }
-    }
+    // Get session data (returns null if it doesn't exist)
+    let sessionData = get_session_data(contexts);
 
     // Example of how session data should look
     // data.queryResult.outputContexts = [
@@ -28,7 +22,8 @@ async function handle_fulfillment(req, res) {
     //        lifespan: 5,
     //        parameters: {
     //          "username": "Tony Gunk",
-    //          "recipe": "Tony's Kentucky Chicken"
+    //          "recipe": "Tony's Kentucky Chicken",
+    //          "currentStep": 1
     //        }
     // ]
     
@@ -56,22 +51,41 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for first step and retrieve the response text
         case "first-step":
-            response_text = await intent.getFirstStep(stepDict);
+            if (sessionData == null) {
+                response_text = await intent.getFirstStep(stepDict);
+            } else {
+                sessionData.currentStep = 0;
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+            }
             break;
         //Match for next step and retrieve the response text
         case "next-step":
-            stepDict.name = "nextStep";
-            response_text = await intent.getStepByIndex(stepDict);
+            if (sessionData == null) {
+                stepDict.name = "nextStep";
+                response_text = await intent.getStepByIndex(stepDict);
+            } else {
+                sessionData.currentStep++;
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+            }
             break;
         //Match for repeating step
         case "repeat-step":
-            stepDict.name = "repeatStep";
-            response_text = await intent.getStepByIndex(stepDict);
+            if (sessionData == null) {
+                stepDict.name = "repeatStep";
+                response_text = await intent.getStepByIndex(stepDict);
+            } else {
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+            }
             break;
         //Match for the previous step
         case "previous-step":
-            stepDict.name = "previousStep";
-            response_text = await intent.getStepByIndex(stepDict);
+            if (sessionData == null) {
+                stepDict.name = "previousStep";
+                response_text = await intent.getStepByIndex(stepDict);
+            } else {
+                sessionData.currentStep--;
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+            }
             break;
         //Match for any requested step
         case "requested-step":

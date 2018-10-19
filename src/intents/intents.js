@@ -7,7 +7,8 @@ import {getCookTime} from './cooktime_intent'
 import {handle_get_cooktime} from './cooktime_intent'
 import {getPrepTime} from './prep-time_intent'
 import {handle_get_preptime} from './prep-time_intent'
-import getStepByIndex from'./nextstep_intent'
+import {getStepByIndex} from'./nextstep_intent'
+import {handle_get_step_by_index} from './nextstep_intent'
 import getTotalNumberOfSteps from './total_steps_intent'
 import {handle_get_ingredient} from './ingredient_intent'
 
@@ -23,6 +24,7 @@ module.exports = {
     handle_get_ingredient: handle_get_ingredient,
     handle_get_ingredient_list: handle_get_ingredient_list,
     handle_get_cooktime: handle_get_cooktime,
-    handle_get_preptime: handle_get_preptime
+    handle_get_preptime: handle_get_preptime,
+    handle_get_step_by_index: handle_get_step_by_index
 }
 
