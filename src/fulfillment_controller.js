@@ -5,9 +5,28 @@ var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, 
 
 async function handle_fulfillment(req, res) {
     let response = {};
-    let response_text;
+    let response_text = '';
     let data = req.body;
     let displayName = data.queryResult.intent.displayName;
+    let contexts = data.queryResult.outputContexts;
+
+    let sessionData;
+    // Grab session data from request context (if it exists)
+    for (let i = 0; i < contexts.length; i++) {
+        if (contexts[i].name == "session_data") {
+            sessionData = contexts[i].parameters;
+        }
+    }
+
+    // Example of how session data should look
+    let newContext = {
+        name: "session_data",
+        lifespan: 5,
+        parameters: {
+            "username": "Tony Gunk",
+            "recipe": "Tony's Kentucky Chicken"
+        }
+    }
     
     /*Switch to route all the different Intents to their specific
     functions and retrieve the response message*/
@@ -16,8 +35,12 @@ async function handle_fulfillment(req, res) {
         case "Ingredient-Intent":
         case "Ingredient-Intent-Follow-Up":
             // Get Ingredient asked for from database
-            let ingredient = data.queryResult.parameters.ingredient;
-            response_text = await intent.get_ingredient(ingredient, data);
+            if (sessionData == null) {
+                let ingredient = data.queryResult.parameters.ingredient;
+                response_text = await intent.get_ingredient(ingredient, data);
+            } else {
+                await intent.handle_get_ingredient(req, res, sessionData); // should be the only function called once session data set
+            }
             break;
         //Match for List of all ingredients and retrieve the response text
         case "List-Ingredients":
@@ -68,18 +91,23 @@ async function handle_fulfillment(req, res) {
             response_text = await intent.getPrepTime();
             break;
     }
-    // Set response text
-    response.fulfillmentText = response_text;
+   
+    // If query didn't go through session data
+    if (response_text.length !== 0) {
+        // Set response text
+        response.fulfillmentText = response_text;
 
-    if (response.fulfillmentText != null
-      && response.fulfillmentText.length > 1) {
-        res.status(201);
-      } else {
-        res.status(500);
-      }
+        if (response.fulfillmentText != null
+        && response.fulfillmentText.length > 1) {
+            res.status(201);
+        } else {
+            res.status(500);
+        }
+        
+        // Send response message back
+        res.json(response);
+    }
     
-    // Send response message back
-    res.json(response);
 }
 
 export default handle_fulfillment;

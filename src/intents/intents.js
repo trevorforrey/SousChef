@@ -6,6 +6,7 @@ import getCookTime from './cooktime_intent'
 import getPrepTime from './prep-time_intent'
 import getStepByIndex from'./nextstep_intent'
 import getTotalNumberOfSteps from './total_steps_intent'
+import {handle_get_ingredient} from './ingredient_intent'
 
 module.exports = {
     get_ingredient: get_ingredient,
@@ -15,6 +16,7 @@ module.exports = {
     getCookTime: getCookTime,
     getPrepTime: getPrepTime,
     getStepByIndex: getStepByIndex,
-    getTotalNumberOfSteps: getTotalNumberOfSteps
+    getTotalNumberOfSteps: getTotalNumberOfSteps,
+    handle_get_ingredient: handle_get_ingredient
 }
 
