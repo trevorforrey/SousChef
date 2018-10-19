@@ -26,7 +26,7 @@ async function handle_fulfillment(req, res) {
     //          "currentStep": 1
     //        }
     // ]
-    
+
     /*Switch to route all the different Intents to their specific
     functions and retrieve the response message*/
     switch (displayName) {
@@ -109,10 +109,7 @@ async function handle_fulfillment(req, res) {
         //Match for set up intent
         case "Setup-Intent":
             if (sessionData == null) {
-                let projectID = data.session.split('/')[1];
-                let sessionID = data.session.split('/')[4];
-                intent.update_session_entity(projectID, sessionID);
-                response_text = "Let's get cooking!";
+                intent.follow_up_login_request(req, res);
             } else {
                 let projectID = data.session.split('/')[1];
                 let sessionID = data.session.split('/')[4];
@@ -138,7 +135,7 @@ async function handle_fulfillment(req, res) {
             }
             break;
     }
-   
+
     // If query didn't go through session data
     if (response_text.length !== 0) {
         // Set response text
@@ -150,11 +147,11 @@ async function handle_fulfillment(req, res) {
         } else {
             res.status(500);
         }
-        
+
         // Send response message back
         res.json(response);
     }
-    
+
 }
 
 export default handle_fulfillment;
