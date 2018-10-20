@@ -1,4 +1,8 @@
 
+/*Show a red border around inputs if not valid*/
+input:focus:required:invalid {border: 2px solid red;}
+input:required:valid { border: 2px solid black; }
+
 *{
 	padding: 0;
 	border:0;
@@ -7,6 +11,8 @@
     font-size: 1.08em;
 	
 }
+
+
 h1{
 	text-align: center;
 	margin:50px;
@@ -115,7 +121,6 @@ body {
     text-decoration: underline;
     color: #666;
 }
-
 .btn-register {
     background-color: #1CB94E;
     outline: none;
@@ -137,6 +142,7 @@ body {
     background: #59B2E0;
     color: #000;
 }
+
 
 .input-1   
     {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;

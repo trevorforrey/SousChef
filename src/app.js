@@ -2,7 +2,7 @@ import handle_fulfillment from './fulfillment_controller'
 import post_user_recipe from './post_user_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
-import getLoginUser from './views/js/registration'
+import getLoginUser from './views/js/login'
 
 const shell = require('shelljs');
 var express = require('express');
@@ -43,7 +43,7 @@ app.get('/home', function (req, res) {
 app.post('/postReg', postRegistration);
 
 //get a user from the db for logging in.
-app.get('/getLogin', getLoginUser);
+app.post('/getLogin', getLoginUser);
 
 
 app.get('/upload',function (req, res) {
@@ -56,7 +56,7 @@ app.get('/upload',function (req, res) {
 app.post('/postRecipe', post_user_recipe);
 
 
-app.get('/:userid/cookbook',get_cookbook);
+app.get('/:userid/cookbook', get_cookbook);
 
 
 app.listen(port, function () {

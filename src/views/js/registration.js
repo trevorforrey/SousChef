@@ -9,37 +9,20 @@ async function postRegistration(req, res) {
     
     //Registration form data
     let registrationData = req.body;
-    // let usernameForm = registrationData.usernameReg;
-    // let firstnameForm = registrationData.firstnameReg;
-    // let lastnameameForm= registrationData.email;
-    // let passForm = registrationData.passwordReg;
-    // let confirmPassForm = registrationData.confirmPasswordReg;
     
     //Create a JSON object of the registration form data
     var registrationInsert = {
         firstname: registrationData.firstnameReg,
-        lastnameame: registrationData.email,
+        lastname: registrationData.lastnameReg,
+        email: registrationData.email,
         username: registrationData.usernameReg,
         pass: registrationData.passwordReg,
         confirmPass: registrationData.confirmPasswordReg
     };
     
     
-    
     try {
-        //client = await MongoClient.connect(uri);
         console.log("Connected correctly to server");
-        
-        //const db = client.db('sous-chef');
-        
-        // Get the users collection
-        //const users = db.collection('users');
-        
-        // let result = await users.updateOne(
-        //     {username: user}, // Filter
-        //     {$push: {recipes: recipe}} // Append recipe to user's recipes array
-        // );
-        
         
         await MongoClient.connect(uri, function(err, db) {
             let dbo = db.db('sous-chef');
@@ -47,6 +30,7 @@ async function postRegistration(req, res) {
                 db.close();
             })
         });
+        res.redirect('/');
         
         
     } catch (err) {
