@@ -89,3 +89,28 @@ export async function get_users() {
   client.close();
   return users;
 }
+
+export async function get_user_recipes(username) {
+  let client;
+  let mongo_pw = process.env.MONGO_PW;
+  let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
+  let user_doc = null;
+  let recipes = [];
+  try {
+    client = await MongoClient.connect(uri);
+    console.log("Connected correctly to server");
+
+    const db = client.db('sous-chef');
+
+    // Get specific user
+    user_doc = await db.collection('users').find({username: username}).limit(1).next();
+
+    user_doc.recipes.forEach( function(recipe) { recipes.push(recipe.name); } )
+
+  } catch (err) {
+    console.log(err.stack);
+    client.close();
+  }
+  client.close();
+  return recipes;
+}
