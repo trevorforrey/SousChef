@@ -10,6 +10,8 @@ async function handle_fulfillment(req, res) {
     let data = req.body;
     let displayName = data.queryResult.intent.displayName;
     let contexts = data.queryResult.outputContexts;
+    let projectID = data.session.split('/')[1];
+    let sessionID = data.session.split('/')[4];
 
     // Get session data (returns null if it doesn't exist)
     let sessionData = get_session_data(contexts);
@@ -111,10 +113,6 @@ async function handle_fulfillment(req, res) {
             if (sessionData == null) {
                 intent.follow_up_login_request(req, res);
             } else {
-                let projectID = data.session.split('/')[1];
-                let sessionID = data.session.split('/')[4];
-                console.log(projectID);
-                console.log(sessionID);
                 await intent.handle_update_session_entity(req, res, sessionData, projectID, sessionID); // should be the only function called once session data set
             }
             break;
@@ -135,15 +133,15 @@ async function handle_fulfillment(req, res) {
             }
             break;
         case "login-request":
-            intent.handle_login_request(req,res);
+            await intent.handle_login_request(req,res,projectID);
             break;
         case "login-request user":
-            username = data.queryResult.parameters.username;
-            intent.handle_username_response(req,res,username);
+            let username = data.queryResult.parameters.username;
+            await intent.handle_username_response(req,res,projectID,sessionID,username);
             break;
         case "login-request recipe":
-            recipe = data.queryResult.parameters.recipe;
-            intent.handle_recipe_response(req,res,recipe);
+            let recipe = data.queryResult.parameters.recipe;
+            await intent.handle_recipe_response(req,res,recipe);
             break;
     }
 
