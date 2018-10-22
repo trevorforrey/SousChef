@@ -132,10 +132,17 @@ $(document).ready(function(){
 
 		console.log(recipe);
 
+		let url;
+		if (window.location.contains('localhost')) {
+			url = 'http://localhost:5000/postRecipe';
+		} else if (window.location.contains('https://sous-chef-assistant.herokuapp.com/')) {
+			url = 'https://sous-chef-assistant.herokuapp.com/postRecipe';
+		}
+
 		// Make an ajax call to post the data to the database
 		$.ajax({
 			contentType: 'application/json',
-			url : 'http://localhost:5000/postRecipe', //TODO Remove hardcoded url
+			url : url,
 			type : 'POST',
 			data : JSON.stringify(recipe),
 			dataType:'text',
