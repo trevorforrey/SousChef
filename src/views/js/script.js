@@ -14,24 +14,37 @@ $(document).ready(function(){
 
 		var ingredient_field = $(document.createElement('input'))
 	         .attr("type", "text")
+	         .attr("value", "name")
 			 .attr("class", "input-1")
 			 .attr("id", nameId);
 
 	    var amount_field = $(document.createElement('input'))
 	         .attr("type", "text")
+	         .attr("value", "amount")
 			 .attr("class", "input-1")
 			 .attr("id", amountId);
 	    
-	    var unit_field = $(document.createElement('input'))
-	         .attr("type", "text")
+	    var unit_field = $(document.createElement('select'))
+	         .attr("name", " ")
 			 .attr("class", "input-1")
-			 .attr("id", unitId);
+			 .attr("id", unitId)
+			 .append("<option>unit</option>")
+			 .append("<option>teaspoon</option>")
+			 .append("<option>tablespoon</option>")
+			 .append("<option>ounce</option>")
+			 .append("<option>cup</option>")
+			 .append("<option>gill</option>")
+			 .append("<option>gram</option>")
+			 .append("<option>pound</option>")
+			 .append("<option>gallon</option>")
+			 .append("<option>ml</option>")
+			 .append("<option>liter</option>")
 	    
 		$(".ingredient-fields li")
 			.append(ingredient_field)
 			.append(amount_field)
 			.append(unit_field)
-			.append("<br />");
+			.append("</br>");
 	         
 	    console.log(1);
 	});
@@ -62,6 +75,11 @@ $(document).ready(function(){
 
 	// Upload recipe button handler
 	$("#upload").click(function() {
+		postForm()
+
+	})
+
+	function postForm(){
 		console.log('there are ' + numberOfIngredients + ' ingredients');
 
 		// Create an empty recipe object which will be populated with recipe information
@@ -147,7 +165,7 @@ $(document).ready(function(){
 				$("#form-area").append(failure_text).append("<br />").append(failure_desc_text);
 			}
 		});
-	}); // end of button upload handler
-
-		
+	 // end of button upload handler
+	}
+			
 });

@@ -3,51 +3,62 @@
 	<head>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
-		<script src="js/jquery-3.2.1.min.js"></script>>
+		<script src="js/jquery-3.2.1.min.js"></script>
 		<script src="js/script.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<div id="content-header">
-				<h1 class="text-center">Upload your receipe</h1>
-			</div>
-
-
-
+		<div class="container">	
+		<div id="content-header">		
+			<h1 class="text-center">Upload your recipe</h1>
+		</div>
 			<div id="form-area">
 				<form>
 					<ul id="upload-recipe">
-						<li id="name">
-							<span>Recipe Name:</span>
-							<input type="text" id="recipeName" class="input-1"></li>
-
-						<li id="time">
-							<span>Preparation time:</span>
-							<input type="text" class="input-1" id="prepTime"></li>
-					 	<li>
-					 		<input class="btn primary" type="button" value="Add Ingredients" id="ingredient" />
-					 		<ul class="ingredient-fields">
-					 			<li></li>
-					 		</ul>
-					 	</li>
-					 	<li>
-					 		<input  class="btn primary" type="button" value="Add steps" id="steps"/>
-					 		<ul class="steps-field">
-					 			<li></li>
-					 		</ul>
-					 	</li>
-					 	<li>
-					 		<input class="btn primary" type="button" value="upload" id="upload"/>
-					 	</li>
+						<div class="row">
+							<li id="name" class="col-md-12">
+								<span >Recipe Name:</span>
+								<input type="text" id="recipeName" class="input-1">
+							</li>
+					    </div>
+						<div class="row">
+							<li id="time" class="col-md-4" >
+								<span >Preparation time:</span>
+								<input type="text" class="input-1"   id="prepTime">
+							</li>
+							<li class="col-md-4">
+								<span >Cook Time:</span>
+								<input type="text" class="input-1" id="cookTime">
+							</li>
+							<li class="col-md-4">
+								<span >Serving Size:</span>
+								<input type="text" class="input-1"  id="servingSize">	
+							</li>
+					   </div>
+						<div class="row">
+						 	<li class="col-md-12">
+						 		<input class="btn primary" type="button" value="Add Ingredients" id="ingredient" />
+						 		<ul class="ingredient-fields">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+						 	<li class="col-md-12">
+						 		<input  class="btn primary" type="button" value="Add steps" id="steps"/>
+						 		<ul class="steps-field">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+						 </div>
+						 <div class="row">
+						 	<li class="col-md-12">
+						 		<input class="btn primary" type="button" value="upload" id="upload"/>	
+						 	</li>
+						 </div>		
 				 	</ul>
-				 <div class="test"></div>
-
 				</form>		
 			</div>
 		</div>
 		<footer>
     		<div class="container">
-      			
     		</div>
  		 </footer>			
 	</body>

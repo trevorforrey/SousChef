@@ -1,11 +1,8 @@
 import handle_fulfillment from './fulfillment_controller'
-
 import post_user_recipe from './post_user_recipe'
-
 import get_cookbook from './get_cookbook'
-
-import postRegistration from './views/js/register_login'
-import getLoginUser from './views/js/register_login'
+import postRegistration from './views/js/registration'
+import getLoginUser from './views/js/login'
 
 const shell = require('shelljs');
 var express = require('express');
@@ -16,6 +13,9 @@ let MongoClient = require('mongodb').MongoClient;
 let app = express();
 var router = express.Router();
 app.use(bodyparser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyparser.urlencoded({ extended: false }));
+
 
 // process.env.PORT used by Heroku
 var port = process.env.PORT || 5000;
@@ -37,11 +37,13 @@ app.get('/home', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
+
+
 //posting a registered user account
-//app.post('/postReg', postRegistration(req, res));
+app.post('/postReg', postRegistration);
 
 //get a user from the db for logging in.
-app.get('/index', getLoginUser);
+app.post('/getLogin', getLoginUser);
 
 
 app.get('/upload',function (req, res) {
@@ -54,7 +56,7 @@ app.get('/upload',function (req, res) {
 app.post('/postRecipe', post_user_recipe);
 
 
-app.get('/:userid/cookbook',get_cookbook);
+app.get('/:userid/cookbook', get_cookbook);
 
 
 app.listen(port, function () {

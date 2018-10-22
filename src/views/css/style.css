@@ -1,11 +1,18 @@
 
+/*Show a red border around inputs if not valid*/
+input:focus:required:invalid {border: 2px solid red;}
+input:required:valid { border: 2px solid black; }
+
 *{
 	padding: 0;
 	border:0;
 	box-sizing: border-box;
 	font-family: sans-serif;
+    font-size: 1.08em;
 	
 }
+
+
 h1{
 	text-align: center;
 	margin:50px;
@@ -13,7 +20,8 @@ h1{
 
 h3 {
     text-align: center;
-    margin:20px;
+    margin:0px;
+    font-size: 1.05em;
 }
 
 p{
@@ -113,7 +121,6 @@ body {
     text-decoration: underline;
     color: #666;
 }
-
 .btn-register {
     background-color: #1CB94E;
     outline: none;
@@ -136,13 +143,36 @@ body {
     color: #000;
 }
 
+
 .input-1   
-    {border: solid 1px #333; padding: 5px 2px; margin: 10px 10px 0 0; }
+    {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
+        height:40px;width: 100%; border-radius: 5px} 
 #upload-recipe li {list-style-type: none; }
 
-#ingredient, #steps, #name, #time {
+/**#ingredient, #steps, #name, #time{
     margin: 10px 0;
     
 }
 
-li#name span, li#time span {min-width: 200px;}
+li#name span, li#time span {min-width: 200px;}**/
+.btn{
+    height:40px;
+    width:100%;
+    font-size: 1.02em;
+}
+
+#ingredient, #steps, #upload{
+    margin: 10px 0;
+}
+
+.row{
+    margin: 10px 10px 0 0;
+    padding: 5px 2px
+}
+
+#form-area{
+    background: rgb(135,206,250); box-sizing: border-box; padding: 30px 0px 30px 10px;
+}
+.container{
+    margin-bottom:20px;
+}
