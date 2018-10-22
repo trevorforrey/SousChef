@@ -34,10 +34,10 @@ async function postRegistration(req, res) {
         
         
     } catch (err) {
+        res.status(500);
+        res.send("Error adding user to database");
         console.log(err.stack);
     }
-    res.status(201);
-    res.send("success")
 };
 
 // allows us to import the function in app.js

@@ -36,7 +36,8 @@ async function getLoginUser(req, res) {
         if(usernameForm === userDB.username && passwordForm === userDB.pass) {
             console.log("============================Made it in validator function", "usernameForm = ", usernameForm,
                 " userDB.username = ", userDB.username, "\nPasswordForm = ", passwordForm, " passwordDB = ", userDB.pass);
-            res.redirect('/home.html');
+            req.session.username = userDB.username;
+            res.redirect('/home');
         }
         
         

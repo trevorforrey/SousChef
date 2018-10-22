@@ -4,6 +4,7 @@ import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
 
+var session = require('express-session');
 const shell = require('shelljs');
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -15,7 +16,12 @@ var router = express.Router();
 app.use(bodyparser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({ extended: false }));
-
+app.use(session({
+    secret: 'our super duper secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 // process.env.PORT used by Heroku
 var port = process.env.PORT || 5000;
@@ -34,6 +40,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/home', function (req, res) {
+    console.log("session data work?");
+    console.log(req.session.username);
     res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
