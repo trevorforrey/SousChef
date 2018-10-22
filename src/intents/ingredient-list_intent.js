@@ -1,6 +1,43 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe, get_user_recipe} from '../mongo_helper'
 
-async function get_ingredient_list() {
+export async function handle_get_ingredient_list(req,res,sessionData) {
+    let response = {};
+    let data = req.body;
+    let contexts = data.queryResult.outputContexts;
+
+    let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
+
+    console.log('ingredient list from mongo: ' + recipe_doc.ingredients);
+
+    // Generate Response
+    let response_text = "For this recipe, you'll need ";
+    let ingredients = recipe_doc.ingredients;
+    
+    // Iterate through the ingredient array
+    ingredients.forEach( (ingredient) => {
+        
+        // Add "and" to start of last ingredient
+        if (ingredient === ingredients[ingredients.length - 1]) {
+            response_text += "and ";
+        }
+        
+        // Handles items like eggs, oranges (name is unit)
+        if (ingredient.unit === ingredient.name) {
+            response_text += ingredient.quantity + " " + ingredient.name + ". ";
+            
+            // Handles items where it's natural to say quantity, units, and name
+        } else {
+            response_text += ingredient.quantity + " " + ingredient.unit + " of " + ingredient.name + ". ";
+        }
+    });
+    response.fulfillmentText = response_text;
+    response.contextOut = data.queryResult.outputContexts;
+    res.status(201);
+    res.json(response);
+    return;
+}
+
+export async function get_ingredient_list() {
     // Load up a recipe
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let ingredients = recipe_doc.ingredients;
@@ -27,6 +64,3 @@ async function get_ingredient_list() {
     });
     return response;
 };
-
-// allows us to import the function in app.js
-export default get_ingredient_list;

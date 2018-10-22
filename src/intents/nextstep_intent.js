@@ -1,6 +1,44 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe, get_user_recipe} from '../mongo_helper'
+import {set_session_data} from '../session_helper'
 
-async function getStepByIndex(stepDict){
+export async function handle_get_step_by_index(req,res,sessionData,contexts) {
+    let response = {};
+    let response_text;
+    let data = req.body;
+    let step_requested = sessionData.currentStep;
+
+    let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
+
+    console.log('recipe from mongo: ' + recipe_doc.ingredients);
+    
+    const steps = recipe_doc.directions;
+
+    // If step requested < 0, set back to 0, and inform the user they are on the first step
+    if (step_requested < 0) {
+        res.status(400);
+        response_text = 'You are at the first step, there are no previous steps';
+        sessionData.currentStep = 0;
+    }
+    // Else if step requested > number of steps, set to last step and let them know they're on the last step
+    else if (step_requested > steps.length - 1) {
+        res.status(400);
+        response_text = 'You are at the last step, there are no more steps';
+        sessionData.currentStep = steps.length - 1;
+    }
+    // Else, perform a proper step lookup and response
+    else {
+        res.status(201);
+        response_text = steps[step_requested];
+        sessionData.currentStep = step_requested;
+    }
+
+    response.fulfillmentText = response_text;
+    response.contextOut = set_session_data(contexts, sessionData); // Updates session data in context array
+    res.json(response);
+    return;
+}
+
+export async function getStepByIndex(stepDict){
     //Get the recipe from the database
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let response_text;
@@ -91,4 +129,3 @@ async function getStepByIndex(stepDict){
     console.log("stepDict inside nextStep.js", stepDict);
     return response_text;
 }
-export default getStepByIndex;
