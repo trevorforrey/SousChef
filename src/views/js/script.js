@@ -133,9 +133,9 @@ $(document).ready(function(){
 		console.log(recipe);
 
 		let url;
-		if (window.location.contains('localhost')) {
+		if (window.location.href.includes('localhost')) {
 			url = 'http://localhost:5000/postRecipe';
-		} else if (window.location.contains('https://sous-chef-assistant.herokuapp.com/')) {
+		} else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
 			url = 'https://sous-chef-assistant.herokuapp.com/postRecipe';
 		}
 
