@@ -75,8 +75,8 @@ $(document).ready(function(){
 
 	// Upload recipe button handler
 	$("#upload").click(function() {
-		postForm()
-
+		postForm();
+		
 	})
 
 	function postForm(){

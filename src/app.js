@@ -37,6 +37,10 @@ app.get('/home', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
+app.get('/test', function (req, res) {
+    res.sendFile(path.join(__dirname + '/views/test.html'));
+});
+
 
 
 //posting a registered user account
