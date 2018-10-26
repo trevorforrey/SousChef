@@ -1,5 +1,6 @@
 import handle_fulfillment from './fulfillment_controller'
 import post_user_recipe from './post_user_recipe'
+import delete_recipe from './delete_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
@@ -63,6 +64,7 @@ app.get('/upload',function (req, res) {
 
 app.post('/postRecipe', post_user_recipe);
 
+app.delete('/:username/:recipeName/', delete_recipe);
 
 app.get('/:userid/cookbook', get_cookbook);
 
