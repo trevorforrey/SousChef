@@ -40,6 +40,15 @@ img.test { background-size: auto 100%; width: 100%;}
 body {
     padding-top: 90px;
 }
+
+ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: upper-roman;
+}
+
 .panel-login {
     border-color: #ccc;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);

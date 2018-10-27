@@ -38,7 +38,7 @@ async function get_cookbook(req,res) {
     }
     client.close();
     res.status(200);
-    res.json(recipes_response);
+    res.jsonp(recipes_response);
   }
   
   export default get_cookbook;
