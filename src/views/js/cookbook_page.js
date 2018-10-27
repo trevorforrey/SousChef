@@ -9,13 +9,23 @@ function unoopsie(){
 }
 
 $(document).ready(function() {
+
+    let url;
+    if (window.location.href.includes('localhost')) {
+        url = 'http://localhost:5000/cookbook';
+    } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
+        url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
+    } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
+        url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
+    }
+
     //jquery getJSON() isn't working for me, trying code from 
     // https://stackoverflow.com/questions/47523265/jquery-ajax-no-access-control-allow-origin-header-is-present-on-the-requested instead
     $.ajax({
         type: 'GET',
         crossDomain: true,
         dataType: 'jsonp',
-        url: 'http://localhost:5000/:userid/cookbook',
+        url: url,
         success: function(result){
             console.log("hello");
             console.log(result);
