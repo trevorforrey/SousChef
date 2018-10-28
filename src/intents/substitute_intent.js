@@ -1,4 +1,5 @@
 import {get_user_recipe} from '../mongo_helper'
+let unirest = require('unirest');
 
 export async function handle_substitute_ingredient(req,res,sessionData) {
     let response = {};
@@ -10,13 +11,21 @@ export async function handle_substitute_ingredient(req,res,sessionData) {
     console.log('ingredient to substitute: ' + ingredientToSubstitute);
 
     // Get ingredient from recipe to figure out quantity
-    const ingredientData = await get_ingredient_from_user(sessionData.username, sessionData.recipe, ingredientToSubstitute, data);
+    // const ingredientData = await get_ingredient_from_user(sessionData.username, sessionData.recipe, ingredientToSubstitute, data);
 
     // Debugging (print out ingredient object)
-    console.log(ingredientData);
+    // console.log(ingredientData);
 
     // Make API call to find substitute ingredients
     // - Should get amount of substitute too
+    // These code snippets use an open-source library. http://unirest.io/nodejs
+    unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/substitutes?ingredientName=" + ingredientToSubstitute)
+    .header("X-Mashape-Key", "WHvwtmMxRlmshM0D4WoKnup1PMxop1H8k7zjsnTy224VfXki0B")
+    .header("Accept", "application/json")
+    .end(function (result) {
+        console.log('made api call');
+        console.log(result.status, result.headers, result.body);
+    });
     
     // Check status of API call
     // if (!ingredientResponse.includes("is not in the recipe")) {
