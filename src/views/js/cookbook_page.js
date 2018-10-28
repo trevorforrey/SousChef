@@ -8,6 +8,30 @@ function unoopsie(){
     $("#Message").text("Your Cookbook");
 }
 
+function populate(recipe){
+    console.log(recipe);
+    
+    if (recipe.prep_time != undefined && recipe.prep_time != null){
+        $("#prep_time").html(recipe.prep_time);
+    } else {
+        $("#prep_time").html("not listed");
+    }
+    if (recipe.make_time != undefined && recipe.make_time != null) {
+        $("#make_time").html(recipe.make_time);
+    } else {
+        $("#make_time").html("not listed");
+    }
+    var ingreds = recipe.ingredients;
+    for (var i in ingreds){
+        console.log(ingreds[i]);
+        $("#ingredients").append('<li>'+ingreds[i].quantity+" "+ingreds[i].unit+" of "+ingreds[i].name+"</li>");
+    }
+    var steps = recipe.directions
+    for (var i in steps){
+        $("#steps").append("<li>"+steps[i]+"</li>");
+    }
+}
+
 $(document).ready(function() {
 
     let url;
@@ -34,32 +58,15 @@ $(document).ready(function() {
                 $("#recipeList").append($("<option></option>").attr("value",index)
                 .text(value.name));
             });
-        
+
+            var defaultRecipe = recipesDoc.recipes[0];
+            populate(defaultRecipe);
+            
             $("#recipeList").change(function() {
                 var selected = $(this).val();
                 console.log("input: " + selected);
                 var  recipe = recipesDoc.recipes[parseInt(selected)];
-                console.log(recipe);
-        
-                if (recipe.prep_time != undefined && recipe.prep_time != null){
-                    $("#prep_time").html(recipe.prep_time);
-                } else {
-                    $("#prep_time").html("not listed");
-                }
-                if (recipe.make_time != undefined && recipe.make_time != null) {
-                    $("#make_time").html(recipe.make_time);
-                } else {
-                    $("#make_time").html("not listed");
-                }
-                var ingreds = recipe.ingredients;
-                for (var i in ingreds){
-                    console.log(ingreds[i]);
-                    $("#ingredients").append('<li>'+ingreds[i].quantity+" "+ingreds[i].unit+" of "+ingreds[i].name+"</li>");
-                }
-                var steps = recipe.directions
-                for (var i in steps){
-                    $("#steps").append("<li>"+steps[i]+"</li>");
-                }
+                populate(recipe);
         
             });
         }
