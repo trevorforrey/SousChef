@@ -58,10 +58,10 @@ $(document).ready(function() {
                 $("#recipeList").append($("<option></option>").attr("value",index)
                 .text(value.name));
             });
-
-            var defaultRecipe = recipesDoc.recipes[0];
-            populate(defaultRecipe);
-            
+            if (recipesDoc.recipes.length > 0){
+                var defaultRecipe = recipesDoc.recipes[0];
+                populate(defaultRecipe);
+            }
             $("#recipeList").change(function() {
                 var selected = $(this).val();
                 console.log("input: " + selected);
