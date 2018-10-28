@@ -3,6 +3,7 @@ import post_user_recipe from './post_user_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
+import update_recipe from './update_recipe'
 
 const shell = require('shelljs');
 var express = require('express');
@@ -59,6 +60,7 @@ app.get('/upload',function (req, res) {
 
 app.post('/postRecipe', post_user_recipe);
 
+app.post('/updateRecipe', update_recipe);
 
 app.get('/:userid/cookbook', get_cookbook);
 
