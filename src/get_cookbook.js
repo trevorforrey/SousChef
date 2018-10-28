@@ -5,7 +5,10 @@ async function get_cookbook(req,res) {
     let data = req.body;
     let recipes_response = {};
 
-    let user = 'Tony Gunk';
+    // const user = req.session.username; *** Will need to uncomment come merge with develop ***
+    const user = "thetoastyone";
+
+    console.log(`Getting cookbook for user ${user}`);
   
     let client;
     let mongo_pw = process.env.MONGO_PW;
@@ -38,7 +41,7 @@ async function get_cookbook(req,res) {
     }
     client.close();
     res.status(200);
-    res.json(recipes_response);
+    res.jsonp(recipes_response);
   }
   
   export default get_cookbook;

@@ -62,7 +62,7 @@ app.post('/postRecipe', post_user_recipe);
 
 app.post('/updateRecipe', update_recipe);
 
-app.get('/:userid/cookbook', get_cookbook);
+app.get('/cookbook', get_cookbook);
 
 
 app.listen(port, function () {
