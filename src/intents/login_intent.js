@@ -1,4 +1,5 @@
 import {get_users, get_user_recipes} from '../mongo_helper'
+import {set_session_data} from '../session_helper'
 
 export async function handle_login_request(req, res, projectId) {
   let response = {
@@ -105,7 +106,7 @@ export async function handle_username_response(req, res, projectId, session, use
         console.log("Added recipes!")
     })
     .then(() => {
-      // success creating ingredient session entities
+      // success creating ingredient session entities.
       res.status(201);
       res.json(response);
     })
@@ -117,7 +118,7 @@ export async function handle_username_response(req, res, projectId, session, use
     });
 }
 
-export async function handle_recipe_response(req, res, recipe) {
+export async function handle_recipe_response(req, res, recipe, contexts) {
   let response = {
     "followupEventInput": {
       "name": "Setup-Intent",
@@ -125,7 +126,16 @@ export async function handle_recipe_response(req, res, recipe) {
       "languageCode": "en-US"
     }
   };
-  //SET SESSION_DATA HERE. Recipe is given and user should be in the outputcontext.
+  let sessionData = {}
+
+  contexts.forEach( context => {
+    if (context.name.includes("login-requestuser-followup")) {
+      sessionData.username = context.parameters.username
+    }
+  })
+  sessionData.recipe = recipe;
+  response.contextOut = set_session_data(contexts, sessionData);
+
   res.status(201);
   res.json(response);
   return;
