@@ -24,14 +24,16 @@ async function update_recipe(req, res){
             }
         );
         for (var i=0;i<user_doc.recipes.length;i++ ){
-        	console.log(user_doc.recipes.name);
+        	
         	if(recipe_name===user_doc.recipes[i].name)
         	{
-        		console.log(response);
+        		console.log("Recipe name:"+user_doc.recipes[i].name);
         		
-        		response=user_doc.recipes[i];
+        		response={id:i,
+        				 body:user_doc.recipes[i]};
 
         	}
+        	console.log(response);
         }
         
     }
@@ -44,7 +46,7 @@ async function update_recipe(req, res){
     client.close();
     res.status(200);
 
-    res.json(response);
+    res.jsonp(response);
     
   
 

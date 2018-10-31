@@ -4,6 +4,8 @@ import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
 import update_recipe from './update_recipe'
+import update_recipe_in_db from './handle_update'
+
 
 const shell = require('shelljs');
 var express = require('express');
@@ -42,6 +44,14 @@ app.get('/test', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/test.html'));
 });
 
+app.get('/cookbook', function (req, res) {
+    res.sendFile(path.join(__dirname + '/views/cookbook.html'));
+});
+
+app.get('/update', function (req, res) {
+    res.sendFile(path.join(__dirname + '/views/update.html'));
+});
+
 
 
 //posting a registered user account
@@ -61,6 +71,8 @@ app.get('/upload',function (req, res) {
 app.post('/postRecipe', post_user_recipe);
 
 app.post('/updateRecipe', update_recipe);
+app.post('/update', update_recipe_in_db);
+
 
 app.get('/cookbook', get_cookbook);
 

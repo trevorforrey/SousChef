@@ -167,5 +167,17 @@ $(document).ready(function(){
 		});
 	 // end of button upload handler
 	}
+//onclick handler on each update button for each recipe in cookbook page
+	$("mult_update").click(function(){
+		//ajax call to /update_recipe ,send data contains name of the recipe
+		//obtained from text field. received data has the id field
+		//{id: id ,body: recipe}
+	})
+
+	$("#update").click(function(){
+		//ajax call to /handle_update.js to update db
+		//send req along with id field
+		//{id: id ,body: recipe}
+	})
 			
 });
