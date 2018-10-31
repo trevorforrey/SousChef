@@ -1,16 +1,10 @@
 let MongoClient = require('mongodb').MongoClient;
-
-async function get_cookbook(req,res) {
-
-    let data = req.body;
-    let recipes_response = {};
-
-    // const user = req.session.username; *** Will need to uncomment come merge with develop ***
-    const user = "thetoastyone";
-
-    console.log(`Getting cookbook for user ${user}`);
-  
-    let client;
+async function update_recipe(req, res){
+	//let recipe_name=req.body;
+	let recipe_name="red sauce";
+	let response={};
+	let user = 'thetoastyone';
+  	let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
     let recipe_doc = null;
@@ -29,11 +23,21 @@ async function get_cookbook(req,res) {
                 username: { $eq: user }
             }
         );
-        
-        // Add user recipes to response json
-        recipes_response.recipes = user_doc.recipes;
+        for (var i=0;i<user_doc.recipes.length;i++ ){
+        	
+        	if(recipe_name===user_doc.recipes[i].name)
+        	{
+        		console.log("Recipe name:"+user_doc.recipes[i].name);
+        		
+        		response={id:i,
+        				 body:user_doc.recipes[i]};
 
-    } catch (err) {
+        	}
+        	console.log(response);
+        }
+        
+    }
+    catch (err) {
         res.status(500);
         res.send('failure');
         console.log(err.stack);
@@ -41,7 +45,11 @@ async function get_cookbook(req,res) {
     }
     client.close();
     res.status(200);
-    res.jsonp(recipes_response);
-  }
+
+    res.jsonp(response);
+    
   
-  export default get_cookbook;
+
+
+}
+export default update_recipe;
