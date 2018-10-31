@@ -138,11 +138,11 @@ async function handle_fulfillment(req, res) {
             break;
         case "login-request user":
             let username = data.queryResult.parameters.username;
-            await intent.handle_username_response(req,res,projectID,sessionID,username,sessionData, contexts);
+            await intent.handle_username_response(req,res,projectID,sessionID,username);
             break;
         case "login-request recipe":
             let recipe = data.queryResult.parameters.recipe;
-            await intent.handle_recipe_response(req,res,recipe,sessionData,contexts);
+            await intent.handle_recipe_response(req,res,recipe,contexts);
             break;
     }
 

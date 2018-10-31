@@ -35,11 +35,20 @@ export function get_session_data(contexts) {
 // and returns the new context array
 export function set_session_data(contexts, sessionData) {
     // Find session data from request context, and set it
+    let session_found = false
     if (contexts != null) {
         for (let i = 0; i < contexts.length; i++) {
             if (contexts[i].name == "session_data") {
                 contexts[i].parameters = sessionData;
+                session_found = true
             }
+        }
+        if (!session_found) {
+          contexts.push({
+            "name" : "session_data",
+            "lifespanCount" : 5,
+            "parameters" : sessionData
+          })
         }
     }
     return contexts;
