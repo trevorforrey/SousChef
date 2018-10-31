@@ -59,7 +59,7 @@ export async function handle_login_request(req, res, projectId) {
     });
 }
 
-export async function handle_username_response(req, res, projectId, session, username) {
+export async function handle_username_response(req, res, projectId, session, username , sessionData , context) {
   let response = {
     'fulfillmentText':'Hello ' + username + "! What recipe would you like to make?"
   }
@@ -105,7 +105,9 @@ export async function handle_username_response(req, res, projectId, session, use
         console.log("Added recipes!")
     })
     .then(() => {
-      // success creating ingredient session entities
+      // success creating ingredient session entities. Setting the initial sessionData after user is authenticated
+      sessionData.username = username;
+      response.contextOut = set_session_data(contexts, sessionData); 
       res.status(201);
       res.json(response);
     })
@@ -117,7 +119,7 @@ export async function handle_username_response(req, res, projectId, session, use
     });
 }
 
-export async function handle_recipe_response(req, res, recipe) {
+export async function handle_recipe_response(req, res, recipe,sessionData,contexts) {
   let response = {
     "followupEventInput": {
       "name": "Setup-Intent",
@@ -126,6 +128,8 @@ export async function handle_recipe_response(req, res, recipe) {
     }
   };
   //SET SESSION_DATA HERE. Recipe is given and user should be in the outputcontext.
+  sessionData.recipe = recipe;
+  response.contextOut = set_session_data(contexts, sessionData);
   res.status(201);
   res.json(response);
   return;

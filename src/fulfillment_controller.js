@@ -113,6 +113,7 @@ async function handle_fulfillment(req, res) {
             if (sessionData == null) {
                 intent.follow_up_login_request(req, res);
             } else {
+                console.log("Setup-Intent, session not null block");
                 await intent.handle_update_session_entity(req, res, sessionData, projectID, sessionID); // should be the only function called once session data set
             }
             break;
@@ -137,11 +138,11 @@ async function handle_fulfillment(req, res) {
             break;
         case "login-request user":
             let username = data.queryResult.parameters.username;
-            await intent.handle_username_response(req,res,projectID,sessionID,username);
+            await intent.handle_username_response(req,res,projectID,sessionID,username,sessionData, contexts);
             break;
         case "login-request recipe":
             let recipe = data.queryResult.parameters.recipe;
-            await intent.handle_recipe_response(req,res,recipe);
+            await intent.handle_recipe_response(req,res,recipe,sessionData,contexts);
             break;
     }
 
