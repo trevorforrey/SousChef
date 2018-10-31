@@ -10,6 +10,10 @@ function unoopsie(){
 
 function populate(recipe){
     console.log(recipe);
+
+    // Empty previous ingredients and steps before populating the page
+    $("#ingredients").empty();
+    $("#steps").empty();
     
     if (recipe.prep_time != undefined && recipe.prep_time != null){
         $("#prep_time").html(recipe.prep_time);
