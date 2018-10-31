@@ -11,12 +11,10 @@ async function update_recipe_in_db(req, res){
 	let name="red sauce";
 	let recipeId=0;
 	let queryId=recipeId.toString();
-	let response={};
 	let user = 'thetoastyone';
   	let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
-   
     try {
         client = await MongoClient.connect(uri);
         console.log("Connected correctly to server");
