@@ -3,14 +3,14 @@
 input:focus:required:invalid {border: 2px solid red;}
 input:required:valid { border: 2px solid black; }
 
-*{
-	padding: 0;
-	border:0;
-	box-sizing: border-box;
-	font-family: sans-serif;
-    font-size: 1.08em;
-	
-}
+/**{*/
+	/*padding: 0;*/
+	/*border:0;*/
+	/*box-sizing: border-box;*/
+	/*font-family: sans-serif;*/
+    /*font-size: 1.08em;*/
+	/**/
+/*}*/
 
 
 h1{
