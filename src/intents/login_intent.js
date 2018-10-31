@@ -59,7 +59,7 @@ export async function handle_login_request(req, res, projectId) {
     });
 }
 
-export async function handle_username_response(req, res, projectId, session, username , sessionData , context) {
+export async function handle_username_response(req, res, projectId, session, username , sessionData , contexts) {
   let response = {
     'fulfillmentText':'Hello ' + username + "! What recipe would you like to make?"
   }
