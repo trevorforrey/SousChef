@@ -134,7 +134,7 @@ export async function handle_recipe_response(req, res, recipe, contexts) {
     }
   })
   sessionData.recipe = recipe;
-  response.contextOut = set_session_data(contexts, sessionData);
+  response.outputContexts = set_session_data(contexts, sessionData);
 
   res.status(201);
   res.json(response);

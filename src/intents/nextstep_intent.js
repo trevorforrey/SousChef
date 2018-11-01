@@ -33,7 +33,7 @@ export async function handle_get_step_by_index(req,res,sessionData,contexts) {
     }
 
     response.fulfillmentText = response_text;
-    response.contextOut = set_session_data(contexts, sessionData); // Updates session data in context array
+    response.outputContexts = set_session_data(contexts, sessionData); // Updates session data in context array
     res.json(response);
     return;
 }

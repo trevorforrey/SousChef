@@ -17,7 +17,7 @@ export async function handle_get_ingredient(req,res,sessionData) {
         res.status(400);
     }
     response.fulfillmentText = ingredientResponse;
-    response.contextOut = data.queryResult.outputContexts;
+    response.outputContexts = data.queryResult.outputContexts;
     res.json(response);
     return;
 }

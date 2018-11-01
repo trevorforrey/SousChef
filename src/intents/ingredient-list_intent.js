@@ -31,7 +31,7 @@ export async function handle_get_ingredient_list(req,res,sessionData) {
         }
     });
     response.fulfillmentText = response_text;
-    response.contextOut = data.queryResult.outputContexts;
+    response.outputContexts = data.queryResult.outputContexts;
     res.status(201);
     res.json(response);
     return;

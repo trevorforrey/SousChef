@@ -25,7 +25,7 @@ export async function handle_get_num_remaining_steps(req,res,sessionData) {
 
     res.status(201);
     response.fulfillmentText = response_text;
-    response.contextOut = data.queryResult.outputContexts;
+    response.outputContexts = data.queryResult.outputContexts;
     res.json(response);
     return;
 }

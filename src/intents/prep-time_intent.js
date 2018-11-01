@@ -21,7 +21,7 @@ export async function handle_get_preptime(req,res,sessionData) {
         res.status(400);
     }
     response.fulfillmentText = response_text;
-    response.contextOut = data.queryResult.outputContexts;
+    response.outputContexts = data.queryResult.outputContexts;
     res.json(response);
     return;
 }
