@@ -1,5 +1,5 @@
 import * as intent from './intents/intents'
-import {get_session_data} from './session_helper'
+import {get_session_data, get_initial_session_data} from './session_helper'
 
 // Global variables
 var stepDict = {name: "", index: null, currentIndex: null, previousIndex: null, stepRequest: null};
@@ -110,12 +110,14 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for set up intent
         case "Setup-Intent":
-            console.log(data);
-            if (Object.keys(data.queryResult.parameters).length == 0) {
+            if (sessionData == null) {
+              sessionData = get_initial_session_data(contexts)
+            }
+            if (sessionData == null) {
                 intent.follow_up_login_request(req, res);
             } else {
                 console.log("Setup-Intent, session not null block");
-                await intent.handle_update_session_entity(req, res, data.queryResult.parameters, projectID, sessionID); // should be the only function called once session data set
+                await intent.handle_update_session_entity(req, res, sessionData, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for cook time intent and retrieve the response text
@@ -142,8 +144,7 @@ async function handle_fulfillment(req, res) {
             await intent.handle_username_response(req,res,projectID,sessionID,username);
             break;
         case "login-request recipe":
-            let recipe = data.queryResult.parameters.recipe;
-            await intent.handle_recipe_response(req,res,recipe,contexts);
+            await intent.handle_recipe_response(req,res);
             break;
     }
 

@@ -118,22 +118,11 @@ export async function handle_username_response(req, res, projectId, session, use
     });
 }
 
-export async function handle_recipe_response(req, res, recipe, contexts) {
-  let username = null;
-
-  contexts.forEach( context => {
-    if (context.name.includes("login-requestuser-followup")) {
-      username = context.parameters.username
-    }
-  })
-
+export async function handle_recipe_response(req, res) {
   let response = {
     "followupEventInput": {
       "name": "Setup-Intent",
-      "parameters": {
-        "username": username,
-        "recipe": recipe
-      },
+      "parameters": {},
       "languageCode": "en-US"
     }
   };
