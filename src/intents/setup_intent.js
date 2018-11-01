@@ -2,7 +2,7 @@ import {get_recipe, get_user_recipe, get_users} from '../mongo_helper'
 import {set_session_data} from '../session_helper'
 
 
-export async function handle_update_session_entity(req, res, sessionData, projectId, session) {
+export async function handle_update_session_entity(req, res, sessionData, projectID, session) {
 
   let response = {};
 
@@ -52,7 +52,7 @@ export async function handle_update_session_entity(req, res, sessionData, projec
       // success creating ingredient session entities
       res.status(201);
       response.fulfillmentText = 'We\'re cooking: ' + sessionData.recipe + '. Lets start cooking!';
-      response.outputContexts = set_session_data(req.body.queryResult.outputContexts, sessionData, ProjectID, session);
+      response.outputContexts = set_session_data(req.body.queryResult.outputContexts, sessionData, projectID, session);
       res.json(response);
     })
     .catch(err => {
