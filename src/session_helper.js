@@ -56,13 +56,15 @@ export function set_session_data(contexts, sessionData) {
 
 export function get_initial_session_data(contexts) {
   let sessionData = null
-  for (let i = 0; i < contexts.length; i++) {
-      if (contexts[i].name.includes("login-requestuser-followup")) {
-          sessionData = {
-            "username" : contexts[i].parameters.username,
-            "recipe" : contexts[i].parameters.recipe
-          }
-      }
+  if (contexts != null) {
+    for (let i = 0; i < contexts.length; i++) {
+        if (contexts[i].name.includes("login-requestuser-followup")) {
+            sessionData = {
+              "username" : contexts[i].parameters.username,
+              "recipe" : contexts[i].parameters.recipe
+            }
+        }
+    }
   }
   return sessionData
 }
