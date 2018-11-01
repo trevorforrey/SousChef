@@ -21,7 +21,7 @@ export function get_session_data(contexts) {
     // Grab session data from request context (if it exists)
     if (contexts != null) {
         for (let i = 0; i < contexts.length; i++) {
-            if (contexts[i].name == "session_data") {
+            if (contexts[i].name.includes("session_data")) {
                 sessionData = contexts[i].parameters;
             }
         }
@@ -33,19 +33,19 @@ export function get_session_data(contexts) {
 // takes in an array of contexts, and a new session data object
 // sets the current session data in the context to the new session data
 // and returns the new context array
-export function set_session_data(contexts, sessionData) {
+export function set_session_data(contexts, sessionData,ProjectID,SessionID) {
     // Find session data from request context, and set it
     let session_found = false
     if (contexts != null) {
         for (let i = 0; i < contexts.length; i++) {
-            if (contexts[i].name == "session_data") {
+            if (contexts[i].name.includes("session_data")) {
                 contexts[i].parameters = sessionData;
                 session_found = true
             }
         }
         if (!session_found) {
           contexts.push({
-            "name" : "session_data",
+            "name" : "projects/" + ProjectID + "/agent/sessions/"+ SessionID + "/contexts/session_data",
             "lifespanCount" : 5,
             "parameters" : sessionData
           })

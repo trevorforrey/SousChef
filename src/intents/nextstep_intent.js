@@ -1,7 +1,7 @@
 import {get_recipe, get_user_recipe} from '../mongo_helper'
 import {set_session_data} from '../session_helper'
 
-export async function handle_get_step_by_index(req,res,sessionData,contexts) {
+export async function handle_get_step_by_index(req,res,sessionData,contexts,ProjectID,SessionID) {
     let response = {};
     let response_text;
     let data = req.body;
@@ -10,7 +10,7 @@ export async function handle_get_step_by_index(req,res,sessionData,contexts) {
     let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
 
     console.log('recipe from mongo: ' + recipe_doc.ingredients);
-    
+
     const steps = recipe_doc.directions;
 
     // If step requested < 0, set back to 0, and inform the user they are on the first step
@@ -33,7 +33,7 @@ export async function handle_get_step_by_index(req,res,sessionData,contexts) {
     }
 
     response.fulfillmentText = response_text;
-    response.outputContexts = set_session_data(contexts, sessionData); // Updates session data in context array
+    response.outputContexts = set_session_data(contexts, sessionData, ProjectID, SessionID); // Updates session data in context array
     res.json(response);
     return;
 }
@@ -44,7 +44,7 @@ export async function getStepByIndex(stepDict){
     let response_text;
     let stepParamName = stepDict.name;
     let total_number_of_steps = recipe_doc.directions.length;
-    
+
     switch(stepParamName) {
         //Get the next step
         case "nextStep":
@@ -67,7 +67,7 @@ export async function getStepByIndex(stepDict){
                 }
             }
             break;
-        
+
         //Get the next step
         case "repeatStep":
             if(stepDict.currentIndex == null){
@@ -81,7 +81,7 @@ export async function getStepByIndex(stepDict){
                 else response_text = "which step do you want?"
             }
             break;
-        
+
         //Get the previous step
         case "previousStep":
             if(stepDict.previousIndex == null){
@@ -103,7 +103,7 @@ export async function getStepByIndex(stepDict){
                 stepDict.previousIndex = stepDict.previousIndex - 1;
             }
             break;
-        
+
         //Get the specific step that was requested
         case "requestedStep":
             let requested_step_number = stepDict.stepRequest - 1;
@@ -111,7 +111,7 @@ export async function getStepByIndex(stepDict){
             if(isNaN(requested_step_number) || requested_step_number == null){
                 response_text = "Sorry I didn't catch that! Can you please repeat?";
             }
-            
+
             else if(requested_step !== null){
                 if(requested_step_number >= total_number_of_steps || requested_step_number < 0) {
                     response_text = "I'm sorry there is no step " + (requested_step_number + 1) + " in the recipe!";

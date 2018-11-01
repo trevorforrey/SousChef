@@ -57,7 +57,7 @@ async function handle_fulfillment(req, res) {
                 response_text = await intent.getFirstStep(stepDict);
             } else {
                 sessionData.currentStep = 0;
-                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for next step and retrieve the response text
@@ -67,7 +67,7 @@ async function handle_fulfillment(req, res) {
                 response_text = await intent.getStepByIndex(stepDict);
             } else {
                 sessionData.currentStep++;
-                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for repeating step
@@ -76,7 +76,7 @@ async function handle_fulfillment(req, res) {
                 stepDict.name = "repeatStep";
                 response_text = await intent.getStepByIndex(stepDict);
             } else {
-                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+              await intent.handle_get_step_by_index(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for the previous step
@@ -86,7 +86,7 @@ async function handle_fulfillment(req, res) {
                 response_text = await intent.getStepByIndex(stepDict);
             } else {
                 sessionData.currentStep--;
-                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for any requested step
@@ -97,7 +97,7 @@ async function handle_fulfillment(req, res) {
                 response_text = await intent.getStepByIndex(stepDict);
             } else {
                 sessionData.currentStep = data.queryResult.parameters.number - 1; // Because of zero index
-                await intent.handle_get_step_by_index(req, res, sessionData, contexts); // should be the only function called once session data set
+                await intent.handle_get_step_by_index(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for getting the remaining number of steps

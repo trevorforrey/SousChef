@@ -52,7 +52,8 @@ export async function handle_update_session_entity(req, res, sessionData, projec
       // success creating ingredient session entities
       res.status(201);
       response.fulfillmentText = 'We\'re cooking: ' + sessionData.recipe + '. Lets start cooking!';
-      response.outputContexts = set_session_data(req.body.queryResult.outputContexts, sessionData);      res.json(response);
+      response.outputContexts = set_session_data(req.body.queryResult.outputContexts, sessionData, ProjectID, session);
+      res.json(response);
     })
     .catch(err => {
       // failure creating ingredient session entities
