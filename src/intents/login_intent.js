@@ -126,15 +126,15 @@ export async function handle_recipe_response(req, res, recipe, contexts) {
       "languageCode": "en-US"
     }
   };
-  let sessionData = {}
-
-  contexts.forEach( context => {
-    if (context.name.includes("login-requestuser-followup")) {
-      sessionData.username = context.parameters.username
-    }
-  })
-  sessionData.recipe = recipe;
-  response.outputContexts = set_session_data(contexts, sessionData);
+  // let sessionData = {}
+  //
+  // contexts.forEach( context => {
+  //   if (context.name.includes("login-requestuser-followup")) {
+  //     sessionData.username = context.parameters.username
+  //   }
+  // })
+  // sessionData.recipe = recipe;
+  // response.outputContexts = set_session_data(contexts, sessionData);
 
   res.status(201);
   res.json(response);
