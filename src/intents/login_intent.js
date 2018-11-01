@@ -26,7 +26,7 @@ export async function handle_login_request(req, res, projectId) {
       synonyms: [user],
     });
   });
-
+  
   //Creates a CreateSessionEntityTypes request
   // const request = {
   //     name: entityPath,
@@ -119,22 +119,24 @@ export async function handle_username_response(req, res, projectId, session, use
 }
 
 export async function handle_recipe_response(req, res, recipe, contexts) {
+  let username = null;
+
+  contexts.forEach( context => {
+    if (context.name.includes("login-requestuser-followup")) {
+      username = context.parameters.username
+    }
+  })
+
   let response = {
     "followupEventInput": {
       "name": "Setup-Intent",
-      "parameters": {},
+      "parameters": {
+        "username": username,
+        "recipe": recipe
+      },
       "languageCode": "en-US"
     }
   };
-  // let sessionData = {}
-  //
-  // contexts.forEach( context => {
-  //   if (context.name.includes("login-requestuser-followup")) {
-  //     sessionData.username = context.parameters.username
-  //   }
-  // })
-  // sessionData.recipe = recipe;
-  // response.outputContexts = set_session_data(contexts, sessionData);
 
   res.status(201);
   res.json(response);

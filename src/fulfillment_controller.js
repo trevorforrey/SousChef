@@ -110,11 +110,11 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for set up intent
         case "Setup-Intent":
-            if (sessionData == null) {
+            if (Object.keys(data.queryResult.parameters).length == 0) {
                 intent.follow_up_login_request(req, res);
             } else {
                 console.log("Setup-Intent, session not null block");
-                await intent.handle_update_session_entity(req, res, sessionData, projectID, sessionID); // should be the only function called once session data set
+                await intent.handle_update_session_entity(req, res, data.queryResult.parameters, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for cook time intent and retrieve the response text
