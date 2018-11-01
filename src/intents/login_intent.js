@@ -26,7 +26,7 @@ export async function handle_login_request(req, res, projectId) {
       synonyms: [user],
     });
   });
-  
+
   //Creates a CreateSessionEntityTypes request
   // const request = {
   //     name: entityPath,

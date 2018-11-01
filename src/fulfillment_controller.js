@@ -110,6 +110,7 @@ async function handle_fulfillment(req, res) {
             break;
         //Match for set up intent
         case "Setup-Intent":
+            console.log(data);
             if (Object.keys(data.queryResult.parameters).length == 0) {
                 intent.follow_up_login_request(req, res);
             } else {
