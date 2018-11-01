@@ -52,16 +52,6 @@ app.get('/test', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/test.html'));
 });
 
-app.get('/cookbook', function (req, res) {
-    res.sendFile(path.join(__dirname + '/views/cookbook.html'));
-});
-
-app.get('/update', function (req, res) {
-    res.sendFile(path.join(__dirname + '/views/update.html'));
-});
-
-
-
 //posting a registered user account
 app.post('/postReg', postRegistration);
 
@@ -74,13 +64,11 @@ app.get('/upload',function (req, res) {
     console.log('hit the upload handler');
 });
 
-
-
 app.post('/postRecipe', post_user_recipe);
 
 app.post('/updateRecipe', update_recipe);
-app.post('/update', update_recipe_in_db);
 
+app.post('/update', update_recipe_in_db);
 
 app.get('/cookbook', get_cookbook);
 
