@@ -16,11 +16,11 @@ export async function handle_update_session_entity(req, res, sessionData, projec
   const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
   // The path to the agent the session entity types belong to.
   const sessionEntityPath = sessionEntityTypesClient.sessionEntityTypePath(
-      projectId,session,'ingredient'
+      projectID,session,'ingredient'
   );
   // The path to the agent that the session exists in
   const sessionPath = sessionEntityTypesClient.sessionPath(
-      projectId,session
+      projectID,session
   );
 
   // Places the ingredients into an entity list.
