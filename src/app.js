@@ -39,13 +39,13 @@ app.use(express.static(__dirname + '/views'))
 app.post('/fulfillment', handle_fulfillment);
 
 app.get('/', function (req, res) {
+    console.log("session data work?");
+    console.log(req.session.username);
     res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
-app.get('/home', function (req, res) {
-    console.log("session data work?");
-    console.log(req.session.username);
-    res.sendFile(path.join(__dirname + '/views/home.html'));
+app.get('/login_registration', function (req, res) {
+    res.sendFile(path.join(__dirname + '/views/login_registration.html'));
 });
 
 app.get('/test', function (req, res) {

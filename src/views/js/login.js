@@ -8,8 +8,6 @@ async function getLoginUser(req, res) {
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
-    console.log("==============================OUTSIDE\n", "usernameForm = ", usernameForm,
-        " passwordForm = ", passwordForm);
     
     try {
         client = await MongoClient.connect(uri);
@@ -26,18 +24,19 @@ async function getLoginUser(req, res) {
                 username: usernameForm ,
             }
         );
+       if(req.session.username) {
+            console.log("===================== TRUEEEEEE", req.session.username );
+        }
         //If username is not in the DB or is null then send them back to login page
         if(userDB === null || userDB.username !== usernameForm) {
-            res.redirect('/');
+            res.redirect('/login_registration');
             //res.send("The Username or Password you entered was incorrect");
         }
         
         //Verify the users login info
         if(usernameForm === userDB.username && passwordForm === userDB.pass) {
-            console.log("============================Made it in validator function", "usernameForm = ", usernameForm,
-                " userDB.username = ", userDB.username, "\nPasswordForm = ", passwordForm, " passwordDB = ", userDB.pass);
             req.session.username = userDB.username;
-            res.redirect('/home');
+            res.redirect('/');
         }
         
         
