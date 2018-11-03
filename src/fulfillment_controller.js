@@ -34,7 +34,7 @@ async function handle_fulfillment(req, res) {
             if (sessionData == null) {
                 handle_no_session_data(req,res,sessionData);
             } else {
-                await intent.handle_get_ingredient(req, res, sessionData); // should be the only function called once session data set
+                await intent.handle_get_ingredient(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for List of all ingredients and retrieve the response text
@@ -42,7 +42,7 @@ async function handle_fulfillment(req, res) {
             if (sessionData == null) {
                 handle_no_session_data(req,res,sessionData);
             } else {
-                await intent.handle_get_ingredient_list(req, res, sessionData);
+                await intent.handle_get_ingredient_list(req, res, sessionData, contexts, projectID, sessionID);
             }
             break;
         //Match for first step and retrieve the response text
@@ -94,7 +94,7 @@ async function handle_fulfillment(req, res) {
             if (sessionData == null) {
                 handle_no_session_data(req,res,sessionData);
             } else {
-                await intent.handle_get_num_remaining_steps(req, res, sessionData); // should be the only function called once session data set
+                await intent.handle_get_num_remaining_steps(req, res, sessionData, contexts, projectID, sessionID); // should be the only function called once session data set
             }
             break;
         //Match for set up intent

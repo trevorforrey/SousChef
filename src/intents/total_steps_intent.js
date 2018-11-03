@@ -1,6 +1,7 @@
 import {get_recipe, get_user_recipe} from "../mongo_helper";
+import {set_session_data} from '../session_helper'
 
-export async function handle_get_num_remaining_steps(req,res,sessionData) {
+export async function handle_get_num_remaining_steps(req,res,sessionData, contexts, projectID, sessionID) {
     let response = {};
     let response_text;
     let data = req.body;
@@ -25,7 +26,7 @@ export async function handle_get_num_remaining_steps(req,res,sessionData) {
 
     res.status(201);
     response.fulfillmentText = response_text;
-    response.outputContexts = data.queryResult.outputContexts;
+    response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
     res.json(response);
     return;
 }
