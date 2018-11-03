@@ -166,9 +166,9 @@ describe('Test Getting amount of sugar', () => {
             if (error) {
                 done(error);
             } else {
-                response.should.have.status(201);
+                response.should.have.status(400);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include('sugar');
+                response.body.fulfillmentText.should.include('please ask to log in');
                 done();
             }
         });
@@ -186,9 +186,9 @@ describe('Test Getting amount of flour', () => {
             if (error) {
                 done(error);
             } else {
-                response.should.have.status(201);
+                response.should.have.status(400);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include('flour');
+                response.body.fulfillmentText.should.include('please ask to log in');
                 done();
             }
         });
@@ -206,9 +206,9 @@ describe('Test Getting amount of blueberries', () => {
             if (error) {
                 done(error);
             } else {
-                response.should.have.status(201);
+                response.should.have.status(400);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include('blueberries');
+                response.body.fulfillmentText.should.include('please ask to log in');
                 done();
             }
         });
