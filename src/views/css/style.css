@@ -12,31 +12,73 @@ input:required:valid { border: 2px solid black; }
 	/**/
 /*}*/
 
-#login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
-}
-#login-dp .help-block{
-    font-size:12px
-}
-#login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
-}
-@media(max-width:768px){
-    #login-dp{
-        background-color: inherit;
-        color: #fff;
-    }
-    #login-dp .bottom{
-        background-color: inherit;
-        border-top:0 none;
-    }
-}
+/*#button-drop { background: #9acfea}*/
+/*#outer-btn-drop { background: #ac2925}*/
+#btnText {color:#000}
+#alreadyText{color:#fff}
+.infoButton {
+    text-decoration: none;
+    margin-top: 12px;
+    background-color: #ac2925;
+    border:  solid 1px #000;
+    box-shadow:
+            inset 0 0 2px 0 rgba(255,255,255,.4),
+            inset 0 0 3px 0 rgba(0,0,0,.4),
+            inset 0 0 3px 5px rgba(0,0,0,.05),
+            2px 2px 4px 0 rgba(0,0,0,.25);
+    border-radius: 4px;
+    font-size: 14px;
+    text-shadow: 5px 5px 30px #54565b;
+    line-height: 8px;
+    position: relative;
+    color:#FFFFFF;
+    padding:12px 18px;
+    cursor: pointer;
+}.infoButton:before, .infoButton:after {
+     content: '';
+     display: block;
+     position: absolute;
+     left: 2px;
+     right: 2px;
+     height: 3px;
+ }.infoButton:before {
+      top: 0;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      background: rgba(255,255,255,.6);
+      box-shadow: 0 1px 2px 0 rgba(255,255,255,.6);
+  }.infoButton:after {
+       bottom: 0;
+       border-top-left-radius: 4px;
+       border-top-right-radius: 4px;
+       background: rgba(0,0,0,.15);
+       box-shadow: 0 -1px 2px 0 rgba(0,0,0,.15);
+   }
+/*#login-dp{*/
+    /*min-width: 250px;*/
+    /*padding: 14px 14px 0;*/
+    /*overflow:hidden;*/
+    /*background-color:rgba(255,255,255,.8);*/
+/*}*/
+/*#login-dp .help-block{*/
+    /*font-size:12px*/
+/*}*/
+/*#login-dp .bottom{*/
+    /*background-color:rgba(255,255,255,.8);*/
+    /*border-top:1px solid #ddd;*/
+    /*clear:both;*/
+    /*padding:14px;*/
+/*}*/
+/*@media(max-width:768px){*/
+    /*#login-dp{*/
+        /*background-color: inherit;*/
+        /*color: #fff;*/
+    /*}*/
+    /*#login-dp .bottom{*/
+        /*background-color: inherit;*/
+        /*border-top:0 none;*/
+    /*}*/
+/*}*/
 
 h1{
 	text-align: center;

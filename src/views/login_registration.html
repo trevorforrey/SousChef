@@ -11,10 +11,9 @@
 </head>
 <body>
 
-
+<!-- NAVBAR -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -24,39 +23,27 @@
             </button>
             <li><p class="navbar-brand"><i>Sous Chef Buddy</i></p></li>
         </div>
-
         <!-- COLLAPSIBLE NAVBAR -->
         <div class="collapse navbar-collapse" id="alignment-example">
-
             <!-- Links -->
             <ul class="nav navbar-nav">
                 <li><a href="index.html">HOME </a></li>
                 <li><a href="upload.html">UPLOAD RECIPE</a></li>
                 <li><a href="cookbook.html">COOKBOOK</a></li>
             </ul>
-
             <!-- Button -->
-            <!--<button type="button" class="btn btn-default navbar-btn navbar-right">Login</button>-->
-            <li class="dropdown btn btn-default navbar-btn navbar-right">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">LOGIN <span class="caret"></span></a>
-                <ul class="dropdown-menu" aria-labelledby="about-us">
-                    <li><a href="#">Register New Account</a></li>
-                    <li><a href="#">Logout</a></li>
+            <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                    <li><a href="login_registration.html">Login</a></li>
+                    <li><a href="login_registration.html">Register New Account</a></li>
+                    <li><a href="home.html">Logout</a></li>
                 </ul>
-            </li>
-
+            </ul>
         </div>
     </div>
 </nav>
-
-
-
-
-
-
-
-
 
 <div class="container">
 
@@ -175,6 +162,15 @@
     </div>
 </div>
 <script>
+    // Tooltip component
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    // Popover component
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
     /*Click functionality between the Login and register tabs
     * using jquery to make it easier to do the DOM manipulation of showing
     * and hiding tab panels and also because I found a nice code snippet online ;-)*/
