@@ -53,7 +53,7 @@ async function handle_fulfillment(req, res) {
             break;
         case "Substitute-Ingredient":
             if (sessionData == null) {
-                response_text = await intent.handle_substitute_ingredient(req, res, {username: 'thetoastyone', recipe: 'red sauce'});
+                response_text = await intent.handle_substitute_ingredient(req, res, {username: 'thetoastyone', recipe: 'Bread and Butter'});
             } else {
                 await intent.handle_substitute_ingredient(req, res, sessionData);
             }

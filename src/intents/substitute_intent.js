@@ -10,40 +10,50 @@ export async function handle_substitute_ingredient(req,res,sessionData) {
 
     console.log('ingredient to substitute: ' + ingredientToSubstitute);
 
-    // Get ingredient from recipe to figure out quantity
-    // const ingredientData = await get_ingredient_from_user(sessionData.username, sessionData.recipe, ingredientToSubstitute, data);
-
-    // Debugging (print out ingredient object)
-    // console.log(ingredientData);
+    let apiResult;
 
     // Make API call to find substitute ingredients
-    // - Should get amount of substitute too
-    // These code snippets use an open-source library. http://unirest.io/nodejs
     unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/substitutes?ingredientName=" + ingredientToSubstitute)
     .header("X-Mashape-Key", "WHvwtmMxRlmshM0D4WoKnup1PMxop1H8k7zjsnTy224VfXki0B")
     .header("Accept", "application/json")
     .end(function (result) {
         console.log('made api call');
         console.log(result.status, result.headers, result.body);
+        apiResult = result;
+
+        // If error in api request
+        if (apiResult.status != 200) {
+            res.status(500);
+            response.fulfillmentText = 'there was an error using the recipe substitute api. Please try something else';
+            response.contextOut = data.queryResult.outputContexts; //TODO switch with set session once merged with develop
+            res.json(response);
+            return;
+        }
+
+        // If no substitutions found for the ingredient
+        if (apiResult.body.status === 'failure') {
+            res.status(404);
+            response.fulfillmentText = "Sorry, we couldn't find a substitution for " + ingredientToSubstitute;
+        } else {
+            response.fulfillmentText = "";
+            res.status(201);
+            const substitutions = apiResult.body.substitutes;
+            for (let i = 0; i < 2 && i < substitutions.length; i++) {
+                const currentSubstitution = substitutions[i];
+                const splitSub = currentSubstitution.split("=");
+                response.fulfillmentText += "You can substitute " + splitSub[0] + " of " + ingredientToSubstitute + " with " + splitSub[1] + ". ";
+                if (i + 1 < 2 && i + 1 < substitutions.length) {
+                    response.fulfillmentText += "Also, ";
+                }
+            }
+        }
+
+        response.contextOut = data.queryResult.outputContexts; //TODO switch with set session once merged with develop
+        res.json(response);
+        return;
     });
     
-    // Check status of API call
-    // if (!ingredientResponse.includes("is not in the recipe")) {
-    //     res.status(201);
-    // } else {
-    //     res.status(400);
-    // }
-
-    // Loop through substitutes and grab up to two ingredient substitutes
-
-    if (ingredientData != null) {
-        response.fulfillmentText = 'we will try to find a substitute for ' + ingredientToSubstitute;
-    } else {
-        response.fulfillmentText = 'that ingredient does not exist in the toasty ones red sauce recipe';
-    }
-    response.contextOut = data.queryResult.outputContexts;
-    res.json(response);
-    return;
+    
 }
 
 
