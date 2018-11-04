@@ -60,9 +60,9 @@ describe('Test Ingredient List Intent', () => {
             if (error) {
                 done(error);
             } else {
-                response.should.have.status(201);
+                response.should.have.status(400);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include('For this recipe,');
+                response.body.fulfillmentText.should.include('please ask to log in');
                 done();
             }
         });

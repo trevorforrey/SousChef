@@ -13,8 +13,16 @@ deploy:
     master: master-heroku-souchef
     develop: sous-chef-assistant
 notifications:
-  slack:
-    rooms:
-      - ser515-fall2018:AvFC02mjRbmLqOj4LWaopX0c#chartreuse_hat_hackr2
-    on_success: change # default: always
-    on_failure: always # default: always
+
+  slack: ser515-fall2018:0ORqJzFF4lb4O5SZd8xTitJJ
+  email:
+    recipients:
+      - swdunnin@asu.edu
+      - sparanj2@asu.edu
+      - rkhatun@asu.edu
+      - dlahtine@asu.edu
+      - pahorton@asu.edu
+      - trevor4e@gmail.com
+  on_success: change # default: always
+  on_failure: always # default: always
+

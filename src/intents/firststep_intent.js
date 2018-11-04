@@ -1,6 +1,6 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe} from '../mongo_helper'
 
-async function getFirstStep(stepDict){
+export async function getFirstStep(stepDict){
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let first_step = recipe_doc.directions[0];
     let response_text;
@@ -16,4 +16,3 @@ async function getFirstStep(stepDict){
     console.log("stepDict inside firstStep.js", stepDict);
     return response_text;
 }
-export default getFirstStep;

@@ -1,6 +1,34 @@
-import get_recipe from '../mongo_helper'
+import {get_recipe, get_user_recipe} from '../mongo_helper'
+import {set_session_data} from '../session_helper'
 
-async function getCookTime() {
+export async function handle_get_cooktime(req,res,sessionData, contexts, projectID, sessionID) {
+    let response = {};
+    let data = req.body;
+    // let contexts = data.queryResult.outputContexts;
+
+    let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
+
+    console.log('recipe from mongo: ' + recipe_doc);
+
+    // Generate Response
+    let response_text = "";
+    let cook_time = recipe_doc.cook_time;
+    
+    if (cook_time != null) {
+        response_text = sessionData.recipe + ' will take ' + cook_time + ' to cook';
+        res.status(201);
+    } else {
+        response_text = 'Unfortunately this recipe does not include a cook time.';
+        res.status(400);
+    }
+
+    response.fulfillmentText = response_text;
+    response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
+    res.json(response);
+    return;
+}
+
+export async function getCookTime() {
     //Get the recipe from the database
     let recipe_doc = await get_recipe("Todd's Favorite Blueberry Pancakes");
     let response_text;
@@ -15,9 +43,6 @@ async function getCookTime() {
     }
     return response_text;
 }
-
-// allows us to import the function in app.js
-export default getCookTime;
 
 
     
