@@ -135,6 +135,15 @@ async function handle_fulfillment(req, res) {
         case "login-request recipe":
             await intent.handle_recipe_response(req,res);
             break;
+        case "Adjust-Serving-Size-Intent":
+            
+            break;
+        case "Get-Servings-Intent":
+            if (sessionData == null) {
+                handle_no_session_data(req, res, sessionData);
+            } else {
+                await intent.handle_get_num_servings(req, res, sessionData);
+            }
     }
 }
 

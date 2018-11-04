@@ -8,6 +8,7 @@
     //          "username": "Tony Gunk",
     //          "recipe": "Tony's Kentucky Chicken",
     //          "currentStep": 1
+    //          "serving_proportion": 3.141592653
     //        }
     // ]
 
@@ -60,9 +61,11 @@ export function get_initial_session_data(contexts) {
   if (contexts != null) {
     for (let i = 0; i < contexts.length; i++) {
         if (contexts[i].name.includes("login-requestuser-followup")) {
+            
             sessionData = {
               "username" : contexts[i].parameters.username,
-              "recipe" : contexts[i].parameters.recipe
+              "recipe" : contexts[i].parameters.recipe,
+              "serving_proportion": 1.0
             }
         }
     }
