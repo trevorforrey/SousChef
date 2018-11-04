@@ -175,16 +175,57 @@ $(document).ready(function(){
 	 // end of button upload handler
 	}
 //onclick handler on each update button for each recipe in cookbook page
-	$("mult_update").click(function(){
+var recipeToUpdate=null
+	$("#edit").click(function(){
 		//ajax call to /update_recipe ,send data contains name of the recipe
 		//obtained from text field. received data has the id field
 		//{id: id ,body: recipe}
+		var recipe_name={name:$("#recipeList option:selected").text()}
+		//var id=$("recipeList").val()
+		console.log(recipe_name)
+		
+		$.ajax({
+			//contentType: 'text',
+			url : 'http://localhost:5000/updateRecipe',
+			type : 'POST',
+			data : recipe_name,
+			dataType:'text',
+			success:function(data){
+				recipeToUpdate=data
+			//	console.log("recipe data"+JSON.parse(recipeToUpdate)); 	
+				console.log(data)
+			},
+			error:function(){
+				console.log("failure")
+			}
+		})
+
+		
+
 	})
 
-	$("#update").click(function(){
+/*	$("#update").click(function(){
 		//ajax call to /handle_update.js to update db
 		//send req along with id field
 		//{id: id ,body: recipe}
-	})
+		try{
+			var recipeToUpdate_obj=JSON.parse(recipeToUpdate)
+		}
+		catch(e){
+			console.log(e)
+		}
+		$.ajax({
+			url : 'http://localhost:5000/update',
+			type : 'POST',
+			data : recipeToUpdate_obj
+			dataType:'text',
+			success:function(response){
+				console.log("response")
+			},
+			error:function(){
+
+			}
+		})
+	}) */
 			
 });

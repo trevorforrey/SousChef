@@ -1,7 +1,9 @@
 let MongoClient = require('mongodb').MongoClient;
 async function update_recipe(req, res){
 	//let recipe_name=req.body;
-	let recipe_name="red sauce";
+	let recipeName=req.body;
+    console.log(recipeName.name)
+    let recipe_name=recipeName.name;
 	let response={};
 	let user = 'thetoastyone';
   	let client;
@@ -48,8 +50,5 @@ async function update_recipe(req, res){
 
     res.jsonp(response);
     
-  
-
-
 }
 export default update_recipe;
