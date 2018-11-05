@@ -20,6 +20,9 @@ On the google assistant side, you can choose to cook the recipe _Bread and Butte
 
 * For the website you can use the username and password above, or create your own user under register.  You can upload a recipe, or view your "cookbook" as well.  Sprint 2 was all about functionality, so the design is not great, but thats coming in Sprint 3.
 
+
+
+
 #### References:
 JQuery snippet in index.html taken from www.bootsnip.com
 Made it easier to toggle between the tabs so we didn't have 
