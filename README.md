@@ -23,7 +23,9 @@ On the google assistant side, you can choose to cook the recipe _Bread and Butte
 
 
 
-#### References:
+
+
+### References:
 JQuery snippet in index.html taken from www.bootsnip.com
 Made it easier to toggle between the tabs so we didn't have 
 to do a bunch of dom manipulation and unecessary javascript.
