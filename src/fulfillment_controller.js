@@ -136,13 +136,24 @@ async function handle_fulfillment(req, res) {
             await intent.handle_recipe_response(req,res);
             break;
         case "Adjust-Serving-Size-Intent":
-            
+            if (sessionData == null) {
+                handle_no_session_data(req,res,sessionData);
+            } else {
+                await intent.handle_get_preptime(req, res, sessionData);
+            }
             break;
         case "Get-Servings-Intent":
             if (sessionData == null) {
                 handle_no_session_data(req, res, sessionData);
             } else {
                 await intent.handle_get_num_servings(req, res, sessionData);
+            }
+            break;
+        case "Adjust-Serving-Size-Intent":
+            if (sessionData == null){
+                handle_no_session_data(req, res, sessionData);
+            } else {
+                await intent.handle_adjust_servings(req, res, sessionData, projectID, sessionID);
             }
     }
 }

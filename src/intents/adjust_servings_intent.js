@@ -1,7 +1,7 @@
 import {set_session_data, get_session_data} from '../session_helper'
 import {get_recipe, get_user_recipe} from '../mongo_helper'
 
-export async function handle_adjust_serving(req,res,sessionData, contexts, projectID, sessionID){
+export async function handle_adjust_servings(req,res,sessionData, contexts, projectID, sessionID){
     let response = {}
     let servingAmount = req.body.queryResult.parameters.number;
     if (servingAmount == undefined || servingAmount == null){
