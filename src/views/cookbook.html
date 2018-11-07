@@ -35,7 +35,7 @@
                        aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="loginDrop">
                         <li><a href="login_registration.html">Login</a></li>
-                        <li><a href="login_registration.html">Register New Account</a></li>
+                        <li><a href="login_registration.html/">Register New Account</a></li>
                         <li><a href="home.html">Logout</a></li>
                     </ul>
                 </ul>
@@ -75,26 +75,17 @@
             </div>
             <div>
                 <h2>Steps</h2>
-                <ol id="steps">
-
-                </ol>
+                <ol id="steps"></ol>
             </div>
             
         </div>
-        <!--/using some code from 
-            https://www.w3schools.com/xml/ajax_xmlhttprequest_response.asp-->
-        
+        <!--/using some code from https://www.w3schools.com/xml/ajax_xmlhttprequest_response.asp-->
         <script src="js/cookbook_page.js"></script>
-    <script>
-        // Tooltip component
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-
-        // Popover component
-        $(function () {
-            $('[data-toggle="popover"]').popover()
-        });
-    </script>
+        <script>//JS for navbar for login popdown
+            // Tooltip component
+            $(function () { $('[data-toggle="tooltip"]').tooltip() });
+            // Popover component
+            $(function () { $('[data-toggle="popover"]').popover() });
+        </script>
     </body>
 </html>
