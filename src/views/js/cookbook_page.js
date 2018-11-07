@@ -256,6 +256,8 @@ $(document).ready(function() {
         url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
     } else  {
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
+    } else{
+        url = 'https://session-management-souchef.herokuapp.com/cookbook';
     }
 
 
@@ -342,7 +344,6 @@ $(document).ready(function() {
 
     });
 
-
     /*
     $.getJSON("http://localhost:5000/:userid/cookbook?callback=?", success=function(rawRecipes, status, xhr){
         //Used https://stackoverflow.com/questions/22743287/uncaught-syntax-error-unexpected-token-getjson as reference
@@ -410,6 +411,7 @@ $(document).ready(function() {
         });
     }
     */
+
 });
 
 /*$('#form-area_edit :input').change(function(e){
