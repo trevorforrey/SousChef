@@ -18,26 +18,41 @@ async function getLoginUser(req, res) {
         // Get the users collection
         const users = db.collection('users');
         
-        // Get user from document
-        let userDB = await users.findOne(
+        //First check if a session exists
+        //Lookup user from document by pulling their username
+        /*let userDB = await users.findOne(
             {
-                username: usernameForm ,
+                username: usernameForm,
             }
-        );
-       if(req.session.username) {
-            console.log("===================== TRUEEEEEE", req.session.username );
-        }
+        );*/
+        users.findOne({username: usernameForm }, function(err, user) {
+            if(!user) { //Not in the DB
+                res.redirect('/login_registration');
+                console.log("Not in the DB");
+            }
+            else {
+                if (usernameForm === user.username && passwordForm === user.pass) {
+                    req.session.username = user.username;
+                    res.redirect('/');
+                }
+                else { //Incorrect username or password entered
+                    res.redirect('/login_registration');
+                    console.log("The Username or Password you entered was incorrect");
+                }
+            }
+        });
+        
         //If username is not in the DB or is null then send them back to login page
-        if(userDB === null || userDB.username !== usernameForm) {
+        /*if (userDB === null || userDB.username !== usernameForm) {
             res.redirect('/login_registration');
-            //res.send("The Username or Password you entered was incorrect");
-        }
+            //res.write("The Username or Password you entered was incorrect");
+        }*/
         
         //Verify the users login info
-        if(usernameForm === userDB.username && passwordForm === userDB.pass) {
+        /*if (usernameForm === userDB.username && passwordForm === userDB.pass) {
             req.session.username = userDB.username;
             res.redirect('/');
-        }
+        }*/
         
         
     } catch (err) {

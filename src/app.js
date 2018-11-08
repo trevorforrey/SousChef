@@ -22,8 +22,15 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(session({
     secret: 'our super duper secret',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+    ephemeral: true,
+    saveUninitialized: false, /*False is useful for implementing login sessions, reducing
+                                server storage usage and helping with race conditions.*/
+    cookie: {
+        secure: false, //When true ensure cookie only used over https
+        maxAge: 30 * 60 * 1000, //Define user session length (ms) so not indefinite
+        httpOnly: true, //prevents browser JS from accessing cookies
+    },
+    rolling: true //Lengthen user session by activity
 }));
 
 // process.env.PORT used by Heroku
