@@ -1,19 +1,12 @@
 
-/*Show a red border around inputs if not valid*/
+/*Show a red border around Login and Registration inputs if not valid*/
 input:focus:required:invalid {border: 2px solid red;}
 input:required:valid { border: 2px solid black; }
 
-/**{*/
-	/*padding: 0;*/
-	/*border:0;*/
-	/*box-sizing: border-box;*/
-	/*font-family: sans-serif;*/
-    /*font-size: 1.08em;*/
-	/**/
-/*}*/
+body {
+    background: #bbb;
+}
 
-/*#button-drop { background: #9acfea}*/
-/*#outer-btn-drop { background: #ac2925}*/
 #btnText {color:#000}
 #alreadyText{color:#fff}
 .infoButton {
@@ -26,59 +19,14 @@ input:required:valid { border: 2px solid black; }
             inset 0 0 3px 0 rgba(0,0,0,.4),
             inset 0 0 3px 5px rgba(0,0,0,.05),
             2px 2px 4px 0 rgba(0,0,0,.25);
-    border-radius: 4px;
-    font-size: 14px;
-    text-shadow: 5px 5px 30px #54565b;
+    border-radius: 0;
+    font-size: 13px;
     line-height: 8px;
     position: relative;
     color:#FFFFFF;
-    padding:12px 18px;
+    padding:11px;
     cursor: pointer;
-}.infoButton:before, .infoButton:after {
-     content: '';
-     display: block;
-     position: absolute;
-     left: 2px;
-     right: 2px;
-     height: 3px;
- }.infoButton:before {
-      top: 0;
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
-      background: rgba(255,255,255,.6);
-      box-shadow: 0 1px 2px 0 rgba(255,255,255,.6);
-  }.infoButton:after {
-       bottom: 0;
-       border-top-left-radius: 4px;
-       border-top-right-radius: 4px;
-       background: rgba(0,0,0,.15);
-       box-shadow: 0 -1px 2px 0 rgba(0,0,0,.15);
-   }
-/*#login-dp{*/
-    /*min-width: 250px;*/
-    /*padding: 14px 14px 0;*/
-    /*overflow:hidden;*/
-    /*background-color:rgba(255,255,255,.8);*/
-/*}*/
-/*#login-dp .help-block{*/
-    /*font-size:12px*/
-/*}*/
-/*#login-dp .bottom{*/
-    /*background-color:rgba(255,255,255,.8);*/
-    /*border-top:1px solid #ddd;*/
-    /*clear:both;*/
-    /*padding:14px;*/
-/*}*/
-/*@media(max-width:768px){*/
-    /*#login-dp{*/
-        /*background-color: inherit;*/
-        /*color: #fff;*/
-    /*}*/
-    /*#login-dp .bottom{*/
-        /*background-color: inherit;*/
-        /*border-top:0 none;*/
-    /*}*/
-/*}*/
+}
 
 h1{
 	text-align: center;
@@ -103,7 +51,6 @@ img.test { background-size: auto 100%; width: 100%;}
 
 
 
-/*Registration/Login Page CSS*/
 
 
 ul {
@@ -114,6 +61,7 @@ ol {
     list-style-type: upper-roman;
 }
 
+/*Registration/Login Page CSS*/
 .panel-login {
     border-color: #ccc;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -179,6 +127,7 @@ ol {
     padding: 14px 0;
     text-transform: uppercase;
     border-color: #59B2E6;
+    border-radius: 0;
 }
 .btn-login:hover,
 .btn-login:focus {
@@ -205,6 +154,7 @@ ol {
     padding: 14px 0;
     text-transform: uppercase;
     border-color: #1CB94A;
+    border-radius: 0;
 }
 .btn-register:hover,
 .btn-register:focus {
@@ -220,7 +170,7 @@ ol {
 
 .input-1   
     {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
-        height:40px;width: 100%; border-radius: 5px} 
+        height:40px;width: 100%; border-radius: 5px}
 #upload-recipe li {list-style-type: none; }
 
 /**#ingredient, #steps, #name, #time{
