@@ -31,8 +31,8 @@ async function update_recipe(req, res){
         	{
         		console.log("Recipe name:"+user_doc.recipes[i].name);
         		
-        		response={id:i,
-        				 body:user_doc.recipes[i]};
+        		response={id:i
+        				 };
 
         	}
         	console.log(response);

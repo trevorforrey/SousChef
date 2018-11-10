@@ -1,0 +1,50 @@
+{
+  "responseId": "45578158-4969-4793-8b4e-899397bb5754",
+  "queryResult": {
+    "queryText": "what is prep time?",
+    "parameters": {
+      "recipe_indicator": "",
+      "action": "",
+      "Prep-Time-Entity": "prep",
+      "Cook-Time-Entity": ""
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 2,
+        "parameters": {
+          "action.original": "",
+          "Prep-Time-Entity": "prep",
+          "recipe_indicator": "",
+          "Prep-Time-Entity.original": "prep",
+          "recipe": "Bread and Butter",
+          "action": "",
+          "Cook-Time-Entity": "",
+          "recipe_indicator.original": "",
+          "Cook-Time-Entity.original": "",
+          "username": "thetoastyone"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/26eaf56d-3019-4047-bc85-6c93adca5c64",
+      "displayName": "Prep-Time-Intent"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}
