@@ -18,26 +18,25 @@ async function getLoginUser(req, res) {
         // Get the users collection
         const users = db.collection('users');
         
-        //First check if a session exists
         //Lookup user from document by pulling their username
-        /*let userDB = await users.findOne(
-            {
-                username: usernameForm,
-            }
-        );*/
         users.findOne({username: usernameForm }, function(err, user) {
-            if(!user) { //Not in the DB
-                res.redirect('/login_registration');
-                console.log("Not in the DB");
+            if(!user) { //If username is not in the DB then send them back to login page
+                res.render('login_registration.hbs');
+                req.check('email', "Not in the DB");
             }
             else {
                 if (usernameForm === user.username && passwordForm === user.pass) {
                     req.session.username = user.username;
                     res.redirect('/');
                 }
-                else { //Incorrect username or password entered
-                    res.redirect('/login_registration');
-                    console.log("The Username or Password you entered was incorrect");
+                else { //Username exists in the DB, Incorrect password entered
+                    res.render('login_registration.hbs');
+                    //Output error on html page via template
+                    let errors = req.validationErrors();
+                    if(errors) {
+                        req.session.errors = errors;
+                    }
+                    
                 }
             }
         });

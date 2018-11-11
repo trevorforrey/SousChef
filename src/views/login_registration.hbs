@@ -65,7 +65,13 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-
+                            <div id="invalidLogin">
+                                {{# if success }}
+                                    <section class="success">
+                                        <p>Thanks for registering! Your username is {{username}}.</p>
+                                    </section>
+                                {{/if}}
+                            </div>
                             <! Login Form-->
                             <! ======================================================= -->
                             <!Need to collect the form data in action -->
@@ -187,11 +193,7 @@
         });
     });
 </script>
-<div id="invalidLogin">
-    <label type="" ></label>
-    <! Show the user their login userrname/password was incorrect-->
 
-</div>
 </body>
 
 </html>
