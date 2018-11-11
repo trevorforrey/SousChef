@@ -2,11 +2,13 @@ $(document).ready(function(){
 
 	let numberOfIngredients = 0;
 	let numberOfSteps = 0;
+	let count=0;
 
 	// Add ingredient button handler
 	$("#ingredient").click(function(){
 
 		numberOfIngredients++;
+		count++;
 
 		let nameId = "ingredient" + numberOfIngredients + "name";
 		let amountId = "ingredient" + numberOfIngredients + "amount";
@@ -14,13 +16,13 @@ $(document).ready(function(){
 
 		var ingredient_field = $(document.createElement('input'))
 	         .attr("type", "text")
-	         .attr("value", "name")
+	         .attr("placeholder", "name")
 			 .attr("class", "input-1")
 			 .attr("id", nameId);
 
 	    var amount_field = $(document.createElement('input'))
 	         .attr("type", "text")
-	         .attr("value", "amount")
+	         .attr("placeholder", "amount")
 			 .attr("class", "input-1")
 			 .attr("id", amountId);
 	    
@@ -28,6 +30,7 @@ $(document).ready(function(){
 	         .attr("name", " ")
 			 .attr("class", "input-1")
 			 .attr("id", unitId)
+			 .append("<option>Select...</option>")
 			 .append("<option>unit</option>")
 			 .append("<option>teaspoon</option>")
 			 .append("<option>tablespoon</option>")
@@ -41,11 +44,12 @@ $(document).ready(function(){
 			 .append("<option>liter</option>")
 	    
 		$(".ingredient-fields li")
+			.append("<h2>Ingredient: "+count+"</h2>")
 			.append(ingredient_field)
 			.append(amount_field)
 			.append(unit_field)
-			.append("</br>");
-	         
+			.append("<br><br>");
+			 
 	    console.log(1);
 	});
 
@@ -57,12 +61,14 @@ $(document).ready(function(){
 		numberOfSteps++;
 		let stepId = 'step' + numberOfSteps;
 
-		var steps_field = $(document.createElement('input'))
-	         .attr("type", "text")
+		var steps_field = $(document.createElement('textarea'))
+	         //.attr("type", "text")
+			 .attr("rows", "4")
 			 .attr("class", "input-1")
+			 .attr("style", "none")
 			 .attr("id", stepId);
 	         
-		$(".steps-field li").append(steps_field).append("<br />");
+		$(".steps-field li").append("<h2>Step: "+ numberOfSteps + "</h2>").append(steps_field).append("<br />");
 	 
 	});
 
