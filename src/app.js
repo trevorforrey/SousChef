@@ -60,7 +60,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/login_registration.html', function (req, res) {
-    res.render('login_registration.hbs', { title: 'Form Validation', success: req.session.success, errors: req.session.errors }); //Render because we're using handlebars for this page
+    //Render because we're using handlebars for this page
+    res.render('login_registration.hbs', { validationCheck: req.validationCheck});
 });
 
 app.get('/test', function (req, res) {

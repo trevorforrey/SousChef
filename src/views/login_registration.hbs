@@ -65,10 +65,16 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="invalidLogin">
-                                {{# if success }}
-                                    <section class="success">
-                                        <p>Thanks for registering! Your username is {{username}}.</p>
+                            <div id="invalidLoginDiv">
+                                {{# if usernameCheck }}
+                                    <section class="usernameCheck">
+                                        <p><i><b>The username "{{username}}" you entered is incorrect.<br>Please Try
+                                            again!</b></i></p>
+                                    </section>
+                                {{/if}}
+                                {{# if passwordCheck }}
+                                    <section class="passwordCheck">
+                                        <p><i><b>The password you entered is incorrect. <br>Please Try again!</b></i></p>
                                     </section>
                                 {{/if}}
                             </div>
