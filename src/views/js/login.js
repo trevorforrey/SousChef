@@ -26,7 +26,7 @@ async function getLoginUser(req, res) {
         users.findOne({username: usernameForm }, function(err, user) {
             if(!user) { //If username is not in the DB then send them back to login page
                 req.usernameCheck = true;
-                res.render('login_registration.hbs', { usernameCheck: req.usernameCheck});
+                res.render('login_registration.hbs', { usernameCheck: req.usernameCheck, usernameError: usernameForm});
             }
             else {
                 if (usernameForm === user.username && passwordForm === user.pass) {
@@ -36,7 +36,7 @@ async function getLoginUser(req, res) {
                 }
                 else { //Incorrect username or password entered
                     req.passwordCheck = true;
-                    res.render('login_registration.hbs', { passwordCheck: req.passwordCheck});
+                    res.render('login_registration.hbs', { passwordCheck: req.passwordCheck });
                     //Output error on html page via template
                     
                     
