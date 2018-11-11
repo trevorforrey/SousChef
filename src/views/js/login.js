@@ -28,18 +28,17 @@ async function getLoginUser(req, res) {
                 req.usernameCheck = true;
                 res.render('login_registration.hbs', { usernameCheck: req.usernameCheck, usernameError: usernameForm});
             }
+            //Username exists in the Database
             else {
+                //Username and password are correct, successful login
                 if (usernameForm === user.username && passwordForm === user.pass) {
                     req.validationCheck = false;
                     req.session.username = user.username;
                     res.redirect('/');
                 }
-                else { //Incorrect username or password entered
+                else { //Incorrect password entered
                     req.passwordCheck = true;
                     res.render('login_registration.hbs', { passwordCheck: req.passwordCheck });
-                    //Output error on html page via template
-                    
-                    
                 }
             }
         });
