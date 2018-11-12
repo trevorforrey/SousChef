@@ -64,17 +64,7 @@ async function postRegistration(req, res) {
                 errors: errors
             });
         }*/
-    
-        /*bcrypt.hash(passReg, saltRounds, function(err, hash) {
-            // Store hash in your password DB.
-            MongoClient.connect(uri, function (err, db) {
-                let dbo = db.db('sous-chef');
-                dbo.collection('users').insertOne(registrationInsert, function (err, res) {
-                    db.close();
-                })
-            });
-            res.redirect('/');
-        });*/
+        
         
         //Registration is ok post to DB
         await MongoClient.connect(uri, function (err, db) {
