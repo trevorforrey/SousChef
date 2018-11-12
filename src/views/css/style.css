@@ -202,6 +202,28 @@ ol {
     border-color: #74b893;
 }
 
+.homeImage {
+    width: 100%;
+    background-image: url("../img/9rguqEo.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 50em;
+}
+
+#homeButtons {
+    padding-top: 2em;
+    text-align: center;
+}
+
+#uploadRecipeButton {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#cookbookButton {
+    margin-left: 1em;
+    margin-right: 1em;
+}
 
 
 

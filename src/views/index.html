@@ -5,6 +5,7 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/homepage.js"></script>
 </head>
     <body>
 
@@ -19,29 +20,32 @@
 
 
     <div class="container">
-        <div id="content-header">
-            <h1 class="text-center">Welcome</h1>
+        <div class="homeImage">
+            <!-- <img src="img/9rguqEo.jpg"> -->
         </div>
-        <div>
-            <img class="test" src="img/9rguqEo.jpg">
-        </div>
-        <div id="upload-receipe" class ="text-center">
+        <!-- <div id="upload-receipe" class ="text-center">
             <h4><a href="upload.html">Upload your own receipe</a></h4>
         </div>
         <div id="get-cookbook" class ="text-center">
             <h4><a href="cookbook.html">View your cookbook</a></h4>
+        </div> -->
+    </div>
+    <div class="container">
+        <div id="homeButtons">
+            <button onclick="loadUploadPage()" type="button" id="uploadRecipeButton" class="btn btn-primary btn-lg">Upload a Recipe</button>
+            <button onclick="loadCookBookPage()" type="button" id="cookbookButton" class="btn btn-primary btn-lg">View Cookbook</button>
         </div>
     </div>
-        <footer>
-            <div class="container">
-                Copyright &copy; 2018 Chanteuse Hat Hackers <br>
-            </div>
-        </footer>
-        <script>//JS for navbar for login popdown
-            // Tooltip component
-            $(function () { $('[data-toggle="tooltip"]').tooltip() });
-            // Popover component
-            $(function () { $('[data-toggle="popover"]').popover() });
-        </script>
+    <footer>
+        <div class="container">
+            Copyright &copy; 2018 Chanteuse Hat Hackers <br>
+        </div>
+    </footer>
+    <script>//JS for navbar for login popdown
+        // Tooltip component
+        $(function () { $('[data-toggle="tooltip"]').tooltip() });
+        // Popover component
+        $(function () { $('[data-toggle="popover"]').popover() });
+    </script>
     </body>
 </html>
