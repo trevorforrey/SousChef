@@ -2,7 +2,12 @@
 var MongoClient = require('mongodb').MongoClient;
 var expressValidator = require('express-validator');
 
+
 async function postRegistration(req, res) {
+    //Seems to be an issue with Bcrypt
+    /*var bcrypt = require('bcrypt'); //Encrypt users passwords in the DB
+    const saltRounds = 10;*/
+    
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
@@ -16,6 +21,8 @@ async function postRegistration(req, res) {
     let passReg = registrationData.passwordReg;
     let confirmPassReg = registrationData.confirmPasswordReg;
     
+    //Encrypt password before sending to MongoDB
+    //const hash = await bcrypt.hash(passReg, saltRounds);
     
     //Create a JSON object of the registration form data
     var registrationInsert = {
@@ -23,10 +30,9 @@ async function postRegistration(req, res) {
         lastname: lNameReg,
         email: emailReg,
         username: uNameReg,
-        pass: passReg,
-        confirmPass: confirmPassReg
+        pass: hash,
+        confirmPass: hash
     };
-    
     
     try {
         console.log("Connected correctly to server – To POST Registration");
