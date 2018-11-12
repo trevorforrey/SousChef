@@ -91,6 +91,7 @@ $(document).ready(function(){
 		recipe.name = $("#recipeName").val();
 		recipe.prep_time = $("#prepTime").val();
 		recipe.num_servings = $("#servingSize").val();
+		recipe.cook_time = $("#cookTime").val();
 
 		// Grab all ingredient information
 		for (let i = 1; i <= numberOfIngredients; i++) {
