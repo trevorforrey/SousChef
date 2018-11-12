@@ -9,6 +9,7 @@ async function update_recipe_in_db(req, res){
 		"directions" :["Soak rice","Cook chicken"]	
 	}; 
     */
+    console.log(req.session.username)
 	let old_name=req.body.old_name.name;
     let new_name=req.body.recipe.name;
     let prep_time=req.body.recipe.prep_time;
@@ -16,7 +17,7 @@ async function update_recipe_in_db(req, res){
     let ingredients=req.body.recipe.ingredients;
     let directions=req.body.recipe.directions;
     let serving_size=req.body.recipe.serving_size;
-	let user = 'thetoastyone';
+	let user = req.session.username;
   	let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
