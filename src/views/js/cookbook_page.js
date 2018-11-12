@@ -3,6 +3,8 @@ var currentRecipe = null;
 
 let numberOfIngredients = 0;
 let numberOfSteps = 0;
+var old_recipename={};
+var flag=0
 
 function oopsie(){
     $("#Message").text("Oopsie woopsie! uwu We made a messy wessy! Our code mookeys are working VEWY HAWD to fix this!");
@@ -84,14 +86,18 @@ function renderIngredientsAndSteps(recipe){
 
 function updateRecipe(){
 		// Create an empty recipe object which will be populated with recipe information
-		let recipe = {};
-		recipe.ingredients = [];
-		recipe.directions = [];
+        let recipe_container={}
+        recipe_container.old_name={};
+		recipe_container.recipe = {};
+		recipe_container.recipe.ingredients = [];
+		recipe_container.recipe.directions = [];
 
 		// Grab recipe name and prepTime TODO get cook time and number of servings
-		recipe.name = $("#recipe_name_edit").val();
-		recipe.prep_time = $("#prep_time_edit").val();
-        recipe.make_time = $("#cook_time_edit").val();
+		recipe_container.recipe.name = $("#recipe_name_edit").val();
+		recipe_container.recipe.prep_time = $("#prep_time_edit").val();
+        recipe_container.recipe.make_time = $("#cook_time_edit").val();
+        recipe_container.recipe.serving_size = $("#serving_size_edit").val();
+
 
 		// Grab all ingredient information
 		for (let i = 1; i <= numberOfIngredients; i++) {
@@ -114,7 +120,7 @@ function updateRecipe(){
 			ingredient.unit = ingredientUnits;
 
 			// Push ingredient object to the main recipe object
-			recipe.ingredients.push(ingredient);
+			recipe_container.recipe.ingredients.push(ingredient);
 		}
 
 		// Grab all step information
@@ -129,19 +135,22 @@ function updateRecipe(){
 			console.log(currentStep);
 
 			// Push ingredient object to the main recipe object
-			recipe.directions.push(currentStep);
+			recipe_container.recipe.directions.push(currentStep);
 		}
 
+        recipe_container.old_name=old_recipename;
         console.log("Recipe to be updated:")
-		console.log(recipe);
+		console.log(recipe_container);
+        console.log(recipe_container.old_name);
+
 
 		let url;
 		if (window.location.href.includes('localhost')) {
-			url = 'http://localhost:5000/postRecipe';
+			url = 'http://localhost:5000/update';
 		} else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
-			url = 'https://sous-chef-assistant.herokuapp.com/postRecipe';
+			url = 'https://sous-chef-assistant.herokuapp.com/update';
 		} else{
-            url = 'https://session-management-souchef.herokuapp.com/postRecipe';
+            url = 'https://session-management-souchef.herokuapp.com/update';
         }
 
 		// Make an ajax call to post the data to the database
@@ -149,7 +158,7 @@ function updateRecipe(){
 			contentType: 'application/json',
 			url : url,
 			type : 'POST',
-			data : JSON.stringify(recipe),
+			data : JSON.stringify(recipe_container),
 			dataType:'text',
 
 			// Let user know of success
@@ -238,10 +247,43 @@ $(document).ready(function() {
             
             $("#enableEdit").on("click",function(){
                 $("#form-area_edit :input").prop("disabled", false);
+                //ajax call to /update_recipe ,send data contains name of the recipe
+                //obtained from text field. received data has the id field
+                //{id: id ,body: recipe}
+                 old_recipename.name=$("#recipeList option:selected").text()
+                //var id=$("recipeList").val()
+                console.log(old_recipename)
+                flag=1
+                
+               /* $.ajax({
+                    //contentType: 'text',
+                    url : 'http://localhost:5000/updateRecipe',
+                    type : 'POST',
+                    data : recipe_name,
+                    dataType:'json',
+                    success:function(data){
+                        recipeId=data.id
+                    //  console.log("recipe data"+JSON.parse(recipeToUpdate));  
+                        console.log(data.id)
+                    },
+                    error:function(){
+                        console.log("failure")
+                    }
+                }) */
+
+         
+
             });
             
             $("#update").on("click",function(){
-               updateRecipe(); 
+                if(flag===1){
+                  updateRecipe(); 
+                  console.log("Upto update click")  
+                }
+                else{
+                    alert("Nothing is changed!")
+                }
+               
             });
             
             $("#cancel").on("click",function(){

@@ -1,16 +1,21 @@
 let MongoClient = require('mongodb').MongoClient;
 async function update_recipe_in_db(req, res){
-	//let recipe_name=req.body;
-	//let req_obj=JSON.parse(req)
-	let recipe={
-		"name":"chicken soup",
-		"prep_time" :"test",
-		"ingredients" :["nothing"],
-		"directions" :["idk"],	
-	};
-	let name="red sauce";
-	let recipeId=0;
-	let queryId=recipeId.toString();
+    /* Hardcoded recipe
+	let recipe=
+   {
+		"name":"Biriyanihhh",
+		"prep_time" :"30 minutes",
+		"ingredients" :[{"name":"rice","quantity":"250","unit":"gram"},{"name":"chicken","quantity":"250","unit":"gram"}],
+		"directions" :["Soak rice","Cook chicken"]	
+	}; 
+    */
+	let old_name=req.body.old_name.name;
+    let new_name=req.body.recipe.name;
+    let prep_time=req.body.recipe.prep_time;
+    let cook_time=req.body.recipe.make_time;
+    let ingredients=req.body.recipe.ingredients;
+    let directions=req.body.recipe.directions;
+    let serving_size=req.body.recipe.serving_size;
 	let user = 'thetoastyone';
   	let client;
     let mongo_pw = process.env.MONGO_PW;
@@ -28,19 +33,21 @@ async function update_recipe_in_db(req, res){
             {
             	username: { $eq: user }
             }, 
-             // Append recipe to user's recipes array
+             
         );
-        var setField="recipes."+queryId;
+       
         try{
-
+               //update recipe matching old recipe name
 
 				users.updateOne(
-					{"username" : "raisa"},
+					{username : user,'recipes.name':old_name},
 						{
-							$set:{ setField : recipe}
+							$set:{ "recipes.$.name" : new_name,"recipes.$.prep_time":prep_time,
+                                    "recipes.$.cook_time":cook_time,"recipes.$.serving_size":serving_size,
+                                    "recipes.$.ingredients":ingredients,"recipes.$.directions":directions}
 						}
 				);
-				//console.log("no error");
+				
 			
 			} catch(e){
 				console.log("error: "+ e);	
