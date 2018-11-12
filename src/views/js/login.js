@@ -1,4 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
+var bcrypt = require('bcryptjs'); //Encrypt users passwords in the DB
+
 
 //=========== User Login =================//
 async function getLoginUser(req, res) {
@@ -18,10 +20,12 @@ async function getLoginUser(req, res) {
         // Get the users collection
         const users = db.collection('users');
     
-        //First check if there is a "user session" a user is already logged in
+        //First check if there is a "user session" – a user is already logged in
         // if(req.session && req.session.user) {
         //     res.redirect('/');
         // }
+        
+        
         //If no user is logged already then Lookup user from document by pulling their username
         users.findOne({username: usernameForm }, function(err, user) {
             if(!user) { //If username is not in the DB then send them back to login page
@@ -30,30 +34,25 @@ async function getLoginUser(req, res) {
             }
             //Username exists in the Database
             else {
-                //Username and password are correct, successful login
-                if (usernameForm === user.username && passwordForm === user.pass) {
-                    req.validationCheck = false;
-                    req.session.username = user.username;
-                    res.redirect('/');
-                }
-                else { //Incorrect password entered
-                    req.passwordCheck = true;
-                    res.render('login_registration.hbs', { passwordCheck: req.passwordCheck });
-                }
+                //Get the hashed password from the db
+                const hash = user.pass.toString();
+                
+                /*Compare the hashed password from the db to the newly
+                  hashed password that was entered*/
+                bcrypt.compare(passwordForm, hash, function(err, response) {
+                    //Username and password are correct, successful login
+                    if (usernameForm === user.username && response === true) {
+                        req.validationCheck = false;
+                        req.session.username = user.username;
+                        res.redirect('/');
+                    }
+                    else { //Incorrect password entered
+                        req.passwordCheck = true;
+                        res.render('login_registration.hbs', { passwordCheck: req.passwordCheck });
+                    }
+                });
             }
         });
-        
-        //If username is not in the DB or is null then send them back to login page
-        /*if (userDB === null || userDB.username !== usernameForm) {
-            res.redirect('/login_registration');
-            //res.write("The Username or Password you entered was incorrect");
-        }*/
-        
-        //Verify the users login info
-        /*if (usernameForm === userDB.username && passwordForm === userDB.pass) {
-            req.session.username = userDB.username;
-            res.redirect('/');
-        }*/
         
         
     } catch (err) {

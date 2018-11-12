@@ -3,11 +3,12 @@ var MongoClient = require('mongodb').MongoClient;
 var expressValidator = require('express-validator');
 var passport = require('passport');
 
+//Seems to be an issue with Bcrypt
+var bcrypt = require('bcryptjs'); //Encrypt users passwords in the DB
+const saltRounds = 10;
+
+
 async function postRegistration(req, res) {
-    //Seems to be an issue with Bcrypt
-    var bcrypt = require('bcryptjs'); //Encrypt users passwords in the DB
-    const saltRounds = 10;
-    
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
@@ -54,6 +55,7 @@ async function postRegistration(req, res) {
         console.log('req.body', req.checkBody);
         console.log('Are there any errors?', errors);
         
+        //-------------Uncomment when we can get express-validator working correctly -----------
         /*Errors in registration so redirect back to registration
           and display error messages before inserting into DB*/
         /*if(errors) {
@@ -64,32 +66,18 @@ async function postRegistration(req, res) {
                 errors: errors
             });
         }*/
+        //-------------Uncomment when we can get express-validator working correctly -----------
     
-        bcrypt.hash(passReg, saltRounds, function(err, hash) {
-            // Store hash in your password DB.
-            MongoClient.connect(uri, function (err, db) {
-                let dbo = db.db('sous-chef');
-                dbo.collection('users').insertOne(registrationInsert, function (err, res) {
-                
-                });
-                dbo.collection('users').find({}).sort({_id:-1}).limit(1)
-                db.close();
-            });
-            const user_id = res[0];
-            console.log("res[0]", res[0]);
-            req.login(user_id, function(err) {
-                res.redirect('/');
-            });
-        });
+        
         
         //Registration is ok post to DB
-        /*await MongoClient.connect(uri, function (err, db) {
+        await MongoClient.connect(uri, function (err, db) {
             let dbo = db.db('sous-chef');
             dbo.collection('users').insertOne(registrationInsert, function (err, res) {
                 db.close();
             })
         });
-        res.redirect('/');*/
+        res.render('login_registration.hbs');
         
         
     } catch (err) {

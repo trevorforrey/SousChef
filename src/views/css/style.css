@@ -11,8 +11,8 @@ body {
 #invalidLoginP {
     background: #dca7a7;
     font-size: 14px;
-    color: #ac2925;
-    padding: 0 0 0 0;
+    color: red;
+    padding: 4px 0 4px 10px;
     margin-bottom: 12px;
 }
 
