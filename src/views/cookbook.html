@@ -2,55 +2,99 @@
     <head>
         <title>My Cookbook</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
     </head>
     <body>
         <h1 id="Message">
             Cookbook Page
         </h1>
         <form id="selectRecipe">
-            <select id="recipeList">
-            
-            </select>
+            <div class="row-upload row">
+								   <select id="recipeList">
+                                   </select>
+								   <input class="btn-upload btn primary" type="button" value="Edit" style="width: 66px;height: 26px;margin-left: 213px;margin-top: 113px;" id="enableEdit" style="width: 66px;height: 26px;margin-left: 208px;"/>	
+					    </div>
+         
+           <!--  <div id="form-area">
+				<form>
+					<ul id="upload-recipe">
+						<div class="row-upload row">
+							<li id="name" class="col-md-12">
+								<span >Recipe Name:</span>
+								<input type="text" id="recipeName" class="input-1">
+							</li> -->
         </form>
-        <div id = "cookbook_page">
-            <h2 id="recipe_title">
-                
-            </h2>
-            <h2>
-                Prep Time
-            </h2>
-            <p id="prep_time">
-                
-            </p>
-            <h2>
-                Make Time
-            </h2>
-            <p id = "make_time">
-
-            </p>
-            <div>
-                <h2>Ingredients</h2>
-                <ul id="ingredients">
-
-                </ul>
-            </div>
-            <div>
-                <h2>Steps</h2>
-                <ol id="steps">
-
-                </ol>
-            </div>
-            <div>
-                <button id="edit">Edit</button>
-                <button id="update">Update</button>
-            </div>
-            
-        </div>
+            <div class="container-upload container">	
+			<div id="form-area_edit">
+				<form>
+					<ul id="upload-recipe">
+						<div class="row-upload row">
+							<li id="name" class="col-md-12">
+								<span >Recipe Name:</span>
+								<input type="text" id="recipe_name_edit" class="input-1">
+							</li>
+					    </div>
+						<div class="row-upload row">
+							<li id="time" class="col-md-4" >
+								<span >Preparation time:</span>
+								<input type="text" class="input-1"   id="prep_time_edit">
+							</li>
+							<li class="col-md-4">
+								<span >Cook Time:</span>
+								<input type="text" class="input-1" id="cook_time_edit">
+							</li>
+							<li class="col-md-4">
+								<span >Serving Size:</span>
+								<input type="text" class="input-1"  id="serving_size_edit">	
+							</li>
+					   </div>
+                       
+						 	<li class="col-md-12">
+						 		<ul class="ingredient-fields">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+                        
+                         <div class="row-upload row">
+                            <tr class="col-md-12" style='border:1px solid #dddddd;'>
+                                <td style='padding-left:10px;'><span style="margin-left: 57px;">Ingredients Name:</span></td>
+                                <td class='tdid' style='padding-left:10px;'><span style="margin-left: 215px;">Quantity</span></td>
+                                <td class='tdid' style='padding-left:10px;'><span style="margin-left: 200px;">Unit:</span></td>
+                                
+			                 </tr>
+                        </div>
+                        <div id="stepsAndIngredientsDiv">
+						 </div>
+                        
+                        <div class="row-upload row">
+                        <li class="col-md-12">
+                            <span style="margin-left: 57px;">Steps:</span>
+						 		<ul class="steps-field">
+						 			<li id="stepsList"></li>
+						 		</ul>
+						 	</li>
+                        </div>
+                        
+						 <div class="row-upload row">
+						 	<li class="col-md-5">
+						 		<input class="btn-upload btn primary" type="button" value="update" style="width: 266px;height: 26px;margin-left: 500px;" id="update" disabled="true"/>	
+						 	</li>
+                             <li class="col-md-2">
+                             </li>
+                             <li class="col-md-5">
+						 		<input class="btn-upload btn primary" type="button" value="cancel" style="width: 266px;height: 26px;margin-left: 500px;" id="cancel"/>	
+						 	</li>
+						 </div>		
+                        <div id="div1">
+                            <span id="responseTxt"></span>
+                        </div>
+				 	</ul>
+				</form>		
+			</div>
+		</div>
         <!--/using some code from 
             https://www.w3schools.com/xml/ajax_xmlhttprequest_response.asp-->
         
         <script src="js/cookbook_page.js"></script>
-        <script src="js/script.js"></script>
     </body>
 </html>
