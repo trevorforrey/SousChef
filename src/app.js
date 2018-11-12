@@ -14,9 +14,8 @@ const bodyparser = require('body-parser');
 let path = require('path');
 let MongoClient = require('mongodb').MongoClient;
 var hbs = require('express-handlebars');
-var expressValidator = require('express-validator');
-var router = express.Router();
 let app = express();
+var expressValidator = require('express-validator');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyparser.json());
@@ -63,6 +62,13 @@ app.get('/login_registration.html', function (req, res) {
     //Render because we're using handlebars for this page
     res.render('login_registration.hbs', { validationCheck: req.validationCheck, usernameError: req.body.username});
 });
+app.get('/logout', function (req, res) {
+    //req.logout();
+    req.session.destroy();
+    //Render because we're using handlebars for this page
+    res.render('login_registration.hbs');
+});
+
 
 app.get('/test', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/test.html'));

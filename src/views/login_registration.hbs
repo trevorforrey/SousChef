@@ -38,7 +38,7 @@
                 <ul class="dropdown-menu" aria-labelledby="loginDrop">
                     <li><a href="login_registration.html">Login</a></li>
                     <li><a href="login_registration.html">Register New Account</a></li>
-                    <li><a href="home.html">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </ul>
         </div>
@@ -149,12 +149,16 @@
 
                                 <div class="form-group">
                                     <input type="password" name="passwordReg" id="passwordReg" tabindex="2"
-                                           class="form-control" placeholder="Password" required>
+                                           class="form-control" placeholder="Password" onkeyup="checkPasswords()"
+                                           required>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="password" name="confirmPasswordReg" id="confirm-passwordReg"
-                                           tabindex="2" class="form-control" placeholder="Confirm Password" required>
+                                           tabindex="2" class="form-control" placeholder="Confirm Password"
+                                           onkeyup="checkPasswords()"
+                                           required>
+                                    <span id='message'></span>
                                 </div>
 
                                 <div class="form-group">
@@ -162,7 +166,7 @@
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="registerSubmit" id="registerSubmit"
                                                    tabindex="4" class="form-control btn btn-register"
-                                                   value="Sign Up" >
+                                                   value="Sign Up"  diabled>
                                         </div>
                                     </div>
                                 </div>
@@ -173,6 +177,19 @@
             </div>
         </div>
     </div>
+</div>
+<div id="invalidRegistrationDiv">
+    {{# if errors }}
+        {{#each errors}}
+            {{this.msg}}
+        {{/each}}
+        <!--<section class="usernameCheck">
+            <p><i><b>The username  you entered is incorrect
+                .<br>Please Try
+                again!</b></i></p><br>
+        </section>-->
+    {{/if}}
+
 </div>
 <script>//JS for navbar for login popdown
     // Tooltip component
