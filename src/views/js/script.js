@@ -140,6 +140,8 @@ $(document).ready(function(){
 		} else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
 			url = 'https://sous-chef-assistant.herokuapp.com/postRecipe';
 		}
+		console.log('url to post to');
+		console.log(url);
 
 		// Make an ajax call to post the data to the database
 		$.ajax({
