@@ -1,4 +1,4 @@
-/* Fulfillment handler tests. Runs in local but not in remote. Build is failing
+ //Fulfillment handler tests. commented tests are failing
 process.env.NODE_ENV = 'test';
 
 import 'babel-polyfill'
@@ -13,72 +13,22 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-const ingredient_list ={
-  "responseId": "70425ec9-5593-415d-ba20-ccf79a1e15a6",
-  "queryResult": {
-    "queryText": "ingredient list",
-    "parameters": {},
-    "allRequiredParamsPresent": true,
-    "fulfillmentText": "Your ingredients for blueberry pancakes are",
-    "fulfillmentMessages": [
-      {
-        "text": {
-          "text": [
-            "Your ingredients for blueberry pancakes are"
-          ]
-        }
-      }
-    ],
-    "outputContexts": [
-      {
-        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/login-requestuser-followup",
-        "parameters": {
-          "recipe.original": "bread and butter",
-          "recipe": "Bread and Butter",
-          "username.original": "thetoastyone",
-          "username": "thetoastyone"
-        }
-      },
-      {
-        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
-        "lifespanCount": 4,
-        "parameters": {
-          "recipe": "Bread and Butter",
-          "username": "thetoastyone"
-        }
-      }
-    ],
-    "intent": {
-      "name": "projects/testagent-be9db/agent/intents/5784d9f6-6108-43be-8301-9188a143cef9",
-      "displayName": "List-Ingredients"
-    },
-    "intentDetectionConfidence": 0.45,
-    "languageCode": "en"
-  },
-  "originalDetectIntentRequest": {
-    "payload": {}
-  },
-  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
-} 
 
-
-//var ingredient_list = cjson.load('D:/Academic/SE 515/project/SousChef/test/ingredient_list.json');
-
-
-const ingd_follow_up=cjson.load('D:/Academic/SE 515/project/SousChef/test/ingd_follow_up.json');
-const first_step=cjson.load('D:/Academic/SE 515/project/SousChef/test/first_step.json');
-const next_step=cjson.load('D:/Academic/SE 515/project/SousChef/test/next_step.json');
-const repeat_step=cjson.load('D:/Academic/SE 515/project/SousChef/test/repeat_step.json');
-const previous_step=cjson.load('D:/Academic/SE 515/project/SousChef/test/prev_step.json');
-const requested_step=cjson.load('D:/Academic/SE 515/project/SousChef/test/requested_step.json');
-const remaining_step=cjson.load('D:/Academic/SE 515/project/SousChef/test/remaining_step.json');
-//const setup_intent_loggedin=cjson.load('D:/Academic/SE 515/project/SousChef/test/run_setup_logged_in.json');
-const setup_intent=cjson.load('D:/Academic/SE 515/project/SousChef/test/run_setup.json');
-const cook_time=cjson.load('D:/Academic/SE 515/project/SousChef/test/cook_time.json');
-const prep_time=cjson.load('D:/Academic/SE 515/project/SousChef/test/prep_time.json');
-const login_request=cjson.load('D:/Academic/SE 515/project/SousChef/test/login_req.json');
-const login_request_user=cjson.load('D:/Academic/SE 515/project/SousChef/test/login_user.json');
-const user_recipe_req= cjson.load('D:/Academic/SE 515/project/SousChef/test/user_recipe_req.json'); 
+const ingredient_list = cjson.load(__dirname+'/ingredient_list.json');
+const ingd_follow_up=cjson.load(__dirname+'/ingd_follow_up.json');
+const first_step=cjson.load(__dirname+'/first_step.json');
+const next_step=cjson.load(__dirname+'/next_step.json');
+const repeat_step=cjson.load(__dirname+'/repeat_step.json');
+const previous_step=cjson.load(__dirname+'/prev_step.json');
+const requested_step=cjson.load(__dirname+'/requested_step.json');
+const remaining_step=cjson.load(__dirname+'/remaining_step.json');
+//const setup_intent_loggedin=cjson.load(__dirname+'/run_setup_logged_in.json');
+const setup_intent=cjson.load(__dirname+'/run_setup.json');
+const cook_time=cjson.load(__dirname+'/cook_time.json');
+const prep_time=cjson.load(__dirname+'/prep_time.json');
+const login_request=cjson.load(__dirname+'/login_req.json');
+const login_request_user=cjson.load(__dirname+'/login_user.json');
+const user_recipe_req= cjson.load(__dirname+'/user_recipe_req.json'); 
 
 //ingredient list
 describe('Test Getting ingredient list', () => {
@@ -221,7 +171,7 @@ describe('Test Getting remaining step', () => {
         });
     });
 });
-*/
+
 /*
 //run setup when not logged in
 describe('Test run setup when not logged in', () => {
