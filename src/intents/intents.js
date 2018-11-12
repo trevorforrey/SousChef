@@ -39,7 +39,7 @@ module.exports = {
     handle_login_request: handle_login_request,
     handle_username_response: handle_username_response,
     handle_recipe_response: handle_recipe_response,
-    handle_substitute_ingredient: handle_substitute_ingredient
+    handle_substitute_ingredient: handle_substitute_ingredient,
     handle_get_num_servings: handle_get_num_servings,
     handle_adjust_servings: handle_adjust_servings
-}
+};
