@@ -31,7 +31,9 @@ async function adjust_serving(recipe, servingAmount, sessionData){
             console.log("warning: num_servings invalid for " + recipe.name);
         }
     }
+
     sessionData.serving_proportion = servingAmount / ns;
+
     if (!predefinedServings) {
         response_text = "No serving data found; assuming 1 serving. Will relay ingredient amounts for "
          + servingAmount + " servings.";

@@ -45,6 +45,10 @@ $(document).ready(function() {
         url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
     } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
+    } else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+        url = 'http://sous-chef-assistant.herokuapp.com/cookbook';
+    } else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
+        url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
     }
 
     //jquery getJSON() isn't working for me, trying code from 
