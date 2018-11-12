@@ -1,7 +1,7 @@
 
 var MongoClient = require('mongodb').MongoClient;
 var expressValidator = require('express-validator');
-
+var passport = require('passport');
 
 async function postRegistration(req, res) {
     //Seems to be an issue with Bcrypt
@@ -64,16 +64,32 @@ async function postRegistration(req, res) {
                 errors: errors
             });
         }*/
-        
+    
+        bcrypt.hash(passReg, saltRounds, function(err, hash) {
+            // Store hash in your password DB.
+            MongoClient.connect(uri, function (err, db) {
+                let dbo = db.db('sous-chef');
+                dbo.collection('users').insertOne(registrationInsert, function (err, res) {
+                
+                });
+                dbo.collection('users').find({}).sort({_id:-1}).limit(1)
+                db.close();
+            });
+            const user_id = res[0];
+            console.log("res[0]", res[0]);
+            req.login(user_id, function(err) {
+                res.redirect('/');
+            });
+        });
         
         //Registration is ok post to DB
-        await MongoClient.connect(uri, function (err, db) {
+        /*await MongoClient.connect(uri, function (err, db) {
             let dbo = db.db('sous-chef');
             dbo.collection('users').insertOne(registrationInsert, function (err, res) {
                 db.close();
             })
         });
-        res.redirect('/');
+        res.redirect('/');*/
         
         
     } catch (err) {
@@ -83,32 +99,16 @@ async function postRegistration(req, res) {
     }
 };
 
+passport.serializeUser(function(user_id, done) {
+    done(null, user_id);
+});
+
+passport.deserializeUser(function(user_id, done) {
+    done(null, user_id);
+});
+
 // allows us to import the function in app.js
 export default postRegistration;
 
 
-
-//======================================
-//======================================
-
-/*
-function loginSubmit(form) {
-    //Get the value of the username and password entered to login
-    let username = form.usernameLogin.value;
-    let password = form.passwordLogin.value;
- 
-    console.log("Value of username is: ", username);
-}
-
-
-function registerSubmit(reg_form) {
-    //Get the values of the registration form
-    let fName = reg_form.firstnameReg.value;
-    let lName = reg_form.lastnameReg.value;
-    let usernameReg = reg_form.usernameReg.value;
-    let email = reg_form.email.value;
-    let passwordReg = reg_form.passwordReg.value;
-}
-
-*/
 

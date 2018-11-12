@@ -16,6 +16,8 @@ let MongoClient = require('mongodb').MongoClient;
 var hbs = require('express-handlebars');
 let app = express();
 var expressValidator = require('express-validator');
+var passport = require('passport');
+
 
 
 
@@ -36,7 +38,8 @@ app.use(session({
     },
     rolling: true //Lengthen user session by activity
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 // process.env.PORT used by Heroku
 var port = process.env.PORT || 5000;
