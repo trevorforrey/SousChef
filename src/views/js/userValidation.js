@@ -9,5 +9,7 @@ function checkPasswords() {
     } else {
         document.getElementById('message').style.color = 'red';
         document.getElementById('message').innerHTML = 'Passwords Do not match!';
+        document.getElementById('registerSubmit').disabled = true;
+        
     }
 }

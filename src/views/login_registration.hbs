@@ -47,10 +47,10 @@
 
 <div class="container">
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+    <div class="row logRegRow">
+        <div class="col-md-6 col-md-offset-3 logRegCol">
             <div class="panel panel-login">
-                <div class="panel-heading">
+                <div class="panel-heading logRegHeader">
                     <div class="row">
                         <div class="col-xs-6">
                             <a href="#" class="active" id="login-form-link">LOGIN</a>
@@ -71,20 +71,18 @@
                             <! ======================================================= -->
                             <form id="login-form" action="/getLogin" method="post"
                                   role="form" style="display: block;">
-                                <div id="invalidLoginDiv">
                                     {{# if usernameCheck }}
                                         <section class="usernameCheck">
-                                            <p><i><b>The username "{{usernameError}}" you entered is incorrect
-                                                .<br>Please Try
-                                                again!</b></i></p><br>
+                                            <p id="invalidLoginP"><b>User "{{usernameError}}" does not exist!
+                                                <br>Please Try again!</b></p><br>
                                         </section>
                                     {{/if}}
                                     {{# if passwordCheck }}
                                         <section class="passwordCheck">
-                                            <p><i><b>The password you entered is incorrect. <br>Please Try again!</b></i></p>
+                                            <p id="invalidLoginP"><b>The password you entered is incorrect.
+                                                <br>Please Try again!</b></p>
                                         </section>
                                     {{/if}}
-                                </div>
                                 <div class="form-group">
                                     <input required type="text" name="usernameLogin" id="usernameLogin" tabindex="1"
                                            class="form-control testInput" placeholder="Username" value="" >
@@ -164,9 +162,10 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="registerSubmit" id="registerSubmit"
-                                                   tabindex="4" class="form-control btn btn-register"
-                                                   value="Sign Up"  diabled>
+                                            <input disabled="true" type="submit" name="registerSubmit"
+                                                   id="registerSubmit"
+                                                   tabindex="4" class="form-control btn btn-register disabledButton"
+                                                   value="Sign Up">
                                         </div>
                                     </div>
                                 </div>

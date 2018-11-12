@@ -60,7 +60,7 @@ app.get('/', function (req, res) {
 
 app.get('/login_registration.html', function (req, res) {
     //Render because we're using handlebars for this page
-    res.render('login_registration.hbs', { validationCheck: req.validationCheck, usernameError: req.body.username});
+    res.render('login_registration.hbs'/*, { validationCheck: req.validationCheck, usernameError: req.body.username}*/);
 });
 app.get('/logout', function (req, res) {
     //req.logout();
