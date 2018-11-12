@@ -20,10 +20,10 @@ function populate(recipe){
     } else {
         $("#prep_time").html("not listed");
     }
-    if (recipe.make_time != undefined && recipe.make_time != null) {
-        $("#make_time").html(recipe.make_time);
+    if (recipe.cook_time != undefined && recipe.cook_time != null) {
+        $("#cook_time").html(recipe.cook_time);
     } else {
-        $("#make_time").html("not listed");
+        $("#cook_time").html("not listed");
     }
     var ingreds = recipe.ingredients;
     for (var i in ingreds){

@@ -14,9 +14,17 @@ export async function handle_get_ingredient_list(req,res,sessionData, contexts, 
     let response_text = "For this recipe, you'll need ";
     let ingredients = recipe_doc.ingredients;
     
+    let sp = sessionData.serving_proportion;
+
+    if (sp == undefined || sp == null || sp <= 0){
+        sp = 1.0;
+    }
+
     // Iterate through the ingredient array
     ingredients.forEach( (ingredient) => {
         
+        let quant = ingredient.quantity * sp;
+
         // Add "and" to start of last ingredient
         if (ingredient === ingredients[ingredients.length - 1]) {
             response_text += "and ";
@@ -24,11 +32,11 @@ export async function handle_get_ingredient_list(req,res,sessionData, contexts, 
         
         // Handles items like eggs, oranges (name is unit)
         if (ingredient.unit === ingredient.name) {
-            response_text += ingredient.quantity + " " + ingredient.name + ". ";
+            response_text += quant + " " + ingredient.name + ". ";
             
             // Handles items where it's natural to say quantity, units, and name
         } else {
-            response_text += ingredient.quantity + " " + ingredient.unit + " of " + ingredient.name + ". ";
+            response_text += quant + " " + ingredient.unit + " of " + ingredient.name + ". ";
         }
     });
     response.fulfillmentText = response_text;
