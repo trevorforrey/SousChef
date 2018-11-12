@@ -94,9 +94,9 @@ describe('Test Getting First Step', () => {
             if (error) {
                 done(error);
             } else {
-                response.should.have.status(201);
+                response.should.have.status(400);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include('In a large bowl, sift together flour, salt, baking powder and sugar.');
+                response.body.fulfillmentText.should.include('please ask to log in');
                 done();
             }
         });
@@ -114,9 +114,9 @@ describe('Test Getting the next step', () => {
             if (error) {
                 done(error);
             } else {
-                response.should.have.status(201);
+                response.should.have.status(400);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include('Heat a lightly oiled griddle or frying pan over medium high heat.');
+                response.body.fulfillmentText.should.include('please ask to log in');
                 done();
             }
         });

@@ -3,6 +3,9 @@ import post_user_recipe from './post_user_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
+import update_recipe from './update_recipe'
+import update_recipe_in_db from './handle_update'
+
 
 var session = require('express-session');
 const shell = require('shelljs');
@@ -45,7 +48,9 @@ app.get('/home', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
-
+app.get('/test', function (req, res) {
+    res.sendFile(path.join(__dirname + '/views/test.html'));
+});
 
 //posting a registered user account
 app.post('/postReg', postRegistration);
@@ -59,12 +64,13 @@ app.get('/upload',function (req, res) {
     console.log('hit the upload handler');
 });
 
-
-
 app.post('/postRecipe', post_user_recipe);
 
+app.post('/updateRecipe', update_recipe);
 
-app.get('/:userid/cookbook', get_cookbook);
+app.post('/update', update_recipe_in_db);
+
+app.get('/cookbook', get_cookbook);
 
 
 app.listen(port, function () {

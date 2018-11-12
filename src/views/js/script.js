@@ -75,8 +75,8 @@ $(document).ready(function(){
 
 	// Upload recipe button handler
 	$("#upload").click(function() {
-		postForm()
-
+		postForm();
+		
 	})
 
 	function postForm(){
@@ -90,6 +90,8 @@ $(document).ready(function(){
 		// Grab recipe name and prepTime TODO get cook time and number of servings
 		recipe.name = $("#recipeName").val();
 		recipe.prep_time = $("#prepTime").val();
+		recipe.num_servings = $("#servingSize").val();
+		recipe.cook_time = $("#cookTime").val();
 
 		// Grab all ingredient information
 		for (let i = 1; i <= numberOfIngredients; i++) {
@@ -100,7 +102,7 @@ $(document).ready(function(){
 			// Get all info for the ingredient
 			let ingredientName = $(ingredientId + 'name').val();
 			let ingredientAmount = $(ingredientId + 'amount').val();
-			let ingredientUnits = $(ingredientId + 'units').val();
+			let ingredientUnits = Number($(ingredientId + 'units').val());
 
 			console.log(ingredientName);
 			console.log(ingredientAmount);
@@ -137,7 +139,11 @@ $(document).ready(function(){
 			url = 'http://localhost:5000/postRecipe';
 		} else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
 			url = 'https://sous-chef-assistant.herokuapp.com/postRecipe';
+		} else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+			url = 'http://sous-chef-assistant.herokuapp.com/postRecipe';
 		}
+		console.log('url to post to');
+		console.log(url);
 
 		// Make an ajax call to post the data to the database
 		$.ajax({
@@ -174,5 +180,17 @@ $(document).ready(function(){
 		});
 	 // end of button upload handler
 	}
+//onclick handler on each update button for each recipe in cookbook page
+	$("mult_update").click(function(){
+		//ajax call to /update_recipe ,send data contains name of the recipe
+		//obtained from text field. received data has the id field
+		//{id: id ,body: recipe}
+	})
+
+	$("#update").click(function(){
+		//ajax call to /handle_update.js to update db
+		//send req along with id field
+		//{id: id ,body: recipe}
+	})
 			
 });
