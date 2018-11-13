@@ -39,10 +39,16 @@ async function get_ingredient_from_user(user_name, recipe_name, ingredient_name,
             ingredient_info = recipe_ingredient;
         }
     });
+
+    console.log('ingredient info:');
+    console.log(ingredient_info);
+
     
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {
-        let sessionData = get_session_data(data);
+        let sessionData = get_session_data(data.queryResult.outputContexts);
+        console.log('session data');
+        console.log(sessionData);
         if ('unit-weight-name' in data.queryResult.parameters &&
             data.queryResult.parameters['unit-weight-name'] != null &&
             data.queryResult.parameters['unit-weight-name'] !== "") {
