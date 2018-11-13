@@ -20,13 +20,13 @@ function populate(recipe){
     // Empty previous ingredients and steps before populating the page
     $("#ingredients").empty();
     $("#steps").empty();
-    
+
     if(recipe.name != undefined && recipe.name != null){
             $("#recipe_name_edit").val(recipe.name);
     }else{
             $("#recipe_name_edit").val("not listed");
     }
-    //serving_size_edit 
+    //serving_size_edit
      /*if(recipe.name != undefined && recipe.name !=- null){
             $("#recipe_name_edit").html(recipe.name);
     }else{
@@ -71,7 +71,7 @@ function renderIngredientsAndSteps(recipe){
     document.getElementById('stepsAndIngredientsDiv').innerHTML = buildHtml;
     length = steps.length;
     numberOfSteps = length;
-    
+
     //Dynamically creating steps as a list of textboxes
     for(var j=0;j<length;j++){
         steps_field = $(document.createElement('input'))
@@ -81,8 +81,8 @@ function renderIngredientsAndSteps(recipe){
              .attr("value", steps[j]);
         $(".steps-field li").append(steps_field).append("<br />");
 
-    }	         
-    
+    }
+
 }
 
 function updateRecipe(){
@@ -190,6 +190,53 @@ function updateRecipe(){
 	 // end of button upload handler
 	}
 
+function deleteRecipe(recipe) {
+  let request_doc = {};
+  request_doc.recipeName = recipe.name
+
+  let url;
+  if (window.location.href.includes('localhost')) {
+    url = 'http://localhost:5000/delete';
+  } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
+    url = 'https://sous-chef-assistant.herokuapp.com/delete';
+  } else {
+    url = 'https://session-management-souchef.herokuapp.com/delete';
+  }
+
+  $.ajax({
+		contentType: 'application/json',
+		url : url,
+		type : 'DELETE',
+		data : JSON.stringify(request_doc),
+		dataType:'text',
+
+		// Let user know of success
+		success : function(data) {
+			console.log('post was successful!');
+			// Create success element
+              document.getElementById("responseTxt").innerHTML = "Your recipe was deleted successfully!";
+			// Append to container div on page
+			//$("#form-area").append(success_text).append("<br />");
+		},
+
+		// Let user know of failure
+		error : function(request,error)
+		{
+			console.log('post failed!');
+			// Create failure elements
+              document.getElementById("responseTxt").innerHTML = "Failed to delete the recipe, try after some time";
+			/*let failure_text = document.createElement('h3');
+			failure_text.innerHTML = "Your recipe was not uploaded!";
+
+			let failure_desc_text = document.createElement('p');
+			failure_desc_text.innerHTML = "Please recheck your form data and try again";
+
+			// Append to container div on page
+			$("#form-area").append(failure_text).append("<br />").append(failure_desc_text); */
+		}
+	});
+}
+
 $(document).ready(function() {
 
     /*updateTemplate = $.ajax({
@@ -197,7 +244,7 @@ $(document).ready(function() {
                     method: "GET",
                 });
     console.log("AJAX call result:"+updateTemplate); */
-    
+
     let url;
     if (window.location.href.includes('localhost')) {
         url = 'http://localhost:5000/cookbook';
@@ -208,7 +255,7 @@ $(document).ready(function() {
     }
 
 
-    //jquery }getJSON() isn't working for me, trying code from 
+    //jquery }getJSON() isn't working for me, trying code from
     //if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/'))
     // https://stackoverflow.com/questions/47523265/jquery-ajax-no-access-control-allow-origin-header-is-present-on-the-requested instead
     $.ajax({
@@ -243,9 +290,9 @@ $(document).ready(function() {
                  $.when(renderIngredientsAndSteps(recipe)).done(function(){
                         populate(recipe);
                         $("#form-area_edit :input").prop("disabled", true);
-                 });        
+                 });
             });
-            
+
             $("#enableEdit").on("click",function(){
                 $("#form-area_edit :input").prop("disabled", false);
                 //ajax call to /update_recipe ,send data contains name of the recipe
@@ -255,36 +302,43 @@ $(document).ready(function() {
                 //var id=$("recipeList").val()
                 console.log(old_recipename)
                 flag=1
-                
-              
+
+
             });
-            
+
             $("#update").on("click",function(){
                 if(flag===1){
-                  updateRecipe(); 
-                  console.log("Upto update click")  
+                  updateRecipe();
+                  console.log("Upto update click")
                 }
                 else{
                     alert("Nothing is changed!")
                 }
-               
+
             });
-            
+
+            $("#delete").on("click",function(){
+              console.log(currentRecipe);
+              deleteRecipe(currentRecipe);
+              window.location.reload();
+            });
+
             $("#cancel").on("click",function(){
+                console.log("Cancel");
                 document.getElementById('stepsList').innerHTML = "";
                 document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
                 $.when(renderIngredientsAndSteps(currentRecipe)).done(function(){
                         populate(currentRecipe);
                         $("#form-area_edit :input").prop("disabled", true);
-                 }); 
+                 });
                 $("#form-area_edit :input").prop("disabled", true);
 
             });
         }
-        
+
     });
 
-    
+
     /*
     $.getJSON("http://localhost:5000/:userid/cookbook?callback=?", success=function(rawRecipes, status, xhr){
         //Used https://stackoverflow.com/questions/22743287/uncaught-syntax-error-unexpected-token-getjson as reference
@@ -294,12 +348,12 @@ $(document).ready(function() {
         result.recipes.map(function(i, recipe) {
             $("recipeList").append($("<option></option>").attr("value",i).text(recipe.name));
         });
-    
+
         $("selectRecipe").submit(function() {
             var $inputs = $('#selectRecipe :input');
-    
+
             var  recipe = result.recipes[$inputs[0]];
-    
+
             if (recipe.prep_time != undefined && recipe.prep_time != null){
                 $("#prep_time").html(recipe.prep_time);
             }
@@ -312,15 +366,15 @@ $(document).ready(function() {
             for (step in recipe.directions){
                 $("steps").append("<li>"+step+"</li>");
             }
-    
+
         });
     });
     */
     /*
     var xhr = new XMLHttpRequest();
     xhr.open('GET', "http://localhost:5000/:userid/cookbook?callback=?", true);
-    
-    
+
+
 
     xhr.send();
     xhr.onload = function() {
@@ -330,12 +384,12 @@ $(document).ready(function() {
         result.recipes.map(function(i, recipe) {
             $("recipeList").append($("<option></option>").attr("value",i).text(recipe.name));
         });
-    
+
         $("selectRecipe").submit(function() {
             var $inputs = $('#selectRecipe :input');
-    
+
             var  recipe = result.recipes[$inputs[0]];
-    
+
             if (recipe.prep_time != undefined && recipe.prep_time != null){
                 $("#prep_time").html(recipe.prep_time);
             }
@@ -348,7 +402,7 @@ $(document).ready(function() {
             for (step in recipe.directions){
                 $("steps").append("<li>"+step+"</li>");
             }
-    
+
         });
     }
     */

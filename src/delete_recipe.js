@@ -1,16 +1,9 @@
 let MongoClient = require('mongodb').MongoClient;
 
 async function delete_recipe(req, res) {
-
-    let username = req.params.username;
-    let recipe = req.params.recipeName;
-
-    // Make sure correct user is signed in
-    if (username !== req.session.username) {
-        res.status(400);
-        res.send("not allowed");
-        return;
-    }
+    console.log(req);
+    let username = req.session.username;
+    let recipe = req.body.recipeName;
 
     console.log(`Going to delete ${recipe} from ${username}`);
 
@@ -21,17 +14,17 @@ async function delete_recipe(req, res) {
     try {
         client = await MongoClient.connect(uri);
         console.log("Connected correctly to server");
-    
+
         const db = client.db('sous-chef');
-    
+
         // Get the users collection
         const users = db.collection('users');
-    
+
         let result = await users.updateOne(
             {username: username}, // Filter
             {$pull: {recipes: {name: recipe}}},{multi:false} // Pull (remove recipe from users recipe array)
         );
-    
+
     } catch (err) {
         console.log(err.stack);
         res.status(500);

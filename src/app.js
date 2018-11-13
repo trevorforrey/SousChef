@@ -71,7 +71,7 @@ app.post('/updateRecipe', update_recipe);
 
 app.post('/update', update_recipe_in_db);
 
-app.delete('/:username/:recipeName/', delete_recipe);
+app.delete('/delete', delete_recipe);
 
 app.get('/cookbook', get_cookbook);
 
