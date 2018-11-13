@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Upload Recipe</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="js/script.js"></script>
+		<!--<div id="qunit"></div>
+	  	<div id="qunit-fixture"></div> 
+		<script src="tests/qunit-2.7.1.js"></script
+	  	<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.7.1.css">-->
+	  	<!--<script src="tests/test.js"></script>-->
+	</head>
+	<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
+            </div>
+            <!-- COLLAPSIBLE NAVBAR -->
+            <div class="collapse navbar-collapse" id="alignment-example">
+                <!-- Links -->
+                <ul class="nav navbar-nav">
+                    <li><a id="navHome" href="/">HOME </a></li>
+                    <li><a class="active" id="navUpload" href="upload.html">UPLOAD RECIPE</a></li>
+                    <li><a id="navCookbook" href="cookbook.html">COOKBOOK</a></li>
+                </ul>
+                {{# if checkSessionExists }}
+                    <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
+                {{/if}}
+                <!-- Button -->
+                <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+
+                    {{# if checkSessionExists }}
+                        <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    {{else}}
+                        <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                            <li><a href="login_registration.html">Login</a></li>
+                            <li><a href="login_registration.html">Register New Account</a></li>
+                        </ul>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- NAVBAR IN ITS OWN FILE-->
+    <!--<div id="nav-placeholder">
+    </div>
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("navbar.html");
+        });
+    </script>-->
+    <!--end of Navigation bar-->
+
+
+    <div class="container-upload container">
+		<div id="content-header">		
+			<h1 class="text-center">Upload your recipe</h1>
+		</div>
+			<div id="form-area">
+				<form>
+					<ul id="upload-recipe">
+						<div class="row-upload row">
+							<li id="name" class="col-md-12">
+								<span >Recipe Name:</span>
+								<input type="text" id="recipeName" class="input-1">
+							</li>
+					    </div>
+						<div class="row-upload row">
+							<li id="time" class="col-md-4" >
+								<span >Preparation time:</span>
+								<input type="text" class="input-1"   id="prepTime">
+							</li>
+							<li class="col-md-4">
+								<span >Cook Time:</span>
+								<input type="text" class="input-1" id="cookTime">
+							</li>
+							<li class="col-md-4">
+								<span >Serving Size:</span>
+								<input type="text" class="input-1"  id="servingSize">	
+							</li>
+					   </div>
+						<div class="row-upload row">
+						 	<li class="col-md-12">
+						 		<input class="btn-upload btn primary" type="button" value="Add Ingredients" id="ingredient" />
+						 		<ul class="ingredient-fields">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+						 	<li class="col-md-12">
+						 		<input class="btn-upload btn primary" type="button" value="Add steps" id="steps"/>
+						 		<ul class="steps-field">
+						 			<li></li>
+						 		</ul>
+						 	</li>
+						 </div>
+						 <div class="row-upload row">
+						 	<li class="col-md-12">
+						 		<input class="btn-upload btn primary" type="button" value="upload" id="upload"/>	
+						 	</li>
+						 </div>		
+				 	</ul>
+				</form>		
+			</div>
+		</div>
+		<footer>
+    		<div class="container">
+    		</div>
+ 		 </footer>
+    <script>//JS for navbar for login popdown
+        // Tooltip component
+        $(function () { $('[data-toggle="tooltip"]').tooltip() });
+        // Popover component
+        $(function () { $('[data-toggle="popover"]').popover() });
+    </script>
+	</body>
+</html>

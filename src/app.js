@@ -5,7 +5,7 @@ import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
 import update_recipe from './update_recipe'
 import update_recipe_in_db from './handle_update'
-
+import get_navbar from './get_navbar'
 
 var session = require('express-session');
 const shell = require('shelljs');
@@ -17,8 +17,6 @@ var hbs = require('express-handlebars');
 let app = express();
 var expressValidator = require('express-validator');
 var passport = require('passport');
-
-
 
 
 // parse application/x-www-form-urlencoded
@@ -55,23 +53,39 @@ app.set('views', path.join(__dirname, '/views')); //Need this line for template 
 app.set('view engine', 'hbs');
 
 
+
 app.post('/fulfillment', handle_fulfillment);
 
 app.get('/', function (req, res) {
     console.log("session data work?");
-    console.log(req.session.username);
-    res.sendFile(path.join(__dirname + '/views/index.html'));
+    console.log(req.session.firstname);
+    if(req.session) {
+        req.checkSessionExists = true;
+        req.welcomeName = req.session.firstname;
+    }
+    else {
+        req.checkSessionExists = false;
+    }
+    // res.sendFile(path.join(__dirname + '/views/index.html'));
+    res.render('index', { checkSessionExists: req.checkSessionExists,
+        welcomeName: req.welcomeName });
 });
 
+//-----Login the User -----------
 app.get('/login_registration.html', function (req, res) {
     //Render because we're using handlebars for this page
-    res.render('login_registration.hbs'/*, { validationCheck: req.validationCheck, usernameError: req.body.username}*/);
-});
-app.get('/logout', function (req, res) {
-    //req.logout();
-    req.session.destroy();
-    //Render because we're using handlebars for this page
     res.render('login_registration.hbs');
+});
+
+//-----Logout the User -----------
+app.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy(() => {
+        res.clearCookie('connect.sid', {
+            path: '/',
+            httpOnly: true,
+        }).render('login_registration.hbs');
+    });
 });
 
 
@@ -80,11 +94,33 @@ app.get('/test', function (req, res) {
 });
 
 
-app.get('/upload',function (req, res) {
-    res.sendFile(path.join(__dirname + '/views/upload.html'));
-    console.log('hit the upload handler');
+app.get('/upload.html',function (req, res) {
+    //res.sendFile(path.join(__dirname + '/views/upload.html'));
+    if(req.session) {
+        req.checkSessionExists = true;
+        req.welcomeName = req.session.firstname;
+    }
+    else {
+        req.checkSessionExists = false;
+    }
+    // res.sendFile(path.join(__dirname + '/views/index.html'));
+    res.render('upload.hbs', { checkSessionExists: req.checkSessionExists,
+        welcomeName: req.welcomeName });
 });
 
+app.get('/cookbook.html',function (req, res) {
+    //res.sendFile(path.join(__dirname + '/views/upload.html'));
+    if(req.session) {
+        req.checkSessionExists = true;
+        req.welcomeName = req.session.firstname;
+    }
+    else {
+        req.checkSessionExists = false;
+    }
+    // res.sendFile(path.join(__dirname + '/views/index.html'));
+    res.render('cookbook.hbs', { checkSessionExists: req.checkSessionExists,
+        welcomeName: req.welcomeName });
+});
 
 app.post('/postReg', postRegistration); //posting a registered user account
 app.post('/getLogin', getLoginUser); //get a user from the db for logging in.
@@ -92,7 +128,6 @@ app.post('/postRecipe', post_user_recipe); //POST a recipe
 app.post('/updateRecipe', update_recipe); //POST a recipe update
 app.post('/update', update_recipe_in_db); //POST a recipe update?????
 app.get('/cookbook', get_cookbook); //GET users cookbook
-
 
 app.listen(port, function () {
     console.log('Cooking server listening on port ' + port);

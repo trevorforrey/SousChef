@@ -5,23 +5,56 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="js/userValidation.js"></script>
+    <script src="js/confirmPassword.js"></script>
     <meta charset="UTF-8">
     <title>Sous Chef – Registration/Login page</title>
 </head>
 <body>
 
-<!--Navigation bar-->
-<div id="nav-placeholder">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
+            </div>
+            <!-- COLLAPSIBLE NAVBAR -->
+            <div class="collapse navbar-collapse" id="alignment-example">
+                <!-- Links -->
+                <ul class="nav navbar-nav">
+                    <li><a id="navHome" href="/">HOME </a></li>
+                    <li><a id="navUpload" href="upload.html">UPLOAD RECIPE</a></li>
+                    <li><a id="navCookbook" href="cookbook.html">COOKBOOK</a></li>
+                </ul>
+                {{# if checkSessionExists }}
+                        <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
+                {{/if}}
+                <!-- Button -->
+                <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
 
-</div>
+                        {{# if checkSessionExists }}
+                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        {{else}}
+                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                <li><a href="login_registration.html">Login</a></li>
+                                <li><a href="login_registration.html">Register New Account</a></li>
+                            </ul>
 
-<script>
-    $(function(){
-        $("#nav-placeholder").load("navbar.html");
-    });
-</script>
-<!--end of Navigation bar-->
+                        {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
 
 <div class="container">
 
@@ -77,8 +110,7 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                   class="form-control btn btn-login" value="Log In"
-                                                   onclick="testFunc()">
+                                                   class="form-control btn btn-login" value="Log In">
                                         </div>
                                     </div>
                                 </div>
