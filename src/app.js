@@ -94,8 +94,7 @@ app.get('/test', function (req, res) {
 });
 
 
-app.get('/upload.html',function (req, res) {
-    //res.sendFile(path.join(__dirname + '/views/upload.html'));
+app.get('/upload',function (req, res) {
     if(req.session) {
         req.checkSessionExists = true;
         req.welcomeName = req.session.firstname;
@@ -108,8 +107,7 @@ app.get('/upload.html',function (req, res) {
         welcomeName: req.welcomeName });
 });
 
-app.get('/cookbook.html',function (req, res) {
-    //res.sendFile(path.join(__dirname + '/views/upload.html'));
+app.get('/userCookbook',function (req, res) {
     if(req.session) {
         req.checkSessionExists = true;
         req.welcomeName = req.session.firstname;
