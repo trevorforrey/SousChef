@@ -44,7 +44,11 @@ async function getLoginUser(req, res) {
                     if (usernameForm === user.username && response === true) {
                         req.validationCheck = false;
                         req.session.username = user.username;
-                        res.redirect('/');
+                        req.session.firstname = user.firstname;
+                        req.checkSessionExists = true;
+                        req.welcomeName = user.firstname;
+                        res.render('index', { checkSessionExists: req.checkSessionExists,
+                            welcomeName: req.welcomeName });
                     }
                     else { //Incorrect password entered
                         req.passwordCheck = true;
