@@ -13,7 +13,7 @@ async function update_recipe_in_db(req, res){
 	let old_name=req.body.old_name.name;
     let new_name=req.body.recipe.name;
     let prep_time=req.body.recipe.prep_time;
-    let cook_time=req.body.recipe.make_time;
+    let cook_time=req.body.recipe.cook_time;
     let ingredients=req.body.recipe.ingredients;
     let directions=req.body.recipe.directions;
     let serving_size=req.body.recipe.serving_size;
