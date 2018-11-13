@@ -257,8 +257,8 @@ $(document).ready(function() {
                 //var id=$("recipeList").val()
                 console.log(old_recipename)
                 flag=1
-                
-              
+                $('.input-1').attr("style","background: #eee");
+                $('.input-1').css("color","#333");
             });
             
             $("#update").on("click",function(){
@@ -280,6 +280,8 @@ $(document).ready(function() {
                         $("#form-area_edit :input").prop("disabled", true);
                  }); 
                 $("#form-area_edit :input").prop("disabled", true);
+                $('.input-1').attr("style","background: #333");
+                $('.input-1').css("color","#bbb");
 
             });
         }
