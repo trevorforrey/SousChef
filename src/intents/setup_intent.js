@@ -1,6 +1,8 @@
 import {get_recipe, get_user_recipe, get_users} from '../mongo_helper'
+import {set_session_data} from '../session_helper'
 
-export async function handle_update_session_entity(req, res, sessionData, projectId, session) {
+
+export async function handle_update_session_entity(req, res, sessionData, projectID, session) {
 
   let response = {};
 
@@ -14,11 +16,11 @@ export async function handle_update_session_entity(req, res, sessionData, projec
   const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
   // The path to the agent the session entity types belong to.
   const sessionEntityPath = sessionEntityTypesClient.sessionEntityTypePath(
-      projectId,session,'ingredient'
+      projectID,session,'ingredient'
   );
   // The path to the agent that the session exists in
   const sessionPath = sessionEntityTypesClient.sessionPath(
-      projectId,session
+      projectID,session
   );
 
   // Places the ingredients into an entity list.
@@ -39,7 +41,6 @@ export async function handle_update_session_entity(req, res, sessionData, projec
         entities: entities
     }
   };
-
   // Call the client library to create a new session entity
   return sessionEntityTypesClient
     .createSessionEntityType(request).then(responses => {
@@ -50,7 +51,7 @@ export async function handle_update_session_entity(req, res, sessionData, projec
       // success creating ingredient session entities
       res.status(201);
       response.fulfillmentText = 'We\'re cooking: ' + sessionData.recipe + '. Lets start cooking!';
-      response.contextOut = req.body.queryResult.outputContexts;
+      response.outputContexts = set_session_data(req.body.queryResult.outputContexts, sessionData, projectID, session);
       res.json(response);
     })
     .catch(err => {
@@ -58,7 +59,7 @@ export async function handle_update_session_entity(req, res, sessionData, projec
       console.error(err);
       res.status(500);
       response.fulfillmentText = 'There was an error setting up your ingredient session entities';
-      response.contextOut = req.body.queryResult.outputContexts;
+      response.outputContexts = req.body.queryResult.outputContexts;
       res.json(response);
     });
 }

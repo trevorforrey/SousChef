@@ -1,0 +1,83 @@
+{
+  "responseId": "bcaa9043-e3c8-4735-9081-eed217ba1400",
+  "queryResult": {
+    "queryText": "repeat step",
+    "parameters": {
+      "repeat-step": "repeat",
+      "repeat-step1": ""
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 4,
+        "parameters": {
+          "repeat-step1": "",
+          "ingredient": "tomato",
+          "repeat-step1.original": "",
+          "repeat-step.original": "repeat",
+          "next-step.original": "next",
+          "recipe": "Bread and Butter",
+          "repeat-step": "repeat",
+          "next-step": "next",
+          "unit-weight-name": "",
+          "unit-volume-name": "",
+          "currentStep": 1,
+          "unit-weight-name.original": "",
+          "unit-volume-name.original": "",
+          "ingredient.original": "tomato?",
+          "username": "thetoastyone"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/next-step-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "repeat-step1": "",
+          "repeat-step1.original": "",
+          "repeat-step.original": "repeat",
+          "next-step.original": "next",
+          "repeat-step": "repeat",
+          "next-step": "next"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/ingredient-amount",
+        "lifespanCount": 2,
+        "parameters": {
+          "repeat-step1": "",
+          "ingredient": "tomato",
+          "repeat-step1.original": "",
+          "repeat-step.original": "repeat",
+          "next-step.original": "next",
+          "repeat-step": "repeat",
+          "unit-weight-name.original": "",
+          "next-step": "next",
+          "unit-weight-name": "",
+          "unit-volume-name.original": "",
+          "ingredient.original": "tomato?",
+          "unit-volume-name": ""
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/0489bc78-4d13-4e24-b529-8d6ebade00b8",
+      "displayName": "repeat-step"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

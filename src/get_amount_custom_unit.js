@@ -1,6 +1,6 @@
 import unitLookup from './unit_lookup';
 
-async function getCustomUnitResponse(ingredientInfo, unit){
+async function getCustomUnitResponse(ingredientInfo, unit, sessionData){
     //console.log(ingredientName)
     //console.log(unit)
     var unitConvert = require('convert-units');
@@ -36,7 +36,12 @@ async function getCustomUnitResponse(ingredientInfo, unit){
         
         //console.log(newUnitShort)
         //console.log(origUnitShort)
+        let servingSizeAdjusted = (sessionData.serving_proportion != undefined &&
+            sessionData.serving_proportion != null && sessionData.serving_proportion != 1);
+        if (servingSizeAdjusted) amount *= sessionData.serving_proportion;
+
         newAmount = unitConvert(amount).from(origUnitShort).to(newUnitShort).toPrecision(3);
+
     } catch (e){
         console.log('unable to convert ' + origUnit + ' to ' + unit + '.');
         return null;

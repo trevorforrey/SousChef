@@ -2,11 +2,13 @@ $(document).ready(function(){
 
 	let numberOfIngredients = 0;
 	let numberOfSteps = 0;
+	let count=0;
 
 	// Add ingredient button handler
 	$("#ingredient").click(function(){
 
 		numberOfIngredients++;
+		count++;
 
 		let nameId = "ingredient" + numberOfIngredients + "name";
 		let amountId = "ingredient" + numberOfIngredients + "amount";
@@ -14,13 +16,13 @@ $(document).ready(function(){
 
 		var ingredient_field = $(document.createElement('input'))
 	         .attr("type", "text")
-	         .attr("value", "name")
+	         .attr("placeholder", "name")
 			 .attr("class", "input-1")
 			 .attr("id", nameId);
 
 	    var amount_field = $(document.createElement('input'))
 	         .attr("type", "text")
-	         .attr("value", "amount")
+	         .attr("placeholder", "amount")
 			 .attr("class", "input-1")
 			 .attr("id", amountId);
 	    
@@ -28,6 +30,7 @@ $(document).ready(function(){
 	         .attr("name", " ")
 			 .attr("class", "input-1")
 			 .attr("id", unitId)
+			 .append("<option>Select...</option>")
 			 .append("<option>unit</option>")
 			 .append("<option>teaspoon</option>")
 			 .append("<option>tablespoon</option>")
@@ -41,11 +44,12 @@ $(document).ready(function(){
 			 .append("<option>liter</option>")
 	    
 		$(".ingredient-fields li")
+			.append("<h2>Ingredient: "+count+"</h2>")
 			.append(ingredient_field)
 			.append(amount_field)
 			.append(unit_field)
-			.append("</br>");
-	         
+			.append("<br><br>");
+			 
 	    console.log(1);
 	});
 
@@ -57,12 +61,14 @@ $(document).ready(function(){
 		numberOfSteps++;
 		let stepId = 'step' + numberOfSteps;
 
-		var steps_field = $(document.createElement('input'))
-	         .attr("type", "text")
+		var steps_field = $(document.createElement('textarea'))
+	         //.attr("type", "text")
+			 .attr("rows", "4")
 			 .attr("class", "input-1")
+			 .attr("style", "none")
 			 .attr("id", stepId);
 	         
-		$(".steps-field li").append(steps_field).append("<br />");
+		$(".steps-field li").append("<h2>Step: "+ numberOfSteps + "</h2>").append(steps_field).append("<br />");
 	 
 	});
 
@@ -75,8 +81,8 @@ $(document).ready(function(){
 
 	// Upload recipe button handler
 	$("#upload").click(function() {
-		postForm()
-
+		postForm();
+		
 	})
 
 	function postForm(){
@@ -90,6 +96,8 @@ $(document).ready(function(){
 		// Grab recipe name and prepTime TODO get cook time and number of servings
 		recipe.name = $("#recipeName").val();
 		recipe.prep_time = $("#prepTime").val();
+		recipe.num_servings = $("#servingSize").val();
+		recipe.cook_time = $("#cookTime").val();
 
 		// Grab all ingredient information
 		for (let i = 1; i <= numberOfIngredients; i++) {
@@ -100,7 +108,7 @@ $(document).ready(function(){
 			// Get all info for the ingredient
 			let ingredientName = $(ingredientId + 'name').val();
 			let ingredientAmount = $(ingredientId + 'amount').val();
-			let ingredientUnits = $(ingredientId + 'units').val();
+			let ingredientUnits = Number($(ingredientId + 'units').val());
 
 			console.log(ingredientName);
 			console.log(ingredientAmount);
@@ -137,7 +145,11 @@ $(document).ready(function(){
 			url = 'http://localhost:5000/postRecipe';
 		} else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
 			url = 'https://sous-chef-assistant.herokuapp.com/postRecipe';
+		} else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+			url = 'http://sous-chef-assistant.herokuapp.com/postRecipe';
 		}
+		console.log('url to post to');
+		console.log(url);
 
 		// Make an ajax call to post the data to the database
 		$.ajax({
@@ -174,5 +186,58 @@ $(document).ready(function(){
 		});
 	 // end of button upload handler
 	}
+//onclick handler on each update button for each recipe in cookbook page
+var recipeToUpdate=null
+	$("#edit").click(function(){
+		//ajax call to /update_recipe ,send data contains name of the recipe
+		//obtained from text field. received data has the id field
+		//{id: id ,body: recipe}
+		var recipe_name={name:$("#recipeList option:selected").text()}
+		//var id=$("recipeList").val()
+		console.log(recipe_name)
+		
+		$.ajax({
+			//contentType: 'text',
+			url : 'http://localhost:5000/updateRecipe',
+			type : 'POST',
+			data : recipe_name,
+			dataType:'text',
+			success:function(data){
+				recipeToUpdate=data
+			//	console.log("recipe data"+JSON.parse(recipeToUpdate)); 	
+				console.log(data)
+			},
+			error:function(){
+				console.log("failure")
+			}
+		})
+
+		 
+
+	})
+
+/*	$("#update").click(function(){
+		//ajax call to /handle_update.js to update db
+		//send req along with id field
+		//{id: id ,body: recipe}
+		try{
+			var recipeToUpdate_obj=JSON.parse(recipeToUpdate)
+		}
+		catch(e){
+			console.log(e)
+		}
+		$.ajax({
+			url : 'http://localhost:5000/update',
+			type : 'POST',
+			data : recipeToUpdate_obj
+			dataType:'text',
+			success:function(response){
+				console.log("response")
+			},
+			error:function(){
+
+			}
+		})
+	}) */
 			
 });
