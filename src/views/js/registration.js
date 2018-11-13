@@ -36,9 +36,6 @@ async function postRegistration(req, res) {
     };
     
     try {
-        console.log("Connected correctly to server – To POST Registration");
-        
-        
         /*Make the registration page more robust and make sure the user is entering a valid username,
           email and the correct password is being made in the confirm password field*/
         req.checkBody('usernameReg', 'Username field cannot be empty.').notEmpty();
@@ -69,6 +66,7 @@ async function postRegistration(req, res) {
         //-------------Uncomment when we can get express-validator working correctly -----------
         
         await MongoClient.connect(uri, function (err, db) {
+            console.log("Connected correctly to server – To POST Registration");
             let dbo = db.db('sous-chef');
             dbo.collection('users').findOne({username: uNameReg }, function (err, user) {
                 if(user) { //If username is not in the DB then send them back to login page
@@ -80,9 +78,13 @@ async function postRegistration(req, res) {
                     dbo.collection('users').insertOne(registrationInsert, function (err, res) {
                         db.close();
                     });
-                    res.render('login_registration.hbs');
+                    req.session.username = uNameReg;
+                    req.session.firstname = fNameReg;
+                    req.checkSessionExists = true;
+                    req.welcomeName = fNameReg;
+                    res.render('index', { checkSessionExists: req.checkSessionExists,
+                        welcomeName: req.welcomeName });
                 }
-                
             })
         });
         

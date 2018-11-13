@@ -13,7 +13,7 @@ async function getLoginUser(req, res) {
     
     try {
         client = await MongoClient.connect(uri);
-        console.log("Connected correctly to server");
+        console.log("Connected correctly to server – To POST Login");
         
         const db = client.db('sous-chef');
         
