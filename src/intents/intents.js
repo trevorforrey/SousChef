@@ -16,6 +16,7 @@ import {handle_get_ingredient} from './ingredient_intent'
 import {handle_login_request} from './login_intent'
 import {handle_username_response} from './login_intent'
 import {handle_recipe_response} from './login_intent'
+import {handle_substitute_ingredient} from './substitute_intent'
 import {handle_get_num_servings} from './get_servings_intent'
 import {handle_adjust_servings} from './adjust_servings_intent'
 
@@ -38,6 +39,7 @@ module.exports = {
     handle_login_request: handle_login_request,
     handle_username_response: handle_username_response,
     handle_recipe_response: handle_recipe_response,
+    handle_substitute_ingredient: handle_substitute_ingredient,
     handle_get_num_servings: handle_get_num_servings,
     handle_adjust_servings: handle_adjust_servings
-}
+};
