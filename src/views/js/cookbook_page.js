@@ -37,8 +37,9 @@ function populate(recipe){
     } else {
         $("#prep_time_edit").val("not listed");
     }
-    if (recipe.make_time != undefined && recipe.make_time != null) {
-        $("#cook_time_edit").val(recipe.make_time);
+
+    if (recipe.cook_time != undefined && recipe.cook_time != null) {
+        $("#cook_time_edit").val(recipe.cook_time);
     } else {
         $("#cook_time_edit").val("not listed");
     }
@@ -95,7 +96,7 @@ function updateRecipe(){
 		// Grab recipe name and prepTime TODO get cook time and number of servings
 		recipe_container.recipe.name = $("#recipe_name_edit").val();
 		recipe_container.recipe.prep_time = $("#prep_time_edit").val();
-        recipe_container.recipe.make_time = $("#cook_time_edit").val();
+        recipe_container.recipe.cook_time = $("#cook_time_edit").val();
         recipe_container.recipe.serving_size = $("#serving_size_edit").val();
 
 
@@ -204,8 +205,10 @@ $(document).ready(function() {
         url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
     } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
-    }else{
-        url = 'https://session-management-souchef.herokuapp.com/cookbook';
+    } else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+        url = 'http://sous-chef-assistant.herokuapp.com/cookbook';
+    } else (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
+        url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
     }
 
     //jquery getJSON() isn't working for me, trying code from 
@@ -255,24 +258,7 @@ $(document).ready(function() {
                 console.log(old_recipename)
                 flag=1
                 
-               /* $.ajax({
-                    //contentType: 'text',
-                    url : 'http://localhost:5000/updateRecipe',
-                    type : 'POST',
-                    data : recipe_name,
-                    dataType:'json',
-                    success:function(data){
-                        recipeId=data.id
-                    //  console.log("recipe data"+JSON.parse(recipeToUpdate));  
-                        console.log(data.id)
-                    },
-                    error:function(){
-                        console.log("failure")
-                    }
-                }) */
-
-         
-
+              
             });
             
             $("#update").on("click",function(){

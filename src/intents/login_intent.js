@@ -72,10 +72,12 @@ export async function handle_username_response(req, res, projectId, session, use
 
   // Instantiates clients
   const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
+
   // The path to the agent the session entity types belong to.
   const sessionEntityPath = sessionEntityTypesClient.sessionEntityTypePath(
       projectId,session,'recipe'
   );
+
   // The path to the agent that the session exists in
   const sessionPath = sessionEntityTypesClient.sessionPath(
       projectId,session
