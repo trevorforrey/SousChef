@@ -1,5 +1,5 @@
 function loadCookBookPage() {
-    window.location.pathname = "/cookbook.html";
+    window.location.pathname = "/userCookbook";
 }
 
 function loadUploadPage() {

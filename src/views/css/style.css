@@ -27,23 +27,18 @@ body {
     color: #fff;
     list-style-type: none;
 }
-#navHome.active {
-    color: #fff;
-}
+
 
 #h1HomePage {
     color: #5db3b8;
 }
 
-.navbar-brand {
-    font-size: 20px;
-}
+.navbar-brand {font-size: 20px;}
+#navUpload.active {color:#fff;}
+#navCookbook.active {color:#fff;}
+#navHom.active {color:#fff;}
 #navHome:hover { color: #fff; }
-#navHome{
-    color: #a02853;
-    font-size: 16px;
-}
-
+#navHome{ color: #a02853; font-size: 16px;}
 #navUpload:hover { color: #fff; }
 #navUpload{ color: #a02853; font-size: 16px;}
 #navCookbook:hover { color: #fff; }
