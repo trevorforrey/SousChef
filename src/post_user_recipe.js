@@ -12,7 +12,7 @@ async function post_user_recipe(req, res) {
 
     // TODO get this data from a session object, or pass it in on the request
     let user = req.session.username;
-
+    console.log(req.session.username)
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";

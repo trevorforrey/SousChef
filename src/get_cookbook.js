@@ -6,7 +6,7 @@ async function get_cookbook(req,res) {
     let recipes_response = {};
 
     // const user = req.session.username; *** Will need to uncomment come merge with develop ***
-    const user = "thetoastyone";
+    const user = req.session.username;
 
     console.log(`Getting cookbook for user ${user}`);
   
