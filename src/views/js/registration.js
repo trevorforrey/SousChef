@@ -67,17 +67,34 @@ async function postRegistration(req, res) {
             });
         }*/
         //-------------Uncomment when we can get express-validator working correctly -----------
-    
+        
+        await MongoClient.connect(uri, function (err, db) {
+            let dbo = db.db('sous-chef');
+            dbo.collection('users').findOne({username: uNameReg }, function (err, user) {
+                if(user) { //If username is not in the DB then send them back to login page
+                    req.usernameCheckReg = true;
+                    res.render('registration.hbs', { usernameCheckReg: req.usernameCheckReg, usernameExists: uNameReg});
+                    db.close();
+                }
+                else {
+                    dbo.collection('users').insertOne(registrationInsert, function (err, res) {
+                        db.close();
+                    });
+                    res.render('login_registration.hbs');
+                }
+                
+            })
+        });
         
         
         //Registration is ok post to DB
-        await MongoClient.connect(uri, function (err, db) {
+        /*await MongoClient.connect(uri, function (err, db) {
             let dbo = db.db('sous-chef');
             dbo.collection('users').insertOne(registrationInsert, function (err, res) {
                 db.close();
             })
         });
-        res.render('login_registration.hbs');
+        res.render('login_registration.hbs');*/
         
         
     } catch (err) {

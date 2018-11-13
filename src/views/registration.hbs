@@ -11,50 +11,50 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
-            </div>
-            <!-- COLLAPSIBLE NAVBAR -->
-            <div class="collapse navbar-collapse" id="alignment-example">
-                <!-- Links -->
-                <ul class="nav navbar-nav">
-                    <li><a id="navHome" href="/">HOME </a></li>
-                    <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
-                    <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
-                </ul>
-                {{# if checkSessionExists }}
-                        <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
-                {{/if}}
-                <!-- Button -->
-                <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
-                    <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
-
-                        {{# if checkSessionExists }}
-                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                                <li><a href="/logout">Logout</a></li>
-                            </ul>
-                        {{else}}
-                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                                <li><a href="login_registration.html">Login</a></li>
-                                <li><a href="registration.html">Register New Account</a></li>
-                            </ul>
-
-                        {{/if}}
-                </ul>
-            </div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
         </div>
-    </nav>
-    <!-- END NAVBAR -->
+        <!-- COLLAPSIBLE NAVBAR -->
+        <div class="collapse navbar-collapse" id="alignment-example">
+            <!-- Links -->
+            <ul class="nav navbar-nav">
+                <li><a id="navHome" href="/">HOME </a></li>
+                <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
+                <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
+            </ul>
+            {{# if checkSessionExists }}
+                <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
+            {{/if}}
+            <!-- Button -->
+            <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+
+                {{# if checkSessionExists }}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                {{else}}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="login_registration.html">Login</a></li>
+                        <li><a href="registration.html">Register New Account</a></li>
+                    </ul>
+
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END NAVBAR -->
 
 <div class="container">
 
@@ -64,10 +64,10 @@
                 <div class="panel-heading logRegHeader">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">LOGIN</a>
+                            <a href="#" id="login-form-link">LOGIN</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="register-form-link">REGISTER ACCOUNT</a>
+                            <a href="#" class="active" id="register-form-link">REGISTER ACCOUNT</a>
                         </div>
                     </div><hr>
                 </div>
@@ -77,23 +77,20 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <! Login Form-->
-                            <! ======================================================= -->
-                            <!Need to collect the form data in action -->
-                            <! ======================================================= -->
                             <form id="login-form" action="/getLogin" method="post"
-                                  role="form" style="display: block;">
-                                    {{# if usernameCheck }}
-                                        <section class="usernameCheck">
-                                            <p id="invalidLoginP">User "{{usernameError}}" does not exist!
-                                                <br>Please Try again!</p><br>
-                                        </section>
-                                    {{/if}}
-                                    {{# if passwordCheck }}
-                                        <section class="passwordCheck">
-                                            <p id="invalidLoginP">The password you entered is incorrect.
-                                                <br>Please Try again!</p>
-                                        </section>
-                                    {{/if}}
+                                  role="form" style="display: none;">
+                                {{# if usernameCheck }}
+                                    <section class="usernameCheck">
+                                        <p id="invalidLoginP">User "{{usernameError}}" does not exist!
+                                            <br>Please Try again!</p><br>
+                                    </section>
+                                {{/if}}
+                                {{# if passwordCheck }}
+                                    <section class="passwordCheck">
+                                        <p id="invalidLoginP">The password you entered is incorrect.
+                                            <br>Please Try again!</p>
+                                    </section>
+                                {{/if}}
                                 <div class="form-group">
                                     <input required type="text" name="usernameLogin" id="usernameLogin" tabindex="1"
                                            class="form-control testInput" placeholder="Username" value="" >
@@ -136,7 +133,7 @@
 
                             <! Registration Form -->
                             <form id="register-form" action="/postReg"
-                                  method="post" role="form" style="display: none;">
+                                  method="post" role="form" style="display: block;">
                                 <div class="form-group">
                                     <input type="text" name="usernameReg" id="usernameReg" tabindex="1"
                                            class="form-control" placeholder="Username" value="" required>
@@ -203,30 +200,30 @@
 
 </div>
 <script>//JS for navbar for login popdown
-    // Tooltip component
-    $(function () { $('[data-toggle="tooltip"]').tooltip() });
-    // Popover component
-    $(function () { $('[data-toggle="popover"]').popover() });
+// Tooltip component
+$(function () { $('[data-toggle="tooltip"]').tooltip() });
+// Popover component
+$(function () { $('[data-toggle="popover"]').popover() });
 
-    /*Click functionality between the Login and register tabs
-    * using jquery to make it easier to do the DOM manipulation of showing
-    * and hiding tab panels and also because I found a nice code snippet online ;-)*/
-    $(function () {
-        $('#login-form-link').click(function  (e) {
-            $("#login-form").delay(100).fadeIn(100);
-            $("#register-form").fadeOut(100);
-            $('#register-form-link').removeClass('active');
-            $(this).addClass('active');
-            e.preventDefault();
-        });
-        $('#register-form-link').click(function (e) {
-            $("#register-form").delay(100).fadeIn(100);
-            $("#login-form").fadeOut(100);
-            $('#login-form-link').removeClass('active');
-            $(this).addClass('active');
-            e.preventDefault();
-        });
+/*Click functionality between the Login and register tabs
+* using jquery to make it easier to do the DOM manipulation of showing
+* and hiding tab panels and also because I found a nice code snippet online ;-)*/
+$(function () {
+    $('#register-form-link').click(function (e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
     });
+    $('#login-form-link').click(function  (e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+});
 </script>
 
 </body>

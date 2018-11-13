@@ -73,8 +73,12 @@ app.get('/', function (req, res) {
 
 //-----Login the User -----------
 app.get('/login_registration.html', function (req, res) {
-    //Render because we're using handlebars for this page
     res.render('login_registration.hbs');
+});
+
+//-----Login the User -----------
+app.get('/registration.html', function (req, res) {
+    res.render('registration.hbs');
 });
 
 //-----Logout the User -----------

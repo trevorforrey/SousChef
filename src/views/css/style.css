@@ -28,7 +28,6 @@ body {
     list-style-type: none;
 }
 
-
 #h1HomePage {
     color: #5db3b8;
 }
@@ -61,6 +60,13 @@ body {
     color:#FFFFFF;
     padding:11px;
     cursor: pointer;
+}
+#message {
+    padding: 0 0 0 4px;
+}
+#uNameInvalidMsg {
+    color:red;
+    padding: 0 0 0 4px;
 }
 
 h1{
