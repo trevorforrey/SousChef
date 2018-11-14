@@ -203,12 +203,8 @@ $(document).ready(function() {
         url = 'http://localhost:5000/cookbook';
     } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
         url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
-    } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
+    } else   {
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
-    } else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
-        url = 'http://sous-chef-assistant.herokuapp.com/cookbook';
-    } else (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
-        url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
     }
 
     //jquery getJSON() isn't working for me, trying code from 
