@@ -20,13 +20,13 @@ function populate(recipe){
     // Empty previous ingredients and steps before populating the page
     $("#ingredients").empty();
     $("#steps").empty();
-
+    
     if(recipe.name != undefined && recipe.name != null){
             $("#recipe_name_edit").val(recipe.name);
     }else{
             $("#recipe_name_edit").val("not listed");
     }
-    //serving_size_edit
+    //serving_size_edit 
      /*if(recipe.name != undefined && recipe.name !=- null){
             $("#recipe_name_edit").html(recipe.name);
     }else{
@@ -65,13 +65,13 @@ function renderIngredientsAndSteps(recipe){
     //Dynamically creating ingredients as a table (Ingredient Name, Quantity , Unit)
     for(var i=0; i<length ;i++){
         if(ingredients[i] != null){
-            buildHtml += "<div class=\"row-upload row\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td style='padding-left:10px;'><input type='text'  id="+(i+1)+" name='slno'"+(i+1)+" class='input-1' maxlength='2' style='width:40px !important;' value="+(i+1)+" disabled></td> <td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-1\" maxlength='252' value=\"dummy\" style='width: 250px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-1\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-1\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td></tr></div>";
+            buildHtml += "<div class=\"row-upload row\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-1\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-1\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-1\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td></tr></div>";
         }
     }
     document.getElementById('stepsAndIngredientsDiv').innerHTML = buildHtml;
     length = steps.length;
     numberOfSteps = length;
-
+    
     //Dynamically creating steps as a list of textboxes
     for(var j=0;j<length;j++){
         steps_field = $(document.createElement('input'))
@@ -81,8 +81,8 @@ function renderIngredientsAndSteps(recipe){
              .attr("value", steps[j]);
         $(".steps-field li").append(steps_field).append("<br />");
 
-    }
-
+    }	         
+    
 }
 
 function updateRecipe(){
@@ -167,6 +167,9 @@ function updateRecipe(){
 				console.log('post was successful!');
 				// Create success element
                 document.getElementById("responseTxt").innerHTML = "Your recipe was updated successfully!";
+                setTimeout(function() {
+                    document.getElementById("responseTxt").innerHTML = "";
+                }, 10000);
 				// Append to container div on page
 				//$("#form-area").append(success_text).append("<br />");
 			},
@@ -248,15 +251,15 @@ $(document).ready(function() {
                     method: "GET",
                 });
     console.log("AJAX call result:"+updateTemplate); */
-
+    
     let url;
     if (window.location.href.includes('localhost')) {
         url = 'http://localhost:5000/cookbook';
     } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
         url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
-    } else  {
+    } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
-    } else{
+    } else {
         url = 'https://session-management-souchef.herokuapp.com/cookbook';
     }
 
@@ -308,9 +311,27 @@ $(document).ready(function() {
                 //var id=$("recipeList").val()
                 console.log(old_recipename)
                 flag=1
-
+                //$('.input-1').attr("style","background: #eee");
+                $('.input-1').css("color","#eee");
+            });
+            
+            $("#cancel").on("click",function(){
+                document.getElementById('stepsList').innerHTML = "";
+                document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
+                $.when(renderIngredientsAndSteps(currentRecipe)).done(function(){
+                        populate(currentRecipe);
+                        $("#form-area_edit :input").prop("disabled", true);
+                 }); 
+                $("#form-area_edit :input").prop("disabled", true);
+                //$('.input-1').attr("style","background: #333");
+                $('.input-1').css("color","#777");
 
             });
+            
+            $('.input-1').css("color","#777");
+        }
+        
+    });
 
             $("#update").on("click",function(){
                 if(flag===1){
