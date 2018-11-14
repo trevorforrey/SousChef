@@ -1,5 +1,6 @@
 import handle_fulfillment from './fulfillment_controller'
 import post_user_recipe from './post_user_recipe'
+import delete_recipe from './delete_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
@@ -69,6 +70,8 @@ app.post('/postRecipe', post_user_recipe);
 app.post('/updateRecipe', update_recipe);
 
 app.post('/update', update_recipe_in_db);
+
+app.delete('/delete', delete_recipe);
 
 app.get('/cookbook', get_cookbook);
 
