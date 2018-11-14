@@ -40,7 +40,8 @@ export function set_session_data(contexts, sessionData,ProjectID,SessionID) {
         for (let i = 0; i < contexts.length; i++) {
             if (contexts[i].name.includes("session_data")) {
                 contexts[i].parameters = sessionData;
-                session_found = true
+                session_found = true;
+                contexts[i].lifespanCount = 5;
             }
         }
         if (!session_found) {
@@ -67,4 +68,13 @@ export function get_initial_session_data(contexts) {
     }
   }
   return sessionData
+}
+
+export function handle_no_session_data(req,res,sessionData) {
+    let response = {};
+
+    res.status(400);
+    response.fulfillmentText = "You aren't logged in, please ask to log in to cook";
+    res.json(response);
+    return;
 }
