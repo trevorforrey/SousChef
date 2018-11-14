@@ -350,21 +350,6 @@ $(document).ready(function() {
               window.location.reload();
             });
 
-            $("#cancel").on("click",function(){
-                console.log("Cancel");
-                document.getElementById('stepsList').innerHTML = "";
-                document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
-                $.when(renderIngredientsAndSteps(currentRecipe)).done(function(){
-                        populate(currentRecipe);
-                        $("#form-area_edit :input").prop("disabled", true);
-                 });
-                $("#form-area_edit :input").prop("disabled", true);
-
-            });
-        }
-
-    });
-
     /*
     $.getJSON("http://localhost:5000/:userid/cookbook?callback=?", success=function(rawRecipes, status, xhr){
         //Used https://stackoverflow.com/questions/22743287/uncaught-syntax-error-unexpected-token-getjson as reference
