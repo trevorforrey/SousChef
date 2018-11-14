@@ -107,8 +107,8 @@ $(document).ready(function(){
 
 			// Get all info for the ingredient
 			let ingredientName = $(ingredientId + 'name').val();
-			let ingredientAmount = $(ingredientId + 'amount').val();
-			let ingredientUnits = Number($(ingredientId + 'units').val());
+			let ingredientAmount = Number($(ingredientId + 'amount').val());
+			let ingredientUnits = $(ingredientId + 'units').val();
 
 			console.log(ingredientName);
 			console.log(ingredientAmount);
