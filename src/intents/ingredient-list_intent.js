@@ -1,10 +1,9 @@
 import {get_recipe, get_user_recipe} from '../mongo_helper'
-import {set_session_data} from '../session_helper'
 
-export async function handle_get_ingredient_list(req,res,sessionData, contexts, projectID, sessionID) {
+export async function handle_get_ingredient_list(req,res,sessionData) {
     let response = {};
     let data = req.body;
-    // let contexts = data.queryResult.outputContexts;
+    let contexts = data.queryResult.outputContexts;
 
     let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
 

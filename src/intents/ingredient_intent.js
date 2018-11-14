@@ -1,12 +1,11 @@
 import {get_recipe, get_user_recipe} from '../mongo_helper'
 import getCustomUnitResponse from '../get_amount_custom_unit'
-import {set_session_data} from '../session_helper'
 
-export async function handle_get_ingredient(req,res,sessionData, contexts, projectID, sessionID) {
+export async function handle_get_ingredient(req,res,sessionData) {
     let response = {};
     let response_text;
     let data = req.body;
-    // let contexts = data.queryResult.outputContexts;
+    let contexts = data.queryResult.outputContexts;
 
     let ingredientResponse = await get_ingredient_from_user(sessionData.username, sessionData.recipe, data.queryResult.parameters.ingredient, data);
 
@@ -18,7 +17,7 @@ export async function handle_get_ingredient(req,res,sessionData, contexts, proje
         res.status(400);
     }
     response.fulfillmentText = ingredientResponse;
-    response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
+    response.outputContexts = data.queryResult.outputContexts;
     res.json(response);
     return;
 }
