@@ -1,7 +1,6 @@
 let MongoClient = require('mongodb').MongoClient;
 
 async function delete_recipe(req, res) {
-    console.log(req);
     let username = req.session.username;
     let recipe = req.body.recipeName;
 

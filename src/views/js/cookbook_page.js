@@ -199,8 +199,12 @@ function deleteRecipe(recipe) {
     url = 'http://localhost:5000/delete';
   } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
     url = 'https://sous-chef-assistant.herokuapp.com/delete';
-  } else {
-    url = 'https://session-management-souchef.herokuapp.com/delete';
+  } else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+    url = 'https://sous-chef-assistant.herokuapp.com/delete';
+  } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
+    url = 'https://master-heroku-souchef.herokuapp.com//delete';
+  } else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
+    url = 'http://master-heroku-souchef.herokuapp.com/delete';
   }
 
   $.ajax({
