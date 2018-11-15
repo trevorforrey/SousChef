@@ -65,7 +65,7 @@ function renderIngredientsAndSteps(recipe){
     //Dynamically creating ingredients as a table (Ingredient Name, Quantity , Unit)
     for(var i=0; i<length ;i++){
         if(ingredients[i] != null){
-            buildHtml += "<div class=\"row-upload row\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-1\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-1\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-1\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td></tr></div>";
+            buildHtml += "<div class=\"row-upload row\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-edit\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td></tr></div>";
         }
     }
     document.getElementById('stepsAndIngredientsDiv').innerHTML = buildHtml;
@@ -76,7 +76,7 @@ function renderIngredientsAndSteps(recipe){
     for(var j=0;j<length;j++){
         steps_field = $(document.createElement('input'))
 	         .attr("type", "text")
-			 .attr("class", "input-1")
+			 .attr("class", "input-edit")
 			 .attr("id", "step"+(j+1))
              .attr("value", steps[j]);
         $(".steps-field li").append(steps_field).append("<br />");
@@ -311,8 +311,7 @@ $(document).ready(function() {
                 //var id=$("recipeList").val()
                 console.log(old_recipename)
                 flag=1
-                //$('.input-1').attr("style","background: #eee");
-                $('.input-1').css("color","#eee");
+                $('.input-edit').css("color","#eee");
             });
             
             $("#cancel").on("click",function(){
@@ -323,12 +322,11 @@ $(document).ready(function() {
                         $("#form-area_edit :input").prop("disabled", true);
                  }); 
                 $("#form-area_edit :input").prop("disabled", true);
-                //$('.input-1').attr("style","background: #333");
-                $('.input-1').css("color","#777");
+                $('.input-edit').css("color","#777");
 
             });
             
-            $('.input-1').css("color","#777");
+            $('.input-edit').css("color","#777");
         }
         
     });
