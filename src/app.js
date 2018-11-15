@@ -59,7 +59,7 @@ app.post('/fulfillment', handle_fulfillment);
 app.get('/', function (req, res) {
     console.log("session data work?");
     console.log(req.session.firstname);
-    if(req.session) {
+    if(req.session && req.session.username) {
         req.checkSessionExists = true;
         req.welcomeName = req.session.firstname;
     }
@@ -99,7 +99,7 @@ app.get('/test', function (req, res) {
 
 
 app.get('/upload',function (req, res) {
-    if(req.session) {
+    if(req.session && req.session.username) {
         req.checkSessionExists = true;
         req.welcomeName = req.session.firstname;
     }
@@ -112,7 +112,7 @@ app.get('/upload',function (req, res) {
 });
 
 app.get('/userCookbook',function (req, res) {
-    if(req.session) {
+    if(req.session && req.session.username) {
         req.checkSessionExists = true;
         req.welcomeName = req.session.firstname;
     }

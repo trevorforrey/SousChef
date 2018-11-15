@@ -1,13 +1,38 @@
 
-/*Show a red border around Login and Registration inputs if not valid*/
-input:focus:required:invalid {border: 2px solid red;}
-input:required:valid { border: 2px solid black; }
-
+/*============ START BASIC HTML TAGS ==============*/
 body {
+    font-family: Calibri;
     background: #bbb;
 }
+h1{
+    text-align: center;
+    margin:50px;
+}
+h3 {
+    text-align: center;
+    margin:0px;
+    font-size: 1.05em;
+}
+p{
 
-/*Div for invalid login message*/
+    padding-top: 30px;
+    font-size: .8em;
+}
+h4{
+    margin: 50px;
+}
+img.test { background-size: auto 100%; width: 100%;}
+ul {
+    list-style-type: circle;
+}
+ol {
+    list-style-type: upper-roman;
+}
+/*END BASIC HTML TAGS ********************** */
+
+
+
+/*=========START LOGIN MESSAGES =============*/
 #invalidLoginP {
     background: #dca7a7;
     font-size: 14px;
@@ -15,33 +40,46 @@ body {
     padding: 4px 0 4px 10px;
     margin-bottom: 12px;
 }
+#uNameInvalidMsg {
+    color:red;
+    padding: 0 0 0 4px;
+}
+/*CONFIRM PASSWORD MSG */
+#message {
+    padding: 0 0 0 4px;
+}
+/*END LOGIN MESSAGES ********************** */
+
+
+/*========= START NAVBAR =============*/
+#welcomeMsg {
+    color:#fff;
+    margin: 0 0 0 110px;
+    padding: 0;
+    font-size: 15px;
+}
+
 #nav_bar .active {
     color: #F8F8F8;
     background-color: #4f81bd;
-}
-#welcomeMsg {
-    color:#fff;
-    padding: 0 18px 0 0;
 }
 #navLogo {
     color: #fff;
     list-style-type: none;
 }
-
 #h1HomePage {
     color: #5db3b8;
 }
-
-.navbar-brand {font-size: 20px;}
+.navbar-brand {font-size: 22px;}
 #navUpload.active {color:#fff;}
 #navCookbook.active {color:#fff;}
-#navHom.active {color:#fff;}
+#navHome.active {color:#fff;}
 #navHome:hover { color: #fff; }
-#navHome{ color: #a02853; font-size: 16px;}
+#navHome{ color: #a02853; font-size: 17px;}
 #navUpload:hover { color: #fff; }
-#navUpload{ color: #a02853; font-size: 16px;}
+#navUpload{ color: #a02853; font-size: 17px;}
 #navCookbook:hover { color: #fff; }
-#navCookbook{ color: #a02853; font-size: 16px;}
+#navCookbook{ color: #a02853; font-size: 17px;}
 
 .navbar-toggle {
     background: #a02853;
@@ -50,7 +88,7 @@ body {
 #alreadyText{color:#fff}
 .infoButton {
     text-decoration: none;
-    margin-top: 10px;
+    margin: 0 0 4px 0;
     background-color: #a02853;
     border:  solid 1px #000;
     border-radius: 0;
@@ -61,48 +99,15 @@ body {
     padding:11px;
     cursor: pointer;
 }
-#message {
-    padding: 0 0 0 4px;
-}
-#uNameInvalidMsg {
-    color:red;
-    padding: 0 0 0 4px;
-}
-
-h1{
-	text-align: center;
-	margin:50px;
-}
-
-h3 {
-    text-align: center;
-    margin:0px;
-    font-size: 1.05em;
-}
-
-p{
-
-	padding-top: 30px;
-	font-size: .8em;
-}
-h4{
-	margin: 50px;
-}
-img.test { background-size: auto 100%; width: 100%;}
+/*END NAVBAR =============*/
 
 
 
+/*============ START LOGIN/REGISTRATION PAGES ==============*/
+/*Show a red border around Login and Registration inputs if not valid*/
+input:focus:required:invalid {border: 2px solid red;}
+input:required:valid { border: 2px solid black; }
 
-
-ul {
-    list-style-type: circle;
-}
-
-ol {
-    list-style-type: upper-roman;
-}
-
-/*Registration/Login Page CSS*/
 .panel-login {
     border-color: #ccc;
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -129,7 +134,7 @@ ol {
     font-size: 18px;
 }
 #login-form-link.active {
-    color: #5db3b8;
+    color: #53A3CD;
 }
 #register-form-link.active {
     color: #8cc63f;
@@ -143,12 +148,9 @@ ol {
     padding-bottom: 4px;
     background: #eeeeee;
 }
-
-
 .panel-body {
     background: #eeeeee;
 }
-
 .panel-login>.panel-heading hr{
     margin-top: 10px;
     margin-bottom: 0px;
@@ -176,8 +178,6 @@ ol {
     box-shadow: none;
     border-color: #5db3b8;
 }
-
-
 #register-form input:hover,
 #register-form  input:focus {
     outline:none;
@@ -186,9 +186,8 @@ ol {
     box-shadow: none;
     border-color: #8cc63f;
 }
-
 .btn-login {
-    background-color: #5db3b8;
+    background-color: #53A3CD;
     outline: none;
     color: #fff;
     font-size: 14px;
@@ -196,14 +195,14 @@ ol {
     font-weight: normal;
     padding: 14px 0;
     text-transform: uppercase;
-    border-color: #5db3b8;
+    border-color: #53A3CD;
     border-radius: 0;
 }
 .btn-login:hover,
 .btn-login:focus {
-    color: #000;
-    background-color: #85dbcd;
-    border-color: #85dbcd;
+    color: #fff;
+    background-color: #5db3b8;
+    border-color: #5db3b8;
 }
 .forgot-password {
     text-decoration: underline;
@@ -232,7 +231,10 @@ ol {
     background-color: #74b893;
     border-color: #74b893;
 }
+/*END LOGIN/REGISTRATION ***********************/
 
+
+/*============ START HOME PAGE ==============*/
 .homeImage {
     width: 100%;
     background-image: url("../img/9rguqEo.jpg");
@@ -240,22 +242,19 @@ ol {
     background-position: center;
     height: 50em;
 }
-
 #homeButtons {
     padding-top: 2em;
     text-align: center;
 }
-
 #uploadRecipeButton {
     margin-left: 1em;
     margin-right: 1em;
 }
-
 #cookbookButton {
     margin-left: 1em;
     margin-right: 1em;
 }
-
+/*END HOME PAGE ********************** */
 
 
 .input-1   
@@ -265,10 +264,10 @@ ol {
 
 /**#ingredient, #steps, #name, #time{
     margin: 10px 0;
-    
 }
-
 li#name span, li#time span {min-width: 200px;}**/
+
+
 .btn-upload{
     height:40px;
     width:100%;
