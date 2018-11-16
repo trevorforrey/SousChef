@@ -6,7 +6,6 @@ import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
 import update_recipe from './update_recipe'
 import update_recipe_in_db from './handle_update'
-import get_navbar from './get_navbar'
 
 var session = require('express-session');
 const shell = require('shelljs');
