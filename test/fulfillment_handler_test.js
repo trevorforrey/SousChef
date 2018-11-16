@@ -2,7 +2,6 @@
 process.env.NODE_ENV = 'test';
 
 import 'babel-polyfill'
-import json_load from './request_json'
 
 //Require the dev-dependencies 
 var cjson = require('cjson');
@@ -14,21 +13,21 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 
-const ingredient_list = cjson.load(__dirname+'/ingredient_list.json');
-const ingd_follow_up=cjson.load(__dirname+'/ingd_follow_up.json');
-const first_step=cjson.load(__dirname+'/first_step.json');
-const next_step=cjson.load(__dirname+'/next_step.json');
-const repeat_step=cjson.load(__dirname+'/repeat_step.json');
-const previous_step=cjson.load(__dirname+'/prev_step.json');
-const requested_step=cjson.load(__dirname+'/requested_step.json');
-const remaining_step=cjson.load(__dirname+'/remaining_step.json');
+const ingredient_list = cjson.load(__dirname+'/json/ingredient_list.json');
+const ingd_follow_up=cjson.load(__dirname+'/json/ingd_follow_up.json');
+const first_step=cjson.load(__dirname+'/json/first_step.json');
+const next_step=cjson.load(__dirname+'/json/next_step.json');
+const repeat_step=cjson.load(__dirname+'/json/repeat_step.json');
+const previous_step=cjson.load(__dirname+'/json/prev_step.json');
+const requested_step=cjson.load(__dirname+'/json/requested_step.json');
+const remaining_step=cjson.load(__dirname+'/json/remaining_step.json');
 //const setup_intent_loggedin=cjson.load(__dirname+'/run_setup_logged_in.json');
-const setup_intent=cjson.load(__dirname+'/run_setup.json');
-const cook_time=cjson.load(__dirname+'/cook_time.json');
-const prep_time=cjson.load(__dirname+'/prep_time.json');
-const login_request=cjson.load(__dirname+'/login_req.json');
-const login_request_user=cjson.load(__dirname+'/login_user.json');
-const user_recipe_req= cjson.load(__dirname+'/user_recipe_req.json'); 
+const setup_intent=cjson.load(__dirname+'/json/run_setup.json');
+const cook_time=cjson.load(__dirname+'/json/cook_time.json');
+const prep_time=cjson.load(__dirname+'/json/prep_time.json');
+const login_request=cjson.load(__dirname+'/json/login_req.json');
+const login_request_user=cjson.load(__dirname+'/json/login_user.json');
+const user_recipe_req= cjson.load(__dirname+'/json/user_recipe_req.json'); 
 
 //ingredient list
 describe('Test Getting ingredient list', () => {
@@ -43,7 +42,7 @@ describe('Test Getting ingredient list', () => {
             } else {
                 response.should.have.status(201);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include("For this recipe, you'll need 4 gram of tomato. and 2 ounce of butter");
+                response.body.fulfillmentText.should.include("For this recipe, you'll need 4 gram of tomatoes. and 2 ounce of butter");
                 done();
             }
         });
@@ -64,7 +63,7 @@ describe('Test Getting ingredient follow up', () => {
             } else {
                 response.should.have.status(201);
                 console.log('Fulfillment Text: ' + response.body.fulfillmentText);
-                response.body.fulfillmentText.should.include("You need 4 grams of tomato");
+                response.body.fulfillmentText.should.include("You need 4 grams of tomatoes");
                 done();
             }
         });
