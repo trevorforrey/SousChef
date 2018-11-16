@@ -27,11 +27,11 @@ function populate(recipe){
             $("#recipe_name_edit").val("not listed");
     }
     //serving_size_edit 
-     /*if(recipe.name != undefined && recipe.name !=- null){
-            $("#recipe_name_edit").html(recipe.name);
+    if(recipe.serving_size != undefined && recipe.serving_size != null){
+            $("#serving_size_edit").val(recipe.serving_size);
     }else{
-            $("#recipe_name_edit").html("not listed");
-    } */
+            $("#serving_size_edit").val("not listed");
+    } 
     if (recipe.prep_time != undefined && recipe.prep_time != null){
         $("#prep_time_edit").val(recipe.prep_time);
     } else {
