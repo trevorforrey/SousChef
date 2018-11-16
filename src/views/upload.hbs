@@ -4,6 +4,7 @@
 		<title>Upload Recipe</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+        <script src="js/jquery-3.2.1.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="js/script.js"></script>
@@ -32,15 +33,15 @@
                 <!-- Links -->
                 <ul class="nav navbar-nav">
                     <li><a id="navHome" href="/">HOME </a></li>
-                    <li><a class="active" id="navUpload"  href="upload">UPLOAD RECIPE</a></li>
+                    <li><a id="navUpload" class="active" href="upload">UPLOAD RECIPE</a></li>
                     <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
                 </ul>
                 {{# if checkSessionExists }}
-                    <span id="welcomeMsg" class="navbar-left"><i>Welcome {{welcomeName}}!</i></span><br>
+                    <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
                 {{/if}}
                 <!-- Button -->
                 <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
 
                     {{# if checkSessionExists }}
@@ -70,55 +71,55 @@
 
 
     <div class="container-upload container">
-		<div id="content-header">		
-			<h1 class="text-center">Upload your recipe</h1>
-		</div>
-			<div id="form-area">
-				<form>
-					<ul id="upload-recipe">
-						<div class="row-upload row">
-							<li id="name" class="col-md-12">
-								<span >Recipe Name:</span>
-								<input type="text" id="recipeName" class="input-1">
-							</li>
-					    </div>
-						<div class="row-upload row">
-							<li id="time" class="col-md-4" >
-								<span >Preparation time:</span>
-								<input type="text" class="input-1"   id="prepTime">
-							</li>
-							<li class="col-md-4">
-								<span >Cook Time:</span>
-								<input type="text" class="input-1" id="cookTime">
-							</li>
-							<li class="col-md-4">
-								<span >Serving Size:</span>
-								<input type="text" class="input-1"  id="servingSize">	
-							</li>
-					   </div>
-						<div class="row-upload row">
-						 	<li class="col-md-12">
-						 		<input class="btn-upload btn primary" type="button" value="Add Ingredients" id="ingredient" />
-						 		<ul class="ingredient-fields">
-						 			<li></li>
-						 		</ul>
-						 	</li>
-						 	<li class="col-md-12">
-						 		<input class="btn-upload btn primary" type="button" value="Add steps" id="steps"/>
-						 		<ul class="steps-field">
-						 			<li></li>
-						 		</ul>
-						 	</li>
-						 </div>
-						 <div class="row-upload row">
-						 	<li class="col-md-12">
-						 		<input class="btn-upload btn primary" type="button" value="upload" id="upload"/>	
-						 	</li>
-						 </div>		
-				 	</ul>
-				</form>		
-			</div>
-		</div>
+        <div id="content-header">
+            <h1 class="text-center">Upload your recipe</h1>
+        </div>
+        <div id="form-area">
+            <form>
+                <ul id="upload-recipe">
+                    <div class="row-upload row">
+                        <li id="name" class="col-md-12">
+                            <span >Recipe Name:</span>
+                            <input type="text" id="recipeName" class="input-1">
+                        </li>
+                    </div>
+                    <div class="row-upload row">
+                        <li id="time" class="col-md-4" >
+                            <span >Preparation time:</span>
+                            <input type="text" class="input-1"   id="prepTime">
+                        </li>
+                        <li class="col-md-4">
+                            <span >Cook Time:</span>
+                            <input type="text" class="input-1" id="cookTime">
+                        </li>
+                        <li class="col-md-4">
+                            <span >Serving Size:</span>
+                            <input type="text" class="input-1"  id="servingSize">
+                        </li>
+                    </div>
+                    <div class="row-upload row">
+                        <li class="col-md-12">
+                            <input class="btn-upload btn primary" type="button" value="Add Ingredients" id="ingredient" />
+                            <ul class="ingredient-fields">
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="col-md-12">
+                            <input class="btn-upload btn primary" type="button" value="Add steps" id="steps"/>
+                            <ul class="steps-field">
+                                <li></li>
+                            </ul>
+                        </li>
+                    </div>
+                    <div class="row-upload row">
+                        <li class="col-md-12">
+                            <input class="btn-upload btn primary" type="button" value="Upload" id="upload"/>
+                        </li>
+                    </div>
+                </ul>
+            </form>
+        </div>
+    </div>
 		<footer>
     		<div class="container">
     		</div>

@@ -51,19 +51,17 @@ ol {
 /*END LOGIN MESSAGES ********************** */
 
 #cookBookBody{
-     padding-top: 90px;
-     background-color: #bbb;
-    background-image: img/9rguqEo.jpg;
+     padding-top: -90px;
+    background-image: url('../img/9rguqEo.jpg');
 }
 
 ul {
     list-style-type: circle;
-
+}
 /*========= START NAVBAR =============*/
 #welcomeMsg {
     color:#fff;
-    margin: 0 0 0 110px;
-    padding: 0;
+    margin: 10px 0 0 4px;
     font-size: 15px;
 }
 
@@ -95,8 +93,8 @@ ul {
 #btnText {color:#000}
 #alreadyText{color:#fff}
 .infoButton {
+    margin: 6px 0 4px 0;
     text-decoration: none;
-    margin: 0 0 4px 0;
     background-color: #a02853;
     border:  solid 1px #000;
     border-radius: 0;
@@ -341,7 +339,7 @@ input:required:valid { border: 2px solid black; }
 
 #recipeList{
      margin-left: 52px;
-    margin-bottom: -80;
+    margin-bottom: -80px;
     border-color: #555;
     background: #333;
     color: #bbb;
