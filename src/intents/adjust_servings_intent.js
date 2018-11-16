@@ -14,7 +14,7 @@ export async function handle_adjust_servings(req,res,sessionData, projectID, ses
         let adjustment = await adjust_serving(recipe, servingAmount, sessionData);
 
         response.fulfillmentText = adjustment;
-        response.outputContexts = await set_session_data(contexts, sessionData, projectID, sessionID);
+        response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
         
     }
     res.json(response);

@@ -25,7 +25,7 @@ export async function handle_substitute_ingredient(req,res,sessionData) {
         if (apiResult.status != 200) {
             res.status(500);
             response.fulfillmentText = 'there was an error using the recipe substitute api. Please try something else';
-            response.contextOut = data.queryResult.outputContexts; //TODO switch with set session once merged with develop
+            response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
             res.json(response);
             return;
         }
@@ -48,7 +48,7 @@ export async function handle_substitute_ingredient(req,res,sessionData) {
             }
         }
 
-        response.contextOut = data.queryResult.outputContexts; //TODO switch with set session once merged with develop
+        response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
         res.json(response);
         return;
     });
