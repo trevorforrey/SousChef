@@ -150,9 +150,13 @@ function updateRecipe(){
 			url = 'http://localhost:5000/update';
 		} else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
 			url = 'https://sous-chef-assistant.herokuapp.com/update';
-		} else{
-            url = 'https://session-management-souchef.herokuapp.com/update';
-        }
+		} else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+			url = 'http://sous-chef-assistant.herokuapp.com/update';
+		} else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
+			url = 'https://master-heroku-souchef.herokuapp.com//update';
+		} else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
+			url = 'http://master-heroku-souchef.herokuapp.com/';
+		}
 
 		// Make an ajax call to post the data to the database
 		$.ajax({
@@ -205,7 +209,7 @@ function deleteRecipe(recipe) {
   } else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
     url = 'https://sous-chef-assistant.herokuapp.com/delete';
   } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
-    url = 'https://master-heroku-souchef.herokuapp.com//delete';
+    url = 'https://master-heroku-souchef.herokuapp.com/delete';
   } else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
     url = 'http://master-heroku-souchef.herokuapp.com/delete';
   }
@@ -257,10 +261,12 @@ $(document).ready(function() {
         url = 'http://localhost:5000/cookbook';
     } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
         url = 'https://sous-chef-assistant.herokuapp.com/cookbook';
+    } else if (window.location.href.includes('http://sous-chef-assistant.herokuapp.com/')) {
+        url = 'http://sous-chef-assistant.herokuapp.com/cookbook';
     } else if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/')) {
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
-    } else {
-        url = 'https://session-management-souchef.herokuapp.com/cookbook';
+    } else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
+        url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
     }
 
 
