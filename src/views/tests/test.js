@@ -1,7 +1,7 @@
+
 QUnit.test('test', function(assert){
 	assert.equal(1, 1, 'One is one');
 });
-
 QUnit.test('button test',function(assert){
 	$("#upload").triggerHandler("click");
 	var done=assert.async();

@@ -1,0 +1,47 @@
+{
+  "responseId": "70425ec9-5593-415d-ba20-ccf79a1e15a6",
+  "queryResult": {
+    "queryText": "ingredient list",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Your ingredients for blueberry pancakes are",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Your ingredients for blueberry pancakes are"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/login-requestuser-followup",
+        "parameters": {
+          "recipe.original": "bread and butter",
+          "recipe": "Bread and Butter",
+          "username.original": "thetoastyone",
+          "username": "thetoastyone"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 4,
+        "parameters": {
+          "recipe": "Bread and Butter",
+          "username": "thetoastyone"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/5784d9f6-6108-43be-8301-9188a143cef9",
+      "displayName": "List-Ingredients"
+    },
+    "intentDetectionConfidence": 0.45,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

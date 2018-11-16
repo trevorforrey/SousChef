@@ -50,6 +50,14 @@ ol {
 }
 /*END LOGIN MESSAGES ********************** */
 
+#cookBookBody{
+     padding-top: 90px;
+     background-color: #bbb;
+    background-image: img/9rguqEo.jpg;
+}
+
+ul {
+    list-style-type: circle;
 
 /*========= START NAVBAR =============*/
 #welcomeMsg {
@@ -256,16 +264,49 @@ input:required:valid { border: 2px solid black; }
 }
 /*END HOME PAGE ********************** */
 
+/* UPLOAD RECIPE PAGE: START
+   ========================= */
 
+.upload-body                {padding: 0; background: #A9A9A9; font-family: Calibri;}
+.upload-body .container     {background-color: #303030; padding:0; }
+.upload-body h1             {margin: 40px 0; color: #fff;}
+.upload-body hr             {background-color: #000;}
+
+#form-area                      {background: #eeeeee; padding: 20px 30px;  font-size: 16px;}
+#form-area ul                   {padding:0; margin:0;}
+#form-area ul#upload-recipe li  {list-style-type: none; }
+
+#form-area .input-1 {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
+                            height:40px;width: 100%; border-radius: 5px} 
+#form-area textarea.input-1 {width:100%; height: auto;}
+
+#ingredient, #steps, #upload{margin: 10px auto; border: solid 1px #333; box-shadow: 2px 2px 5px #333;}
+
+.btn-upload:hover   {background-color: #a02853; color: #fff;}
+.btn-upload         {display: block; height:40px; width:200px; font-size: 1.02em; background-color: #d6437f;}
+
+
+.row-upload{margin: 10px 10px 0 0;padding: 5px 2px}
+.row-upload .ingredient-fields .fields {margin-bottom: 20px; background-color: red;}
+.container-upload{margin-bottom:20px;}
+
+/* UPLOAD RECIPE PAGE: END
+   ======================= */
+
+/*UPDATE RECIPE PAGE: START*/
 .input-1   
-    {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
-        height:40px;width: 100%; border-radius: 5px}
-#upload-recipe li {list-style-type: none; }
+    {
+        border: solid 1px #555;
+        margin: 10px 10px 0 0;
+        padding: 5px 2px;
+        height:40px;
+        width: 100%;
+        border-radius: 5px;
+        background: #333;
+        color: #777;
+        } 
 
-/**#ingredient, #steps, #name, #time{
-    margin: 10px 0;
-}
-li#name span, li#time span {min-width: 200px;}**/
+#upload-recipe li {list-style-type: none; }
 
 
 .btn-upload{
@@ -273,6 +314,30 @@ li#name span, li#time span {min-width: 200px;}**/
     width:100%;
     font-size: 1.02em;
 }
+.btn-update{
+    height:80px;
+    width:100%;
+    font-size: 1.02em;
+    text-align: center;
+    background: #333;
+    color: #bbb;
+    border: 1px solid #555;
+    border-radius: 10px;
+    /* HOVER OFF */
+   -webkit-transition: padding 2s;
+}
+.btn-update:hover {
+     color: #F8E2B9;
+      /* HOVER ON */
+   -webkit-transition: border-radius 2s;
+ }
+
+.btn-update:hover {
+     color: #F8E2B9;
+      /* HOVER ON */
+   -webkit-transition: border-radius 2s;
+ }
+
 
 #ingredient, #steps, #upload{
     margin: 10px 0;
@@ -286,6 +351,37 @@ li#name span, li#time span {min-width: 200px;}**/
 #form-area{
     background: rgb(135,206,250); box-sizing: border-box; padding: 30px 0px 30px 10px;
 }
+
 .container-upload{
     margin-bottom:20px;
 }
+
+#form-area_edit{
+    background: #222;
+    box-sizing: border-box;
+    padding: 30px 0px 30px 10px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #bbb;
+    
+}
+
+#recipeList{
+     margin-left: 52px;
+    margin-bottom: -80;
+    border-color: #555;
+    background: #333;
+    color: #bbb;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+
+/*Update Recipe page ends*/

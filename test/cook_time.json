@@ -1,0 +1,44 @@
+{
+  "responseId": "d4806a6d-614c-42c9-8a8b-02d75bb046aa",
+  "queryResult": {
+    "queryText": "cook time for the recipe",
+    "parameters": {
+      "recipe_indicator": "",
+      "Cook-Time-Entity": "cook time"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 3,
+        "parameters": {
+          "recipe_indicator": "",
+          "recipe": "Bread and Butter",
+          "Cook-Time-Entity": "cook time",
+          "recipe_indicator.original": "",
+          "Cook-Time-Entity.original": "cook time",
+          "username": "thetoastyone"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/c7af74ff-b6d1-4a0f-9d1d-a2edf70c8d70",
+      "displayName": "Cook-Time-Intent"
+    },
+    "intentDetectionConfidence": 0.58,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

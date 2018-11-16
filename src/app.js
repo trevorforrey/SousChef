@@ -1,5 +1,6 @@
 import handle_fulfillment from './fulfillment_controller'
 import post_user_recipe from './post_user_recipe'
+import delete_recipe from './delete_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
@@ -131,6 +132,7 @@ app.post('/updateRecipe', update_recipe); //POST a recipe update
 app.post('/update', update_recipe_in_db); //POST a recipe update?????
 app.get('/cookbook', get_cookbook); //GET users cookbook
 
+app.delete('/delete', delete_recipe);
 app.listen(port, function () {
     console.log('Cooking server listening on port ' + port);
 });
