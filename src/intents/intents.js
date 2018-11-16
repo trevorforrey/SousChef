@@ -3,7 +3,6 @@ import {handle_update_session_entity} from './setup_intent'
 import {follow_up_login_request} from './setup_intent'
 import {get_ingredient_list} from './ingredient-list_intent'
 import {handle_get_ingredient_list} from './ingredient-list_intent'
-import {getFirstStep} from'./firststep_intent'
 import {getCookTime} from './cooktime_intent'
 import {handle_get_cooktime} from './cooktime_intent'
 import {getPrepTime} from './prep-time_intent'
@@ -25,7 +24,6 @@ module.exports = {
     handle_update_session_entity: handle_update_session_entity,
     follow_up_login_request: follow_up_login_request,
     get_ingredient_list: get_ingredient_list,
-    getFirstStep: getFirstStep,
     getCookTime: getCookTime,
     getPrepTime: getPrepTime,
     getStepByIndex: getStepByIndex,

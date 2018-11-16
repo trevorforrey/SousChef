@@ -1,4 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
+var bcrypt = require('bcryptjs'); //Encrypt users passwords in the DB
+
 
 //=========== User Login =================//
 async function getLoginUser(req, res) {
@@ -8,37 +10,53 @@ async function getLoginUser(req, res) {
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
-    console.log("==============================OUTSIDE\n", "usernameForm = ", usernameForm,
-        " passwordForm = ", passwordForm);
     
     try {
         client = await MongoClient.connect(uri);
-        console.log("Connected correctly to server");
+        console.log("Connected correctly to server – To POST Login");
         
         const db = client.db('sous-chef');
         
         // Get the users collection
         const users = db.collection('users');
+    
+        //First check if there is a "user session" – a user is already logged in
+        // if(req.session && req.session.user) {
+        //     res.redirect('/');
+        // }
         
-        // Get user from document
-        let userDB = await users.findOne(
-            {
-                username: usernameForm ,
+        
+        //If no user is logged already then Lookup user from document by pulling their username
+        users.findOne({username: usernameForm }, function(err, user) {
+            if(!user) { //If username is not in the DB then send them back to login page
+                req.usernameCheck = true;
+                res.render('login_registration.hbs', { usernameCheck: req.usernameCheck, usernameError: usernameForm});
             }
-        );
-        //If username is not in the DB or is null then send them back to login page
-        if(userDB === null || userDB.username !== usernameForm) {
-            res.redirect('/');
-            //res.send("The Username or Password you entered was incorrect");
-        }
-        
-        //Verify the users login info
-        if(usernameForm === userDB.username && passwordForm === userDB.pass) {
-            console.log("============================Made it in validator function", "usernameForm = ", usernameForm,
-                " userDB.username = ", userDB.username, "\nPasswordForm = ", passwordForm, " passwordDB = ", userDB.pass);
-            req.session.username = userDB.username;
-            res.redirect('/home');
-        }
+            //Username exists in the Database
+            else {
+                //Get the hashed password from the db
+                const hash = user.pass.toString();
+                
+                /*Compare the hashed password from the db to the newly
+                  hashed password that was entered*/
+                bcrypt.compare(passwordForm, hash, function(err, response) {
+                    //Username and password are correct, successful login
+                    if (usernameForm === user.username && response === true) {
+                        req.validationCheck = false;
+                        req.session.username = user.username;
+                        req.session.firstname = user.firstname;
+                        req.checkSessionExists = true;
+                        req.welcomeName = user.firstname;
+                        res.render('index', { checkSessionExists: req.checkSessionExists,
+                            welcomeName: req.welcomeName });
+                    }
+                    else { //Incorrect password entered
+                        req.passwordCheck = true;
+                        res.render('login_registration.hbs', { passwordCheck: req.passwordCheck });
+                    }
+                });
+            }
+        });
         
         
     } catch (err) {

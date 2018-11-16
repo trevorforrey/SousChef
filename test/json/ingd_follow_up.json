@@ -3,7 +3,7 @@
   "queryResult": {
     "queryText": "how much tomato?",
     "parameters": {
-      "ingredient": "tomato",
+      "ingredient": "tomatoes",
       "unit-volume-name": "",
       "unit-weight-name": ""
     },
@@ -23,7 +23,7 @@
         "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
         "lifespanCount": 1,
         "parameters": {
-          "ingredient": "tomato",
+          "ingredient": "tomatoes",
           "recipe": "Bread and Butter",
           "unit-weight-name.original": "",
           "unit-weight-name": "",

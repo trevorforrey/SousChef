@@ -6,7 +6,6 @@ export async function handle_get_ingredient(req,res,sessionData, contexts, proje
     let response = {};
     let response_text;
     let data = req.body;
-    // let contexts = data.queryResult.outputContexts;
 
     let ingredientResponse = await get_ingredient_from_user(sessionData.username, sessionData.recipe, data.queryResult.parameters.ingredient, data);
 
@@ -39,10 +38,6 @@ async function get_ingredient_from_user(user_name, recipe_name, ingredient_name,
             ingredient_info = recipe_ingredient;
         }
     });
-
-    console.log('ingredient info:');
-    console.log(ingredient_info);
-
     
     // If Ingredient was found, return ingredient info. If not, return error message
     if (ingredient_info != null) {

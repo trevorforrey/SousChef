@@ -4,7 +4,6 @@ import {set_session_data} from '../session_helper'
 export async function handle_get_ingredient_list(req,res,sessionData, contexts, projectID, sessionID) {
     let response = {};
     let data = req.body;
-    // let contexts = data.queryResult.outputContexts;
 
     let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
 
@@ -40,7 +39,7 @@ export async function handle_get_ingredient_list(req,res,sessionData, contexts, 
         }
     });
     response.fulfillmentText = response_text;
-    response.outputContexts = data.queryResult.outputContexts;
+    response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
     res.status(201);
     res.json(response);
     return;

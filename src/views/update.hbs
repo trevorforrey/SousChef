@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update Recipe</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
+        </div>
+        <!-- COLLAPSIBLE NAVBAR -->
+        <div class="collapse navbar-collapse" id="alignment-example">
+            <!-- Links -->
+            <ul class="nav navbar-nav">
+                <li><a id="navHome" href="/">HOME </a></li>
+                <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
+                <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
+            </ul>
+            {{# if checkSessionExists }}
+            <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
+            {{/if}}
+            <!-- Button -->
+            <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+
+                {{# if checkSessionExists }}
+                <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+                {{else}}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="login_registration.html">Login</a></li>
+                        <li><a href="registration.html">Register New Account</a></li>
+                    </ul>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END NAVBAR -->
+<!-- NAVBAR IN ITS OWN FILE-->
+<!--<div id="nav-placeholder">
+</div>
+<script>
+    $(function(){
+        $("#nav-placeholder").load("navbar.html");
+    });
+</script>-->
+<!--end of Navigation bar-->
+
+	<button id="update">Update</button>
+    <script>//JS for navbar for login popdown
+        // Tooltip component
+        $(function () { $('[data-toggle="tooltip"]').tooltip() });
+        // Popover component
+        $(function () { $('[data-toggle="popover"]').popover() });
+    </script>
+</body>
+</html>
