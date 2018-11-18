@@ -5,6 +5,7 @@ let numberOfIngredients = 0;
 let numberOfSteps = 0;
 var old_recipename={};
 var flag=0
+//$("#add_ingredients").disabled=true;
 
 function oopsie(){
     $("#Message").text("Oopsie woopsie! uwu We made a messy wessy! Our code mookeys are working VEWY HAWD to fix this!");
@@ -310,16 +311,68 @@ $(document).ready(function() {
 
             $("#enableEdit").on("click",function(){
                 $("#form-area_edit :input").prop("disabled", false);
-                //ajax call to /update_recipe ,send data contains name of the recipe
-                //obtained from text field. received data has the id field
-                //{id: id ,body: recipe}
-                 old_recipename.name=$("#recipeList option:selected").text()
-                //var id=$("recipeList").val()
+                old_recipename.name=$("#recipeList option:selected").text()
                 console.log(old_recipename)
                 flag=1
                 $('.input-edit').css("color","#eee");
             });
-            
+            var countIngredients=numberOfIngredients;
+            var countSteps=numberOfSteps+1;
+            $("#add_steps").click(function(event){
+                event.preventDefault();
+                var steps_field = $(document.createElement('textarea'))
+                                 .attr("rows", "4")
+                                 .attr("class", "input-1")
+                                 .attr("style", "none")
+                                 //.attr("id", stepId);
+             
+             $(".steps-field li").append("<h2>Step: "+ countSteps + "</h2>").append(steps_field).append("<br />");
+             countSteps++;
+            });
+
+            $("#add_ingredients").click(function(event){
+                event.preventDefault();
+               // alert("INg button clicked");
+                var ingredient_field = $(document.createElement('input'))
+                                         .attr("type", "text")
+                                         .attr("placeholder", "name")
+                                         .attr("class", "input-1")
+                                         //.attr("id", nameId);
+
+                var amount_field = $(document.createElement('input'))
+                                     .attr("type", "text")
+                                     .attr("placeholder", "amount")
+                                     .attr("class", "input-1")
+                                    // .attr("id", amountId);
+        
+                var unit_field = $(document.createElement('select'))
+                                 .attr("name", " ")
+                                 .attr("class", "input-1")
+                                 //.attr("id", unitId)
+                                 .append("<option>Select...</option>")
+                                 .append("<option>unit</option>")
+                                 .append("<option>teaspoon</option>")
+                                 .append("<option>tablespoon</option>")
+                                 .append("<option>ounce</option>")
+                                 .append("<option>cup</option>")
+                                 .append("<option>gill</option>")
+                                 .append("<option>gram</option>")
+                                 .append("<option>pound</option>")
+                                 .append("<option>gallon</option>")
+                                 .append("<option>ml</option>")
+                                 .append("<option>liter</option>")
+                             
+                                         
+                $(".ingredient-fields li")
+                    .append("<h2>Ingredient: "+countIngredients+"</h2>")
+                    .append(ingredient_field)
+                    .append(amount_field)
+                    .append(unit_field)
+                    .append("<br><br>");
+
+                countIngredients++;
+
+            });
             $("#cancel").on("click",function(){
                 document.getElementById('stepsList').innerHTML = "";
                 document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
