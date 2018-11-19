@@ -327,8 +327,17 @@ $(document).ready(function() {
                                  .attr("class", "input-1")
                                  .attr("style", "none")
                                  //.attr("id", stepId);
+                var step_li=$(document.createElement('li'))
+                            .append("<h2>Step:<span class='remove-step'>-</span></h2>")
+                            .append(steps_field).append("<br />");
+
              
-             $(".steps-field li").append("<h2>Step: "+ countSteps + "</h2>").append(steps_field).append("<br />");
+                $(".steps-field").append(step_li);
+                $(".remove-step").click(function(){
+                    console.log("step removed");
+                    $(this).parent().parent().remove();
+
+                })
              
             });
 
