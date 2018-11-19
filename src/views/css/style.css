@@ -351,5 +351,7 @@ input:required:valid { border: 2px solid black; }
 
 #form-area_edit ul { list-style-type: none; }
 
-
+/*ADD REMOVE FIELD CSS -RAISA*/
+.remove-ig{border:solid 1px #000;height:50px;width: 50px ;}
+.num-list li{list-style-type: decimal;}
 /*Update Recipe page ends*/

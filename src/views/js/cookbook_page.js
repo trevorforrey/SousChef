@@ -5,6 +5,7 @@ let numberOfIngredients = 0;
 let numberOfSteps = 0;
 var old_recipename={};
 var flag=0
+var check=0 
 //$("#add_ingredients").disabled=true;
 
 function oopsie(){
@@ -270,7 +271,7 @@ $(document).ready(function() {
         url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
     }
 
-
+    
     //jquery }getJSON() isn't working for me, trying code from
     //if (window.location.href.includes('https://master-heroku-souchef.herokuapp.com/'))
     // https://stackoverflow.com/questions/47523265/jquery-ajax-no-access-control-allow-origin-header-is-present-on-the-requested instead
@@ -317,9 +318,10 @@ $(document).ready(function() {
                 $('.input-edit').css("color","#eee");
             });
             var countIngredients=numberOfIngredients;
-            var countSteps=numberOfSteps+1;
+            var countSteps=numberOfSteps;
             $("#add_steps").click(function(event){
                 event.preventDefault();
+                countSteps++;
                 var steps_field = $(document.createElement('textarea'))
                                  .attr("rows", "4")
                                  .attr("class", "input-1")
@@ -327,12 +329,14 @@ $(document).ready(function() {
                                  //.attr("id", stepId);
              
              $(".steps-field li").append("<h2>Step: "+ countSteps + "</h2>").append(steps_field).append("<br />");
-             countSteps++;
+             
             });
 
+            
             $("#add_ingredients").click(function(event){
                 event.preventDefault();
-               // alert("INg button clicked");
+                // alert("INg button clicked");
+                countIngredients++;
                 var ingredient_field = $(document.createElement('input'))
                                          .attr("type", "text")
                                          .attr("placeholder", "name")
@@ -361,18 +365,37 @@ $(document).ready(function() {
                                  .append("<option>gallon</option>")
                                  .append("<option>ml</option>")
                                  .append("<option>liter</option>")
-                             
-                                         
-                $(".ingredient-fields li")
-                    .append("<h2>Ingredient: "+countIngredients+"</h2>")
-                    .append(ingredient_field)
-                    .append(amount_field)
-                    .append(unit_field)
-                    .append("<br><br>");
+                
+                var ingredient_remove=$(document.createElement('span'))
+                                        .attr("class","remove-ig") 
+                                        .append("-");
 
-                countIngredients++;
+                var ingredient_header=$(document.createElement('h2'))
+                                        .append("Ingredient: ")
+                                        .append(ingredient_remove);
+                                                       
+                var ingredient_li=$(document.createElement('li'))
+                                    .attr("id","id-"+countIngredients)
+                                    .append(ingredient_header)
+                                    //.append("<h2>"+"Ingredient: "+countIngredients+"</h2>")
+                                    .append(ingredient_field)
+                                    .append(amount_field)
+                                    .append(unit_field)
+                                    .append("<br><br>"); 
+
+                $(".ingredient-fields").append(ingredient_li);
+                    
+
+                $(".remove-ig").click(function(){
+                    //$(this).event.preventDefault();
+                    $(this).parent().parent().remove();    
+                    console.log("Remove clicked")
+                });
+
+                             
 
             });
+            
             $("#cancel").on("click",function(){
                 document.getElementById('stepsList').innerHTML = "";
                 document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
@@ -390,23 +413,24 @@ $(document).ready(function() {
         
     });
 
-            $("#update").on("click",function(){
-                if(flag===1){
-                  updateRecipe();
-                  console.log("Upto update click")
-                }
-                else{
-                    alert("Nothing is changed!")
-                }
+    $("#update").on("click",function(){
+        if(flag===1){
+          updateRecipe();
+          console.log("Upto update click")
+        }
+        else{
+            alert("Nothing is changed!")
+        }
 
-            });
+    });
 
-            $("#delete").on("click",function(){
-              console.log(currentRecipe);
-              deleteRecipe(currentRecipe);
-              window.location.reload();
-            });
+    $("#delete").on("click",function(){
+      console.log(currentRecipe);
+      deleteRecipe(currentRecipe);
+      window.location.reload();
+    });
 
+    
     /*
     $.getJSON("http://localhost:5000/:userid/cookbook?callback=?", success=function(rawRecipes, status, xhr){
         //Used https://stackoverflow.com/questions/22743287/uncaught-syntax-error-unexpected-token-getjson as reference
