@@ -313,7 +313,7 @@ $(document).ready(function() {
             $("#enableEdit").on("click",function(){
                 $("#form-area_edit :input").prop("disabled", false);
                 old_recipename.name=$("#recipeList option:selected").text()
-                console.log(old_recipename)
+                console.log("upto edit")
                 flag=1
                 $('.input-edit').css("color","#eee");
             });

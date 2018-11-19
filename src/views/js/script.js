@@ -193,7 +193,7 @@ $(document).ready(function(){
 	 // end of button upload handler
 	}
 //onclick handler on each update button for each recipe in cookbook page
-var recipeToUpdate=null
+/*var recipeToUpdate=null
 	$("#edit").click(function(){
 		//ajax call to /update_recipe ,send data contains name of the recipe
 		//obtained from text field. received data has the id field
@@ -220,7 +220,7 @@ var recipeToUpdate=null
 
 		 
 
-	})
+	}) */
 
 /*	$("#update").click(function(){
 		//ajax call to /handle_update.js to update db
