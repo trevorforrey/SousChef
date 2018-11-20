@@ -157,7 +157,7 @@ function updateRecipe(){
 		} else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
 			url = 'http://master-heroku-souchef.herokuapp.com/';
 		} else{
-            url = 'https://session-management-souchef.herokuapp.com/';
+            url = 'https://session-management-souchef.herokuapp.com/update';
         }
 
 		// Make an ajax call to post the data to the database
