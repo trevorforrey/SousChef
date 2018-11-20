@@ -3,7 +3,7 @@ var currentRecipe = null;
 
 let numberOfIngredients = 0;
 let numberOfSteps = 0;
-var old_recipename={};
+
 var flag=0
 var check=0 
 //$("#add_ingredients").disabled=true;
@@ -67,7 +67,7 @@ function renderIngredientsAndSteps(recipe){
     //Dynamically creating ingredients as a table (Ingredient Name, Quantity , Unit)
     for(var i=0; i<length ;i++){
         if(ingredients[i] != null){
-            buildHtml += "<div class=\"row-upload row\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-edit\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td></tr></div>";
+            buildHtml += "<div class=\"row-upload row ing\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-edit\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td><td><span class='ing-default-remove'>&times;</span></td></tr></div>";
         }
     }
     document.getElementById('stepsAndIngredientsDiv').innerHTML = buildHtml;
@@ -89,8 +89,9 @@ function renderIngredientsAndSteps(recipe){
 
 function updateRecipe(){
 		// Create an empty recipe object which will be populated with recipe information
-        let recipe_container={}
-        recipe_container.old_name={};
+    var old_recipename={};
+    let recipe_container={}
+    recipe_container.old_name={};
 		recipe_container.recipe = {};
 		recipe_container.recipe.ingredients = [];
 		recipe_container.recipe.directions = [];
@@ -98,9 +99,17 @@ function updateRecipe(){
 		// Grab recipe name and prepTime TODO get cook time and number of servings
 		recipe_container.recipe.name = $("#recipe_name_edit").val();
 		recipe_container.recipe.prep_time = $("#prep_time_edit").val();
-        recipe_container.recipe.cook_time = $("#cook_time_edit").val();
-        recipe_container.recipe.serving_size = $("#serving_size_edit").val();
+    recipe_container.recipe.cook_time = $("#cook_time_edit").val();
+    recipe_container.recipe.serving_size = $("#serving_size_edit").val();
 
+    old_recipename.name=$("#recipeList option:selected").text()
+    console.log("upto edit")
+    flag=1
+
+    var ing_count = $('.ingredient-fields li').length;
+    numberOfIngredients=$('#stepsAndIngredientsDiv div').length
+    
+    //$('.ing-default-remove').parent().remove()
 
 		// Grab all ingredient information
 		for (let i = 1; i <= numberOfIngredients; i++) {
@@ -124,7 +133,24 @@ function updateRecipe(){
 
 			// Push ingredient object to the main recipe object
 			recipe_container.recipe.ingredients.push(ingredient);
+
 		}
+
+    // FOR NEWLY ADDED FIELDS
+    for (let i = 1; i <= ing_count; i++) {
+    let ingredient_new = {};
+      let new_ing_name = $('.ingredient-fields li:nth-of-type('+ i +') input:nth-of-type(1)').val();
+      let new_ing_amt = $('.ingredient-fields li:nth-of-type('+ i +') input:nth-of-type(2)').val();
+      let new_ing_type = $('.ingredient-fields li:nth-of-type('+ i +') select:nth-of-type(1)').val();
+
+      ingredient_new.name = new_ing_name;
+      ingredient_new.quantity = new_ing_amt;
+      ingredient_new.unit = new_ing_type;
+
+      recipe_container.recipe.ingredients.push(ingredient_new);
+    }
+
+
 
 		// Grab all step information
 		for (let i = 1; i <= numberOfSteps; i++) {
@@ -143,7 +169,7 @@ function updateRecipe(){
 
         recipe_container.old_name=old_recipename;
         console.log("Recipe to be updated:")
-		console.log(recipe_container);
+		    console.log(recipe_container);
         console.log(recipe_container.old_name);
 
 
@@ -167,6 +193,7 @@ function updateRecipe(){
 			type : 'POST',
 			data : JSON.stringify(recipe_container),
 			dataType:'text',
+      async:false,
 
 			// Let user know of success
 			success : function(data) {
@@ -250,15 +277,8 @@ function deleteRecipe(recipe) {
 	});
 }
 
-$(document).ready(function() {
-
-    /*updateTemplate = $.ajax({
-                    url: "update_template.html",
-                    method: "GET",
-                });
-    console.log("AJAX call result:"+updateTemplate); */
-    
-    let url;
+function fetchRecipe(){
+  let url;
     if (window.location.href.includes('localhost')) {
         url = 'http://localhost:5000/cookbook';
     } else if (window.location.href.includes('https://sous-chef-assistant.herokuapp.com/')) {
@@ -309,128 +329,147 @@ $(document).ready(function() {
                         $("#form-area_edit :input").prop("disabled", true);
                  });
             });
-
-            $("#enableEdit").on("click",function(){
-                $("#form-area_edit :input").prop("disabled", false);
-                old_recipename.name=$("#recipeList option:selected").text()
-                console.log("upto edit")
-                flag=1
-                $('.input-edit').css("color","#eee");
-            });
-            var countIngredients=numberOfIngredients;
-            var countSteps=numberOfSteps;
-            $("#add_steps").click(function(event){
-                event.preventDefault();
-                countSteps++;
-                var steps_field = $(document.createElement('textarea'))
-                                 .attr("rows", "4")
-                                 .attr("class", "input-1")
-                                 .attr("style", "none")
-                                 //.attr("id", stepId);
-                var step_li=$(document.createElement('li'))
-                            .append("<h2>Step:<span class='remove-step'>-</span></h2>")
-                            .append(steps_field).append("<br />");
-
-             
-                $(".steps-field").append(step_li);
-                $(".remove-step").click(function(){
-                    console.log("step removed");
-                    $(this).parent().parent().remove();
-
-                })
-             
-            });
-
-            
-            $("#add_ingredients").click(function(event){
-                event.preventDefault();
-                // alert("INg button clicked");
-                countIngredients++;
-                var ingredient_field = $(document.createElement('input'))
-                                         .attr("type", "text")
-                                         .attr("placeholder", "name")
-                                         .attr("class", "input-1")
-                                         //.attr("id", nameId);
-
-                var amount_field = $(document.createElement('input'))
-                                     .attr("type", "text")
-                                     .attr("placeholder", "amount")
-                                     .attr("class", "input-1")
-                                    // .attr("id", amountId);
-        
-                var unit_field = $(document.createElement('select'))
-                                 .attr("name", " ")
-                                 .attr("class", "input-1")
-                                 //.attr("id", unitId)
-                                 .append("<option>Select...</option>")
-                                 .append("<option>unit</option>")
-                                 .append("<option>teaspoon</option>")
-                                 .append("<option>tablespoon</option>")
-                                 .append("<option>ounce</option>")
-                                 .append("<option>cup</option>")
-                                 .append("<option>gill</option>")
-                                 .append("<option>gram</option>")
-                                 .append("<option>pound</option>")
-                                 .append("<option>gallon</option>")
-                                 .append("<option>ml</option>")
-                                 .append("<option>liter</option>")
-                
-                var ingredient_remove=$(document.createElement('span'))
-                                        .attr("class","remove-ig") 
-                                        .append("-");
-
-                var ingredient_header=$(document.createElement('h2'))
-                                        .append("Ingredient: ")
-                                        .append(ingredient_remove);
-                                                       
-                var ingredient_li=$(document.createElement('li'))
-                                    .attr("id","id-"+countIngredients)
-                                    .append(ingredient_header)
-                                    //.append("<h2>"+"Ingredient: "+countIngredients+"</h2>")
-                                    .append(ingredient_field)
-                                    .append(amount_field)
-                                    .append(unit_field)
-                                    .append("<br><br>"); 
-
-                $(".ingredient-fields").append(ingredient_li);
-                    
-
-                $(".remove-ig").click(function(){
-                    //$(this).event.preventDefault();
-                    $(this).parent().parent().remove();    
-                    console.log("Remove clicked")
-                });
-
-                             
-
-            });
-            
-            $("#cancel").on("click",function(){
-                document.getElementById('stepsList').innerHTML = "";
-                document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
-                $.when(renderIngredientsAndSteps(currentRecipe)).done(function(){
-                        populate(currentRecipe);
-                        $("#form-area_edit :input").prop("disabled", true);
-                 }); 
-                $("#form-area_edit :input").prop("disabled", true);
-                $('.input-edit').css("color","#777");
-
-            });
-            
-            $('.input-edit').css("color","#777");
+                                   
         }
         
+    });//ajax call to populate recipe ends.
+
+
+}
+
+$(document).ready(function() {
+
+    /*updateTemplate = $.ajax({
+                    url: "update_template.html",
+                    method: "GET",
+                });
+    console.log("AJAX call result:"+updateTemplate); */
+    fetchRecipe();
+    
+    $("#cancel").on("click",function(){
+      document.getElementById('stepsList').innerHTML = "";
+      document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
+      $.when(renderIngredientsAndSteps(currentRecipe)).done(function(){
+              populate(currentRecipe);
+              $("#form-area_edit :input").prop("disabled", true);
+       }); 
+      $("#form-area_edit :input").prop("disabled", true);
+      $('.input-edit').css("color","#777");
+
+    });
+              
+    $('.input-edit').css("color","#777");
+
+    $("#enableEdit").on("click",function(){
+        $("#form-area_edit :input").prop("disabled", false);
+        $('.input-edit').css("color","#eee");
+         //Removes an ingredient after rendering 
+        $('.ing-default-remove').click(function(){
+          $(this).parent().remove();
+        })
+    });
+
+   
+    
+    var countIngredients=numberOfIngredients;
+    var countSteps=numberOfSteps;
+
+    $("#add_steps").click(function(event){
+        event.preventDefault();
+        countSteps++;
+        var steps_field = $(document.createElement('textarea'))
+                         .attr("rows", "4")
+                         .attr("class", "input-1")
+                         .attr("style", "none")
+                         //.attr("id", stepId);
+        var step_li=$(document.createElement('li'))
+                    .append("<h2>Step:<span class='remove-step'>-</span></h2>")
+                    .append(steps_field).append("<br />");
+
+     
+        $(".steps-field").append(step_li);
+        $(".remove-step").click(function(){
+            console.log("step removed");
+            $(this).parent().parent().remove();
+
+        })
+     
+    });
+
+            
+    $("#add_ingredients").click(function(event){
+        event.preventDefault();
+        // alert("INg button clicked");
+        countIngredients++;
+        var ingredient_field = $(document.createElement('input'))
+                                 .attr("type", "text")
+                                 .attr("placeholder", "name")
+                                 .attr("class", "input-1 input-edit")
+                                 .attr("style","width: 252px");
+
+        var amount_field = $(document.createElement('input'))
+                             .attr("type", "text")
+                             .attr("placeholder", "amount")
+                             .attr("class", "input-1 input-edit")
+                             .attr("style","width: 252px");
+
+        var unit_field = $(document.createElement('select'))
+                         .attr("name", " ")
+                         .attr("class", "input-1 input-edit")
+                         .attr("style","width: 252px")
+                         .append("<option>Select...</option>")
+                         .append("<option>unit</option>")
+                         .append("<option>teaspoon</option>")
+                         .append("<option>tablespoon</option>")
+                         .append("<option>ounce</option>")
+                         .append("<option>cup</option>")
+                         .append("<option>gill</option>")
+                         .append("<option>gram</option>")
+                         .append("<option>pound</option>")
+                         .append("<option>gallon</option>")
+                         .append("<option>ml</option>")
+                         .append("<option>liter</option>")
+        
+        var ingredient_remove=$(document.createElement('span'))
+                                .attr("class","remove-ig") 
+                                .append("&times;");
+
+        var ingredient_header=$(document.createElement('h2'))
+                                .append("Ingredient: ")
+                                .append(ingredient_remove);
+                                               
+        var ingredient_li=$(document.createElement('li'))
+                            .attr("id","id-"+countIngredients)
+                            .append(ingredient_header)
+                            //.append("<h2>"+"Ingredient: "+countIngredients+"</h2>")
+                            .append(ingredient_field)
+                            .append(amount_field)
+                            .append(unit_field)
+                            .append("<br><br>"); 
+
+        $(".ingredient-fields").append(ingredient_li);
+            
+
+        $(".remove-ig").click(function(){
+            //$(this).event.preventDefault();
+            $(this).parent().parent().remove();    
+            console.log("Remove clicked")
+        });
+                    
     });
 
     $("#update").on("click",function(){
-        if(flag===1){
+        //if(flag===1){
+
           updateRecipe();
           console.log("Upto update click")
-        }
-        else{
-            alert("Nothing is changed!")
-        }
-
+        //}
+        //else{
+         //   alert("Nothing is changed!")
+        //}
+        
+        //fetchRecipe();
+        location.reload();
     });
 
     $("#delete").on("click",function(){
