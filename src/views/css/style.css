@@ -362,7 +362,7 @@ input:required:valid { border: 2px solid black; }
      color: #F8E2B9;
       /* HOVER ON */
    /*-webkit-transition: border-radius 2s; */
- } */
+ /*} */
 
 #form-area_edit{
     background: #222;
