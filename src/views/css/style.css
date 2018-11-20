@@ -355,8 +355,8 @@ input:required:valid { border: 2px solid black; }
     color: #bbb;
     border: 1px solid #555;
     border-radius: 10px;
-    /* HOVER OFF */
-   -webkit-transition: padding 2s;
+    /* HOVER OFF 
+   -webkit-transition: padding 2s; */
 }
 .btn-update:hover {
      color: #F8E2B9;
