@@ -270,7 +270,7 @@ $(document).ready(function() {
     } else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
         url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
     } else{
-            url = 'https://session-management-souchef.herokuapp.com/';
+            url = 'https://session-management-souchef.herokuapp.com/cookbook';
     }
 
 
