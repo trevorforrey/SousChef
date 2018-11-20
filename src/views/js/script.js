@@ -151,7 +151,9 @@ $(document).ready(function(){
 			url = 'https://master-heroku-souchef.herokuapp.com/postRecipe';
 		} else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
 			url = 'http://master-heroku-souchef.herokuapp.com/postRecipe';
-		}
+		} else{
+            url = 'https://session-management-souchef.herokuapp.com/postRecipe';
+        }
 		console.log('url to post to');
 		console.log(url);
 
