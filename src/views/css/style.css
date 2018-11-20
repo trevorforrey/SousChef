@@ -358,6 +358,11 @@ input:required:valid { border: 2px solid black; }
     /* HOVER OFF 
    -webkit-transition: padding 2s; */
 }
+
+.btn-update:focus{
+    color: #F8E2B9;
+    text-decoration: none;
+}
 /*.btn-update:hover {
      color: #F8E2B9;
       /* HOVER ON */
