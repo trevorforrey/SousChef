@@ -88,7 +88,7 @@ function renderIngredientsAndSteps(recipe){
 function updateRecipe(){
     
         var statusImg = ""
-        var modelPopUpContentCss = "<p style=\"text-align: center; width: 297px; padding-top: 0px; color: #555; font-size: 14px\">;
+        var modelPopUpContentCss = "<p style=\"text-align: center; width: 297px; padding-top: 0px; color: #555; font-size: 14px\">";
         
 		// Create an empty recipe object which will be populated with recipe information
         let recipe_container={}
