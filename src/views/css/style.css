@@ -333,7 +333,8 @@ input:required:valid { border: 2px solid black; }
 /* UPLOAD RECIPE PAGE: END
    ======================= */
 
-/*UPDATE RECIPE PAGE: START*/
+/*UPDATE RECIPE PAGE: START
+  ========================= */
 .input-edit   
     {
         border: solid 1px #555;
@@ -363,11 +364,10 @@ input:required:valid { border: 2px solid black; }
     color: #F8E2B9;
     text-decoration: none;
 }
-/*.btn-update:hover {
-     color: #F8E2B9;
-      /* HOVER ON */
-   /*-webkit-transition: border-radius 2s; */
- /*} */
+
+.btn-update:hover {
+    color: #F8E2B9;
+}
 
 #form-area_edit{
     background: #222;
@@ -399,4 +399,5 @@ input:required:valid { border: 2px solid black; }
 #form-area_edit ul { list-style-type: none; }
 
 
-/*Update Recipe page ends*/
+/*Update Recipe page ends
+  ======================= */
