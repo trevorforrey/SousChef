@@ -181,10 +181,10 @@ function updateRecipe(){
                                 "<img src=\"../img/green_tick.png\"></img>" +
                             "</span>"
                 document.getElementById("update-modal-content").innerHTML = modelPopUpContentCss + "Your recipe was updated successfully!</p>";
-                /*setTimeout(function() {
+                setTimeout(function() {
                     modal.style.display = "none";
                     //document.getElementById("responseTxt").innerHTML = "";
-                }, 3000); */
+                }, 3000); 
 				// Append to container div on page
 				//$("#form-area").append(success_text).append("<br />");
 			},
