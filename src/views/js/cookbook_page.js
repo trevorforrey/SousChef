@@ -174,11 +174,11 @@ function updateRecipe(){
 				// Create success element
                  var modal = document.getElementById('myModal');
                 modal.style.display = "block";
-                document.getElementById("update-modal-content").innerHTML = "Your recipe was updated successfully!";
-                setTimeout(function() {
+                document.getElementById("update-modal-content").innerHTML = "<p style:\"text-align=center;\">Your recipe was updated successfully!";
+                /*setTimeout(function() {
                     modal.style.display = "none";
                     //document.getElementById("responseTxt").innerHTML = "";
-                }, 3000);
+                }, 3000); */
 				// Append to container div on page
 				//$("#form-area").append(success_text).append("<br />");
 			},
