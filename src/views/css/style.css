@@ -352,6 +352,7 @@ input:required:valid { border: 2px solid black; }
 #form-area_edit ul { list-style-type: none; }
 
 /*ADD REMOVE FIELD CSS -RAISA*/
-.remove-ig, .remove-step{color: red; height:50px;width: 50px ; cursor: : pointer;}
+.remove-ig:hover, .remove-step:hover,.ing-default-remove:hover {background-color: #a02853;}
+.remove-ig, .remove-step, .ing-default-remove{background-color: #d6437f;font-size:30px;padding:0;margin:0;color:grey; height:50%;width:100% ; cursor: pointer;}
 .num-list li{list-style-type: decimal;}
 /*Update Recipe page ends*/
