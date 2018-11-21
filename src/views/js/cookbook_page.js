@@ -87,7 +87,7 @@ function renderIngredientsAndSteps(recipe){
 
 function updateRecipe(){
     
-        var modelPopUpContentCss = "<p class=\"modal-content\" style=\"text-align: center;width: 297px;padding-top: -10px;color: #eee;font-size: 14px;border-bottom-width: 20px;margin-bottom: 0px;padding-top: 0px;\"> <img src=\"../img/green_tick.png\">";
+        var modelPopUpContentCss = "<p class=\"modal-content\" style=\"text-align: center;width: 297px;padding-top: -10px;color: #eee;font-size: 14px;border-bottom-width: 20px;margin-bottom: 0px;padding-top: 0px;\"> <img src=\"";
         
 		// Create an empty recipe object which will be populated with recipe information
         let recipe_container={}
@@ -170,23 +170,18 @@ function updateRecipe(){
 			type : 'POST',
 			data : JSON.stringify(recipe_container),
 			dataType:'text',
-
-			// Let user know of success
 			success : function(data) {
 				console.log('post was successful!');
 				// Create success element
                  var modal = document.getElementById('myModal'); 
                 modal.style.display = "block";
-                statusImg = "<span style=\"padding-right:3px; padding-top: 12px; display:inline-block;\">" +
-                                "<img src=\"../img/green_tick.png\"></img>" +
-                            "</span>"
-                document.getElementById("update-modal-content").innerHTML = modelPopUpContentCss + "Your recipe was updated successfully!</p>";
+                document.getElementById("update-modal-content").innerHTML = modelPopUpContentCss + "../img/green_tick.png\"> Your recipe was updated successfully!</p>";
                 setTimeout(function() {
                     modal.style.display = "none";
-                    //document.getElementById("responseTxt").innerHTML = "";
                 }, 3000); 
-				// Append to container div on page
-				//$("#form-area").append(success_text).append("<br />");
+                
+                $("#form-area_edit :input").prop("disabled", true);
+                $('.input-edit').css("color","#777");
 			},
 
 			// Let user know of failure
