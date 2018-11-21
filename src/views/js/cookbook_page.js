@@ -174,7 +174,7 @@ function updateRecipe(){
 				// Create success element
                  var modal = document.getElementById('myModal');
                 modal.style.display = "block";
-                document.getElementById("update-modal-content").innerHTML = "<p style=\"text-align: center; width: 297px; padding-top: 0px;\">Your recipe was updated successfully!</p>";
+                document.getElementById("update-modal-content").innerHTML = "<p style=\"text-align: center; width: 297px; padding-top: 0px; color: #555; font-size: 14px\">Your recipe was updated successfully!</p>";
                 /*setTimeout(function() {
                     modal.style.display = "none";
                     //document.getElementById("responseTxt").innerHTML = "";

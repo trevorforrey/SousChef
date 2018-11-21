@@ -415,11 +415,11 @@ input:required:valid { border: 2px solid black; }
 
 /* Modal Content */
 .modal-content {
-    background-color: #1f1f1f;
+    background-color: #00000080;
     margin: auto;
     padding: 20px;
-    border: 1px solid #333;
-    width: 60%;
+    border: 1px solid #555;
+    width: 40%;
     height: 10%;
 }
 
