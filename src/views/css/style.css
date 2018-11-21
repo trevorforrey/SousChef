@@ -415,7 +415,7 @@ input:required:valid { border: 2px solid black; }
 
 /* Modal Content */
 .modal-content {
-    background-color: #00000080;
+    background-color: #eee;
     margin: auto;
     padding: 20px;
     border: 1px solid #555;

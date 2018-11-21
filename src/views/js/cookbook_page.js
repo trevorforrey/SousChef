@@ -86,6 +86,10 @@ function renderIngredientsAndSteps(recipe){
 }
 
 function updateRecipe(){
+    
+        var statusImg = ""
+        var modelPopUpContentCss = "<p style=\"text-align: center; width: 297px; padding-top: 0px; color: #555; font-size: 14px\">;
+        
 		// Create an empty recipe object which will be populated with recipe information
         let recipe_container={}
         recipe_container.old_name={};
@@ -174,7 +178,10 @@ function updateRecipe(){
 				// Create success element
                  var modal = document.getElementById('myModal');
                 modal.style.display = "block";
-                document.getElementById("update-modal-content").innerHTML = "<p style=\"text-align: center; width: 297px; padding-top: 0px; color: #555; font-size: 14px\">Your recipe was updated successfully!</p>";
+                statusImg = "<span style=\"padding-right:3px; padding-top: 3px; display:inline-block;\">" +
+                                "<img src=\"../img/green_tick.png\"></img>" +
+                            "</span>"
+                document.getElementById("update-modal-content").innerHTML = statusImg + modelPopUpContentCss + "Your recipe was updated successfully!</p>";
                 /*setTimeout(function() {
                     modal.style.display = "none";
                     //document.getElementById("responseTxt").innerHTML = "";
