@@ -172,10 +172,13 @@ function updateRecipe(){
 			success : function(data) {
 				console.log('post was successful!');
 				// Create success element
-                document.getElementById("responseTxt").innerHTML = "Your recipe was updated successfully!";
+                 var modal = document.getElementById('myModal');
+                modal.style.display = "block";
+                document.getElementById("update-modal-content").innerHTML = "Your recipe was updated successfully!";
                 setTimeout(function() {
-                    document.getElementById("responseTxt").innerHTML = "";
-                }, 10000);
+                    modal.style.display = "none";
+                    //document.getElementById("responseTxt").innerHTML = "";
+                }, 3000);
 				// Append to container div on page
 				//$("#form-area").append(success_text).append("<br />");
 			},
