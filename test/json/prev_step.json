@@ -1,0 +1,54 @@
+{
+  "responseId": "380cc66c-6b26-4a2d-bf18-af8ca7920555",
+  "queryResult": {
+    "queryText": "previous step",
+    "parameters": {
+      "previous-step": "previous"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 4,
+        "parameters": {
+          "currentStep": 1,
+          "previous-step.original": "previous",
+          "next-step.original": "next",
+          "recipe": "Bread and Butter",
+          "next-step": "next",
+          "previous-step": "previous",
+          "username": "thetoastyone"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/next-step-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "previous-step.original": "previous",
+          "next-step.original": "next",
+          "next-step": "next",
+          "previous-step": "previous"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/59a6d1db-cf0a-4239-ae87-9c265fcb52b7",
+      "displayName": "previous-step"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

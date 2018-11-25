@@ -1,0 +1,49 @@
+{
+  "responseId": "63efc8b0-fb7b-4bc0-82d6-378316dfd315",
+  "queryResult": {
+    "queryText": "thetoastyone",
+    "action": "sign-in.sign-in-yes",
+    "parameters": {
+      "username": "thetoastyone"
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Nice to hear from you thetoastyone! What do you want to cook?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "Nice to hear from you thetoastyone! What do you want to cook?"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/login-requestuser-followup",
+        "lifespanCount": 2,
+        "parameters": {
+          "username.original": "thetoastyone",
+          "username": "thetoastyone"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/sign-in-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "username.original": "thetoastyone",
+          "username": "thetoastyone"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/9a584c87-a4dd-4923-9e54-ec1689f9b6c9",
+      "displayName": "login-request user"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

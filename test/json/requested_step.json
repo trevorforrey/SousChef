@@ -1,0 +1,58 @@
+{
+  "responseId": "366ea068-67e9-48b2-b925-cff8994c43ed",
+  "queryResult": {
+    "queryText": "what was step 2?",
+    "parameters": {
+      "number": 2,
+      "repeat-step": ""
+    },
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "You requested step number X.",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "You requested step number X."
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 1,
+        "parameters": {
+          "repeat-step1": "",
+          "ingredient": "tomato",
+          "repeat-step1.original": "",
+          "repeat-step.original": "",
+          "next-step.original": "next",
+          "recipe": "Bread and Butter",
+          "repeat-step": "",
+          "next-step": "next",
+          "unit-weight-name": "",
+          "number.original": "2?",
+          "unit-volume-name": "",
+          "currentStep": 0,
+          "number": 2,
+          "previous-step.original": "",
+          "unit-weight-name.original": "",
+          "unit-volume-name.original": "",
+          "ingredient.original": "tomato?",
+          "previous-step": "",
+          "username": "thetoastyone"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/3e48d845-95ff-4d3e-a50b-23c2f9d2a5f8",
+      "displayName": "requested-step"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

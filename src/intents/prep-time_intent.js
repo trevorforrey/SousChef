@@ -4,7 +4,6 @@ import {set_session_data} from '../session_helper'
 export async function handle_get_preptime(req,res,sessionData, contexts, projectID, sessionID) {
     let response = {};
     let data = req.body;
-    // let contexts = data.queryResult.outputContexts;
 
     let recipe_doc = await get_user_recipe(sessionData.username, sessionData.recipe);
 

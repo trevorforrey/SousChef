@@ -1,0 +1,50 @@
+{
+  "responseId": "fa024790-b963-4efe-b2bb-2a91d1e0207a",
+  "queryResult": {
+    "queryText": "log me in",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "What is your username?",
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            "What is your username?"
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 1,
+        "parameters": {
+          "action.original": "",
+          "Prep-Time-Entity": "prep",
+          "recipe_indicator": "",
+          "Prep-Time-Entity.original": "prep",
+          "recipe": "Bread and Butter",
+          "action": "",
+          "Cook-Time-Entity": "",
+          "recipe_indicator.original": "",
+          "Cook-Time-Entity.original": "",
+          "username": "thetoastyone"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/sign-in-followup",
+        "lifespanCount": 2
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/bafe8f9a-69c0-4317-b59e-3f2b778e3db1",
+      "displayName": "login-request"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

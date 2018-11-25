@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/confirmPassword.js"></script>
+    <meta charset="UTF-8">
+    <title>Sous Chef – Registration/Login page</title>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
+        </div>
+        <!-- COLLAPSIBLE NAVBAR -->
+        <div class="collapse navbar-collapse" id="alignment-example">
+            <!-- Links -->
+            <ul class="nav navbar-nav">
+                <li><a id="navHome" href="/">HOME </a></li>
+                <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
+                <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
+            </ul>
+            {{# if checkSessionExists }}
+                <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
+            {{/if}}
+            <!-- Button -->
+            <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+
+                {{# if checkSessionExists }}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                {{else}}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="login_registration.html">Login</a></li>
+                        <li><a href="registration.html">Register New Account</a></li>
+                    </ul>
+
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END NAVBAR -->
+
+<div class="container">
+
+    <div class="row logRegRow">
+        <div class="col-md-6 col-md-offset-3 logRegCol">
+            <div class="panel panel-login">
+                <div class="panel-heading logRegHeader">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" id="login-form-link">LOGIN</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="register-form-link">REGISTER ACCOUNT</a>
+                        </div>
+                    </div><hr>
+                </div>
+
+                <! Login portion of the panel-->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <! Login Form-->
+                            <form id="login-form" action="/getLogin" method="post"
+                                  role="form" style="display: none;">
+                                {{# if usernameCheck }}
+                                    <section class="usernameCheck">
+                                        <p id="invalidLoginP">User "{{usernameError}}" does not exist!
+                                            <br>Please Try again!</p><br>
+                                    </section>
+                                {{/if}}
+                                {{# if passwordCheck }}
+                                    <section class="passwordCheck">
+                                        <p id="invalidLoginP">The password you entered is incorrect.
+                                            <br>Please Try again!</p>
+                                    </section>
+                                {{/if}}
+                                <div class="form-group">
+                                    <input required type="text" name="usernameLogin" id="usernameLogin" tabindex="1"
+                                           class="form-control testInput" placeholder="Username" value="" >
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="passwordLogin" id="passwordLogin" tabindex="2"
+                                           class="form-control" placeholder="Password" required>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                    <label for="remember"> Remember Me</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                                   class="form-control btn btn-login" value="Log In">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!Forgot password panel – Doesn't do anything right now until we decide what
+                                we're doing with the Google Sign in next sprint-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <! ====================================================== -->
+                                                <! Need to collect the form data in action for forgot
+                                                password eventually -->
+                                                <! ====================================================== -->
+                                                <a href="" tabindex="5"
+                                                   class="forgot-password">Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <! Registration Form -->
+                            <form id="register-form" action="/postReg"
+                                  method="post" role="form" style="display: block;">
+                                <div class="form-group">
+                                    <input type="text" name="usernameReg" id="usernameReg" tabindex="1"
+                                           class="form-control" placeholder="Username" value="" required>
+                                    {{# if usernameCheckReg }}
+                                        <span id="uNameInvalidMsg">Username '{{usernameExists}}' is not available.</span>
+                                    {{/if}}
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="firstnameReg" id="firstnameReg" tabindex="1"
+                                           class="form-control" placeholder="First Name" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="lastnameReg" id="lastnameReg" tabindex="1"
+                                           class="form-control" placeholder="Last Name" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                           placeholder="Email Address" value="" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="passwordReg" id="passwordReg" tabindex="2"
+                                           class="form-control" placeholder="Password" onkeyup="checkPasswords()"
+                                           required>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="confirmPasswordReg" id="confirm-passwordReg"
+                                           tabindex="2" class="form-control" placeholder="Confirm Password"
+                                           onkeyup="checkPasswords()"
+                                           required>
+                                    <span id='message'></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input disabled="true" type="submit" name="registerSubmit"
+                                                   id="registerSubmit"
+                                                   tabindex="4" class="form-control btn btn-register disabledButton"
+                                                   value="Sign Up">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="invalidRegistrationDiv">
+    {{# if errors }}
+        {{#each errors}}
+            {{this.msg}}
+        {{/each}}
+        <!--<section class="usernameCheck">
+            <p><i><b>The username  you entered is incorrect
+                .<br>Please Try
+                again!</b></i></p><br>
+        </section>-->
+    {{/if}}
+
+</div>
+<script>//JS for navbar for login popdown
+// Tooltip component
+$(function () { $('[data-toggle="tooltip"]').tooltip() });
+// Popover component
+$(function () { $('[data-toggle="popover"]').popover() });
+
+/*Click functionality between the Login and register tabs
+* using jquery to make it easier to do the DOM manipulation of showing
+* and hiding tab panels and also because I found a nice code snippet online ;-)*/
+$(function () {
+    $('#register-form-link').click(function (e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#login-form-link').click(function  (e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+});
+</script>
+
+</body>
+
+</html>
+
+
+
+

@@ -1,7 +1,4 @@
 
-/*Show a red border around inputs if not valid*/
-input:focus:required:invalid {border: 2px solid red;}
-input:required:valid { border: 2px solid black; }
 
 /**{*/
 	/*padding: 0;*/
@@ -17,79 +14,197 @@ COLORS
 ################
 */
 :root {
-    --main-bg: #ccc;
+    --main-bg-color: #bbb;
+    --main-fg-color: #a02853;
+    --header-text-color: rgb(24, 24, 54);
 
-    --panel-heading: #00415d;
-    --panel-border-color: #ffffff;
-    --panel-bg-color: #ffffff;
+    --navbar-color:#333;
+    --navbar-selected-color:#4f81bd;
+    --navbar-welcome-text-color: #fff;
+    --navbar-logo-color:#fff;
+    --navbar-active-text-color:#F8F8F8;
+    --navbar-inactive-text-color:#a02853;
 
     --link-inactive-color: #666666;
     --link-active-color-1:#59B2E0;
-    --link-active-color-2: #029f5b;
-    
+    --link-active-color-2: #8cc63f;
 
-    --text-field-border-color:#ddd;
-    --text-field-border-mouseover-color:#ccc;
+    /*different colors of button.*/
+    /*normal*/
+    --button-color-0: var(--main-fg-color);
+    --button-text-color-0:#000;
+    --button-border-color-0:var(--main-fg-color);
+    --button-mouseover-color-0:#53A3CD;
+    --button-mouseover-text-color-0:#fff;
+    --button-mouseover-border-color-0:#53A3CD;
 
-
+    /*login*/
     --button-color-1: #59B2E0;
     --button-text-color-1:#fff;
     --button-border-color-1:#59B2E6;
-    --button-mouseover-color-1:#53A3CD;
+    --button-mouseover-color-1:#5db3b8;
     --button-mouseover-text-color-1:#fff;
-    --button-mouseover-border-color-1:#53A3CD;
-
+    --button-mouseover-border-color-1:#5db3b8;
+    /*register*/
+    --button-disabled-color:var(--main-bg-color);
+    --button-disabled-text-color:black;
     --button-color-2:#1CB94E;
-    --button-text-color-2:#fff;
+    --button-text-color-2:#000;
     --button-border-color-2:#1CB94A;
-    --button-mouseover-color-2:#1CA347;
-    --button-mouseover-text-color-2:#fff;
-    --button-mouseover-border-color-2:#1CA347;
+    --button-mouseover-color-2:#74b893;
+    --button-mouseover-text-color-2:#000;
+    --button-mouseover-border-color-2:#74b893;
+
+    /*page specific*/
+    --panel-color:#eee;
 
     --outbound-link-color:#888;
     --outbound-link-mouseover-color:#666;
 
-    --site-main-color:#59B2E0;
-    --site-title-text-color:#000;
-
     --input-color-1: #333;
     --form-area-color:rgb(135,206,250);
+
+    --register-text-field-border-color:#1CB94A;
+
+    --valid-text-color: black;
+
+    --invalid-text-color: red;
+    --invalid-bg-color:#dca7a7;
 }
 
+
+/*============ START BASIC HTML TAGS ==============*/
 body {
-    padding-top: 90px;
+    font-family: Calibri;
+    background: var(--main-bg-color);
 }
-
-
 
 h1{
-	text-align: center;
-	margin:50px;
+    text-align: center;
+    margin:50px;
+    color: var(--header-text-color)
 }
-
 h3 {
     text-align: center;
     margin:0px;
     font-size: 1.05em;
+    color: var(--header-text-color)
 }
 
 h4{
-	margin: 50px;
+    margin: 50px;
+    color: var(--header-text-color)
 }
 
 p{
 
-	padding-top: 30px;
-	font-size: .8em;
+    padding-top: 30px;
+    font-size: .8em;
+}
+
+
+
+img.test { background-size: auto 100%; width: 100%;}
+ul {
+    list-style-type: circle;
+}
+ol {
+    list-style-type: upper-roman;
+}
+/*END BASIC HTML TAGS ********************** */
+
+
+/*Show a red border around inputs if not valid*/
+input:focus:required:invalid {border: 2px solid var(--invalid-text-color);}
+input:required:valid { border: 2px solid var(--valid-text-color); }
+
+/*=========START LOGIN MESSAGES =============*/
+#invalidLoginP {
+    background: var(--invalid-bg-color);
+    font-size: 14px;
+    color: var(--invalid-text-color);
+    padding: 4px 0 4px 10px;
+    margin-bottom: 12px;
+}
+#uNameInvalidMsg {
+    color:var(--invalid-text-color);
+    padding: 0 0 0 4px;
+}
+/*CONFIRM PASSWORD MSG */
+#message {
+    padding: 0 0 0 4px;
+}
+/*END LOGIN MESSAGES ********************** */
+
+#cookBookBody{
+     padding-top: -90px;
+    background-image: url('../img/9rguqEo.jpg');
 }
 
 ul {
     list-style-type: circle;
 }
-
-ol {
-    list-style-type: upper-roman;
+/*========= START NAVBAR =============*/
+#welcomeMsg {
+    color:var(--navbar-welcome-text-color);
+    margin: 10px 0 0 4px;
+    font-size: 15px;
 }
+
+/*is this a real thing?*/
+#nav_bar .active {
+    color: var(--navbar-active-text-color);
+    background-color: var(--navbar-selected-color);
+}
+
+#navLogo {
+    color: var(--navbar-logo-color);
+    list-style-type: none;
+}
+/* This was a terrible color choice
+#h1HomePage {
+    color: #5db3b8;
+}
+*/
+.navbar-brand {font-size: 22px;}
+#navUpload.active {color:var(--navbar-active-text-color);}
+#navCookbook.active {color:var(--navbar-active-text-color);}
+#navHome.active {color:var(--navbar-active-text-color);}
+#navHome:hover { color: var(--navbar-active-text-color); }
+#navHome{ color: var(--navbar-inactive-text-color); font-size: 17px;}
+#navUpload:hover { color: var(--navbar-active-text-color); }
+#navUpload{ color: var(--navbar-inactive-text-color); font-size: 17px;}
+#navCookbook:hover { color: var(--navbar-active-text-color); }
+#navCookbook{ color: var(--navbar-inactive-text-color); font-size: 17px;}
+
+.navbar-toggle {
+    background: var(--navbar-inactive-text-color);
+}
+#btnText {color:var(--button-text-color-0)}
+
+/*Is this a real thing?*/
+#alreadyText{color: var(--navbar-welcome-text-color)}
+.infoButton {
+    margin: 6px 0 4px 0;
+    text-decoration: none;
+    background-color: var(--button-color-0);
+    border:  solid 1px var(--button-border-color-0);
+    border-radius: 0;
+    font-size: 13px;
+    line-height: 8px;
+    position: relative;
+    color:var(--navbar-welcome-text-color);
+    padding:11px;
+    cursor: pointer;
+}
+/*END NAVBAR =============*/
+
+
+
+/*============ START LOGIN/REGISTRATION PAGES ==============*/
+/*Show a red border around Login and Registration inputs if not valid*/
+input:focus:required:invalid {border: 2px solid var(--invalid-text-color);}
+input:required:valid { border: 2px solid var(--valid-text-color); }
 
 img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
 
@@ -126,6 +241,22 @@ img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
 #login-form-link.active {
     color: var(--link-active-color-1);
 }
+
+#register-form-link.active {
+    color: var(--link-active-color-2);
+}
+.logRegHeader {
+    padding-top: 20px;
+    background: var(--main-fg-color);
+}
+.logRegCol {
+    padding-top: 20px;
+    padding-bottom: 4px;
+    background: var(--panel-color);
+}
+.panel-body {
+    background: var(--panel-color);
+}
 .panel-login>.panel-heading hr{
     margin-top: 10px;
     margin-bottom: 0px;
@@ -151,7 +282,15 @@ img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    border-color: var(--text-field-border-mouseover-color);
+    border-color: var(--button-mouseover-border-color-1);
+}
+#register-form input:hover,
+#register-form  input:focus {
+    outline:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: var(--button-mouseover-border-color-2);
 }
 .btn-login {
     background-color: var(--button-color-1);
@@ -163,10 +302,11 @@ img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
     padding: 14px 0;
     text-transform: uppercase;
     border-color: var(--button-border-color-1);
+    border-radius: 0;
 }
 .btn-login:hover,
 .btn-login:focus {
-    color: var(--button-text-color-1);
+    color: var(--button-mouseover-text-color-1);
     background-color: var(--button-mouseover-color-1);
     border-color: var(--button-mouseover-border-color-1);
 }
@@ -189,48 +329,127 @@ img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
     padding: 14px 0;
     text-transform: uppercase;
     border-color: var(--button-border-color-2);
+    border-radius: 0;
 }
 .btn-register:hover,
 .btn-register:focus {
-    color: var(--button-text-color-2);
+    color: var(--button-mouseover-text-color-2);
     background-color: var(--button-mouseover-color-2);
     border-color: var(--button-mouseover-border-color-2);
 }
-#welcomeDiv {
-    background: var(--site-main-color);
-    color: var(--site-title-text-color);
+/*END LOGIN/REGISTRATION ***********************/
+
+
+/*============ START HOME PAGE ==============*/
+.homeImage {
+    width: 100%;
+    background-image: url("../img/9rguqEo.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 50em;
 }
+#homeButtons {
+    padding-top: 2em;
+    text-align: center;
+}
+#uploadRecipeButton {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+#cookbookButton {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+/*END HOME PAGE ********************** */
+
+/* UPLOAD RECIPE PAGE: START
+   ========================= */
+
+.upload-body                {padding: 0; background: #A9A9A9; font-family: Calibri;}
+.upload-body .container     {background-color: #303030; padding:0; }
+.upload-body h1             {margin: 40px 0; color: #fff;}
+.upload-body hr             {background-color: #000;}
+
+#form-area                      {background: #eeeeee; padding: 20px 30px;  font-size: 16px;}
+#form-area ul                   {padding:0; margin:0;}
+#form-area ul#upload-recipe li  {list-style-type: none; }
+
+#form-area .input-1 {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
+                            height:40px;width: 100%; border-radius: 5px} 
+#form-area textarea.input-1 {width:100%; height: auto;}
+
+#ingredient, #steps, #upload{margin: 10px auto; border: solid 1px #333; box-shadow: 2px 2px 5px #333;}
+
+.btn-upload:hover   {background-color: #a02853; color: #fff;}
+.btn-upload         {display: block; height:40px; width:200px; font-size: 1.02em; background-color: #d6437f;}
 
 
-.input-1   
-    {border: solid 1px var(--input-color-1);margin: 10px 10px 0 0;padding: 5px 2px;
-        height:40px;width: 100%; border-radius: 5px} 
-#upload-recipe li {list-style-type: none; }
+.row-upload{margin: 10px 10px 0 0;padding: 5px 2px}
+.row-upload .ingredient-fields .fields {margin-bottom: 20px; background-color: red;}
+.container-upload{margin-bottom:20px;}
 
-/**#ingredient, #steps, #name, #time{
-    margin: 10px 0;
+/* UPLOAD RECIPE PAGE: END
+   ======================= */
+
+/*UPDATE RECIPE PAGE: START*/
+.input-edit   
+    {
+        border: solid 1px #555;
+        margin: 10px 10px 0 0;
+        padding: 5px 2px;
+        height:40px;
+        width: 100%;
+        border-radius: 5px;
+        background: #333;
+        color: #777;
+        } 
+
+.btn-update{
+    height:80px;
+    width:100%;
+    font-size: 1.02em;
+    text-align: center;
+    background: #333;
+    color: #bbb;
+    border: 1px solid #555;
+    border-radius: 10px;
+    /* HOVER OFF */
+   -webkit-transition: padding 2s;
+}
+.btn-update:hover {
+     color: #F8E2B9;
+      /* HOVER ON */
+   -webkit-transition: border-radius 2s;
+ }
+
+#form-area_edit{
+    background: #222;
+    box-sizing: border-box;
+    padding: 30px 0px 30px 10px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #bbb;
     
 }
 
-li#name span, li#time span {min-width: 200px;}**/
-.btn-upload{
-    height:40px;
-    width:100%;
-    font-size: 1.02em;
+#recipeList{
+     margin-left: 52px;
+    margin-bottom: -80px;
+    border-color: #555;
+    background: #333;
+    color: #bbb;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
-#ingredient, #steps, #upload{
-    margin: 10px 0;
-}
+#form-area_edit ul { list-style-type: none; }
 
-.row-upload{
-    margin: 10px 10px 0 0;
-    padding: 5px 2px
-}
 
-#form-area{
-    background: var(--form-area-color); box-sizing: border-box; padding: 30px 0px 30px 10px;
-}
-.container-upload{
-    margin-bottom:20px;
-}
+/*Update Recipe page ends*/
