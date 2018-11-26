@@ -7,7 +7,7 @@ function popUpMessage(divID,message,isError,id){
     if(isError){
         image = ">"
     }else{
-       image =  "../img/green_tick.png\">;
+       image =  "../img/green_tick.png\">";
     }
     document.getElementById(divID).innerHTML = modelPopUpContentCss + image + message + "</p>";
     
