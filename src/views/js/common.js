@@ -13,6 +13,9 @@ function popUpMessage(divID,message,isError,id){
     
     setTimeout(function() {
         modal.style.display = "none";
+        if(id.includes("upload")){
+            location.reload();
+        }
     }, 3000); 
     
 }

@@ -84,7 +84,7 @@ $(document).ready(function(){
 		postForm();
 		
 	})
-
+    
 	function postForm(){
 		console.log('there are ' + numberOfIngredients + ' ingredients');
 
@@ -170,6 +170,7 @@ $(document).ready(function(){
 				console.log('post was successful!');
 				// Create success element
                 popUpMessage("upload-modal-content","Your recipe was uploaded successfully!",false,'uploadDialog');
+                //$(".input-1").val("");
 				/*let success_text = document.createElement('h3');
 				success_text.innerHTML = "Your recipe was uploaded!"; */
 				// Append to container div on page
