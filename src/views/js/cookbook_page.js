@@ -173,12 +173,14 @@ function updateRecipe(){
 			success : function(data) {
 				console.log('post was successful!');
 				// Create success element
-                 var modal = document.getElementById('myModal'); 
+                /* var modal = document.getElementById('myModal'); 
                 modal.style.display = "block";
                 document.getElementById("update-modal-content").innerHTML = modelPopUpContentCss + "../img/green_tick.png\"> Your recipe was updated successfully!</p>";
                 setTimeout(function() {
                     modal.style.display = "none";
-                }, 3000); 
+                }, 3000);  */
+                //function popUpMessage(divID,message,isError,id)
+                popUpMessage("update-modal-content","Your recipe was updated successfully!",false,myModal);
                 
                 $("#form-area_edit :input").prop("disabled", true);
                 $('.input-edit').css("color","#777");
