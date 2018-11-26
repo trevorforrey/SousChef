@@ -169,8 +169,9 @@ $(document).ready(function(){
 			success : function(data) {
 				console.log('post was successful!');
 				// Create success element
-				let success_text = document.createElement('h3');
-				success_text.innerHTML = "Your recipe was uploaded!";
+                popUpMessage("upload-modal-content","Your recipe was uploaded successfully!",false,'uploadDialog');
+				/*let success_text = document.createElement('h3');
+				success_text.innerHTML = "Your recipe was uploaded!"; */
 				// Append to container div on page
 				$("#form-area").append(success_text).append("<br />");
 			},
@@ -180,11 +181,12 @@ $(document).ready(function(){
 			{
 				console.log('post failed!');
 				// Create failure elements
-				let failure_text = document.createElement('h3');
-				failure_text.innerHTML = "Your recipe was not uploaded!";
+				/*let failure_text = document.createElement('h3');
+				failure_text.innerHTML = "Your recipe was not uploaded!"; */
+                popUpMessage("upload-modal-content","Failed to uploaded recipe! Try after sometime",true,'uploadDialog');
 
-				let failure_desc_text = document.createElement('p');
-				failure_desc_text.innerHTML = "Please recheck your form data and try again";
+				/*let failure_desc_text = document.createElement('p');
+				failure_desc_text.innerHTML = "Please recheck your form data and try again"; */
 
 				// Append to container div on page
 				$("#form-area").append(failure_text).append("<br />").append(failure_desc_text);

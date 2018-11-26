@@ -172,34 +172,19 @@ function updateRecipe(){
 			dataType:'text',
 			success : function(data) {
 				console.log('post was successful!');
-				// Create success element
-                /* var modal = document.getElementById('myModal'); 
-                modal.style.display = "block";
-                document.getElementById("update-modal-content").innerHTML = modelPopUpContentCss + "../img/green_tick.png\"> Your recipe was updated successfully!</p>";
-                setTimeout(function() {
-                    modal.style.display = "none";
-                }, 3000);  */
                 //function popUpMessage(divID,message,isError,id)
-                popUpMessage("update-modal-content","Your recipe was updated successfully!",false,myModal);
-                
+                popUpMessage("update-modal-content","Your recipe was updated successfully!",false,'updateDialog');
                 $("#form-area_edit :input").prop("disabled", true);
                 $('.input-edit').css("color","#777");
 			},
-
 			// Let user know of failure
 			error : function(request,error)
 			{
 				console.log('post failed!');
 				// Create failure elements
-                document.getElementById("responseTxt").innerHTML = "Failed to update the recipe, try after some time";
-				/*let failure_text = document.createElement('h3');
-				failure_text.innerHTML = "Your recipe was not uploaded!";
-
-				let failure_desc_text = document.createElement('p');
-				failure_desc_text.innerHTML = "Please recheck your form data and try again";
-
-				// Append to container div on page
-				$("#form-area").append(failure_text).append("<br />").append(failure_desc_text); */
+                popUpMessage("update-modal-content","Failed to update the recipe, try after sometime!",true,'updateDialog');
+                $("#form-area_edit :input").prop("disabled", true);
+                $('.input-edit').css("color","#777");
 			}
 		});
 	 // end of button upload handler
@@ -363,81 +348,7 @@ $(document).ready(function() {
               deleteRecipe(currentRecipe);
               window.location.reload();
             });
-
-    /*
-    $.getJSON("http://localhost:5000/:userid/cookbook?callback=?", success=function(rawRecipes, status, xhr){
-        //Used https://stackoverflow.com/questions/22743287/uncaught-syntax-error-unexpected-token-getjson as reference
-        console.log ("success begun");
-
-        result = PJSON.parse(rawRecipes);
-        result.recipes.map(function(i, recipe) {
-            $("recipeList").append($("<option></option>").attr("value",i).text(recipe.name));
-        });
-
-        $("selectRecipe").submit(function() {
-            var $inputs = $('#selectRecipe :input');
-
-            var  recipe = result.recipes[$inputs[0]];
-
-            if (recipe.prep_time != undefined && recipe.prep_time != null){
-                $("#prep_time").html(recipe.prep_time);
-            }
-            if (recipe.make_time != undefined && recipe.make_time != null) {
-                $("#make_time").html(recipe);
-            }
-            for (ingredient in recipe.ingredients){
-                $("ingredients").append('<li>'+ingredient.quantity+" "+ingredient.name+"</li>");
-            }
-            for (step in recipe.directions){
-                $("steps").append("<li>"+step+"</li>");
-            }
-
-        });
-    });
-    */
-    /*
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', "http://localhost:5000/:userid/cookbook?callback=?", true);
-
-
-
-    xhr.send();
-    xhr.onload = function() {
-        console.log (xhr);
-
-        result = JSON.parse(rawRecipes);
-        result.recipes.map(function(i, recipe) {
-            $("recipeList").append($("<option></option>").attr("value",i).text(recipe.name));
-        });
-
-        $("selectRecipe").submit(function() {
-            var $inputs = $('#selectRecipe :input');
-
-            var  recipe = result.recipes[$inputs[0]];
-
-            if (recipe.prep_time != undefined && recipe.prep_time != null){
-                $("#prep_time").html(recipe.prep_time);
-            }
-            if (recipe.make_time != undefined && recipe.make_time != null) {
-                $("#make_time").html(recipe);
-            }
-            for (ingredient in recipe.ingredients){
-                $("ingredients").append('<li>'+ingredient.quantity+" "+ingredient.name+"</li>");
-            }
-            for (step in recipe.directions){
-                $("steps").append("<li>"+step+"</li>");
-            }
-
-        });
-    }
-    */
-
 });
-
-/*$('#form-area_edit :input').change(function(e){
-    console.log("Inside the change input form handler");
-    $("#update").prop("disabled", false);
-}); */
 
 function jsonCallback(jsonObject){
     console.log(jsonObject);
