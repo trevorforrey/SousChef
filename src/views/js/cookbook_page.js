@@ -399,7 +399,7 @@ $(document).ready(function() {
         $(".steps-field").append(step_li);
         $(".remove-step").click(function(){
             console.log("step removed");
-            $(this).parent().parent().remove();
+            $(this).parent().remove();
 
         })
      
@@ -477,7 +477,7 @@ $(document).ready(function() {
         
         //fetchRecipe();
         console.log("steps len:"+$(".steps-field li").length);
-        //location.reload();
+        location.reload();
 
     });
 
