@@ -33,13 +33,16 @@ function validateRecipe(popUpDiv,inputClass,popUpID){
 
 //Object comparator
 function compare(obj1, obj2) {
-    var result = {};
-    for(key in obj1) {
+    var result = false;
+    /*for(key in obj1) {
         if(obj2[key] != obj1[key]) result[key] = obj2[key];
         if(typeof obj2[key] == 'array' && typeof obj1[key] == 'array') 
             result[key] = arguments.callee(obj1[key], obj2[key]);
         if(typeof obj2[key] == 'object' && typeof obj1[key] == 'object') 
             result[key] = arguments.callee(obj1[key], obj2[key]);
+    } */
+    if(JSON.stringify(obj1) === JSON.stringify(obj1)){
+        result = true
     }
     return result;
 }

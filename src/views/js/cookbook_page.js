@@ -145,9 +145,9 @@ function updateRecipe(){
 		}
 
         recipe_container.old_name=old_recipename;
-        var result = compare(currentRecipe,recipe_container.recipe);
-        if(result.size == 0){
+        if(compare(currentRecipe,recipe_container.recipe)){
             popUpMessage("update-modal-content","Recipe is already up to date!",true,'updateDialog');
+            return;
         }
 
 		let url;
@@ -174,6 +174,7 @@ function updateRecipe(){
 			dataType:'text',
 			success : function(data) {
 				console.log('post was successful!');
+                currentRecipe = recipe_container.recipe;
                 //function popUpMessage(divID,message,isError,id)
                 popUpMessage("update-modal-content","Your recipe was updated successfully!",false,'updateDialog');
                 $("#form-area_edit :input").prop("disabled", true);
