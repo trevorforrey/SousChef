@@ -14,15 +14,6 @@ function unoopsie(){
     $("#Message").text("Your Cookbook");
 }
 
-function validateRecipe(){
-    if($(".input-edit").val() == '' || undefined == $(".input-edit").val()){
-       popUpMessage("update-modal-content","Recipe cannot have empty fields",true,'updateDialog');
-        return false;
-    }else{
-        return true;
-    }
-}
-
 function populate(recipe){
     console.log(recipe);
 
@@ -96,7 +87,7 @@ function renderIngredientsAndSteps(recipe){
 
 function updateRecipe(){
     
-        if(!validateRecipe()){
+        if(!validateRecipe("update-modal-content",".input-edit","updateDialog")){
             return;
         }
         
@@ -154,10 +145,10 @@ function updateRecipe(){
 		}
 
         recipe_container.old_name=old_recipename;
-        console.log("Recipe to be updated:")
-		console.log(recipe_container);
-        console.log(recipe_container.old_name);
-
+        var result = compare(recipesDoc,recipe_container.recipe);
+        if(result.size == 0){
+            popUpMessage("update-modal-content","Recipe is already up to date!",true,'updateDialog');
+        }
 
 		let url;
 		if (window.location.href.includes('localhost')) {

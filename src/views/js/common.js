@@ -1,3 +1,4 @@
+//Common pop-up dialog for upload and update recipe.
 function popUpMessage(divID,message,isError,id){
     
     var modal = document.getElementById(id); 
@@ -18,4 +19,27 @@ function popUpMessage(divID,message,isError,id){
         }
     }, 3000); 
     
+}
+
+//Common validate recipe function for update and upload.
+function validateRecipe(popUpDiv,inputClass,popUpID){
+    if($(inputClass).val() == '' || undefined == $(inputClass).val()){
+       popUpMessage(popUpDiv,"Recipe cannot have empty fields",true,popUpID);
+        return false;
+    }else{
+        return true;
+    }
+}
+
+//Object comparator
+function compare(obj1, obj2) {
+    var result = {};
+    for(key in obj1) {
+        if(obj2[key] != obj1[key]) result[key] = obj2[key];
+        if(typeof obj2[key] == 'array' && typeof obj1[key] == 'array') 
+            result[key] = arguments.callee(obj1[key], obj2[key]);
+        if(typeof obj2[key] == 'object' && typeof obj1[key] == 'object') 
+            result[key] = arguments.callee(obj1[key], obj2[key]);
+    }
+    return result;
 }

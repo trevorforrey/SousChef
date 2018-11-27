@@ -87,6 +87,10 @@ $(document).ready(function(){
     
 	function postForm(){
 		console.log('there are ' + numberOfIngredients + ' ingredients');
+        
+         if(!validateRecipe("upload-modal-content",".input-1","uploadDialog"){
+            return;
+        }
 
 		// Create an empty recipe object which will be populated with recipe information
 		let recipe = {};
