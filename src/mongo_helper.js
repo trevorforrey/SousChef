@@ -108,7 +108,7 @@ export async function get_user_recipes(username) {
     user_doc.recipes.forEach( function(recipe) { recipes.push(recipe.name); } )
 
   } catch (err) {
-    console.log(err.stack);
+    console.log("No Recipes found!");
     client.close();
   }
   client.close();
