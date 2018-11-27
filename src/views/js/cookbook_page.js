@@ -145,7 +145,7 @@ function updateRecipe(){
 		}
 
         recipe_container.old_name=old_recipename;
-        var result = compare(recipesDoc,recipe_container.recipe);
+        var result = compare(currentRecipe,recipe_container.recipe);
         if(result.size == 0){
             popUpMessage("update-modal-content","Recipe is already up to date!",true,'updateDialog');
         }
