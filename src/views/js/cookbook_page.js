@@ -14,6 +14,13 @@ function unoopsie(){
     $("#Message").text("Your Cookbook");
 }
 
+function validateRecipe(){
+    if($(".input-edit").val() == '' || undefined == $(".input-edit").val()){
+       popUpMessage("update-modal-content","Recipe cannot have empty fields",true,'updateDialog');
+        return;
+    }
+}
+
 function populate(recipe){
     console.log(recipe);
 
@@ -86,8 +93,7 @@ function renderIngredientsAndSteps(recipe){
 }
 
 function updateRecipe(){
-    
-        var modelPopUpContentCss = "<p class=\"modal-content\" style=\"text-align: center;width: 297px;padding-top: -10px;color: #eee;font-size: 14px;border-bottom-width: 20px;margin-bottom: 0px;padding-top: 0px;\"> <img src=\"";
+        validateRecipe();
         
 		// Create an empty recipe object which will be populated with recipe information
         let recipe_container={}
