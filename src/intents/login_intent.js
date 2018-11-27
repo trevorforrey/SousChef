@@ -88,46 +88,44 @@ export async function handle_username_response(req, res, projectId, session, use
     // Places the ingredients into an entity list.
     const entities = [];
     recipes.forEach(recipe => {
-      if (recipe != "") {
+      if (recipe.name != "" && recipe.ingredients.length > 0 && recipe.directions.length > 0) {
         entities.push({
-          value: recipe,
-          synonyms: [recipe],
+          value: recipe.name,
+          synonyms: [recipe.name],
         });
       }
     });
-
-    //Creates a CreateSessionEntityTypes request
-    const request = {
-      parent: sessionPath,
-      sessionEntityType: {
-          name: sessionEntityPath,
-          entityOverrideMode: 1,
-          entities: entities
-      }
-    };
-
-    // Call the client library to create a new session entity
-    return sessionEntityTypesClient
-      .createSessionEntityType(request).then(responses => {
-          console.log("Added recipes!")
-      })
-      .then(() => {
-        // success creating ingredient session entities.
-        res.status(201);
-        res.json(response);
-      })
-      .catch(err => {
-        // failure creating ingredient session entities
-        console.error(err);
-        res.status(500);
-        res.json(response);
+    if(entities.length > 0) {
+      //Creates a CreateSessionEntityTypes request
+      const request = {
+        parent: sessionPath,
+        sessionEntityType: {
+            name: sessionEntityPath,
+            entityOverrideMode: 1,
+            entities: entities
+        }
+      };
+      // Call the client library to create a new session entity
+      return sessionEntityTypesClient
+        .createSessionEntityType(request).then(responses => {
+            console.log("Added recipes!")
+        })
+        .then(() => {
+          // success creating ingredient session entities.
+          res.status(201);
+          res.json(response);
+        })
+        .catch(err => {
+          // failure creating ingredient session entities
+          console.error(err);
+          res.status(500);
+          res.json(response);
       });
     }
-    else {
-      res.status(201);
-      res.json({'fulfillmentText': username + ", you don't have any recipes to load! Go to our web client to upload recipes and try again."});
-      return;
-    }
+  }
+  res.status(201);
+  res.json({'fulfillmentText': username + ", you don't have any valid recipes to load! Go to our web client to upload recipes and try again."});
+  return;
 }
 
 export async function handle_recipe_response(req, res) {
