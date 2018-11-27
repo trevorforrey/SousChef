@@ -17,7 +17,9 @@ function unoopsie(){
 function validateRecipe(){
     if($(".input-edit").val() == '' || undefined == $(".input-edit").val()){
        popUpMessage("update-modal-content","Recipe cannot have empty fields",true,'updateDialog');
-        return;
+        return false;
+    }else{
+        return true;
     }
 }
 
@@ -93,7 +95,10 @@ function renderIngredientsAndSteps(recipe){
 }
 
 function updateRecipe(){
-        validateRecipe();
+    
+        if(!validateRecipe()){
+            return;
+        }
         
 		// Create an empty recipe object which will be populated with recipe information
         let recipe_container={}
