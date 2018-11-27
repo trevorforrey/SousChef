@@ -15,12 +15,11 @@ export async function handle_adjust_servings(req,res,sessionData, projectID, ses
 
         response.fulfillmentText = adjustment;
         response.outputContexts = set_session_data(contexts, sessionData, projectID, sessionID);
-        
     }
     res.json(response);
 }
 
-async function adjust_serving(recipe, servingAmount, sessionData){
+function adjust_serving(recipe, servingAmount, sessionData){
     let response_text;
     let predefinedServings = true;
     let ns = recipe.num_servings;
