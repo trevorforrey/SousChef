@@ -41,7 +41,7 @@ function compare(obj1, obj2) {
         if(typeof obj2[key] == 'object' && typeof obj1[key] == 'object') 
             result[key] = arguments.callee(obj1[key], obj2[key]);
     } */
-    if(JSON.stringify(obj1) === JSON.stringify(obj1)){
+    if(JSON.stringify(obj1) === JSON.stringify(obj2)){
         result = true
     }
     return result;
