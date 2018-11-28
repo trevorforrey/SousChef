@@ -45,7 +45,10 @@ $(document).ready(function(){
 	    
 		$(".ingredient-fields li")
 			.append("<h2>Ingredient: "+count+"</h2>")
+            .append("<div>")
 			.append(ingredient_field)
+            .append("<img src=\"../img/error.png\" width=25 />")
+            .append("</div>")
 			.append(amount_field)
 			.append(unit_field)
 			.append("<br><br>");
