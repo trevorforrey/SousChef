@@ -45,6 +45,13 @@ async function handle_fulfillment(req, res) {
                 await intent.handle_get_ingredient_list(req, res, sessionData, contexts, projectID, sessionID);
             }
             break;
+        case "Substitute-Ingredient":
+            if (sessionData == null) {
+                handle_no_session_data(req,res,sessionData);
+            } else {
+                await intent.handle_substitute_ingredient(req, res, sessionData, contexts, projectID, sessionID);
+            }
+            break;
         //Match for first step and retrieve the response text
         case "first-step":
             if (sessionData == null) {
@@ -135,6 +142,19 @@ async function handle_fulfillment(req, res) {
         case "login-request recipe":
             await intent.handle_recipe_response(req,res);
             break;
+        case "Get-Servings-Intent":
+            if (sessionData == null) {
+                handle_no_session_data(req, res, sessionData);
+            } else {
+                await intent.handle_get_num_servings(req, res, sessionData, projectID, sessionID);
+            }
+            break;
+        case "Adjust-Serving-Size-Intent":
+            if (sessionData == null){
+                handle_no_session_data(req, res, sessionData);
+            } else {
+                await intent.handle_adjust_servings(req, res, sessionData, projectID, sessionID);
+            }
     }
 }
 

@@ -41,7 +41,6 @@ export async function handle_update_session_entity(req, res, sessionData, projec
         entities: entities
     }
   };
-
   // Call the client library to create a new session entity
   return sessionEntityTypesClient
     .createSessionEntityType(request).then(responses => {

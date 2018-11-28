@@ -1,18 +1,11 @@
 let MongoClient = require('mongodb').MongoClient;
 
-async function post_user_recipe(req, res) {
+async function delete_recipe(req, res) {
+    let username = req.session.username;
+    let recipe = req.body.recipeName;
 
-    let recipe = req.body;
+    console.log(`Going to delete ${recipe} from ${username}`);
 
-    // TODO get recipe and username from request body sent
-    if (recipe == null) {
-        console.log('recipe in data.recipe was null');
-        return;
-    }
-
-    // TODO get this data from a session object, or pass it in on the request
-    let user = req.session.username;
-    console.log(req.session.username)
     let client;
     let mongo_pw = process.env.MONGO_PW;
     let uri = "mongodb+srv://tforrey:" + mongo_pw + "@cluster0-mypdv.mongodb.net/test?retryWrites=true";
@@ -20,17 +13,17 @@ async function post_user_recipe(req, res) {
     try {
         client = await MongoClient.connect(uri);
         console.log("Connected correctly to server");
-    
+
         const db = client.db('sous-chef');
-    
+
         // Get the users collection
         const users = db.collection('users');
-    
+
         let result = await users.updateOne(
-            {username: user}, // Filter
-            {$push: {recipes: recipe}} // Append recipe to user's recipes array
+            {username: username}, // Filter
+            {$pull: {recipes: {name: recipe}}},{multi:false} // Pull (remove recipe from users recipe array)
         );
-    
+
     } catch (err) {
         console.log(err.stack);
         res.status(500);
@@ -43,4 +36,4 @@ async function post_user_recipe(req, res) {
 };
 
 // allows us to import the function in app.js
-export default post_user_recipe;
+export default delete_recipe;

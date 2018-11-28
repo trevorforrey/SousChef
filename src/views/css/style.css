@@ -1,53 +1,160 @@
 
-/*Show a red border around inputs if not valid*/
-input:focus:required:invalid {border: 2px solid red;}
-input:required:valid { border: 2px solid black; }
-
-/**{*/
-	/*padding: 0;*/
-	/*border:0;*/
-	/*box-sizing: border-box;*/
-	/*font-family: sans-serif;*/
-    /*font-size: 1.08em;*/
-	/**/
-/*}*/
-
-
-h1{
-	text-align: center;
-	margin:50px;
+/*============ START BASIC HTML TAGS ==============*/
+body {
+    font-family: Calibri;
+    background: #bbb;
+}
+@media (max-width: 830px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
 }
 
+h1{
+    text-align: center;
+    margin:50px;
+}
 h3 {
     text-align: center;
     margin:0px;
     font-size: 1.05em;
 }
-
 p{
 
-	padding-top: 30px;
-	font-size: .8em;
+    padding-top: 30px;
+    font-size: .8em;
 }
 h4{
-	margin: 50px;
+    margin: 50px;
 }
 img.test { background-size: auto 100%; width: 100%;}
+ul {
+    list-style-type: circle;
+}
+ol {
+    list-style-type: upper-roman;
+}
+/*END BASIC HTML TAGS ********************** */
 
 
 
-/*Registration/Login Page CSS*/
-body {
-    padding-top: 90px;
+/*=========START LOGIN MESSAGES =============*/
+#invalidLoginP {
+    background: #dca7a7;
+    font-size: 14px;
+    color: red;
+    padding: 4px 0 4px 10px;
+    margin-bottom: 12px;
+}
+#uNameInvalidMsg {
+    color:red;
+    padding: 0 0 0 4px;
+}
+/*CONFIRM PASSWORD MSG */
+#message {
+    padding: 0 0 0 4px;
+}
+/*END LOGIN MESSAGES ********************** */
+
+#cookBookBody{
+     padding-top: -90px;
+    background-image: url('../img/9rguqEo.jpg');
 }
 
 ul {
     list-style-type: circle;
 }
-
-ol {
-    list-style-type: upper-roman;
+/*========= START NAVBAR =============*/
+#welcomeMsg {
+    color:#fff;
+    margin: 6px 10px 0 0;
+    font-size: 15px;
 }
+#navBarTable {
+    padding:0;
+    margin: 2px 0 0 0;
+}
+
+#nav_bar .active {
+    color: #F8F8F8;
+    background-color: #4f81bd;
+}
+#navLogo {
+    color: #fff;
+    list-style-type: none;
+}
+#h1HomePage {
+    color: #5db3b8;
+}
+.navbar-brand {font-size: 22px;}
+#navUpload.active {color:#fff;}
+#navCookbook.active {color:#fff;}
+#navHome.active {color:#fff;}
+#navHome:hover { color: #fff; }
+#navHome{ color: #a02853; font-size: 17px;}
+#navUpload:hover { color: #fff; }
+#navUpload{ color: #a02853; font-size: 17px;}
+#navCookbook:hover { color: #fff; }
+#navCookbook{ color: #a02853; font-size: 17px;}
+
+.navbar-toggle {
+    background: #a02853;
+}
+#btnText {color:#000}
+#alreadyText{color:#fff}
+.infoButton {
+    margin: 6px 0 0 0;
+    text-decoration: none;
+    background-color: #a02853;
+    border:  solid 1px #000;
+    border-radius: 0;
+    font-size: 13px;
+    line-height: 8px;
+    position: relative;
+    color:#FFFFFF;
+    padding:11px;
+    cursor: pointer;
+}
+/*END NAVBAR =============*/
+
+
+
+/*============ START LOGIN/REGISTRATION PAGES ==============*/
+/*Show a red border around Login and Registration inputs if not valid*/
+input:focus:required:invalid {border: 2px solid red;}
+input:required:valid { border: 2px solid black; }
 
 .panel-login {
     border-color: #ccc;
@@ -75,7 +182,22 @@ ol {
     font-size: 18px;
 }
 #login-form-link.active {
-    color: #59B2E0;
+    color: #53A3CD;
+}
+#register-form-link.active {
+    color: #8cc63f;
+}
+.logRegHeader {
+    padding-top: 20px;
+    background: #a02853;
+}
+.logRegCol {
+    padding-top: 20px;
+    padding-bottom: 4px;
+    background: #eeeeee;
+}
+.panel-body {
+    background: #eeeeee;
 }
 .panel-login>.panel-heading hr{
     margin-top: 10px;
@@ -102,10 +224,18 @@ ol {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    border-color: #ccc;
+    border-color: #5db3b8;
+}
+#register-form input:hover,
+#register-form  input:focus {
+    outline:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: #8cc63f;
 }
 .btn-login {
-    background-color: #59B2E0;
+    background-color: #53A3CD;
     outline: none;
     color: #fff;
     font-size: 14px;
@@ -113,13 +243,14 @@ ol {
     font-weight: normal;
     padding: 14px 0;
     text-transform: uppercase;
-    border-color: #59B2E6;
+    border-color: #53A3CD;
+    border-radius: 0;
 }
 .btn-login:hover,
 .btn-login:focus {
     color: #fff;
-    background-color: #53A3CD;
-    border-color: #53A3CD;
+    background-color: #5db3b8;
+    border-color: #5db3b8;
 }
 .forgot-password {
     text-decoration: underline;
@@ -131,57 +262,136 @@ ol {
     color: #666;
 }
 .btn-register {
-    background-color: #1CB94E;
+    background-color: #8cc63f;
     outline: none;
-    color: #fff;
+    color: #000;
     font-size: 14px;
     height: auto;
     font-weight: normal;
     padding: 14px 0;
     text-transform: uppercase;
-    border-color: #1CB94A;
+    border-color: #8cc63f;
+    border-radius: 0;
 }
 .btn-register:hover,
 .btn-register:focus {
     color: #fff;
-    background-color: #1CA347;
-    border-color: #1CA347;
+    background-color: #74b893;
+    border-color: #74b893;
 }
-#welcomeDiv {
-    background: #59B2E0;
-    color: #000;
+/*END LOGIN/REGISTRATION ***********************/
+
+
+/*============ START HOME PAGE ==============*/
+.homeImage {
+    width: 100%;
+    background-image: url("../img/9rguqEo.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 50em;
 }
+#homeButtons {
+    padding-top: 2em;
+    text-align: center;
+}
+#uploadRecipeButton {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+#cookbookButton {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+/*END HOME PAGE ********************** */
+
+/* UPLOAD RECIPE PAGE: START
+   ========================= */
+
+.upload-body                {padding: 0; background: #A9A9A9; font-family: Calibri;}
+.upload-body .container     {background-color: #303030; padding:0; }
+.upload-body h1             {margin: 40px 0; color: #fff;}
+.upload-body hr             {background-color: #000;}
+
+#form-area                      {background: #eeeeee; padding: 20px 30px;  font-size: 16px;}
+#form-area ul                   {padding:0; margin:0;}
+#form-area ul#upload-recipe li  {list-style-type: none; }
+
+#form-area .input-1 {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
+                            height:40px;width: 100%; border-radius: 5px} 
+#form-area textarea.input-1 {width:100%; height: auto;}
+
+#ingredient, #steps, #upload{margin: 10px auto; border: solid 1px #333; box-shadow: 2px 2px 5px #333;}
+
+.btn-upload:hover   {background-color: #a02853; color: #fff;}
+.btn-upload         {display: block; height:40px; width:200px; font-size: 1.02em; background-color: #d6437f;}
 
 
-.input-1   
-    {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
-        height:40px;width: 100%; border-radius: 5px} 
-#upload-recipe li {list-style-type: none; }
+.row-upload{margin: 10px 10px 0 0;padding: 5px 2px}
+.row-upload .ingredient-fields .fields {margin-bottom: 20px; background-color: red;}
+.container-upload{margin-bottom:20px;}
 
-/**#ingredient, #steps, #name, #time{
-    margin: 10px 0;
+/* UPLOAD RECIPE PAGE: END
+   ======================= */
+
+/*UPDATE RECIPE PAGE: START*/
+.input-edit   
+    {
+        border: solid 1px #555;
+        margin: 10px 10px 0 0;
+        padding: 5px 2px;
+        height:40px;
+        width: 100%;
+        border-radius: 5px;
+        background: #333;
+        color: #777;
+        } 
+
+.btn-update{
+    height:80px;
+    width:100%;
+    font-size: 1.02em;
+    text-align: center;
+    background: #333;
+    color: #bbb;
+    border: 1px solid #555;
+    border-radius: 10px;
+    /* HOVER OFF */
+   -webkit-transition: padding 2s;
+}
+.btn-update:hover {
+     color: #F8E2B9;
+      /* HOVER ON */
+   -webkit-transition: border-radius 2s;
+ }
+
+#form-area_edit{
+    background: #222;
+    box-sizing: border-box;
+    padding: 30px 0px 30px 10px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #bbb;
     
 }
 
-li#name span, li#time span {min-width: 200px;}**/
-.btn-upload{
-    height:40px;
-    width:100%;
-    font-size: 1.02em;
+#recipeList{
+     margin-left: 52px;
+    margin-bottom: -80px;
+    border-color: #555;
+    background: #333;
+    color: #bbb;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
-#ingredient, #steps, #upload{
-    margin: 10px 0;
-}
+#form-area_edit ul { list-style-type: none; }
 
-.row-upload{
-    margin: 10px 10px 0 0;
-    padding: 5px 2px
-}
 
-#form-area{
-    background: rgb(135,206,250); box-sizing: border-box; padding: 30px 0px 30px 10px;
-}
-.container-upload{
-    margin-bottom:20px;
-}
+/*Update Recipe page ends*/

@@ -1,0 +1,67 @@
+{
+  "responseId": "e332566b-6f62-4c4b-897a-8ca7e79ea33d",
+  "queryResult": {
+    "queryText": "first step",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
+        }
+      }
+    ],
+    "outputContexts": [
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/ingredient-intent-followup",
+        "lifespanCount": 1,
+        "parameters": {
+          "ingredient": "tomato",
+          "unit-weight-name.original": "",
+          "unit-weight-name": "",
+          "unit-volume-name.original": "",
+          "unit-volume-name": "",
+          "ingredient.original": "tomato?"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/session_data",
+        "lifespanCount": 4,
+        "parameters": {
+          "ingredient": "tomato",
+          "recipe": "Bread and Butter",
+          "unit-weight-name.original": "",
+          "unit-weight-name": "",
+          "unit-volume-name.original": "",
+          "unit-volume-name": "",
+          "ingredient.original": "tomato?",
+          "username": "thetoastyone"
+        }
+      },
+      {
+        "name": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a/contexts/ingredient-amount",
+        "lifespanCount": 4,
+        "parameters": {
+          "ingredient": "tomato",
+          "unit-weight-name.original": "",
+          "unit-weight-name": "",
+          "unit-volume-name.original": "",
+          "unit-volume-name": "",
+          "ingredient.original": "tomato?"
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/testagent-be9db/agent/intents/be3ea258-57fc-413e-9540-6da397ca7535",
+      "displayName": "first-step"
+    },
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {}
+  },
+  "session": "projects/testagent-be9db/agent/sessions/32b99be0-190b-7b68-53fa-8c151a12489a"
+}

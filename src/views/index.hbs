@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/homepage.js"></script>
+</head>
+    <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
+            </div>
+            <!-- COLLAPSIBLE NAVBAR -->
+            <div class="collapse navbar-collapse" id="alignment-example">
+                <!-- Links -->
+                <ul class="nav navbar-nav">
+                    <li><a id="navHome" class="active" href="/">HOME </a></li>
+                    <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
+                    <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
+                </ul>
+
+                <table id="navBarTable" class="navbar-right">
+                    <tr id="welcomeMsgRow">
+                        <td>
+                        {{# if checkSessionExists }}
+
+                            <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
+                        {{/if}}
+                        </td>
+                    <!-- Button -->
+                    <td>
+                        <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                            <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+                        {{# if checkSessionExists }}
+                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        {{else}}
+                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                <li><a href="login_registration.html">Login</a></li>
+                                <li><a href="registration.html">Register New Account</a></li>
+                            </ul>
+                        </ul>
+                        {{/if}}
+                    </td>
+                </tr>
+                </table>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- NAVBAR IN ITS OWN FILE-->
+    <!--<div id="nav-placeholder">
+    </div>
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("navbar.html");
+        });
+    </script>-->
+    <!--end of Navigation bar-->
+    {{# if checkSessionExists }}
+        <h1 id="h1HomePage"><i>Welcome to Sous Chef Buddy, {{welcomeName}}!</i></h1><br>
+    {{/if}}
+
+    <div class="container">
+        <div class="homeImage">
+            <!-- <img src="img/9rguqEo.jpg"> -->
+        </div>
+        <!-- <div id="upload-receipe" class ="text-center">
+            <h4><a href="upload.html">Upload your own receipe</a></h4>
+        </div>
+        <div id="get-cookbook" class ="text-center">
+            <h4><a href="cookbook.html">View your cookbook</a></h4>
+        </div> -->
+    </div>
+    <div class="container">
+        <div id="homeButtons">
+            <button onclick="loadUploadPage()" type="button" id="uploadRecipeButton" class="btn btn-primary btn-lg">Upload a Recipe</button>
+            <button onclick="loadCookBookPage()" type="button" id="cookbookButton" class="btn btn-primary btn-lg">View Cookbook</button>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            Copyright &copy; 2018 Chanteuse Hat Hackers <br>
+        </div>
+    </footer>
+    <script>//JS for navbar for login popdown
+        // Tooltip component
+        $(function () { $('[data-toggle="tooltip"]').tooltip() });
+        // Popover component
+        $(function () { $('[data-toggle="popover"]').popover() });
+    </script>
+    </body>
+</html>
