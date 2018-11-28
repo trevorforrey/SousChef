@@ -353,6 +353,8 @@ input:required:valid { border: 2px solid black; }
 
 /*ADD REMOVE FIELD CSS -RAISA*/
 .remove-ig:hover, .remove-step:hover,.ing-default-remove:hover {background-color: #a02853;}
-.remove-ig, .remove-step, .ing-default-remove{background-color: #d6437f;font-size:30px;padding:0;margin:0;color:grey; height:50%;width:100% ; cursor: pointer;}
+.remove-ig, .remove-step, .ing-default-remove{background-color:grey;color:black;font-size:30px;padding:0;margin:0;height:50%;width:100% ; cursor: pointer;}
 .num-list li{list-style-type: decimal;}
+#add_steps, #add_ingredients:hover{background-color: #a02853;}
+#add_steps, #add_ingredients{background-color: #d6437f;padding:0;margin:0;color:grey; height:50px;width:50px ;border:solid .5px #d6437f; cursor: pointer;border-radius:5px;font-size: 30px;color: black}
 /*Update Recipe page ends*/

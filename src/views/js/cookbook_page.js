@@ -323,6 +323,7 @@ function fetchRecipe(){
                  $.when(renderIngredientsAndSteps(defaultRecipe)).done(function(){
                         populate(defaultRecipe);
                         $("#form-area_edit :input").prop("disabled", true);
+
                  });
             }
             $("#recipeList").change(function() {
@@ -335,11 +336,13 @@ function fetchRecipe(){
                  $.when(renderIngredientsAndSteps(recipe)).done(function(){
                         populate(recipe);
                         $("#form-area_edit :input").prop("disabled", true);
+                        $('.ing-default-remove').hide(); 
                  });
             });
-                                   
+           $('.ing-default-remove').hide();                        
         }
         
+
     });//ajax call to populate recipe ends.
 
 
@@ -352,8 +355,9 @@ $(document).ready(function() {
                     method: "GET",
                 });
     console.log("AJAX call result:"+updateTemplate); */
-    fetchRecipe();
-    
+    fetchRecipe(); 
+    $('#add_steps').hide();
+    $('#add_ingredients').hide(); 
     $("#cancel").on("click",function(){
       document.getElementById('stepsList').innerHTML = "";
       document.getElementById('stepsAndIngredientsDiv').innerHTML = "";
@@ -370,6 +374,9 @@ $(document).ready(function() {
 
     $("#enableEdit").on("click",function(){
         $("#form-area_edit :input").prop("disabled", false);
+        $('.ing-default-remove').show();
+        $('#add_steps').show();
+        $('#add_ingredients').show();
         $('.input-edit').css("color","#eee");
          //Removes an ingredient after rendering 
         $('.ing-default-remove').click(function(){
