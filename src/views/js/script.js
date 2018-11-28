@@ -98,7 +98,7 @@ $(document).ready(function(){
 		// Grab recipe name and prepTime TODO get cook time and number of servings
 		recipe.name = $("#recipeName").val();
 		recipe.prep_time = $("#prepTime").val();
-		recipe.serving_size = $("#servingSize").val();
+		recipe.num_servings = $("#servingSize").val();
 		recipe.cook_time = $("#cookTime").val();
 
 		// Grab all ingredient information

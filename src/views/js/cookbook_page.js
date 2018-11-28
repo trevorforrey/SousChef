@@ -28,8 +28,8 @@ function populate(recipe){
             $("#recipe_name_edit").val("not listed");
     }
     //serving_size_edit 
-    if(recipe.serving_size != undefined && recipe.serving_size != null){
-            $("#serving_size_edit").val(recipe.serving_size);
+    if(recipe.num_servings != undefined && recipe.serving_size != null){
+            $("#serving_size_edit").val(recipe.num_servings);
     }else{
             $("#serving_size_edit").val("not listed");
     } 
