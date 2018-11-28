@@ -44,7 +44,7 @@ $(document).ready(function(){
 			 .append("<option>liter</option>")
 	    
 		$(".ingredient-fields li")
-			.append("<h2>Ingredient: "+count+" <img src=\"../img/error.png\" width=25 /></h2>")
+			.append("<h2>Ingredient: "+count+" <img class=\"deleteIngredient\" src=\"../img/error.png\" value='"+count+"'width=25 /></h2>")
 			.append(ingredient_field)
 			.append(amount_field)
 			.append(unit_field)
@@ -53,7 +53,10 @@ $(document).ready(function(){
 	    console.log(1);
 	});
 
-
+    $(".deleteIngredient").on('click',function(){
+        console.log("Value="+this.attr("value"));
+        
+    });
 	// Add step button handler
 
 	$("#steps").click(function(){
