@@ -19,8 +19,8 @@ function populate(recipe){
     console.log(recipe);
 
     // Empty previous ingredients and steps before populating the page
-    $("#ingredients").empty();
-    $("#steps").empty();
+   /* $("#ingredients").empty();
+    $("#steps").empty(); */
     
     if(recipe.name != undefined && recipe.name != null){
             $("#recipe_name_edit").val(recipe.name);
@@ -28,7 +28,7 @@ function populate(recipe){
             $("#recipe_name_edit").val("not listed");
     }
     //serving_size_edit 
-    if(recipe.num_servings != undefined && recipe.serving_size != null){
+    if(recipe.num_servings != undefined && recipe.num_servings != null){
             $("#serving_size_edit").val(recipe.num_servings);
     }else{
             $("#serving_size_edit").val("not listed");
@@ -59,19 +59,59 @@ function renderIngredientsAndSteps(recipe){
     var buildHtml = "";
     var ingredients = recipe.ingredients;
     var steps = recipe.directions;
-    if(ingredients!=null){
+    if(ingredients!=null && steps!=null){
       var length = ingredients.length;
       numberOfIngredients = length;
-      var steps_field = null;
+      //var steps_field = null;
+      //var ingredient_field=null;
 
     //Dynamically creating ingredients as a table (Ingredient Name, Quantity , Unit)
       for(var i=0; i<length ;i++){
           if(ingredients[i] != null){
-              buildHtml += "<div class=\"row-upload row ing\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-edit\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td><td><span class='ing-default-remove'>&times;</span></td></tr></div>";
+            var ingredient_field = $(document.createElement('input'))
+                                 .attr("type", "text")
+                                 .attr("placeholder", "name")
+                                 .attr("class", "input-1 input-edit")
+                                 .attr("value",ingredients[i].name)
+                                 .attr("style","width: 252px");
+
+            var amount_field = $(document.createElement('input'))
+                                 .attr("type", "text")
+                                 .attr("placeholder", "amount")
+                                 .attr("class", "input-1 input-edit")
+                                 .attr("value",ingredients[i].quantity)
+                                 .attr("style","width: 252px");
+
+            var unit_field = $(document.createElement('select'))
+                             .attr("class", "input-1 input-edit")
+                             .attr("style","width: 252px")
+                             .append("<option>"+ingredients[i].unit+"</option>")
+                             .append("<option>unit</option>")
+                             .append("<option>teaspoon</option>")
+                             .append("<option>tablespoon</option>")
+                             .append("<option>ounce</option>")
+                             .append("<option>cup</option>")
+                             .append("<option>gill</option>")
+                             .append("<option>gram</option>")
+                             .append("<option>pound</option>")
+                             .append("<option>gallon</option>")
+                             .append("<option>ml</option>")
+                             .append("<option>liter</option>")
+            
+             ingredient_li=$(document.createElement('li'))
+                                //.append("<h2>"+"Ingredient: "+countIngredients+"</h2>")
+                                .append(ingredient_field)
+                                .append(amount_field)
+                                .append(unit_field)
+                                .append("<span class='ing-default-remove'>&times;</span>")
+                                .append("<br><br>"); 
+
+            $(".ingredient-fields").append(ingredient_li);                
+            /*  buildHtml += "<div class=\"row-upload row ing\"><tr class=\"col-md-12\" style='border:1px solid #dddddd;'><td class='tdid' style='padding-left:10px;'></td><td class='tdid' style='padding-left:10px;'><textarea id='ingname"+(i+1)+"' name='ingname"+(i+1)+"' class=\"input-edit\" maxlength='252' value=\"dummy\" style='width: 250px;color: rgb(119, 119, 119);margin-left: 50px;'>"+ingredients[i].name+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='quantity"+(i+1)+"' name='quantity"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].quantity+"</textarea></td><td class='tdid' style='padding-left:10px;'><textarea id='unit"+(i+1)+"' name='unit"+(i+1)+"' class=\"input-edit\" maxlength='252' style='width: 250px;'>"+ingredients[i].unit+"</textarea></td><td><span class='ing-default-remove'>&times;</span></td></tr></div>"; */
           }
       }
 
-      document.getElementById('stepsAndIngredientsDiv').innerHTML = buildHtml;
+     /* document.getElementById('stepsAndIngredientsDiv').innerHTML = buildHtml;*/
     }
     
     if(steps!=null){
@@ -110,13 +150,14 @@ function updateRecipe(){
 		recipe_container.recipe.name = $("#recipe_name_edit").val();
 		recipe_container.recipe.prep_time = $("#prep_time_edit").val();
     recipe_container.recipe.cook_time = $("#cook_time_edit").val();
-    recipe_container.recipe.serving_size = $("#serving_size_edit").val();
+    recipe_container.recipe.num_servings = $("#serving_size_edit").val();
 
     old_recipename.name=$("#recipeList option:selected").text()
     console.log("upto edit")
     flag=1
     var ing_count = $('.ingredient-fields li').length;
-    numberOfIngredients=$('#stepsAndIngredientsDiv div').length;  
+
+   /* numberOfIngredients=$('#stepsAndIngredientsDiv div').length;  
    //$('.ing-def ault-remove').parent().remove()
 
 		// Grab all ingredient information
@@ -143,7 +184,7 @@ function updateRecipe(){
 			recipe_container.recipe.ingredients.push(ingredient);
 
 		}
-
+    */
     // FOR NEWLY ADDED FIELDS
     for (let i = 1; i <= ing_count; i++) {
     let ingredient_new = {};
