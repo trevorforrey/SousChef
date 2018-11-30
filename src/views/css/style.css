@@ -273,7 +273,7 @@ input:required:valid { border: 2px solid black; }
 #form-area                      {background: #eeeeee; padding: 20px 30px;  font-size: 16px;}
 #form-area ul                   {padding:0; margin:0;}
 #form-area ul#upload-recipe li  {list-style-type: none; }
-
+#form-area ul#upload-recipe .num-list li{list-style-type: decimal;}
 #form-area .input-1 {border: solid 1px #333;margin: 10px 10px 0 0;padding: 5px 2px;
                             height:40px;width: 100%; border-radius: 5px} 
 #form-area textarea.input-1 {width:100%; height: auto;}
@@ -287,6 +287,9 @@ input:required:valid { border: 2px solid black; }
 .row-upload{margin: 10px 10px 0 0;padding: 5px 2px}
 .row-upload .ingredient-fields .fields {margin-bottom: 20px; background-color: red;}
 .container-upload{margin-bottom:20px;}
+.remove-upload-ing:hover, .remove-upload-step:hover{background-color:red; }
+.remove-upload-ing, .remove-upload-step{background-color:#d6437f;color:black;padding:0px 8px 0px 8px;;margin:5px;border-radius: 2px; }
+
 
 /* UPLOAD RECIPE PAGE: END
    ======================= */

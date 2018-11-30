@@ -446,19 +446,12 @@ $(document).ready(function() {
                          .append("<option>ml</option>")
                          .append("<option>liter</option>")
         
-        var ingredient_remove=$(document.createElement('span'))
-                                .attr("class","remove-ig") 
-                                .append("&times;");
-
-      /*  var ingredient_header=$(document.createElement('h2'))
-                                .append(ingredient_remove); */
-                                               
         var ingredient_li=$(document.createElement('li'))
                             //.append("<h2>"+"Ingredient: "+countIngredients+"</h2>")
                             .append(ingredient_field)
                             .append(amount_field)
                             .append(unit_field)
-                            .append(ingredient_remove)
+                            .append("<span class='remove-ig'>&times;</span>")
                             .append("<br><br>"); 
 
         $(".ingredient-fields").append(ingredient_li);
@@ -466,7 +459,7 @@ $(document).ready(function() {
 
         $(".remove-ig").click(function(){
             //$(this).event.preventDefault();
-            $(this).parent().parent().remove();    
+            $(this).parent().remove();    
             console.log("Remove clicked")
         });
                     
