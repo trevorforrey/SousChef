@@ -1,11 +1,11 @@
 import {get_user_recipe} from '../mongo_helper'
+import {set_session_data} from '../session_helper'
 let unirest = require('unirest');
 
-export async function handle_substitute_ingredient(req,res,sessionData) {
+export async function handle_substitute_ingredient(req,res,sessionData, contexts, projectID, sessionID) {
     let response = {};
     let response_text;
     let data = req.body;
-    let contexts = data.queryResult.outputContexts;
     const ingredientToSubstitute = data.queryResult.parameters.ingredient;
 
     console.log('ingredient to substitute: ' + ingredientToSubstitute);
