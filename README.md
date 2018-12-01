@@ -29,13 +29,13 @@ On the google assistant side, you can choose to cook the recipe _Bread and Butte
 
 ======== TEST APPLICATION ON DIALOGFLOW HERE ==========
     
-    • https://bot.dialogflow.com/201dfebf-ef6d-4c66-9b85-50e5e4bdc8fc
+    https://bot.dialogflow.com/201dfebf-ef6d-4c66-9b85-50e5e4bdc8fc
 
 
 
 ======== TEST THE WEBSITE HERE ==========
     
-    • http://sous-chef-assistant.herokuapp.com/
+    http://sous-chef-assistant.herokuapp.com/
 
 
 
