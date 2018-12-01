@@ -8,6 +8,7 @@ import update_recipe from './update_recipe'
 import update_recipe_in_db from './handle_update'
 
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const shell = require('shelljs');
 var express = require('express');
 const bodyparser = require('body-parser');
@@ -34,7 +35,9 @@ app.use(session({
         ephemeral: true,
         //httpOnly: true, //prevents browser JS from accessing cookies
     },
-    rolling: true //Lengthen user session by activity
+    rolling: true, //Lengthen user session by activity
+    store: new MongoStore("mongodb+srv://tforrey:" +
+    process.env.MONGO_PW + "@cluster0-mypdv.mongodb.net/test?retryWrites=true")
 }));
 app.use(passport.initialize());
 app.use(passport.session());
