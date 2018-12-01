@@ -36,8 +36,10 @@ app.use(session({
         //httpOnly: true, //prevents browser JS from accessing cookies
     },
     rolling: true, //Lengthen user session by activity
-    store: new MongoStore("mongodb+srv://tforrey:" +
-    process.env.MONGO_PW + "@cluster0-mypdv.mongodb.net/test?retryWrites=true")
+    store: new MongoStore({
+        url: ("mongodb+srv://tforrey:" +
+        process.env.MONGO_PW + "@cluster0-mypdv.mongodb.net/test?retryWrites=true")
+    })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
