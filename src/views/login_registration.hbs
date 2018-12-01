@@ -11,34 +11,40 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
-            </div>
-            <!-- COLLAPSIBLE NAVBAR -->
-            <div class="collapse navbar-collapse" id="alignment-example">
-                <!-- Links -->
-                <ul class="nav navbar-nav">
-                    <li><a id="navHome" href="/">HOME </a></li>
-                    <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
-                    <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
-                </ul>
-                {{# if checkSessionExists }}
-                        <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i></span><br>
-                {{/if}}
-                <!-- Button -->
-                <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
-                    <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+<!-- NAVBAR -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <li id="navLogo" class="navbar-brand"><i>Sous Chef Buddy</i></li>
+        </div>
+        <!-- COLLAPSIBLE NAVBAR -->
+        <div class="collapse navbar-collapse" id="alignment-example">
+            <!-- Links -->
+            <ul class="nav navbar-nav">
+                <li><a id="navHome" href="/">HOME </a></li>
+                <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
+                <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
+            </ul>
 
+            <table id="navBarTable" class="navbar-right">
+                <tr id="welcomeMsgRow">
+                    <td>
+                        {{# if checkSessionExists }}
+
+                            <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
+                        {{/if}}
+                    </td>
+                    <!-- Button -->
+                    <td>
+                    <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                        <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
                         {{# if checkSessionExists }}
                             <ul class="dropdown-menu" aria-labelledby="loginDrop">
                                 <li><a href="/logout">Logout</a></li>
@@ -48,11 +54,14 @@
                                 <li><a href="login_registration.html">Login</a></li>
                                 <li><a href="registration.html">Register New Account</a></li>
                             </ul>
+                        </ul>
                         {{/if}}
-                </ul>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </nav>
+    </div>
+</nav>
     <!-- END NAVBAR -->
 
 <div class="container">

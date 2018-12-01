@@ -6,7 +6,7 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="js/common.js"></script>
+
 </head>
 
 <body id="cookBookBody">
@@ -30,34 +30,25 @@
                 <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
                 <li><a id="navCookbook" class="active" href="userCookbook">COOKBOOK</a></li>
             </ul>
+            {{# if checkSessionExists }}
+                <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
+            {{/if}}
+            <!-- Button -->
+            <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
 
-            <table id="navBarTable" class="navbar-right">
-                <tr id="welcomeMsgRow">
-                    <td>
-                        {{# if checkSessionExists }}
-
-                            <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
-                        {{/if}}
-                    </td>
-                    <!-- Button -->
-                    <td>
-                    <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
-                        <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
-                        {{# if checkSessionExists }}
-                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                                <li><a href="/logout">Logout</a></li>
-                            </ul>
-                        {{else}}
-                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                                <li><a href="login_registration.html">Login</a></li>
-                                <li><a href="registration.html">Register New Account</a></li>
-                            </ul>
-                        </ul>
-                        {{/if}}
-                    </td>
-                </tr>
-            </table>
+                {{# if checkSessionExists }}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                {{else}}
+                    <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                        <li><a href="login_registration.html">Login</a></li>
+                        <li><a href="registration.html">Register New Account</a></li>
+                    </ul>
+                {{/if}}
+            </ul>
         </div>
     </div>
 </nav>
@@ -93,8 +84,7 @@
                    style="width: 66px;
                    height: 26px;
                    margin-left: 29px;
-                   margin-top: 0px;
-                   line-height: 1;"
+                   margin-top: 0px;"
                    id="enableEdit">
         </select>
     </div>
@@ -161,14 +151,14 @@
 
                         <div class="row-upload row">
                             <input id="update" class="btn-update btn primary" type="button" value="update"
-                                   style="width: 156px;height: 26px;margin-left: 420px; line-height: 1;">
-                            <input class="btn-update btn primary" type="button" value="delete"
-                                   style="width: 156px;height: 26px;margin-left: 420px; line-height: 1;" id="delete">
-                            <input class="btn-update btn primary" type="button" value="cancel"
-                                   style="width: 156px;height: 26px;margin-left: 420px; line-height: 1;" id="cancel">
+                                   style="width: 156px;height: 26px;margin-left: 420px;">
+                            <li class="col-md-5">
+                                <input class="btn-update btn primary" type="button" value="cancel"
+                                       style="width: 156px;height: 26px;margin-left: 407px;" id="cancel">
+                            </li>
                         </div>
                         <div id="updateDialog" class="modal">
-                        <div id="update-modal-content" style="top: 236px;">
+                        <div id="update-modal-content" class="modal-content" style="top: 236px;">
                         </div>
                         </div>
                     </ul>
@@ -181,5 +171,7 @@
     https://www.w3schools.com/xml/ajax_xmlhttprequest_response.asp-->
 
 <script src="js/cookbook_page.js"></script>
+
+
 </body>
 </html>

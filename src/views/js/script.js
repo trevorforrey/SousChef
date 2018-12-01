@@ -44,7 +44,7 @@ $(document).ready(function(){
 			 .append("<option>liter</option>")
 	    
 		$(".ingredient-fields li")
-			.append("<h2>Ingredient: "+count+"</h2>")
+			.append("<h2>Ingredient: "+count+" <img class=\"deleteIngredient\" src=\"../img/error.png\" value='"+count+"'width=25 /></h2>")
 			.append(ingredient_field)
 			.append(amount_field)
 			.append(unit_field)
@@ -53,7 +53,10 @@ $(document).ready(function(){
 	    console.log(1);
 	});
 
-
+    $(".deleteIngredient").on('click',function(){
+        console.log("Value="+this.attr("value"));
+        
+    });
 	// Add step button handler
 
 	$("#steps").click(function(){
@@ -84,9 +87,13 @@ $(document).ready(function(){
 		postForm();
 		
 	})
-
+    
 	function postForm(){
 		console.log('there are ' + numberOfIngredients + ' ingredients');
+        
+         if(!validateRecipe("upload-modal-content",".input-1","uploadDialog")){
+            return;
+        }
 
 		// Create an empty recipe object which will be populated with recipe information
 		let recipe = {};
@@ -151,7 +158,9 @@ $(document).ready(function(){
 			url = 'https://master-heroku-souchef.herokuapp.com/postRecipe';
 		} else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
 			url = 'http://master-heroku-souchef.herokuapp.com/postRecipe';
-		}
+		} else{
+            url = 'https://session-management-souchef.herokuapp.com/postRecipe';
+        }
 		console.log('url to post to');
 		console.log(url);
 
@@ -167,8 +176,10 @@ $(document).ready(function(){
 			success : function(data) {
 				console.log('post was successful!');
 				// Create success element
-				let success_text = document.createElement('h3');
-				success_text.innerHTML = "Your recipe was uploaded!";
+                popUpMessage("upload-modal-content","Your recipe was uploaded successfully!",false,'uploadDialog');
+                //$(".input-1").val("");
+				/*let success_text = document.createElement('h3');
+				success_text.innerHTML = "Your recipe was uploaded!"; */
 				// Append to container div on page
 				$("#form-area").append(success_text).append("<br />");
 			},
@@ -178,11 +189,12 @@ $(document).ready(function(){
 			{
 				console.log('post failed!');
 				// Create failure elements
-				let failure_text = document.createElement('h3');
-				failure_text.innerHTML = "Your recipe was not uploaded!";
+				/*let failure_text = document.createElement('h3');
+				failure_text.innerHTML = "Your recipe was not uploaded!"; */
+                popUpMessage("upload-modal-content","Failed to uploaded recipe! Try after sometime",true,'uploadDialog');
 
-				let failure_desc_text = document.createElement('p');
-				failure_desc_text.innerHTML = "Please recheck your form data and try again";
+				/*let failure_desc_text = document.createElement('p');
+				failure_desc_text.innerHTML = "Please recheck your form data and try again"; */
 
 				// Append to container div on page
 				$("#form-area").append(failure_text).append("<br />").append(failure_desc_text);

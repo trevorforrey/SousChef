@@ -26,10 +26,12 @@ export async function handle_update_session_entity(req, res, sessionData, projec
   // Places the ingredients into an entity list.
   const entities = [];
   recipe_doc.ingredients.forEach(ingredient => {
-    entities.push({
-      value: ingredient.name.replace(/_/g," "),
-      synonyms: [ingredient.name.replace(/_/g," ")],
-    });
+    if(ingredient != "") {
+      entities.push({
+        value: ingredient.name.replace(/_/g," "),
+        synonyms: [ingredient.name.replace(/_/g," ")],
+      });
+    }
   });
 
   //Creates a CreateSessionEntityTypes request

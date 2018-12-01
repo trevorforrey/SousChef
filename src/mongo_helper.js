@@ -105,10 +105,10 @@ export async function get_user_recipes(username) {
     // Get specific user
     user_doc = await db.collection('users').find({username: username}).limit(1).next();
 
-    user_doc.recipes.forEach( function(recipe) { recipes.push(recipe.name); } )
+    user_doc.recipes.forEach( function(recipe) { recipes.push(recipe); } )
 
   } catch (err) {
-    console.log(err.stack);
+    console.log("No Recipes found!");
     client.close();
   }
   client.close();
