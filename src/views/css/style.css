@@ -304,7 +304,7 @@ input:required:valid { border: 2px solid black; }
         width: 100%;
         border-radius: 5px;
         background: #333;
-        color: #777;
+        color: white;
         } 
 
 .btn-update{
@@ -355,7 +355,8 @@ input:required:valid { border: 2px solid black; }
 #form-area_edit ul { list-style-type: none; }
 
 /*ADD REMOVE FIELD CSS -RAISA*/
-.remove-ig:hover, .remove-step:hover,.ing-default-remove:hover {background-color: #a02853;}
+.remove-ig:hover, .remove-step:hover,.ing-default-remove:hover, #update:hover, #cancel:hover, #enableEdit:hover{background-color: #a02853;}
+#update, #cancel, #enableEdit{background-color: #d6437f; color:white;}
 .remove-ig, .remove-step, .ing-default-remove{background-color:grey;color:black;font-size:30px;padding:0;margin:0;height:50%;width:100% ; cursor: pointer;}
 .num-list li{list-style-type: decimal;}
 #add_steps, #add_ingredients:hover{background-color: #a02853;}
