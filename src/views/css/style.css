@@ -1,9 +1,84 @@
 
+
+/**{*/
+	/*padding: 0;*/
+	/*border:0;*/
+	/*box-sizing: border-box;*/
+	/*font-family: sans-serif;*/
+    /*font-size: 1.08em;*/
+	/**/
+/*}*/
+/*
+#################
+COLORS
+################
+*/
+:root {
+    --main-bg-color: #bbb;
+    --main-fg-color: #a02853;
+    --header-text-color: rgb(24, 24, 54);
+
+    --navbar-color:#333;
+    --navbar-selected-color:#4f81bd;
+    --navbar-welcome-text-color: #fff;
+    --navbar-logo-color:#fff;
+    --navbar-active-text-color:#F8F8F8;
+    --navbar-inactive-text-color:#a02853;
+
+    --link-inactive-color: #666666;
+    --link-active-color-1:#59B2E0;
+    --link-active-color-2: #8cc63f;
+
+    /*different colors of button.*/
+    /*normal*/
+    --button-color-0: var(--main-fg-color);
+    --button-text-color-0:#000;
+    --button-border-color-0:var(--main-fg-color);
+    --button-mouseover-color-0:#53A3CD;
+    --button-mouseover-text-color-0:#fff;
+    --button-mouseover-border-color-0:#53A3CD;
+
+    /*login*/
+    --button-color-1: #59B2E0;
+    --button-text-color-1:#fff;
+    --button-border-color-1:#59B2E6;
+    --button-mouseover-color-1:#5db3b8;
+    --button-mouseover-text-color-1:#fff;
+    --button-mouseover-border-color-1:#5db3b8;
+    /*register*/
+    --button-disabled-color:var(--main-bg-color);
+    --button-disabled-text-color:black;
+    --button-color-2:#1CB94E;
+    --button-text-color-2:#000;
+    --button-border-color-2:#1CB94A;
+    --button-mouseover-color-2:#74b893;
+    --button-mouseover-text-color-2:#000;
+    --button-mouseover-border-color-2:#74b893;
+
+    /*page specific*/
+    --panel-color:#eee;
+
+    --outbound-link-color:#888;
+    --outbound-link-mouseover-color:#666;
+
+    --input-color-1: #333;
+    --form-area-color:rgb(135,206,250);
+
+    --register-text-field-border-color:#1CB94A;
+
+    --valid-text-color: black;
+
+    --invalid-text-color: red;
+    --invalid-bg-color:#dca7a7;
+}
+
+
 /*============ START BASIC HTML TAGS ==============*/
 body {
     font-family: Calibri;
-    background: #bbb;
+    background: var(--main-bg-color);
 }
+
 @media (max-width: 830px) {
     .navbar-header {
         float: none;
@@ -42,23 +117,32 @@ body {
     }
 }
 
+
 h1{
     text-align: center;
     margin:50px;
+    color: var(--header-text-color)
 }
 h3 {
     text-align: center;
     margin:0px;
     font-size: 1.05em;
+    color: var(--header-text-color)
 }
+
+h4{
+    margin: 50px;
+    color: var(--header-text-color)
+}
+
 p{
 
     padding-top: 30px;
     font-size: .8em;
 }
-h4{
-    margin: 50px;
-}
+
+
+
 img.test { background-size: auto 100%; width: 100%;}
 ul {
     list-style-type: circle;
@@ -69,17 +153,20 @@ ol {
 /*END BASIC HTML TAGS ********************** */
 
 
+/*Show a red border around inputs if not valid*/
+input:focus:required:invalid {border: 2px solid var(--invalid-text-color);}
+input:required:valid { border: 2px solid var(--valid-text-color); }
 
 /*=========START LOGIN MESSAGES =============*/
 #invalidLoginP {
-    background: #dca7a7;
+    background: var(--invalid-bg-color);
     font-size: 14px;
-    color: red;
+    color: var(--invalid-text-color);
     padding: 4px 0 4px 10px;
     margin-bottom: 12px;
 }
 #uNameInvalidMsg {
-    color:red;
+    color:var(--invalid-text-color);
     padding: 0 0 0 4px;
 }
 /*CONFIRM PASSWORD MSG */
@@ -98,7 +185,7 @@ ul {
 }
 /*========= START NAVBAR =============*/
 #welcomeMsg {
-    color:#fff;
+    color:var(--navbar-welcome-text-color);
     margin: 6px 10px 0 0;
     font-size: 15px;
 }
@@ -107,43 +194,49 @@ ul {
     margin: 2px 0 0 0;
 }
 
+/*is this a real thing?*/
 #nav_bar .active {
-    color: #F8F8F8;
-    background-color: #4f81bd;
+    color: var(--navbar-active-text-color);
+    background-color: var(--navbar-selected-color);
 }
+
 #navLogo {
-    color: #fff;
+    color: var(--navbar-logo-color);
     list-style-type: none;
 }
+/* This was a terrible color choice
 #h1HomePage {
     color: #5db3b8;
 }
+*/
 .navbar-brand {font-size: 22px;}
-#navUpload.active {color:#fff;}
-#navCookbook.active {color:#fff;}
-#navHome.active {color:#fff;}
-#navHome:hover { color: #fff; }
-#navHome{ color: #a02853; font-size: 17px;}
-#navUpload:hover { color: #fff; }
-#navUpload{ color: #a02853; font-size: 17px;}
-#navCookbook:hover { color: #fff; }
-#navCookbook{ color: #a02853; font-size: 17px;}
+#navUpload.active {color:var(--navbar-active-text-color);}
+#navCookbook.active {color:var(--navbar-active-text-color);}
+#navHome.active {color:var(--navbar-active-text-color);}
+#navHome:hover { color: var(--navbar-active-text-color); }
+#navHome{ color: var(--navbar-inactive-text-color); font-size: 17px;}
+#navUpload:hover { color: var(--navbar-active-text-color); }
+#navUpload{ color: var(--navbar-inactive-text-color); font-size: 17px;}
+#navCookbook:hover { color: var(--navbar-active-text-color); }
+#navCookbook{ color: var(--navbar-inactive-text-color); font-size: 17px;}
 
 .navbar-toggle {
-    background: #a02853;
+    background: var(--navbar-inactive-text-color);
 }
-#btnText {color:#000}
-#alreadyText{color:#fff}
+#btnText {color:var(--button-text-color-0)}
+
+/*Is this a real thing?*/
+#alreadyText{color: var(--navbar-welcome-text-color)}
 .infoButton {
     margin: 6px 0 0 0;
     text-decoration: none;
-    background-color: #a02853;
-    border:  solid 1px #000;
+    background-color: var(--button-color-0);
+    border:  solid 1px var(--button-border-color-0);
     border-radius: 0;
     font-size: 13px;
     line-height: 8px;
     position: relative;
-    color:#FFFFFF;
+    color:var(--navbar-welcome-text-color);
     padding:11px;
     cursor: pointer;
 }
@@ -153,24 +246,31 @@ ul {
 
 /*============ START LOGIN/REGISTRATION PAGES ==============*/
 /*Show a red border around Login and Registration inputs if not valid*/
-input:focus:required:invalid {border: 2px solid red;}
-input:required:valid { border: 2px solid black; }
+input:focus:required:invalid {border: 2px solid var(--invalid-text-color);}
+input:required:valid { border: 2px solid var(--valid-text-color); }
+
+img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
+
+
+
+/*Registration/Login Page CSS*/
+
 
 .panel-login {
-    border-color: #ccc;
+    border-color: var(--main-bg);
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
 .panel-login>.panel-heading {
-    color: #00415d;
-    background-color: #fff;
-    border-color: #fff;
+    color: var(--login-panel-heading);
+    background-color: var(--panel-bg-color);
+    border-color:var(--panel-border-color);
     text-align:center;
 }
 .panel-login>.panel-heading a{
     text-decoration: none;
-    color: #666;
+    color: var(--link-inactive-color);
     font-weight: bold;
     font-size: 15px;
     -webkit-transition: all 0.1s linear;
@@ -178,26 +278,27 @@ input:required:valid { border: 2px solid black; }
     transition: all 0.1s linear;
 }
 .panel-login>.panel-heading a.active{
-    color: #029f5b;
+    color: var(--link-active-color-2);
     font-size: 18px;
 }
 #login-form-link.active {
-    color: #53A3CD;
+    color: var(--link-active-color-1);
 }
+
 #register-form-link.active {
-    color: #8cc63f;
+    color: var(--link-active-color-2);
 }
 .logRegHeader {
     padding-top: 20px;
-    background: #a02853;
+    background: var(--main-fg-color);
 }
 .logRegCol {
     padding-top: 20px;
     padding-bottom: 4px;
-    background: #eeeeee;
+    background: var(--panel-color);
 }
 .panel-body {
-    background: #eeeeee;
+    background: var(--panel-color);
 }
 .panel-login>.panel-heading hr{
     margin-top: 10px;
@@ -212,7 +313,7 @@ input:required:valid { border: 2px solid black; }
 }
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
     height: 45px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--text-field-border-color);
     font-size: 16px;
     -webkit-transition: all 0.1s linear;
     -moz-transition: all 0.1s linear;
@@ -224,7 +325,7 @@ input:required:valid { border: 2px solid black; }
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    border-color: #5db3b8;
+    border-color: var(--button-mouseover-border-color-1);
 }
 #register-form input:hover,
 #register-form  input:focus {
@@ -232,52 +333,52 @@ input:required:valid { border: 2px solid black; }
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    border-color: #8cc63f;
+    border-color: var(--button-mouseover-border-color-2);
 }
 .btn-login {
-    background-color: #53A3CD;
+    background-color: var(--button-color-1);
     outline: none;
-    color: #fff;
+    color: var(--button-text-color-1);
     font-size: 14px;
     height: auto;
     font-weight: normal;
     padding: 14px 0;
     text-transform: uppercase;
-    border-color: #53A3CD;
+    border-color: var(--button-border-color-1);
     border-radius: 0;
 }
 .btn-login:hover,
 .btn-login:focus {
-    color: #fff;
-    background-color: #5db3b8;
-    border-color: #5db3b8;
+    color: var(--button-mouseover-text-color-1);
+    background-color: var(--button-mouseover-color-1);
+    border-color: var(--button-mouseover-border-color-1);
 }
 .forgot-password {
     text-decoration: underline;
-    color: #888;
+    color: var(--outbound-link-color);
 }
 .forgot-password:hover,
 .forgot-password:focus {
     text-decoration: underline;
-    color: #666;
+    color: var(--outbound-link-mouseover-color);
 }
 .btn-register {
-    background-color: #8cc63f;
+    background-color: var(--button-color-2);
     outline: none;
-    color: #000;
+    color: var(--button-text-color-2);
     font-size: 14px;
     height: auto;
     font-weight: normal;
     padding: 14px 0;
     text-transform: uppercase;
-    border-color: #8cc63f;
+    border-color: var(--button-border-color-2);
     border-radius: 0;
 }
 .btn-register:hover,
 .btn-register:focus {
-    color: #fff;
-    background-color: #74b893;
-    border-color: #74b893;
+    color: var(--button-mouseover-text-color-2);
+    background-color: var(--button-mouseover-color-2);
+    border-color: var(--button-mouseover-border-color-2);
 }
 /*END LOGIN/REGISTRATION ***********************/
 
@@ -336,7 +437,8 @@ input:required:valid { border: 2px solid black; }
 /* UPLOAD RECIPE PAGE: END
    ======================= */
 
-/*UPDATE RECIPE PAGE: START*/
+/*UPDATE RECIPE PAGE: START
+  ========================= */
 .input-edit   
     {
         border: solid 1px #555;
@@ -358,14 +460,18 @@ input:required:valid { border: 2px solid black; }
     color: #bbb;
     border: 1px solid #555;
     border-radius: 10px;
-    /* HOVER OFF */
-   -webkit-transition: padding 2s;
+    /* HOVER OFF 
+   -webkit-transition: padding 2s; */
 }
+
+.btn-update:focus{
+    color: #F8E2B9;
+    text-decoration: none;
+}
+
 .btn-update:hover {
-     color: #F8E2B9;
-      /* HOVER ON */
-   -webkit-transition: border-radius 2s;
- }
+    color: #F8E2B9;
+}
 
 #form-area_edit{
     background: #222;
@@ -396,11 +502,61 @@ input:required:valid { border: 2px solid black; }
 
 #form-area_edit ul { list-style-type: none; }
 
+
 /*ADD REMOVE FIELD CSS -RAISA*/
-.remove-ig:hover, .remove-step:hover,.ing-default-remove:hover, #update:hover, #cancel:hover, #enableEdit:hover{background-color: #a02853;}
-#update, #cancel, #enableEdit{background-color: #d6437f; color:white;}
+.remove-ig:hover, .remove-step:hover,.ing-default-remove:hover, #update:hover, #cancel:hover, #enableEdit:hover, #delete:hover{background-color: #a02853;}
+#update, #cancel, #enableEdit, #delete{background-color: #d6437f; color:white;}
 .remove-ig, .remove-step, .ing-default-remove{background-color:grey;color:black;font-size:30px;padding:0;margin:0;height:50%;width:100% ; cursor: pointer;}
 .num-list li{list-style-type: decimal;}
 #add_steps, #add_ingredients:hover{background-color: #a02853;}
 #add_steps, #add_ingredients{background-color: #d6437f;padding:0;margin:0;color:grey; height:50px;width:50px ;border:solid .5px #d6437f; cursor: pointer;border-radius:5px;font-size: 30px;color: black}
 /*Update Recipe page ends*/
+
+.deleteIngredient{
+    
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: -100;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #00000080;
+    margin: auto;
+    padding: 0px;
+    border: -1px solid #555;
+    width: 40%;
+    height: 10%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*Update Recipe page ends
+  ======================= */
+

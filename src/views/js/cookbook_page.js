@@ -138,6 +138,11 @@ function renderIngredientsAndSteps(recipe){
 }
 
 function updateRecipe(){
+    
+    if(!validateRecipe("update-modal-content",".input-edit","updateDialog")){
+        return;
+    }
+        
 		// Create an empty recipe object which will be populated with recipe information
     var old_recipename={};
     let recipe_container={}
@@ -157,34 +162,7 @@ function updateRecipe(){
     flag=1
     var ing_count = $('.ingredient-fields li').length;
 
-   /* numberOfIngredients=$('#stepsAndIngredientsDiv div').length;  
-   //$('.ing-def ault-remove').parent().remove()
-
-		// Grab all ingredient information
-		for (let i = 1; i <= numberOfIngredients; i++) {
-			// Create empty object to fill individual ingredient information into
-			let ingredient = {};
-			let ingredientId = '#ingname' + i;
-
-			// Get all info for the ingredient
-			let ingredientName = $('#ingname'+i).val();
-			let ingredientAmount = $('#quantity'+i).val();
-			let ingredientUnits = $('#unit'+i).val();
-
-			console.log(ingredientName);
-			console.log(ingredientAmount);
-			console.log(ingredientUnits);
-
-			// Set ingredient object params to proper values
-			ingredient.name = ingredientName;
-			ingredient.quantity = ingredientAmount;
-			ingredient.unit = ingredientUnits;
-
-			// Push ingredient object to the main recipe object
-			recipe_container.recipe.ingredients.push(ingredient);
-
-		}
-    */
+   
     // FOR NEWLY ADDED FIELDS
     for (let i = 1; i <= ing_count; i++) {
     let ingredient_new = {};
@@ -217,9 +195,11 @@ function updateRecipe(){
 		}
 
         recipe_container.old_name=old_recipename;
-        console.log("Recipe to be updated:")
-		    console.log(recipe_container);
-        console.log(recipe_container.old_name);
+
+        if(compare(currentRecipe,recipe_container.recipe)){
+            popUpMessage("update-modal-content","Recipe is already up to date!",true,'updateDialog');
+            return;
+        }
 
 
 		let url;
@@ -233,7 +213,9 @@ function updateRecipe(){
 			url = 'https://master-heroku-souchef.herokuapp.com//update';
 		} else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
 			url = 'http://master-heroku-souchef.herokuapp.com/';
-		}
+		} else{
+            url = 'https://session-management-souchef.herokuapp.com/update';
+        }
 
 		// Make an ajax call to post the data to the database
 		$.ajax({
@@ -242,34 +224,27 @@ function updateRecipe(){
 			type : 'POST',
 			data : JSON.stringify(recipe_container),
 			dataType:'text',
+
       async:false,
 
 			// Let user know of success
+
 			success : function(data) {
 				console.log('post was successful!');
-				// Create success element
-                document.getElementById("responseTxt").innerHTML = "Your recipe was updated successfully!";
-                setTimeout(function() {
-                    document.getElementById("responseTxt").innerHTML = "";
-                }, 10000);
-				// Append to container div on page
-				//$("#form-area").append(success_text).append("<br />");
+                currentRecipe = recipe_container.recipe;
+                //function popUpMessage(divID,message,isError,id)
+                popUpMessage("update-modal-content","Your recipe was updated successfully!",false,'updateDialog');
+                $("#form-area_edit :input").prop("disabled", true);
+                $('.input-edit').css("color","#777");
 			},
-
 			// Let user know of failure
 			error : function(request,error)
 			{
 				console.log('post failed!');
 				// Create failure elements
-                document.getElementById("responseTxt").innerHTML = "Failed to update the recipe, try after some time";
-				/*let failure_text = document.createElement('h3');
-				failure_text.innerHTML = "Your recipe was not uploaded!";
-
-				let failure_desc_text = document.createElement('p');
-				failure_desc_text.innerHTML = "Please recheck your form data and try again";
-
-				// Append to container div on page
-				$("#form-area").append(failure_text).append("<br />").append(failure_desc_text); */
+                popUpMessage("update-modal-content","Failed to update the recipe, try after sometime!",true,'updateDialog');
+                $("#form-area_edit :input").prop("disabled", true);
+                $('.input-edit').css("color","#777");
 			}
 		});
 	 // end of button upload handler
@@ -338,6 +313,8 @@ function fetchRecipe(){
         url = 'https://master-heroku-souchef.herokuapp.com/cookbook';
     } else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
         url = 'http://master-heroku-souchef.herokuapp.com/cookbook';
+    } else{
+            url = 'https://session-management-souchef.herokuapp.com/cookbook';
     }
 
     
@@ -390,12 +367,6 @@ function fetchRecipe(){
 }
 
 $(document).ready(function() {
-
-    /*updateTemplate = $.ajax({
-                    url: "update_template.html",
-                    method: "GET",
-                });
-    console.log("AJAX call result:"+updateTemplate); */
     fetchRecipe(); 
     $('#add_steps').hide();
     $('#add_ingredients').hide(); 
@@ -425,8 +396,6 @@ $(document).ready(function() {
         })
     });
 
-   
-    
    var countIngredients=numberOfIngredients;
    var countSteps=numberOfSteps;
 
@@ -507,102 +476,21 @@ $(document).ready(function() {
     });
 
     $("#update").on("click",function(){
-        //if(flag===1){
-
-          updateRecipe();
-          console.log("Upto update click")
-        //}
-        //else{
-         //   alert("Nothing is changed!")
-        //}
         
-        //fetchRecipe();
+        updateRecipe();
+        console.log("Upto update click")
         console.log("steps len:"+$(".steps-field li").length);
         location.reload();
-
-    });
-
-    $("#delete").on("click",function(){
-      console.log(currentRecipe);
-      deleteRecipe(currentRecipe);
-      window.location.reload();
-    });
-
-    
-    /*
-    $.getJSON("http://localhost:5000/:userid/cookbook?callback=?", success=function(rawRecipes, status, xhr){
-        //Used https://stackoverflow.com/questions/22743287/uncaught-syntax-error-unexpected-token-getjson as reference
-        console.log ("success begun");
-
-        result = PJSON.parse(rawRecipes);
-        result.recipes.map(function(i, recipe) {
-            $("recipeList").append($("<option></option>").attr("value",i).text(recipe.name));
-        });
-
-        $("selectRecipe").submit(function() {
-            var $inputs = $('#selectRecipe :input');
-
-            var  recipe = result.recipes[$inputs[0]];
-
-            if (recipe.prep_time != undefined && recipe.prep_time != null){
-                $("#prep_time").html(recipe.prep_time);
-            }
-            if (recipe.make_time != undefined && recipe.make_time != null) {
-                $("#make_time").html(recipe);
-            }
-            for (ingredient in recipe.ingredients){
-                $("ingredients").append('<li>'+ingredient.quantity+" "+ingredient.name+"</li>");
-            }
-            for (step in recipe.directions){
-                $("steps").append("<li>"+step+"</li>");
-            }
-
-        });
-    });
-    */
-    /*
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', "http://localhost:5000/:userid/cookbook?callback=?", true);
+      });
 
 
-
-    xhr.send();
-    xhr.onload = function() {
-        console.log (xhr);
-
-        result = JSON.parse(rawRecipes);
-        result.recipes.map(function(i, recipe) {
-            $("recipeList").append($("<option></option>").attr("value",i).text(recipe.name));
-        });
-
-        $("selectRecipe").submit(function() {
-            var $inputs = $('#selectRecipe :input');
-
-            var  recipe = result.recipes[$inputs[0]];
-
-            if (recipe.prep_time != undefined && recipe.prep_time != null){
-                $("#prep_time").html(recipe.prep_time);
-            }
-            if (recipe.make_time != undefined && recipe.make_time != null) {
-                $("#make_time").html(recipe);
-            }
-            for (ingredient in recipe.ingredients){
-                $("ingredients").append('<li>'+ingredient.quantity+" "+ingredient.name+"</li>");
-            }
-            for (step in recipe.directions){
-                $("steps").append("<li>"+step+"</li>");
-            }
-
-        });
-    }
-    */
+      $("#delete").on("click",function(){
+        console.log(currentRecipe);
+        deleteRecipe(currentRecipe);
+        window.location.reload();
+      });
 
 });
-
-/*$('#form-area_edit :input').change(function(e){
-    console.log("Inside the change input form handler");
-    $("#update").prop("disabled", false);
-}); */
 
 function jsonCallback(jsonObject){
     console.log(jsonObject);

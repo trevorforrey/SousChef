@@ -43,6 +43,7 @@ $(document).ready(function(){
 			 .append("<option>ml</option>")
 			 .append("<option>liter</option>")
 	    
+
 	    		
 	    var ing_li=$(document.createElement('li'))
 	    	.append("<span class='remove-upload-ing'>remove</span>")
@@ -59,7 +60,10 @@ $(document).ready(function(){
 	    })
 	});
 
-
+    $(".deleteIngredient").on('click',function(){
+        console.log("Value="+this.attr("value"));
+        
+    });
 	// Add step button handler
 
 	$("#steps").click(function(){
@@ -97,9 +101,13 @@ $(document).ready(function(){
 		postForm();
 		
 	})
-
+    
 	function postForm(){
 		console.log('there are ' + numberOfIngredients + ' ingredients');
+        
+         if(!validateRecipe("upload-modal-content",".input-1","uploadDialog")){
+            return;
+        }
 
 		// Create an empty recipe object which will be populated with recipe information
 		let recipe = {};
@@ -167,7 +175,9 @@ $(document).ready(function(){
 			url = 'https://master-heroku-souchef.herokuapp.com/postRecipe';
 		} else if (window.location.href.includes('http://master-heroku-souchef.herokuapp.com/')) {
 			url = 'http://master-heroku-souchef.herokuapp.com/postRecipe';
-		}
+		} else{
+            url = 'https://session-management-souchef.herokuapp.com/postRecipe';
+        }
 		console.log('url to post to');
 		console.log(url);
 
@@ -183,8 +193,10 @@ $(document).ready(function(){
 			success : function(data) {
 				console.log('post was successful!');
 				// Create success element
-				let success_text = document.createElement('h3');
-				success_text.innerHTML = "Your recipe was uploaded!";
+                popUpMessage("upload-modal-content","Your recipe was uploaded successfully!",false,'uploadDialog');
+                //$(".input-1").val("");
+				/*let success_text = document.createElement('h3');
+				success_text.innerHTML = "Your recipe was uploaded!"; */
 				// Append to container div on page
 				$("#form-area").append(success_text).append("<br />");
 			},
@@ -194,11 +206,12 @@ $(document).ready(function(){
 			{
 				console.log('post failed!');
 				// Create failure elements
-				let failure_text = document.createElement('h3');
-				failure_text.innerHTML = "Your recipe was not uploaded!";
+				/*let failure_text = document.createElement('h3');
+				failure_text.innerHTML = "Your recipe was not uploaded!"; */
+                popUpMessage("upload-modal-content","Failed to uploaded recipe! Try after sometime",true,'uploadDialog');
 
-				let failure_desc_text = document.createElement('p');
-				failure_desc_text.innerHTML = "Please recheck your form data and try again";
+				/*let failure_desc_text = document.createElement('p');
+				failure_desc_text.innerHTML = "Please recheck your form data and try again"; */
 
 				// Append to container div on page
 				$("#form-area").append(failure_text).append("<br />").append(failure_desc_text);
@@ -206,58 +219,6 @@ $(document).ready(function(){
 		});
 	 // end of button upload handler
 	}
-//onclick handler on each update button for each recipe in cookbook page
-/*var recipeToUpdate=null
-	$("#edit").click(function(){
-		//ajax call to /update_recipe ,send data contains name of the recipe
-		//obtained from text field. received data has the id field
-		//{id: id ,body: recipe}
-		var recipe_name={name:$("#recipeList option:selected").text()}
-		//var id=$("recipeList").val()
-		console.log(recipe_name)
-		
-		$.ajax({
-			//contentType: 'text',
-			url : 'http://localhost:5000/updateRecipe',
-			type : 'POST',
-			data : recipe_name,
-			dataType:'text',
-			success:function(data){
-				recipeToUpdate=data
-			//	console.log("recipe data"+JSON.parse(recipeToUpdate)); 	
-				console.log(data)
-			},
-			error:function(){
-				console.log("failure")
-			}
-		})
 
-		 
-
-	}) */
-
-/*	$("#update").click(function(){
-		//ajax call to /handle_update.js to update db
-		//send req along with id field
-		//{id: id ,body: recipe}
-		try{
-			var recipeToUpdate_obj=JSON.parse(recipeToUpdate)
-		}
-		catch(e){
-			console.log(e)
-		}
-		$.ajax({
-			url : 'http://localhost:5000/update',
-			type : 'POST',
-			data : recipeToUpdate_obj
-			dataType:'text',
-			success:function(response){
-				console.log("response")
-			},
-			error:function(){
-
-			}
-		})
-	}) */
 			
 });

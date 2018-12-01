@@ -21,10 +21,12 @@ export async function handle_login_request(req, res, projectId) {
   // Places the ingredients into an entity list.
   const entities = [];
   users.forEach(user => {
-    entities.push({
-      value: user,
-      synonyms: [user],
-    });
+    if(user != "") {
+      entities.push({
+        value: user,
+        synonyms: [user],
+      });
+    }
   });
 
   //Creates a CreateSessionEntityTypes request
@@ -66,58 +68,64 @@ export async function handle_username_response(req, res, projectId, session, use
   }
 
   const recipes = await get_user_recipes(username);
+  if (recipes.length > 0) {
+    // Set the recipes a user has loaded
+    const dialogflow = require('dialogflow');
 
-  // Set the recipes a user has loaded
-  const dialogflow = require('dialogflow');
+    // Instantiates clients
+    const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
 
-  // Instantiates clients
-  const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
+    // The path to the agent the session entity types belong to.
+    const sessionEntityPath = sessionEntityTypesClient.sessionEntityTypePath(
+        projectId,session,'recipe'
+    );
 
-  // The path to the agent the session entity types belong to.
-  const sessionEntityPath = sessionEntityTypesClient.sessionEntityTypePath(
-      projectId,session,'recipe'
-  );
+    // The path to the agent that the session exists in
+    const sessionPath = sessionEntityTypesClient.sessionPath(
+        projectId,session
+    );
 
-  // The path to the agent that the session exists in
-  const sessionPath = sessionEntityTypesClient.sessionPath(
-      projectId,session
-  );
-
-  // Places the ingredients into an entity list.
-  const entities = [];
-  recipes.forEach(recipe => {
-    entities.push({
-      value: recipe,
-      synonyms: [recipe],
+    // Places the ingredients into an entity list.
+    const entities = [];
+    recipes.forEach(recipe => {
+      if (recipe.name != "" && recipe.ingredients.length > 0 && recipe.directions.length > 0) {
+        entities.push({
+          value: recipe.name,
+          synonyms: [recipe.name],
+        });
+      }
     });
-  });
-
-  //Creates a CreateSessionEntityTypes request
-  const request = {
-    parent: sessionPath,
-    sessionEntityType: {
-        name: sessionEntityPath,
-        entityOverrideMode: 1,
-        entities: entities
+    if(entities.length > 0) {
+      //Creates a CreateSessionEntityTypes request
+      const request = {
+        parent: sessionPath,
+        sessionEntityType: {
+            name: sessionEntityPath,
+            entityOverrideMode: 1,
+            entities: entities
+        }
+      };
+      // Call the client library to create a new session entity
+      return sessionEntityTypesClient
+        .createSessionEntityType(request).then(responses => {
+            console.log("Added recipes!")
+        })
+        .then(() => {
+          // success creating ingredient session entities.
+          res.status(201);
+          res.json(response);
+        })
+        .catch(err => {
+          // failure creating ingredient session entities
+          console.error(err);
+          res.status(500);
+          res.json(response);
+      });
     }
-  };
-
-  // Call the client library to create a new session entity
-  return sessionEntityTypesClient
-    .createSessionEntityType(request).then(responses => {
-        console.log("Added recipes!")
-    })
-    .then(() => {
-      // success creating ingredient session entities.
-      res.status(201);
-      res.json(response);
-    })
-    .catch(err => {
-      // failure creating ingredient session entities
-      console.error(err);
-      res.status(500);
-      res.json(response);
-    });
+  }
+  res.status(201);
+  res.json({'fulfillmentText': username + ", you don't have any valid recipes to load! Go to our web client to upload recipes and try again."});
+  return;
 }
 
 export async function handle_recipe_response(req, res) {

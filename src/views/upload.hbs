@@ -8,6 +8,7 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="js/script.js"></script>
+        <script src="js/common.js"></script>
 		<!--<div id="qunit"></div>
 	  	<div id="qunit-fixture"></div> 
 		<script src="tests/qunit-2.7.1.js"></script
@@ -36,25 +37,34 @@
                     <li><a id="navUpload" class="active" href="upload">UPLOAD RECIPE</a></li>
                     <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
                 </ul>
-                {{# if checkSessionExists }}
-                    <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
-                {{/if}}
-                <!-- Button -->
-                <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
-                    <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
 
-                    {{# if checkSessionExists }}
-                        <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                            <li><a href="/logout">Logout</a></li>
-                        </ul>
-                    {{else}}
-                        <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                            <li><a href="login_registration.html">Login</a></li>
-                            <li><a href="registration.html">Register New Account</a></li>
-                        </ul>
-                    {{/if}}
-                </ul>
+                <table id="navBarTable" class="navbar-right">
+                    <tr id="welcomeMsgRow">
+                        <td>
+                            {{# if checkSessionExists }}
+
+                                <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
+                            {{/if}}
+                        </td>
+                        <!-- Button -->
+                        <td>
+                        <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                            <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+                            {{# if checkSessionExists }}
+                                <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                            {{else}}
+                                <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                    <li><a href="login_registration.html">Login</a></li>
+                                    <li><a href="registration.html">Register New Account</a></li>
+                                </ul>
+                            </ul>
+                            {{/if}}
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </nav>
@@ -115,6 +125,10 @@
                         <li class="col-md-12">
                             <input class="btn-upload btn primary" type="button" value="Upload" id="upload"/>
                         </li>
+                    </div>
+                    <div id="uploadDialog" class="modal">
+                        <div id="upload-modal-content" style="top: 236px;">
+                        </div>
                     </div>
                 </ul>
             </form>
