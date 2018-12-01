@@ -15,13 +15,13 @@ export async function handle_get_step_by_index(req,res,sessionData,contexts,Proj
 
     // If step requested < 0, set back to 0, and inform the user they are on the first step
     if (step_requested < 0) {
-        res.status(400);
+        res.status(201);
         response_text = 'You are at the first step, there are no previous steps';
         sessionData.currentStep = 0;
     }
     // Else if step requested > number of steps, set to last step and let them know they're on the last step
     else if (step_requested > steps.length - 1) {
-        res.status(400);
+        res.status(201);
         response_text = 'You are at the last step, there are no more steps';
         sessionData.currentStep = steps.length - 1;
     }
@@ -29,6 +29,9 @@ export async function handle_get_step_by_index(req,res,sessionData,contexts,Proj
     else {
         res.status(201);
         response_text = steps[step_requested];
+        if (step_requested == steps.length - 1) {
+          response_text = response_text + "... This is the last step!";
+        }
         sessionData.currentStep = step_requested;
     }
 
