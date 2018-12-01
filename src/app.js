@@ -4,7 +4,7 @@ import delete_recipe from './delete_recipe'
 import get_cookbook from './get_cookbook'
 import postRegistration from './views/js/registration'
 import getLoginUser from './views/js/login'
-import update_recipe from './update_recipe'
+//import update_recipe from './update_recipe'
 import update_recipe_in_db from './handle_update'
 
 var session = require('express-session');
@@ -127,8 +127,7 @@ app.get('/userCookbook',function (req, res) {
 app.post('/postReg', postRegistration); //posting a registered user account
 app.post('/getLogin', getLoginUser); //get a user from the db for logging in.
 app.post('/postRecipe', post_user_recipe); //POST a recipe
-app.post('/updateRecipe', update_recipe); //POST a recipe update
-app.post('/update', update_recipe_in_db); //POST a recipe update?????
+app.post('/update', update_recipe_in_db); //POST a recipe update
 app.get('/cookbook', get_cookbook); //GET users cookbook
 
 app.delete('/delete', delete_recipe);

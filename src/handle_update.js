@@ -1,14 +1,6 @@
 let MongoClient = require('mongodb').MongoClient;
 async function update_recipe_in_db(req, res){
-    /* Hardcoded recipe
-	let recipe=
-   {
-		"name":"Biriyanihhh",
-		"prep_time" :"30 minutes",
-		"ingredients" :[{"name":"rice","quantity":"250","unit":"gram"},{"name":"chicken","quantity":"250","unit":"gram"}],
-		"directions" :["Soak rice","Cook chicken"]	
-	}; 
-    */
+   
     console.log(req.session.username)
 	let old_name=req.body.old_name.name;
     let new_name=req.body.recipe.name;
@@ -16,7 +8,7 @@ async function update_recipe_in_db(req, res){
     let cook_time=req.body.recipe.cook_time;
     let ingredients=req.body.recipe.ingredients;
     let directions=req.body.recipe.directions;
-    let serving_size=req.body.recipe.serving_size;
+    let numof_servings=req.body.recipe.num_servings;
 	let user = req.session.username;
   	let client;
     let mongo_pw = process.env.MONGO_PW;
@@ -44,7 +36,7 @@ async function update_recipe_in_db(req, res){
 					{username : user,'recipes.name':old_name},
 						{
 							$set:{ "recipes.$.name" : new_name,"recipes.$.prep_time":prep_time,
-                                    "recipes.$.cook_time":cook_time,"recipes.$.serving_size":serving_size,
+                                    "recipes.$.cook_time":cook_time,"recipes.$.num_servings":numof_servings,
                                     "recipes.$.ingredients":ingredients,"recipes.$.directions":directions}
 						}
 				);

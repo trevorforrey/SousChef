@@ -43,14 +43,20 @@ $(document).ready(function(){
 			 .append("<option>ml</option>")
 			 .append("<option>liter</option>")
 	    
-		$(".ingredient-fields li")
-			.append("<h2>Ingredient: "+count+"</h2>")
+	    		
+	    var ing_li=$(document.createElement('li'))
+	    	.append("<span class='remove-upload-ing'>remove</span>")
 			.append(ingredient_field)
 			.append(amount_field)
 			.append(unit_field)
 			.append("<br><br>");
-			 
+					
+			
+		$(".ingredient-fields").append(ing_li);	 
 	    console.log(1);
+	    $(".remove-upload-ing").click(function(){
+	    	$(this).parent().remove();
+	    })
 	});
 
 
@@ -58,17 +64,24 @@ $(document).ready(function(){
 
 	$("#steps").click(function(){
 
-		numberOfSteps++;
-		let stepId = 'step' + numberOfSteps;
 
 		var steps_field = $(document.createElement('textarea'))
 	         //.attr("type", "text")
 			 .attr("rows", "4")
-			 .attr("class", "input-1")
-			 .attr("style", "none")
-			 .attr("id", stepId);
+			 .attr("class", "input-1");
+			 
 	         
-		$(".steps-field li").append("<h2>Step: "+ numberOfSteps + "</h2>").append(steps_field).append("<br />");
+	    var step_li=$(document.createElement('li'))
+	    	.append("<span class='remove-upload-step'>remove</span>")
+			.append(steps_field)
+			.append("<br><br>");
+					
+		$(".steps-field").append(step_li);
+		
+
+		 $(".remove-upload-step").click(function(){
+	    	$(this).parent().remove();
+	    })
 	 
 	});
 
@@ -95,20 +108,24 @@ $(document).ready(function(){
 
 		// Grab recipe name and prepTime TODO get cook time and number of servings
 		recipe.name = $("#recipeName").val();
+		if(recipe.name===null||recipe.name===""){
+			alert("Please give a name to your recipe.")
+			return;
+		}
 		recipe.prep_time = $("#prepTime").val();
 		recipe.num_servings = $("#servingSize").val();
 		recipe.cook_time = $("#cookTime").val();
 
 		// Grab all ingredient information
-		for (let i = 1; i <= numberOfIngredients; i++) {
+		var ing_count = $('.ingredient-fields li').length;
+		for (let i = 1; i <= ing_count; i++) {
 			// Create empty object to fill individual ingredient information into
 			let ingredient = {};
-			let ingredientId = '#ingredient' + i;
-
+			
 			// Get all info for the ingredient
-			let ingredientName = $(ingredientId + 'name').val();
-			let ingredientAmount = Number($(ingredientId + 'amount').val());
-			let ingredientUnits = $(ingredientId + 'units').val();
+			let ingredientName = $('.ingredient-fields li:nth-of-type('+ i +') input:nth-of-type(1)').val();
+			let ingredientAmount = $('.ingredient-fields li:nth-of-type('+ i +') input:nth-of-type(2)').val();
+			let ingredientUnits = $('.ingredient-fields li:nth-of-type('+ i +') select:nth-of-type(1)').val();
 
 			console.log(ingredientName);
 			console.log(ingredientAmount);
@@ -124,13 +141,12 @@ $(document).ready(function(){
 		}
 
 		// Grab all step information
-		for (let i = 1; i <= numberOfSteps; i++) {
-			// Create empty object to fill individual ingredient information into
-			let step = {};
-			let stepId = '#step' + i;
-
+		steps_count=$('.steps-field li').length;
+		let currentStep="";
+		for (let i = 1; i <= steps_count; i++) {
+			
 			// Get info for the step
-			let currentStep = $(stepId).val();
+			let currentStep = $('.steps-field li:nth-of-type('+ i +') textarea').val();
 
 			console.log(currentStep);
 
@@ -191,7 +207,7 @@ $(document).ready(function(){
 	 // end of button upload handler
 	}
 //onclick handler on each update button for each recipe in cookbook page
-var recipeToUpdate=null
+/*var recipeToUpdate=null
 	$("#edit").click(function(){
 		//ajax call to /update_recipe ,send data contains name of the recipe
 		//obtained from text field. received data has the id field
@@ -218,7 +234,7 @@ var recipeToUpdate=null
 
 		 
 
-	})
+	}) */
 
 /*	$("#update").click(function(){
 		//ajax call to /handle_update.js to update db
