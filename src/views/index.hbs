@@ -28,25 +28,34 @@
                     <li><a id="navUpload" href="upload">UPLOAD RECIPE</a></li>
                     <li><a id="navCookbook" href="userCookbook">COOKBOOK</a></li>
                 </ul>
-                {{# if checkSessionExists }}
-                    <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
-                {{/if}}
-                <!-- Button -->
-                <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
-                    <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
 
-                    {{# if checkSessionExists }}
-                        <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                            <li><a href="/logout">Logout</a></li>
+                <table id="navBarTable" class="navbar-right">
+                    <tr id="welcomeMsgRow">
+                        <td>
+                        {{# if checkSessionExists }}
+
+                            <span id="welcomeMsg" class="navbar-right"><i>Welcome {{welcomeName}}!</i><br></span>
+                        {{/if}}
+                        </td>
+                    <!-- Button -->
+                    <td>
+                        <ul class="dropdown btn btn-default navbar-btn navbar-right infoButton">
+                            <a class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false" id="btnText">LOGIN / REGISTER <span class="caret"></span></a>
+                        {{# if checkSessionExists }}
+                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        {{else}}
+                            <ul class="dropdown-menu" aria-labelledby="loginDrop">
+                                <li><a href="login_registration.html">Login</a></li>
+                                <li><a href="registration.html">Register New Account</a></li>
+                            </ul>
                         </ul>
-                    {{else}}
-                        <ul class="dropdown-menu" aria-labelledby="loginDrop">
-                            <li><a href="login_registration.html">Login</a></li>
-                            <li><a href="registration.html">Register New Account</a></li>
-                        </ul>
-                    {{/if}}
-                </ul>
+                        {{/if}}
+                    </td>
+                </tr>
+                </table>
             </div>
         </div>
     </nav>

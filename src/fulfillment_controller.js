@@ -47,9 +47,9 @@ async function handle_fulfillment(req, res) {
             break;
         case "Substitute-Ingredient":
             if (sessionData == null) {
-                response_text = await intent.handle_substitute_ingredient(req, res, {username: 'thetoastyone', recipe: 'Bread and Butter'});
+                handle_no_session_data(req,res,sessionData);
             } else {
-                await intent.handle_substitute_ingredient(req, res, sessionData);
+                await intent.handle_substitute_ingredient(req, res, sessionData, contexts, projectID, sessionID);
             }
             break;
         //Match for first step and retrieve the response text
