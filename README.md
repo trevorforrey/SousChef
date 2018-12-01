@@ -8,7 +8,9 @@ A Google Assistant Skill that aids in every aspect of cooking
 * On both you can login as the user _thetoastyone_ with the password of _toast_
 On the google assistant side, you can choose to cook the recipe _Bread and Butter_ or _Grilled Cheese_ 
 
-* For the website you can use the username and password above, or create your own user under register.  You can upload a recipe, or view your "cookbook" as well.  Sprint 3 was mainly about the Website, making the design more astecically pleasing and allowing the user CRUD operations for their cookbook.  
+* For the website you can use the username and password above, or create your own user under register.  You can upload a recipe, or view your "cookbook" as well.  
+
+* Sprint 3 was mainly about the Website, making the design more astecically pleasing and allowing the user CRUD operations for their cookbook.  
     • The user can now Update a recipe in their cookbook, including adjusting the serving size of the recipe, which will in turn update the amount of ingriendients accordingly.  
     • The user can delete as well as upload a recipe from their cookbook.  
     
