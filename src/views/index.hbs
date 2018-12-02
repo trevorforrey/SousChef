@@ -7,7 +7,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="js/homepage.js"></script>
 </head>
-    <body>
+    <body id="indexBody">
     <!-- NAVBAR -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -69,12 +69,14 @@
         });
     </script>-->
     <!--end of Navigation bar-->
-    {{# if checkSessionExists }}
-        <h1 id="h1HomePage"><i>Welcome to Sous Chef Buddy, {{welcomeName}}!</i></h1><br>
-    {{/if}}
+
 
     <div class="container">
         <div class="homeImage">
+            {{# if checkSessionExists }}
+                <br><br><br><br><br><br><br><br><br>
+                <h1 id="h1HomePage"><i>Welcome to <br>Sous Chef Buddy, {{welcomeName}}!</i></h1><br>
+            {{/if}}
             <!-- <img src="img/9rguqEo.jpg"> -->
         </div>
         <!-- <div id="upload-receipe" class ="text-center">

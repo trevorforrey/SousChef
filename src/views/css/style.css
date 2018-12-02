@@ -76,8 +76,28 @@ COLORS
 /*============ START BASIC HTML TAGS ==============*/
 body {
     font-family: Calibri;
-    background: var(--main-bg-color);
 }
+
+/*============ BODY BACKGROUND IMAGES ==============*/
+#uploadBody{
+    background: url('../img/salmon.jpg') ;
+    background-size: cover;
+}
+#cookBookBody{
+    padding-top: -90px;
+    background: url('../img/9rguqEo.jpg') no-repeat;
+    background-size: cover;
+}
+
+#indexBody{
+    background: url('../img/9rguqEo.jpg');
+}
+.loginRegBody{
+    background: url('../img/thai.jpg');
+    background-size: cover;
+}
+/*END BODY BACKGROUND IMAGES ==============*/
+
 
 @media (max-width: 830px) {
     .navbar-header {
@@ -175,10 +195,6 @@ input:required:valid { border: 2px solid var(--valid-text-color); }
 }
 /*END LOGIN MESSAGES ********************** */
 
-#cookBookBody{
-     padding-top: -90px;
-    background-image: url('../img/9rguqEo.jpg');
-}
 
 ul {
     list-style-type: circle;
@@ -204,11 +220,18 @@ ul {
     color: var(--navbar-logo-color);
     list-style-type: none;
 }
-/* This was a terrible color choice
+
 #h1HomePage {
-    color: #5db3b8;
+    color: #eee;
+    text-shadow:
+            -1px -1px 0 #a02853,
+            1px -1px 0 #a02853,
+            -1px 1px 0 #a02853,
+            1px 1px 0 #a02853;
+    font-size: 60px;
+
 }
-*/
+
 .navbar-brand {font-size: 22px;}
 #navUpload.active {color:var(--navbar-active-text-color);}
 #navCookbook.active {color:var(--navbar-active-text-color);}
@@ -405,8 +428,16 @@ img.test { background-size: autorgb(135,206,250)100%; width: 100%;}
 }
 /*END HOME PAGE ********************** */
 
-/* UPLOAD RECIPE PAGE: START
-   ========================= */
+/* UPLOAD RECIPE PAGE: START ========================= */
+#h1Upload{
+    color: #eee;
+    text-shadow:
+            -1px -1px 0 #a02853,
+            1px -1px 0 #a02853,
+            -1px 1px 0 #a02853,
+            1px 1px 0 #a02853;
+    font-size: 56px;
+}
 
 .upload-body                {padding: 0; background: #A9A9A9; font-family: Calibri;}
 .upload-body .container     {background-color: #303030; padding:0; }
