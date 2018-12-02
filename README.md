@@ -16,13 +16,18 @@ On the google assistant side, you can choose to cook the recipe _Bread and Butte
     
 * The login and registration for the website has been drastically updated and upgraded.  
     • The login validation is better and the passwords are now being encrypted in the MongoDB for better security.
+    
     • The registration has been updated with enhanced validation to make sure the password and confirm password are the same.  
+    
     • The registration no longer allows duplicate usernames.  A username must be unique.
+    
     • A users login session no longer is open indefinitely and expires after an hour of inactivity
+    
     • The user session is verified and a user will stay logged
 
 * New design and better UI for the website
     • New navigation bar and each page as a more astetically pleasing look to it.
+    
     • The navigation bar will let the user know when they are logged in and dynamically change the Login/Registration/Logout buttons accordingly.
     
 
